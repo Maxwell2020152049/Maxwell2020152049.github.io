@@ -3,13 +3,31 @@
         <title>All Posts - My New Hugo Site</title>
         <link>https://Maxwell2020152049.github.io/posts/</link>
         <description>All Posts | My New Hugo Site</description>
-        <generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 28 Jul 2023 00:33:37 &#43;0800</lastBuildDate><atom:link href="https://Maxwell2020152049.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 28 Jul 2023 00:56:03 &#43;0800</lastBuildDate><atom:link href="https://Maxwell2020152049.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>Ffmpeg Manual</title>
+    <link>https://Maxwell2020152049.github.io/posts/ffmpeg-manual/</link>
+    <pubDate>Fri, 28 Jul 2023 00:56:03 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://Maxwell2020152049.github.io/posts/ffmpeg-manual/</guid>
+    <description><![CDATA[FFmpeg使用手册 FFmpeg 是一个开放原始码的自由软体，可以执行音讯和视讯多种格式的录影、转档、串流功能，包含了libavcodec——这是一个用于多个专案中音讯和视讯的解码器函式库，以及libavformat——一个音讯与视讯格式转换函式库。
+From 维基百科，自由的百科全书
+FFmpeg官网：https://www.ffmpeg.org/
+FFmpeg官网文档：https://www.ffmpeg.org/documentation.html
+简易教学视频：FFmpeg教程
+下载与安装 下载地址：
+https://www.ffmpeg.org/download.html#build-windows，点击Windows builds by BtbN
+https://github.com/BtbN/FFmpeg-Builds/releases，下载ffmpeg-master-latest-win64-gpl-shared.zip
+解压压缩包，在 环境变量 中添加对应路径：
+C:\FFmpeg\ffmpeg-master-latest-win64-gpl-shared\bin 运行ffmpeg命令，效果如下：
+$ ffmpeg.exe -version ffmpeg version N-111422-g886c1ffb5d-20230712 Copyright (c) 2000-2023 the FFmpeg developers built with gcc 13.1.0 (crosstool-NG 1.25.0.196_227d99d) configuration: --prefix=/ffbuild/prefix --pkg-config-flags=--static --pkg-config=pkg-config --cross-prefix=x86_64-w64-mingw32- --arch=x86_64 --target-os=mingw32 --enable-gpl --enable-version3 --disable-debug --enable-shared --disable-static --disable-w32threads --enable-pthreads --enable-iconv --enable-libxml2 --enable-zlib --enable-libfreetype --enable-libfribidi --enable-gmp --enable-lzma --enable-fontconfig --enable-libvorbis --enable-opencl --disable-libpulse --enable-libvmaf --disable-libxcb --disable-xlib --enable-amf --enable-libaom --enable-libaribb24 --enable-avisynth --enable-chromaprint --enable-libdav1d --enable-libdavs2 --disable-libfdk-aac --enable-ffnvcodec --enable-cuda-llvm --enable-frei0r --enable-libgme --enable-libkvazaar --enable-libass --enable-libbluray --enable-libjxl --enable-libmp3lame --enable-libopus --enable-librist --enable-libssh --enable-libtheora --enable-libvpx --enable-libwebp --enable-lv2 --enable-libvpl --enable-openal --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libopenh264 --enable-libopenjpeg --enable-libopenmpt --enable-librav1e --enable-librubberband --enable-schannel --enable-sdl2 --enable-libsoxr --enable-libsrt --enable-libsvtav1 --enable-libtwolame --enable-libuavs3d --disable-libdrm --disable-vaapi --enable-libvidstab --enable-vulkan --enable-libshaderc --enable-libplacebo --enable-libx264 --enable-libx265 --enable-libxavs2 --enable-libxvid --enable-libzimg --enable-libzvbi --extra-cflags=-DLIBTWOLAME_STATIC --extra-cxxflags= --extra-ldflags=-pthread --extra-ldexeflags= --extra-libs=-lgomp --extra-version=20230712 libavutil 58.]]></description>
+</item>
+<item>
     <title>Self Blog</title>
     <link>https://Maxwell2020152049.github.io/posts/self-blog/</link>
     <pubDate>Fri, 28 Jul 2023 00:33:37 &#43;0800</pubDate>
     <author>Author</author>
     <guid>https://Maxwell2020152049.github.io/posts/self-blog/</guid>
-    <description><![CDATA[个人博客 收到了b站一位up主CodeSheep的启发：
+    <description><![CDATA[个人博客 受到了b站一位up主CodeSheep的启发：
 程序猿如何搭建一个属于自己的个人博客
 手把手教你从0开始搭建自己的个人博客 |无坑版视频教程| hexo
 手把手教你从0开始搭建自己的个人博客 |第二种姿势 | hugo
