@@ -1,22 +1,46 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>Tags - Tag - My New Hugo Site</title>
+        <title>Tags - Tag - Rex&#39;s Blog</title>
         <link>https://Maxwell2020152049.github.io/tags/</link>
-        <description>Tags - Tag - My New Hugo Site</description>
-        <generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 28 Jul 2023 00:56:03 &#43;0800</lastBuildDate><atom:link href="https://Maxwell2020152049.github.io/tags/" rel="self" type="application/rss+xml" /><item>
-    <title>FFmpeg</title>
-    <link>https://Maxwell2020152049.github.io/tags/ffmpeg/</link>
-    <pubDate>Fri, 28 Jul 2023 00:56:03 &#43;0800</pubDate>
+        <description>Tags - Tag - Rex&#39;s Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sat, 29 Jul 2023 02:10:49 &#43;0800</lastBuildDate><atom:link href="https://Maxwell2020152049.github.io/tags/" rel="self" type="application/rss+xml" /><item>
+    <title>网络编程</title>
+    <link>https://Maxwell2020152049.github.io/tags/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/</link>
+    <pubDate>Sat, 29 Jul 2023 02:10:49 &#43;0800</pubDate>
     <author>Author</author>
-    <guid>https://Maxwell2020152049.github.io/tags/ffmpeg/</guid>
+    <guid>https://Maxwell2020152049.github.io/tags/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/</guid>
     <description><![CDATA[]]></description>
 </item>
 <item>
-    <title>self-blog</title>
-    <link>https://Maxwell2020152049.github.io/tags/self-blog/</link>
+    <title>Python</title>
+    <link>https://Maxwell2020152049.github.io/tags/python/</link>
+    <pubDate>Sat, 29 Jul 2023 02:05:51 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://Maxwell2020152049.github.io/tags/python/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>操作系统</title>
+    <link>https://Maxwell2020152049.github.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</link>
+    <pubDate>Sat, 29 Jul 2023 01:30:55 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://Maxwell2020152049.github.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>多媒体</title>
+    <link>https://Maxwell2020152049.github.io/tags/%E5%A4%9A%E5%AA%92%E4%BD%93/</link>
+    <pubDate>Fri, 28 Jul 2023 00:56:03 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://Maxwell2020152049.github.io/tags/%E5%A4%9A%E5%AA%92%E4%BD%93/</guid>
+    <description><![CDATA[]]></description>
+</item>
+<item>
+    <title>个人博客</title>
+    <link>https://Maxwell2020152049.github.io/tags/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</link>
     <pubDate>Fri, 28 Jul 2023 00:33:37 &#43;0800</pubDate>
     <author>Author</author>
-    <guid>https://Maxwell2020152049.github.io/tags/self-blog/</guid>
+    <guid>https://Maxwell2020152049.github.io/tags/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</guid>
     <description><![CDATA[]]></description>
 </item>
 </channel>

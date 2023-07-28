@@ -1,0 +1,35 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>个人博客 - Tag - Rex&#39;s Blog</title>
+        <link>https://Maxwell2020152049.github.io/tags/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</link>
+        <description>个人博客 - Tag - Rex&#39;s Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 28 Jul 2023 00:33:37 &#43;0800</lastBuildDate><atom:link href="https://Maxwell2020152049.github.io/tags/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" rel="self" type="application/rss+xml" /><item>
+    <title>如何搭建个人博客</title>
+    <link>https://Maxwell2020152049.github.io/posts/self-blog/</link>
+    <pubDate>Fri, 28 Jul 2023 00:33:37 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://Maxwell2020152049.github.io/posts/self-blog/</guid>
+    <description><![CDATA[个人博客 受到了b站一位up主CodeSheep的启发：
+程序猿如何搭建一个属于自己的个人博客
+手把手教你从0开始搭建自己的个人博客 |无坑版视频教程| hexo
+手把手教你从0开始搭建自己的个人博客 |第二种姿势 | hugo
+动态博客 自己搭建网站，实现前后端
+wordpress：动态博客框架
+静态博客 hexo：简洁，易于搭建，支持markdown，使用js
+jekyllrb：
+Hugo：基于go语言
+vuepress：基于vue.js
+solo：基于Java语言
+使用hexo搭建个人博客 安装node.js
+使用Hugo搭建个人博客 在Linux上配置环境，使用Hugo + Github的组合搭建个人博客。
+下载brew 下载Hugo要使用brew这个工具。
+过程详见这篇博客：在 Linux 上安装和使用 Homebrew 包管理器
+下载Hugo 使用如下命令下载Hugo：
+brew install hugo 使用如下命令检验是否下载成功：
+hugo version 若成功输出版本信息，说明下载成功：
+hugo v0.115.4+extended linux/amd64 BuildDate=unknown 创建一个名为blog博客：
+hugo new site blog 输出：
+Congratulations! Your new Hugo site is created in /home/rex/blog. Just a few more steps and you&#39;re ready to go: 1.]]></description>
+</item>
+</channel>
+</rss>

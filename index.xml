@@ -1,55 +1,191 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>My New Hugo Site</title>
+        <title>Rex&#39;s Blog</title>
         <link>https://Maxwell2020152049.github.io/</link>
         <description>This is my cool site</description>
-        <generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 28 Jul 2023 00:56:03 &#43;0800</lastBuildDate>
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sat, 29 Jul 2023 02:10:49 &#43;0800</lastBuildDate>
             <atom:link href="https://Maxwell2020152049.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
-    <title>Ffmpeg Manual</title>
-    <link>https://Maxwell2020152049.github.io/posts/ffmpeg-manual/</link>
-    <pubDate>Fri, 28 Jul 2023 00:56:03 &#43;0800</pubDate>
+    <title>《TCP IP网络编程》学习笔记 ch02</title>
+    <link>https://Maxwell2020152049.github.io/posts/tcpip_notes_ch02/</link>
+    <pubDate>Sat, 29 Jul 2023 02:10:49 &#43;0800</pubDate>
     <author>Author</author>
-    <guid>https://Maxwell2020152049.github.io/posts/ffmpeg-manual/</guid>
-    <description><![CDATA[FFmpeg使用手册 FFmpeg 是一个开放原始码的自由软体，可以执行音讯和视讯多种格式的录影、转档、串流功能，包含了libavcodec——这是一个用于多个专案中音讯和视讯的解码器函式库，以及libavformat——一个音讯与视讯格式转换函式库。
-From 维基百科，自由的百科全书
-FFmpeg官网：https://www.ffmpeg.org/
-FFmpeg官网文档：https://www.ffmpeg.org/documentation.html
-简易教学视频：FFmpeg教程
-下载与安装 下载地址：
-https://www.ffmpeg.org/download.html#build-windows，点击Windows builds by BtbN
-https://github.com/BtbN/FFmpeg-Builds/releases，下载ffmpeg-master-latest-win64-gpl-shared.zip
-解压压缩包，在 环境变量 中添加对应路径：
-C:\FFmpeg\ffmpeg-master-latest-win64-gpl-shared\bin 运行ffmpeg命令，效果如下：
-$ ffmpeg.exe -version ffmpeg version N-111422-g886c1ffb5d-20230712 Copyright (c) 2000-2023 the FFmpeg developers built with gcc 13.1.0 (crosstool-NG 1.25.0.196_227d99d) configuration: --prefix=/ffbuild/prefix --pkg-config-flags=--static --pkg-config=pkg-config --cross-prefix=x86_64-w64-mingw32- --arch=x86_64 --target-os=mingw32 --enable-gpl --enable-version3 --disable-debug --enable-shared --disable-static --disable-w32threads --enable-pthreads --enable-iconv --enable-libxml2 --enable-zlib --enable-libfreetype --enable-libfribidi --enable-gmp --enable-lzma --enable-fontconfig --enable-libvorbis --enable-opencl --disable-libpulse --enable-libvmaf --disable-libxcb --disable-xlib --enable-amf --enable-libaom --enable-libaribb24 --enable-avisynth --enable-chromaprint --enable-libdav1d --enable-libdavs2 --disable-libfdk-aac --enable-ffnvcodec --enable-cuda-llvm --enable-frei0r --enable-libgme --enable-libkvazaar --enable-libass --enable-libbluray --enable-libjxl --enable-libmp3lame --enable-libopus --enable-librist --enable-libssh --enable-libtheora --enable-libvpx --enable-libwebp --enable-lv2 --enable-libvpl --enable-openal --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libopenh264 --enable-libopenjpeg --enable-libopenmpt --enable-librav1e --enable-librubberband --enable-schannel --enable-sdl2 --enable-libsoxr --enable-libsrt --enable-libsvtav1 --enable-libtwolame --enable-libuavs3d --disable-libdrm --disable-vaapi --enable-libvidstab --enable-vulkan --enable-libshaderc --enable-libplacebo --enable-libx264 --enable-libx265 --enable-libxavs2 --enable-libxvid --enable-libzimg --enable-libzvbi --extra-cflags=-DLIBTWOLAME_STATIC --extra-cxxflags= --extra-ldflags=-pthread --extra-ldexeflags= --extra-libs=-lgomp --extra-version=20230712 libavutil 58.]]></description>
+    <guid>https://Maxwell2020152049.github.io/posts/tcpip_notes_ch02/</guid>
+    <description><![CDATA[ch02 套接字类型与协议设置 2.1 套接字协议及其数据传输特性 协议（Protocol） 协议是计算机之间对话必备的通信规则。
+创建套接字 #include &lt;sys/socket.h&gt; int socket(int domain, i nt type, int protocol); C语言中，创建套接字要使用socket()函数，下面介绍其参数以及具体使用：
+协议族（Protocol Family） PF_INET：IPv4互联网协议族 PF_INET6：IPv6互联网协议族 PF_LOCAL：本地通信的UNIX协议族 PF_PACKET：底层套接字的协议族 PF__IPX：IPX Novell协议族 本书重点讲解PF_INET，即IPv4互联网协议族。
+套接字类型（Type）
+面向连接的套接字（SOCK_STREAM）
+传输过程中数据不会丢失
+数据有序到达
+传输的数据不存在数据边界
+在面向连接的套接字中， read函数和write函数的调用次数并无太大意义
+可靠的、按序传递的、基于宇节的面向连接的数据传输方式的套接字
+面向消息的套接字（SOCK_DGRAM）
+强调快速传输而非传输顺序
+传输的数据可能丢失也可能损毁
+传输的数据存在数据边界
+限制每次传输的数据大小
+不可靠的、不按序传递的、以数据的高速传输为目的的套接字
+协议的最终选择
+同个协议族中可能存在多个数据传输方式相同的协议，所以还需指定最终选择的协议
+参数PF_INET指IPv4网络协议族，SOCK_STREAM是面向连接的数据传输。 满足这2个条件的协议只有IPPROTO_TCP
+参数PF_INET指IPv4网络协议族，SOCK_DGRAM指的是面向消息的数据传输方式，满足上述条件的协议只有IPPROTO_UDP
+验证 面向连接的套接字 的 传输数据无边界性 修改ch01中的hello_clint.c中read()函数的调用方式：
+// read() while (1) { str_len = read(sock, &amp;message[idx ++], 1); if (str_len == -1) error_handling(&#34;read() error!&#34;); else if (str_len == 0) break; cnt += str_len; } printf(&#34;Message from server : %s \n&#34;, message); printf(&#34;function read() call count is %d\n&#34;, cnt); 客户端运行效果如下：]]></description>
 </item>
 <item>
-    <title>Self Blog</title>
-    <link>https://Maxwell2020152049.github.io/posts/self-blog/</link>
-    <pubDate>Fri, 28 Jul 2023 00:33:37 &#43;0800</pubDate>
+    <title>《TCP IP网络编程》学习笔记 ch01</title>
+    <link>https://Maxwell2020152049.github.io/posts/tcpip_notes_ch01/</link>
+    <pubDate>Sat, 29 Jul 2023 02:10:47 &#43;0800</pubDate>
     <author>Author</author>
-    <guid>https://Maxwell2020152049.github.io/posts/self-blog/</guid>
-    <description><![CDATA[个人博客 受到了b站一位up主CodeSheep的启发：
-程序猿如何搭建一个属于自己的个人博客
-手把手教你从0开始搭建自己的个人博客 |无坑版视频教程| hexo
-手把手教你从0开始搭建自己的个人博客 |第二种姿势 | hugo
-动态博客 自己搭建网站，实现前后端
-wordpress：动态博客框架
-静态博客 hexo：简洁，易于搭建，支持markdown，使用js
-jekyllrb：
-Hugo：基于go语言
-vuepress：基于vue.js
-solo：基于Java语言
-使用hexo搭建个人博客 安装node.js
-使用Hugo搭建个人博客 在Linux上配置环境，使用Hugo + Github的组合搭建个人博客。
-下载brew 下载Hugo要使用brew这个工具。
-过程详见这篇博客：在 Linux 上安装和使用 Homebrew 包管理器
-下载Hugo 使用如下命令下载Hugo：
-brew install hugo 使用如下命令检验是否下载成功：
-hugo version 若成功输出版本信息，说明下载成功：
-hugo v0.115.4+extended linux/amd64 BuildDate=unknown 创建一个名为blog博客：
-hugo new site blog 输出：
-Congratulations! Your new Hugo site is created in /home/rex/blog. Just a few more steps and you&#39;re ready to go: 1.]]></description>
+    <guid>https://Maxwell2020152049.github.io/posts/tcpip_notes_ch01/</guid>
+    <description><![CDATA[《TCP IP网络编程》学习笔记 ch01 理解网络编程和套接字 1.1 理解网络编程和套接字 构建 接电话 套接字（服务器端） 创建服务器端的套接字需要以下函数：
+#include &lt;sys/socket.h&gt; // 创建套接字成功时返回文件描述符，失败时返回－1。 int socket(int domain, int type, int protocol); #include &lt;sys/socket.h&gt; // 绑定成功时返回0，失败时返回-1。 int bind(int sockfd, struct sockaddr *myaddr, socklen_t addrlen); #include &lt;sys/socket.h&gt; // 将套接字转化为可接收连接的状态，成功时返回0，失败时返回-1。 int listen(int sockfd, int backlog); #include &lt;sys/socket.h&gt; // 接受网络连接，成功时返回文件描述符，失败时返回-1。 int accept(int sockfd, struct sockaddr *addr, socklen_t *addrlen); 创建服务器端的套接字的基本步骤如下：
+第一步：调用socket()函数创建套接字
+第二步：调用bind()函数绑定套接字的IP和 端口号
+第三步：调用listen()函数把套接字转化为可接收连接状态
+第四步：调用accept()函数接受网络连接
+服务器端hello_server.c代码如下：
+#include &lt;stdio.h&gt; #include &lt;stdlib.h&gt; #include &lt;string.h&gt; #include &lt;unistd.h&gt; #include &lt;arpa/inet.]]></description>
+</item>
+<item>
+    <title>CS61A Homework hw02</title>
+    <link>https://Maxwell2020152049.github.io/posts/cs61a_homework_hw02/</link>
+    <pubDate>Sat, 29 Jul 2023 02:05:51 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://Maxwell2020152049.github.io/posts/cs61a_homework_hw02/</guid>
+    <description><![CDATA[Homework 2: Higher Order Functions 作业链接：Homework 2: Higher Order Functions
+Important Functions 一些文档测试可能基于以下函数：
+from operator import add, mul, sub square = lambda x: x * x identity = lambda x: x triple = lambda x: 3 * x increment = lambda x: x + 1 Q1: Product 仿照能够计算term(1) + ... + term(n)的summation(n, term)函数，编写一个能够计算term(1) * ... * term(n)的product(n, term)函数。
+思路：注意range函数的区间是左闭右开的。
+实现代码如下：
+def product(n, term): &#34;&#34;&#34;Return the product of the first n terms in a sequence.]]></description>
+</item>
+<item>
+    <title>CS61A Homework hw01</title>
+    <link>https://Maxwell2020152049.github.io/posts/cs61a_homework_hw01/</link>
+    <pubDate>Sat, 29 Jul 2023 02:05:49 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://Maxwell2020152049.github.io/posts/cs61a_homework_hw01/</guid>
+    <description><![CDATA[Homework 1: Variables &amp; Functions, Control 作业链接：Homework 1: Variables &amp; Functions, Control
+Q1: Syllabus Quiz 教学大纲和课程政策，详见Syllabus Quiz和Syllabus &amp; Course Policies。
+Q2: A Plus Abs B Fill in the blanks in the following function for adding a to the absolute value of b, without calling abs. You may not modify any of the provided code other than the two blanks.
+题意就是实现如下函数f： $$ f(a, b) = a + \lvert b \rvert $$]]></description>
+</item>
+<item>
+    <title>CS61A Lab lab01</title>
+    <link>https://Maxwell2020152049.github.io/posts/cs61a_lab_lab01/</link>
+    <pubDate>Sat, 29 Jul 2023 02:03:12 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://Maxwell2020152049.github.io/posts/cs61a_lab_lab01/</guid>
+    <description><![CDATA[Lab 1: Variables &amp; Functions, Control 实验链接：Lab 1: Variables &amp; Functions, Control
+如何下载实验压缩包：
+wget https://inst.eecs.berkeley.edu/~cs61a/sp21/lab/lab01/lab01.zip What Would Python Display(WWPD)? (Part 1) Q1: WWPD: Control 使用如下命令进行测试：
+python3 ok -q control -u --local 需要注意：
+若用整型或浮点型做控制语句的判断条件，0会被当作False，非0会被当作True 测试过程如下：
+===================================================================== Assignment: Lab 1 OK, version v1.18.1 ===================================================================== ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Unlocking tests At each &#34;? &#34;, type what you would expect the output to be. Type exit() to quit --------------------------------------------------------------------- Control &gt; Suite 1 &gt; Case 1 (cases remaining: 5) What would Python display?]]></description>
+</item>
+<item>
+    <title>CS61A Lab lab00</title>
+    <link>https://Maxwell2020152049.github.io/posts/cs61a_lab_lab00/</link>
+    <pubDate>Sat, 29 Jul 2023 02:03:09 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://Maxwell2020152049.github.io/posts/cs61a_lab_lab00/</guid>
+    <description><![CDATA[关于.gitignore **/*.zip **/__pycache__ git不需要维护**压缩包** 和 缓存文件
+Lab 0: Getting Started 实验链接：Lab 0: Getting Started
+关于实验测评：Using Ok
+实验环境配置 CS 61A的实验需要：
+Terminal（终端）
+Python3
+Text Editor（代码编辑器）
+命令行工具的使用 实验会可能用到的命令：
+ls cd mkdir unzip mv Python Basic Primitive Expressions（原始表达式） **原始表达式**只进行一步计算：
+&gt;&gt;&gt; 3 3 &gt;&gt;&gt; 12.5 12.5 &gt;&gt;&gt; True True Arithmetic Expressions（算术表达式） 算术表达式由以下运算符组成：
+加法：+ 减法：- 乘法：* 乘方：** 浮点数除法：/ 下取整除法：// 取余：% &gt;&gt;&gt; 7 / 4 1.75 &gt;&gt;&gt; (2 + 6) / 4	# Floating point division 2.0 &gt;&gt;&gt; 7 // 4 # Floor division (rounding down) 1 &gt;&gt;&gt; 7 % 4 # Modulus (remainder of 7 // 4) 3 Assignment statements（赋值语句） &gt;&gt;&gt; a = (100 + 50) // 2 &gt;&gt;&gt; a 75 Doing the assignment（实验任务） Unlocking tests（解锁测试） 完成正式实验前要进行一次测试，检测学生对python的基础知识的掌握程度，使用如下命令（--local参数使得测评在本地运行）：]]></description>
+</item>
+<item>
+    <title>CS61A Project Hog</title>
+    <link>https://Maxwell2020152049.github.io/posts/cs61a_project_hog/</link>
+    <pubDate>Sat, 29 Jul 2023 01:57:41 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://Maxwell2020152049.github.io/posts/cs61a_project_hog/</guid>
+    <description><![CDATA[Project 1: The Game of Hog Project地址：Project 1: The Game of Hog
+Rules 有两个玩家，轮流进行回合，玩家选择骰子的数量（最多10个），得到每个骰子的点数，将点数之和加入总分中，总分先达到100即获胜。
+Sow Sad：如果有一个骰子点数为1，本回合得分为1
+Piggy Points：如果选择0个骰子，本回合获得k + 3分，k为对手分数的平方的位数中值最小的一位。
+More Boar：回合结束后，如果玩家的最高位小于对手的最高位，玩家的次高位小于对手的次高位，继续进行一回合。
+若对规则有疑问，请仔细阅读项目网站。
+Final Product 最终效果可以参考：Final Product
+文件结构 项目目录如下：
+. ├── calc.py ├── default_graphics.py ├── dice.py ├── gui_files ├── hog_gui.py ├── hog.py ├── ok ├── proj01.ok ├── __pycache__ ├── tests └── ucb.py 其中比较重要的有：
+hog.py：项目的初始代码 dice.py：关于骰子的函数 hog_gui.py：项目的用户图形化界面（graphical user interface） ucb.py：本课程的实用函数 gui_files：Web GUI 使用的各种内容的目录 执行如下代码可以运行项目：
+python3 hog_gui.py Phase 1: Simulator Problem 0 (0 pt) dice.]]></description>
+</item>
+<item>
+    <title>CS61A week2 study note</title>
+    <link>https://Maxwell2020152049.github.io/posts/cs61a_notes_week2/</link>
+    <pubDate>Sat, 29 Jul 2023 01:40:58 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://Maxwell2020152049.github.io/posts/cs61a_notes_week2/</guid>
+    <description><![CDATA[Week2 CS 61A 2021 Fall官网：CS 61A: Structure and Interpretation of Computer Programs
+翻译视频：【计算机程序的构造和解释】精译【UC Berkeley 公开课-CS61A (Spring 2021)】-中英双语字幕
+github:Maxwell2020152049/CS61A
+Lecture #3: Recap of Function Evaluation; Control Lab：Lab 1: Variables &amp; Functions, Control
+Slide：03-Control_full.pdf
+​	一个名字(name)总是被绑定(bound)到一个值(value)上。
+​	表达式和子表达式都会在同一个环境中求值，现在本地环境帧(local environment frame)中寻找，若找不到，再递归地在父环境
+(parent environment frame)中寻找。
+eg1.：
+# Create nested environment x = 1 y = 12 def g1(x): def g2(x): # Stop here print(x) g2(x + 1) g1(2) 输出：
+3 在pythontutor中运行结果如下：
+eg2.：
+# Illustrate chain of calls.]]></description>
+</item>
+<item>
+    <title>CS61A week1 study note</title>
+    <link>https://Maxwell2020152049.github.io/posts/cs61a_notes_week1/</link>
+    <pubDate>Sat, 29 Jul 2023 01:37:07 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://Maxwell2020152049.github.io/posts/cs61a_notes_week1/</guid>
+    <description><![CDATA[Week1 CS 61A 2021 Fall官网：CS 61A: Structure and Interpretation of Computer Programs
+翻译视频：【计算机程序的构造和解释】精译【UC Berkeley 公开课-CS61A (Spring 2021)】-中英双语字幕
+github:Maxwell2020152049/CS61A
+Lecture #1: Introduction Lab： Lab 00: Getting Started
+Slide： 01-Introduction_full.pdf
+Computer Science 简单介绍了计算机科学的分支：
+Programming
+Theory
+Programming Languages
+Graphics
+Artificial Intelligence
+Systems
+CS 61A是关于Programming(编程)的课程，需要使用一门编程语言Python。
+CS10 如果感觉本课程太困难，可以考虑CS10，关于CS10：https://cs10.org/su23/
+Course Organization Readings Lectures Labs Discussion Tutorials Homework Projects Lecture #2: Functions, Expressions, Environments Homework：Homework 1: Variables &amp; Functions, Control
+Slide：02-Functions_full.pdf
+Functions as Values 在Python中，functions(函数)可以作为fisrt class values（第一类实体）]]></description>
+</item>
+<item>
+    <title>ch02 Operating system organization</title>
+    <link>https://Maxwell2020152049.github.io/posts/6s081_xv6book_ch02/</link>
+    <pubDate>Sat, 29 Jul 2023 01:30:55 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://Maxwell2020152049.github.io/posts/6s081_xv6book_ch02/</guid>
+    <description><![CDATA[ch02 Operating system organization 操作系统必须满足以下的需求：
+多路复用（资源由进程共享） 隔离性（Isolation，进程之间不会互相影响） 交互性（进程之间可以互相通信） 2.1 Abstract physical resources 为了实现强隔离，操作系统应该禁止应用程序直接访问硬件资源，而提供对于硬件资源的抽象，如文件系统等（open、read、write、close）。
+process：可以视为CPU的抽象 exec：可以视为内存的抽象 file：可以视为磁盘的抽象 2.2 User mode, supervisor mode, and system calls 强隔离性需要的硬件支持：
+user/kernel mode virtual memory RISC-V有三种模式：
+机器模式 监督者模式 用户模式 ​	机器模式主要用于配置计算机，启动CPU。在监督者模式（supervisor mode）下，CPU被允许运行特权指令（内核空间）。如果用户模式下的应用程序试图执行一条特权指令，CPU不会执行该指令，而是切换到监督者模式。应用程序只能执行用户模式的指令，如计算（用户空间）。
+​	一个应用程序如果要调用内核函数（如xv6中的读系统调用），必须过渡到内核。
+​	CPU提供了一个特殊的指令ecall，可以让CPU从用户模式切换为监督者模式，并在内核指定的入口进入内核。
+​	CPU提供了一个特殊的指令sret，当系统调用完成后，内核切换回用户栈，并通过调用sret指令返回用户空间，降低硬件特权级别，恢复执行系统调用前的用户指令。
+2.3 Kernel organization 宏内核 ：整个操作系统都在内核中，所有的系统调用都在监督者模式下运行。
+微内核 ：在用户模式下运行操作系统的大部分代码。
+从概念上讲，xv6是宏内核。
+2.4 Code: xv6 organization xv6内核源码在kernel/子目录下。模块间的接口在kernel/defs.h中定义。
+2.5 Process overview Xv6使用页表（由硬件实现）给每个进程提供自己的地址空间。
+2.6 Code: starting xv6 and the first process ]]></description>
 </item>
 </channel>
 </rss>

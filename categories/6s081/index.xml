@@ -1,0 +1,43 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>6s081 - Category - Rex&#39;s Blog</title>
+        <link>https://Maxwell2020152049.github.io/categories/6s081/</link>
+        <description>6s081 - Category - Rex&#39;s Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sat, 29 Jul 2023 01:30:55 &#43;0800</lastBuildDate><atom:link href="https://Maxwell2020152049.github.io/categories/6s081/" rel="self" type="application/rss+xml" /><item>
+    <title>ch02 Operating system organization</title>
+    <link>https://Maxwell2020152049.github.io/posts/6s081_xv6book_ch02/</link>
+    <pubDate>Sat, 29 Jul 2023 01:30:55 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://Maxwell2020152049.github.io/posts/6s081_xv6book_ch02/</guid>
+    <description><![CDATA[ch02 Operating system organization 操作系统必须满足以下的需求：
+多路复用（资源由进程共享） 隔离性（Isolation，进程之间不会互相影响） 交互性（进程之间可以互相通信） 2.1 Abstract physical resources 为了实现强隔离，操作系统应该禁止应用程序直接访问硬件资源，而提供对于硬件资源的抽象，如文件系统等（open、read、write、close）。
+process：可以视为CPU的抽象 exec：可以视为内存的抽象 file：可以视为磁盘的抽象 2.2 User mode, supervisor mode, and system calls 强隔离性需要的硬件支持：
+user/kernel mode virtual memory RISC-V有三种模式：
+机器模式 监督者模式 用户模式 ​	机器模式主要用于配置计算机，启动CPU。在监督者模式（supervisor mode）下，CPU被允许运行特权指令（内核空间）。如果用户模式下的应用程序试图执行一条特权指令，CPU不会执行该指令，而是切换到监督者模式。应用程序只能执行用户模式的指令，如计算（用户空间）。
+​	一个应用程序如果要调用内核函数（如xv6中的读系统调用），必须过渡到内核。
+​	CPU提供了一个特殊的指令ecall，可以让CPU从用户模式切换为监督者模式，并在内核指定的入口进入内核。
+​	CPU提供了一个特殊的指令sret，当系统调用完成后，内核切换回用户栈，并通过调用sret指令返回用户空间，降低硬件特权级别，恢复执行系统调用前的用户指令。
+2.3 Kernel organization 宏内核 ：整个操作系统都在内核中，所有的系统调用都在监督者模式下运行。
+微内核 ：在用户模式下运行操作系统的大部分代码。
+从概念上讲，xv6是宏内核。
+2.4 Code: xv6 organization xv6内核源码在kernel/子目录下。模块间的接口在kernel/defs.h中定义。
+2.5 Process overview Xv6使用页表（由硬件实现）给每个进程提供自己的地址空间。
+2.6 Code: starting xv6 and the first process ]]></description>
+</item>
+<item>
+    <title>ch01 Operating system interface</title>
+    <link>https://Maxwell2020152049.github.io/posts/6s081_xv6book_ch01/</link>
+    <pubDate>Fri, 28 Jul 2023 23:05:03 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://Maxwell2020152049.github.io/posts/6s081_xv6book_ch01/</guid>
+    <description><![CDATA[ch01 Operating system interface xv6的系统调用，详见bookriscv-rev1-chinese.pdf的P7
+1.1 Processes and memory xv6上的系统调用如下：
+在xv6上使用系统调用，一般要用到以下头文件：
+#include &#34;kernel/types.h&#34; #include &#34;user/user.h&#34; #include &#34;kernel/fcntl.h&#34; fork系统调用可以为父进程创建一个子进程，创建成功时，为子进程返回0，为父进程返回子进程的PID，失败时返回-1。
+int fork(); exit系统调用退出调用进程，并释放资源，如内存和打开的文件。exit需要一个整形参数，一般来说，0表示成功，1表示失败。
+int exit(int status); wait系统调用返回一个当前进程的已退出的子进程的PID，并将其退出状态复制到指针addr所指的地址上；若调用进程的子进程都没有退出，则等待一个子进程退出。若调用者没有子进程，则返回-1；若不关心子进程的退出状态，可以传一个0地址作为参数。
+int wait(uint64 addr); 实现一个xv6的用户应用test，编写/user/test.c，在Makefile的UPROGS中加入$U/_test\，验证以上系统调用的功能：
+#include &#34;kernel/types.h&#34; #include &#34;user/user.h&#34; #include &#34;kernel/fcntl.h&#34; int main(int argc, char* argv[]) { int pid; pid = fork(); if (pid &gt; 0) { wait(0); printf(&#34;Here is parent process.\n&#34;); printf(&#34;child %d is done.\n&#34;, pid); } else if (pid == 0) { printf(&#34;Here is child process.]]></description>
+</item>
+</channel>
+</rss>

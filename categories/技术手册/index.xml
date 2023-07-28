@@ -1,0 +1,53 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>技术手册 - Category - Rex&#39;s Blog</title>
+        <link>https://Maxwell2020152049.github.io/categories/%E6%8A%80%E6%9C%AF%E6%89%8B%E5%86%8C/</link>
+        <description>技术手册 - Category - Rex&#39;s Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 28 Jul 2023 00:56:03 &#43;0800</lastBuildDate><atom:link href="https://Maxwell2020152049.github.io/categories/%E6%8A%80%E6%9C%AF%E6%89%8B%E5%86%8C/" rel="self" type="application/rss+xml" /><item>
+    <title>FFmpeg使用手册</title>
+    <link>https://Maxwell2020152049.github.io/posts/ffmpeg-manual/</link>
+    <pubDate>Fri, 28 Jul 2023 00:56:03 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://Maxwell2020152049.github.io/posts/ffmpeg-manual/</guid>
+    <description><![CDATA[FFmpeg使用手册 FFmpeg 是一个开放原始码的自由软体，可以执行音讯和视讯多种格式的录影、转档、串流功能，包含了libavcodec——这是一个用于多个专案中音讯和视讯的解码器函式库，以及libavformat——一个音讯与视讯格式转换函式库。
+From 维基百科，自由的百科全书
+FFmpeg官网：https://www.ffmpeg.org/
+FFmpeg官网文档：https://www.ffmpeg.org/documentation.html
+简易教学视频：FFmpeg教程
+下载与安装 下载地址：
+https://www.ffmpeg.org/download.html#build-windows，点击Windows builds by BtbN
+https://github.com/BtbN/FFmpeg-Builds/releases，下载ffmpeg-master-latest-win64-gpl-shared.zip
+解压压缩包，在 环境变量 中添加对应路径：
+C:\FFmpeg\ffmpeg-master-latest-win64-gpl-shared\bin 运行ffmpeg命令，效果如下：
+$ ffmpeg.exe -version ffmpeg version N-111422-g886c1ffb5d-20230712 Copyright (c) 2000-2023 the FFmpeg developers built with gcc 13.1.0 (crosstool-NG 1.25.0.196_227d99d) configuration: --prefix=/ffbuild/prefix --pkg-config-flags=--static --pkg-config=pkg-config --cross-prefix=x86_64-w64-mingw32- --arch=x86_64 --target-os=mingw32 --enable-gpl --enable-version3 --disable-debug --enable-shared --disable-static --disable-w32threads --enable-pthreads --enable-iconv --enable-libxml2 --enable-zlib --enable-libfreetype --enable-libfribidi --enable-gmp --enable-lzma --enable-fontconfig --enable-libvorbis --enable-opencl --disable-libpulse --enable-libvmaf --disable-libxcb --disable-xlib --enable-amf --enable-libaom --enable-libaribb24 --enable-avisynth --enable-chromaprint --enable-libdav1d --enable-libdavs2 --disable-libfdk-aac --enable-ffnvcodec --enable-cuda-llvm --enable-frei0r --enable-libgme --enable-libkvazaar --enable-libass --enable-libbluray --enable-libjxl --enable-libmp3lame --enable-libopus --enable-librist --enable-libssh --enable-libtheora --enable-libvpx --enable-libwebp --enable-lv2 --enable-libvpl --enable-openal --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libopenh264 --enable-libopenjpeg --enable-libopenmpt --enable-librav1e --enable-librubberband --enable-schannel --enable-sdl2 --enable-libsoxr --enable-libsrt --enable-libsvtav1 --enable-libtwolame --enable-libuavs3d --disable-libdrm --disable-vaapi --enable-libvidstab --enable-vulkan --enable-libshaderc --enable-libplacebo --enable-libx264 --enable-libx265 --enable-libxavs2 --enable-libxvid --enable-libzimg --enable-libzvbi --extra-cflags=-DLIBTWOLAME_STATIC --extra-cxxflags= --extra-ldflags=-pthread --extra-ldexeflags= --extra-libs=-lgomp --extra-version=20230712 libavutil 58.]]></description>
+</item>
+<item>
+    <title>如何搭建个人博客</title>
+    <link>https://Maxwell2020152049.github.io/posts/self-blog/</link>
+    <pubDate>Fri, 28 Jul 2023 00:33:37 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://Maxwell2020152049.github.io/posts/self-blog/</guid>
+    <description><![CDATA[个人博客 受到了b站一位up主CodeSheep的启发：
+程序猿如何搭建一个属于自己的个人博客
+手把手教你从0开始搭建自己的个人博客 |无坑版视频教程| hexo
+手把手教你从0开始搭建自己的个人博客 |第二种姿势 | hugo
+动态博客 自己搭建网站，实现前后端
+wordpress：动态博客框架
+静态博客 hexo：简洁，易于搭建，支持markdown，使用js
+jekyllrb：
+Hugo：基于go语言
+vuepress：基于vue.js
+solo：基于Java语言
+使用hexo搭建个人博客 安装node.js
+使用Hugo搭建个人博客 在Linux上配置环境，使用Hugo + Github的组合搭建个人博客。
+下载brew 下载Hugo要使用brew这个工具。
+过程详见这篇博客：在 Linux 上安装和使用 Homebrew 包管理器
+下载Hugo 使用如下命令下载Hugo：
+brew install hugo 使用如下命令检验是否下载成功：
+hugo version 若成功输出版本信息，说明下载成功：
+hugo v0.115.4+extended linux/amd64 BuildDate=unknown 创建一个名为blog博客：
+hugo new site blog 输出：
+Congratulations! Your new Hugo site is created in /home/rex/blog. Just a few more steps and you&#39;re ready to go: 1.]]></description>
+</item>
+</channel>
+</rss>

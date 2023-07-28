@@ -1,0 +1,1665 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>CS61A Project Hog - Rex&#39;s Blog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="CS61A Project Hog" />
+<meta property="og:description" content="Project 1: The Game of Hog Project地址：Project 1: The Game of Hog
+Rules 有两个玩家，轮流进行回合，玩家选择骰子的数量（最多10个），得到每个骰子的点数，将点数之和加入总分中，总分先达到100即获胜。
+Sow Sad：如果有一个骰子点数为1，本回合得分为1
+Piggy Points：如果选择0个骰子，本回合获得k &#43; 3分，k为对手分数的平方的位数中值最小的一位。
+More Boar：回合结束后，如果玩家的最高位小于对手的最高位，玩家的次高位小于对手的次高位，继续进行一回合。
+若对规则有疑问，请仔细阅读项目网站。
+Final Product 最终效果可以参考：Final Product
+文件结构 项目目录如下：
+. ├── calc.py ├── default_graphics.py ├── dice.py ├── gui_files ├── hog_gui.py ├── hog.py ├── ok ├── proj01.ok ├── __pycache__ ├── tests └── ucb.py 其中比较重要的有：
+hog.py：项目的初始代码 dice.py：关于骰子的函数 hog_gui.py：项目的用户图形化界面（graphical user interface） ucb.py：本课程的实用函数 gui_files：Web GUI 使用的各种内容的目录 执行如下代码可以运行项目：
+python3 hog_gui.py Phase 1: Simulator Problem 0 (0 pt) dice." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://Maxwell2020152049.github.io/posts/cs61a_project_hog/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-07-29T01:57:41+08:00" />
+<meta property="article:modified_time" content="2023-07-29T01:57:41+08:00" /><meta property="og:site_name" content="My cool site" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="CS61A Project Hog"/>
+<meta name="twitter:description" content="Project 1: The Game of Hog Project地址：Project 1: The Game of Hog
+Rules 有两个玩家，轮流进行回合，玩家选择骰子的数量（最多10个），得到每个骰子的点数，将点数之和加入总分中，总分先达到100即获胜。
+Sow Sad：如果有一个骰子点数为1，本回合得分为1
+Piggy Points：如果选择0个骰子，本回合获得k &#43; 3分，k为对手分数的平方的位数中值最小的一位。
+More Boar：回合结束后，如果玩家的最高位小于对手的最高位，玩家的次高位小于对手的次高位，继续进行一回合。
+若对规则有疑问，请仔细阅读项目网站。
+Final Product 最终效果可以参考：Final Product
+文件结构 项目目录如下：
+. ├── calc.py ├── default_graphics.py ├── dice.py ├── gui_files ├── hog_gui.py ├── hog.py ├── ok ├── proj01.ok ├── __pycache__ ├── tests └── ucb.py 其中比较重要的有：
+hog.py：项目的初始代码 dice.py：关于骰子的函数 hog_gui.py：项目的用户图形化界面（graphical user interface） ucb.py：本课程的实用函数 gui_files：Web GUI 使用的各种内容的目录 执行如下代码可以运行项目：
+python3 hog_gui.py Phase 1: Simulator Problem 0 (0 pt) dice."/>
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://Maxwell2020152049.github.io/posts/cs61a_project_hog/" /><link rel="prev" href="https://Maxwell2020152049.github.io/posts/cs61a_notes_week2/" /><link rel="next" href="https://Maxwell2020152049.github.io/posts/cs61a_lab_lab00/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "CS61A Project Hog",
+        "inLanguage": "en-us",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/Maxwell2020152049.github.io\/posts\/cs61a_project_hog\/"
+        },"genre": "posts","keywords": "Python","wordcount":  5503 ,
+        "url": "https:\/\/Maxwell2020152049.github.io\/posts\/cs61a_project_hog\/","datePublished": "2023-07-29T01:57:41+08:00","dateModified": "2023-07-29T01:57:41+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Author"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Rex&#39;s Blog"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg"
+        data-srcset="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg, https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg 1.5x, https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg 2x"
+        data-sizes="auto"
+        alt="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg"
+        title="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg" />Rex&#39;s cool site</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Rex&#39;s Blog"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg"
+        data-srcset="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg, https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg 1.5x, https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg 2x"
+        data-sizes="auto"
+        alt="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg"
+        title="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg" />Rex&#39;s cool site</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">CS61A Project Hog</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-category">included in <a href="/categories/cs61a/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>CS61A</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-07-29">2023-07-29</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;5503 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;26 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#project-1-the-game-of-hog">Project 1: The Game of Hog</a>
+      <ul>
+        <li><a href="#rules">Rules</a></li>
+        <li><a href="#final-product">Final Product</a></li>
+        <li><a href="#文件结构">文件结构</a></li>
+        <li><a href="#phase-1-simulator">Phase 1: Simulator</a></li>
+        <li><a href="#phase-2-commentary">Phase 2: Commentary</a></li>
+        <li><a href="#phase-3-strategies">Phase 3: Strategies</a></li>
+        <li><a href="#最终测评">最终测评</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="project-1-the-game-of-hog">Project 1: The Game of Hog</h2>
+<p><code>Project</code>地址：<a href="https://inst.eecs.berkeley.edu/~cs61a/sp21/proj/hog/" target="_blank" rel="noopener noreffer ">Project 1: The Game of Hog</a></p>
+<h3 id="rules">Rules</h3>
+<p>有两个玩家，轮流进行回合，玩家选择骰子的数量（最多10个），得到每个骰子的点数，将点数之和加入总分中，总分先达到<code>100</code>即获胜。</p>
+<p><code>Sow Sad</code>：如果有一个骰子点数为<code>1</code>，本回合得分为<code>1</code></p>
+<p><code>Piggy Points</code>：如果选择<code>0</code>个骰子，本回合获得<code>k + 3</code>分，<code>k</code>为对手分数的平方的位数中值最小的一位。</p>
+<p><code>More Boar</code>：回合结束后，如果玩家的最高位小于对手的最高位，玩家的次高位小于对手的次高位，继续进行一回合。</p>
+<p>若对规则有疑问，请仔细阅读<a href="https://inst.eecs.berkeley.edu/~cs61a/sp21/proj/hog/" target="_blank" rel="noopener noreffer ">项目网站</a>。</p>
+<h3 id="final-product">Final Product</h3>
+<p>最终效果可以参考：<a href="https://hog.cs61a.org/" target="_blank" rel="noopener noreffer ">Final Product</a></p>
+<h3 id="文件结构">文件结构</h3>
+<p>项目目录如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>.
+</span></span><span style="display:flex;"><span>├── calc.py 
+</span></span><span style="display:flex;"><span>├── default_graphics.py
+</span></span><span style="display:flex;"><span>├── dice.py
+</span></span><span style="display:flex;"><span>├── gui_files
+</span></span><span style="display:flex;"><span>├── hog_gui.py
+</span></span><span style="display:flex;"><span>├── hog.py
+</span></span><span style="display:flex;"><span>├── ok
+</span></span><span style="display:flex;"><span>├── proj01.ok
+</span></span><span style="display:flex;"><span>├── __pycache__
+</span></span><span style="display:flex;"><span>├── tests
+</span></span><span style="display:flex;"><span>└── ucb.py
+</span></span></code></pre></div><p>其中比较重要的有：</p>
+<ul>
+<li><code>hog.py</code>：项目的初始代码</li>
+<li><code>dice.py</code>：关于骰子的函数</li>
+<li><code>hog_gui.py</code>：项目的用户图形化界面（<code>graphical user interface</code>）</li>
+<li><code>ucb.py</code>：本课程的实用函数</li>
+<li><code>gui_files</code>：Web GUI 使用的各种内容的目录</li>
+</ul>
+<p>执行如下代码可以运行项目：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>python3 hog_gui.py
+</span></span></code></pre></div><h3 id="phase-1-simulator">Phase 1: Simulator</h3>
+<h4 id="problem-0-0-pt">Problem 0 (0 pt)</h4>
+<p><code>dice.py</code>中定义了两种骰子函数：</p>
+<ul>
+<li><code>make_fair_dice(sides)</code>：<code>sides</code>表示骰子的面数，该函数返回一个函数<code>dice</code>，<code>dice</code>会随机返回<code>[a, b]</code>中的一个值。</li>
+<li><code>make_test_dice(*outcomes)</code>：<code>outcomes</code>是一个正整数序列，该函数返回一个函数<code>dice</code>，<code>dice</code>会顺序、周期性地返回<code>outcomes</code>中的值，该骰子函数主要用作测试。</li>
+</ul>
+<p>运行如下代码进行解锁测评：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>python3 ok -q <span style="color:#ae81ff">00</span> -u --local
+</span></span></code></pre></div><p>结果如下（第二题读错题了，要的是“摇”一个6个面的骰子的方法）：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>Assignment: Project 1: Hog
+</span></span><span style="display:flex;"><span>OK, version v1.18.1
+</span></span><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+</span></span><span style="display:flex;"><span>Unlocking tests
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>At each <span style="color:#e6db74">&#34;? &#34;</span>, type what you would expect the output to be.
+</span></span><span style="display:flex;"><span>Type exit<span style="color:#f92672">()</span> to quit
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Question <span style="color:#ae81ff">0</span> &gt; Suite <span style="color:#ae81ff">1</span> &gt; Case <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 2<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; from hog import *
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; test_dice <span style="color:#f92672">=</span> make_test_dice<span style="color:#f92672">(</span>4, 1, 2<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; test_dice<span style="color:#f92672">()</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">4</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; test_dice<span style="color:#f92672">()</span> <span style="color:#75715e"># Second call</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; test_dice<span style="color:#f92672">()</span> <span style="color:#75715e"># Third call</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; test_dice<span style="color:#f92672">()</span> <span style="color:#75715e"># Fourth call</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">4</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Question <span style="color:#ae81ff">0</span> &gt; Suite <span style="color:#ae81ff">2</span> &gt; Case <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 1<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Q: Which of the following is the correct way to <span style="color:#e6db74">&#34;roll&#34;</span> a fair, six-sided die?
+</span></span><span style="display:flex;"><span>Choose the number of the correct choice:
+</span></span><span style="display:flex;"><span>0<span style="color:#f92672">)</span> six_sided<span style="color:#f92672">()</span>
+</span></span><span style="display:flex;"><span>1<span style="color:#f92672">)</span> make_fair_dice<span style="color:#f92672">(</span>6<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>2<span style="color:#f92672">)</span> make_test_dice<span style="color:#f92672">(</span>6<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>3<span style="color:#f92672">)</span> six_sided
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>-- Not quite. Try again! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Choose the number of the correct choice:
+</span></span><span style="display:flex;"><span>0<span style="color:#f92672">)</span> six_sided<span style="color:#f92672">()</span>
+</span></span><span style="display:flex;"><span>1<span style="color:#f92672">)</span> make_fair_dice<span style="color:#f92672">(</span>6<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>2<span style="color:#f92672">)</span> make_test_dice<span style="color:#f92672">(</span>6<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>3<span style="color:#f92672">)</span> six_sided
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>OK! All cases <span style="color:#66d9ef">for</span> Question <span style="color:#ae81ff">0</span> unlocked.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Cannot backup when running ok with --local.
+</span></span></code></pre></div><h4 id="problem-1-2-pt">Problem 1 (2 pt)</h4>
+<p>实现<code>roll_dice(num_rolls, dice=six_sided)</code>函数，<code>num_rolls</code>为骰子数量，<code>dice</code>为骰子函数，返回该回合的得分，需要考虑<code>Sow Sad</code>规则。</p>
+<p><strong><code>注意</code></strong> ：哪怕中途有骰子出现了<code>1</code>，也要摇完<code>num_rolls</code>次骰子，否则测评会出错。</p>
+<p>运行如下代码进行解锁测评：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>python3 ok -q <span style="color:#ae81ff">01</span> -u --local
+</span></span></code></pre></div><p>结果如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>Assignment: Project 1: Hog
+</span></span><span style="display:flex;"><span>OK, version v1.18.1
+</span></span><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+</span></span><span style="display:flex;"><span>Unlocking tests
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>At each <span style="color:#e6db74">&#34;? &#34;</span>, type what you would expect the output to be.
+</span></span><span style="display:flex;"><span>Type exit<span style="color:#f92672">()</span> to quit
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Question <span style="color:#ae81ff">1</span> &gt; Suite <span style="color:#ae81ff">1</span> &gt; Case <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 59<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; from hog import *
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; roll_dice<span style="color:#f92672">(</span>2, make_test_dice<span style="color:#f92672">(</span>4, 6, 1<span style="color:#f92672">))</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Question <span style="color:#ae81ff">1</span> &gt; Suite <span style="color:#ae81ff">1</span> &gt; Case <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 58<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; from hog import *
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; roll_dice<span style="color:#f92672">(</span>3, make_test_dice<span style="color:#f92672">(</span>4, 6, 1<span style="color:#f92672">))</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">11</span>
+</span></span><span style="display:flex;"><span>-- Not quite. Try again! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Question <span style="color:#ae81ff">1</span> &gt; Suite <span style="color:#ae81ff">1</span> &gt; Case <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 57<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; from hog import *
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; roll_dice<span style="color:#f92672">(</span>4, make_test_dice<span style="color:#f92672">(</span>2, 2, 3<span style="color:#f92672">))</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">9</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Question <span style="color:#ae81ff">1</span> &gt; Suite <span style="color:#ae81ff">1</span> &gt; Case <span style="color:#ae81ff">4</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 56<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; from hog import *
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; a <span style="color:#f92672">=</span> roll_dice<span style="color:#f92672">(</span>4, make_test_dice<span style="color:#f92672">(</span>1, 2, 3<span style="color:#f92672">))</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; a <span style="color:#75715e"># check that the value is being returned, not printed</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Question <span style="color:#ae81ff">1</span> &gt; Suite <span style="color:#ae81ff">1</span> &gt; Case <span style="color:#ae81ff">5</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 55<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; from hog import *
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; counted_dice <span style="color:#f92672">=</span> make_test_dice<span style="color:#f92672">(</span>4, 1, 2, 6<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; roll_dice<span style="color:#f92672">(</span>3, counted_dice<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; <span style="color:#75715e"># Make sure you call dice exactly num_rolls times!</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; <span style="color:#75715e"># If you call it fewer or more than that, it won&#39;t be at the right spot in the cycle for the next roll</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; <span style="color:#75715e"># Note that a return statement within a loop ends the loop</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; roll_dice<span style="color:#f92672">(</span>1, counted_dice<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">6</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Question <span style="color:#ae81ff">1</span> &gt; Suite <span style="color:#ae81ff">1</span> &gt; Case <span style="color:#ae81ff">6</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 54<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; from hog import *
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; roll_dice<span style="color:#f92672">(</span>9, make_test_dice<span style="color:#f92672">(</span>6<span style="color:#f92672">))</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">54</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; roll_dice<span style="color:#f92672">(</span>7, make_test_dice<span style="color:#f92672">(</span>2, 2, 2, 2, 2, 2, 1<span style="color:#f92672">))</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>OK! All cases <span style="color:#66d9ef">for</span> Question <span style="color:#ae81ff">1</span> unlocked.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Cannot backup when running ok with --local.
+</span></span></code></pre></div><p>实现代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">roll_dice</span>(num_rolls, dice<span style="color:#f92672">=</span>six_sided):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Simulate rolling the DICE exactly NUM_ROLLS &gt; 0 times. Return the sum of
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    the outcomes unless any of the outcomes is 1. In that case, return 1.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    num_rolls:  The number of dice rolls that will be made.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    dice:       A function that simulates a single dice roll outcome.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># These assert statements ensure that num_rolls is a positive integer.</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">assert</span> type(num_rolls) <span style="color:#f92672">==</span> int, <span style="color:#e6db74">&#39;num_rolls must be an integer.&#39;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">assert</span> num_rolls <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>, <span style="color:#e6db74">&#39;Must roll at least once.&#39;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># BEGIN PROBLEM 1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;*** YOUR CODE HERE ***&#34;</span>
+</span></span><span style="display:flex;"><span>    sum <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    pt_one <span style="color:#f92672">=</span> <span style="color:#66d9ef">False</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, num_rolls):
+</span></span><span style="display:flex;"><span>        pt <span style="color:#f92672">=</span> dice()
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> pt <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>:
+</span></span><span style="display:flex;"><span>            pt_one <span style="color:#f92672">=</span> <span style="color:#66d9ef">True</span>
+</span></span><span style="display:flex;"><span>        sum <span style="color:#f92672">+=</span> pt
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> (<span style="color:#ae81ff">1</span> <span style="color:#66d9ef">if</span> pt_one <span style="color:#66d9ef">else</span> sum)
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e"># END PROBLEM 1</span>
+</span></span></code></pre></div><p>可以使用如下命令进行测评：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>python3 ok -q <span style="color:#ae81ff">01</span> --local
+</span></span></code></pre></div><h4 id="problem-2-1-pt">Problem 2 (1 pt)</h4>
+<p>实现<code>piggy_points(score)</code>函数，<code>score</code>是对手的分数，<code>Piggy Points</code>规则见上，返回本回合的得分。</p>
+<p>运行如下代码进行解锁测评：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>python3 ok -q <span style="color:#ae81ff">02</span> -u --local
+</span></span></code></pre></div><p>结果如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>Assignment: Project 1: Hog
+</span></span><span style="display:flex;"><span>OK, version v1.18.1
+</span></span><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+</span></span><span style="display:flex;"><span>Unlocking tests
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>At each <span style="color:#e6db74">&#34;? &#34;</span>, type what you would expect the output to be.
+</span></span><span style="display:flex;"><span>Type exit<span style="color:#f92672">()</span> to quit
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Question <span style="color:#ae81ff">2</span> &gt; Suite <span style="color:#ae81ff">1</span> &gt; Case <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 36<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; from hog import *
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; import tests.construct_check as test
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; piggy_points<span style="color:#f92672">(</span>4<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">4</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Question <span style="color:#ae81ff">2</span> &gt; Suite <span style="color:#ae81ff">1</span> &gt; Case <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 35<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; from hog import *
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; import tests.construct_check as test
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; piggy_points<span style="color:#f92672">(</span>10<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Question <span style="color:#ae81ff">2</span> &gt; Suite <span style="color:#ae81ff">1</span> &gt; Case <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 34<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; from hog import *
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; import tests.construct_check as test
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; piggy_points<span style="color:#f92672">(</span>94<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">6</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Question <span style="color:#ae81ff">2</span> &gt; Suite <span style="color:#ae81ff">1</span> &gt; Case <span style="color:#ae81ff">4</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 33<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; from hog import *
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; import tests.construct_check as test
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; piggy_points<span style="color:#f92672">(</span>0<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Question <span style="color:#ae81ff">2</span> &gt; Suite <span style="color:#ae81ff">1</span> &gt; Case <span style="color:#ae81ff">5</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 32<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; from hog import *
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; import tests.construct_check as test
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; a <span style="color:#f92672">=</span> piggy_points<span style="color:#f92672">(</span>24<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; a <span style="color:#75715e"># check that the value is being returned, not printed</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">8</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>OK! All cases <span style="color:#66d9ef">for</span> Question <span style="color:#ae81ff">2</span> unlocked.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Cannot backup when running ok with --local.
+</span></span></code></pre></div><p>实现代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">piggy_points</span>(score):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Return the points scored from rolling 0 dice.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    score:  The opponent&#39;s current score.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># BEGIN PROBLEM 2</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;*** YOUR CODE HERE ***&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">smallest_digit</span>(num):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> num <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">10</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> num
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> min(num <span style="color:#f92672">%</span> <span style="color:#ae81ff">10</span>, smallest_digit(num <span style="color:#f92672">//</span> <span style="color:#ae81ff">10</span>))
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> smallest_digit(score <span style="color:#f92672">*</span> score) <span style="color:#f92672">+</span> <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e"># END PROBLEM 2</span>
+</span></span></code></pre></div><p>可以使用如下命令进行测评：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>python3 ok -q <span style="color:#ae81ff">02</span> --local
+</span></span></code></pre></div><h4 id="problem-3-2-pt">Problem 3 (2 pt)</h4>
+<p>实现<code>take_turn(num_rolls, opponent_score, dice=six_sided, goal=GOAL_SCORE)</code>函数，返回玩家在本回合的得分，参数如下：</p>
+<ul>
+<li><code>num_rolls</code>：骰子的数量</li>
+<li><code>opponent_score</code>：对手的分数</li>
+<li><code>dice</code>：骰子函数</li>
+<li><code>goal</code>：最高分</li>
+</ul>
+<p>运行如下代码进行解锁测评：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>python3 ok -q <span style="color:#ae81ff">03</span> -u --local
+</span></span></code></pre></div><p>结果如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>Assignment: Project 1: Hog
+</span></span><span style="display:flex;"><span>OK, version v1.18.1
+</span></span><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+</span></span><span style="display:flex;"><span>Unlocking tests
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>At each <span style="color:#e6db74">&#34;? &#34;</span>, type what you would expect the output to be.
+</span></span><span style="display:flex;"><span>Type exit<span style="color:#f92672">()</span> to quit
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Question <span style="color:#ae81ff">3</span> &gt; Suite <span style="color:#ae81ff">1</span> &gt; Case <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 10<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; from hog import *
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; take_turn<span style="color:#f92672">(</span>2, 0, make_test_dice<span style="color:#f92672">(</span>4, 5, 1<span style="color:#f92672">))</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">9</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Question <span style="color:#ae81ff">3</span> &gt; Suite <span style="color:#ae81ff">1</span> &gt; Case <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 9<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; from hog import *
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; take_turn<span style="color:#f92672">(</span>3, 0, make_test_dice<span style="color:#f92672">(</span>4, 6, 1<span style="color:#f92672">))</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Question <span style="color:#ae81ff">3</span> &gt; Suite <span style="color:#ae81ff">1</span> &gt; Case <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 8<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; from hog import *
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; take_turn<span style="color:#f92672">(</span>0, 2<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">7</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Question <span style="color:#ae81ff">3</span> &gt; Suite <span style="color:#ae81ff">1</span> &gt; Case <span style="color:#ae81ff">4</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 7<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; from hog import *
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; take_turn<span style="color:#f92672">(</span>0, 0<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>OK! All cases <span style="color:#66d9ef">for</span> Question <span style="color:#ae81ff">3</span> unlocked.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Cannot backup when running ok with --local.
+</span></span></code></pre></div><p>思路：当骰子数量为<code>0</code>时，使用<code>Piggy Points</code>规则；否则，正常摇骰子。</p>
+<p>实现代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">take_turn</span>(num_rolls, opponent_score, dice<span style="color:#f92672">=</span>six_sided, goal<span style="color:#f92672">=</span>GOAL_SCORE):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Simulate a turn rolling NUM_ROLLS dice, which may be 0 in the case
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    of a player using Piggy Points.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Return the points scored for the turn by the current player.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    num_rolls:       The number of dice rolls that will be made.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    opponent_score:  The total score of the opponent.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    dice:            A function that simulates a single dice roll outcome.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    goal:            The goal score of the game.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Leave these assert statements here; they help check for errors.</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">assert</span> type(num_rolls) <span style="color:#f92672">==</span> int, <span style="color:#e6db74">&#39;num_rolls must be an integer.&#39;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">assert</span> num_rolls <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>, <span style="color:#e6db74">&#39;Cannot roll a negative number of dice in take_turn.&#39;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">assert</span> num_rolls <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">10</span>, <span style="color:#e6db74">&#39;Cannot roll more than 10 dice.&#39;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">assert</span> opponent_score <span style="color:#f92672">&lt;</span> goal, <span style="color:#e6db74">&#39;The game should be over.&#39;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># BEGIN PROBLEM 3</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;*** YOUR CODE HERE ***&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> num_rolls <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> piggy_points(opponent_score)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> roll_dice(num_rolls, dice)
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># END PROBLEM 3</span>
+</span></span></code></pre></div><p>可以使用如下命令进行测评：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>python3 ok -q <span style="color:#ae81ff">03</span> --local
+</span></span></code></pre></div><h4 id="problem-4-2-pt">Problem 4 (2 pt)</h4>
+<p>实现<code>more_boar(player_score, opponent_score)</code>函数，<code>player_score</code>是当前玩家的分数，<code>opponent_score</code>是对手的分数，根据<code>More Boar</code>规则，判断下一个回合属于哪个玩家，若属于当前玩家，则返回<code>True</code>，否则返回<code>False</code>。</p>
+<p>运行如下代码进行解锁测评：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>python3 ok -q <span style="color:#ae81ff">04</span> -u --local
+</span></span></code></pre></div><p>结果如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>Assignment: Project 1: Hog
+</span></span><span style="display:flex;"><span>OK, version v1.18.1
+</span></span><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+</span></span><span style="display:flex;"><span>Unlocking tests
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>At each <span style="color:#e6db74">&#34;? &#34;</span>, type what you would expect the output to be.
+</span></span><span style="display:flex;"><span>Type exit<span style="color:#f92672">()</span> to quit
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Question <span style="color:#ae81ff">3</span> &gt; Suite <span style="color:#ae81ff">1</span> &gt; Case <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 10<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; from hog import *
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; take_turn<span style="color:#f92672">(</span>2, 0, make_test_dice<span style="color:#f92672">(</span>4, 5, 1<span style="color:#f92672">))</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">9</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Question <span style="color:#ae81ff">3</span> &gt; Suite <span style="color:#ae81ff">1</span> &gt; Case <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 9<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; from hog import *
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; take_turn<span style="color:#f92672">(</span>3, 0, make_test_dice<span style="color:#f92672">(</span>4, 6, 1<span style="color:#f92672">))</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Question <span style="color:#ae81ff">3</span> &gt; Suite <span style="color:#ae81ff">1</span> &gt; Case <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 8<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; from hog import *
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; take_turn<span style="color:#f92672">(</span>0, 2<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">7</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Question <span style="color:#ae81ff">3</span> &gt; Suite <span style="color:#ae81ff">1</span> &gt; Case <span style="color:#ae81ff">4</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 7<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; from hog import *
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; take_turn<span style="color:#f92672">(</span>0, 0<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>OK! All cases <span style="color:#66d9ef">for</span> Question <span style="color:#ae81ff">4</span> unlocked.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Cannot backup when running ok with --local.
+</span></span></code></pre></div><p>实现代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">more_boar</span>(player_score, opponent_score):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Return whether the player gets an extra turn.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    player_score:   The total score of the current player.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    opponent_score: The total score of the other player.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; more_boar(21, 43)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    True
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; more_boar(22, 43)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    True
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; more_boar(43, 21)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    False
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; more_boar(12, 12)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    False
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; more_boar(7, 8)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    False
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># BEGIN PROBLEM 4</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;*** YOUR CODE HERE ***&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">two_digits</span>(x):
+</span></span><span style="display:flex;"><span>        a <span style="color:#f92672">=</span> x <span style="color:#f92672">%</span> <span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span>        b <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> x <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">10</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> b, a
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span> x <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>            b <span style="color:#f92672">=</span> a
+</span></span><span style="display:flex;"><span>            a <span style="color:#f92672">=</span> x <span style="color:#f92672">%</span> <span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span>            x <span style="color:#f92672">//=</span> <span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> a, b
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    tmp_p1, tmp_p2 <span style="color:#f92672">=</span> two_digits(player_score)
+</span></span><span style="display:flex;"><span>    tmp_o1, tmp_o2 <span style="color:#f92672">=</span> two_digits(opponent_score)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> tmp_p1 <span style="color:#f92672">&lt;</span> tmp_o1 <span style="color:#f92672">and</span> tmp_p2 <span style="color:#f92672">&lt;</span> tmp_o2
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># END PROBLEM 4</span>
+</span></span></code></pre></div><p>可以使用如下命令进行测评：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>python3 ok -q <span style="color:#ae81ff">04</span> --local
+</span></span></code></pre></div><h4 id="problem-5-3-pt">Problem 5 (3 pt)</h4>
+<p>实现<code>play</code>函数，模拟游戏的运行，返回两个玩家的最终分数：</p>
+<ul>
+<li>
+<p><code>strategy0</code>：玩家0的策略，根据当前双方的分数，返回骰子数量</p>
+</li>
+<li>
+<p><code>strategy1</code>：玩家1的策略，根据当前双方的分数，返回骰子数量</p>
+</li>
+<li>
+<p><code>score0</code>：玩家0的分数</p>
+</li>
+<li>
+<p><code>score1</code>：玩家1的分数</p>
+</li>
+<li>
+<p><code>dice</code>：骰子函数</p>
+</li>
+<li>
+<p><code>goal</code>：目标分数</p>
+</li>
+</ul>
+<p>运行如下代码进行解锁测评：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>python3 ok -q <span style="color:#ae81ff">05</span> -u --local
+</span></span></code></pre></div><p>结果如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>Assignment: Project 1: Hog
+</span></span><span style="display:flex;"><span>OK, version v1.18.1
+</span></span><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+</span></span><span style="display:flex;"><span>Unlocking tests
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>At each <span style="color:#e6db74">&#34;? &#34;</span>, type what you would expect the output to be.
+</span></span><span style="display:flex;"><span>Type exit<span style="color:#f92672">()</span> to quit
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Question <span style="color:#ae81ff">5</span> &gt; Suite <span style="color:#ae81ff">1</span> &gt; Case <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 111<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Q: The variables score0 and score1 are the scores <span style="color:#66d9ef">for</span> Player <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>and Player 1, respectively. Under what conditions should the
+</span></span><span style="display:flex;"><span>game <span style="color:#66d9ef">continue</span>?
+</span></span><span style="display:flex;"><span>Choose the number of the correct choice:
+</span></span><span style="display:flex;"><span>0<span style="color:#f92672">)</span> While score1 is less than goal
+</span></span><span style="display:flex;"><span>1<span style="color:#f92672">)</span> While at least one of score0 or score1 is less than goal
+</span></span><span style="display:flex;"><span>2<span style="color:#f92672">)</span> While score0 and score1 are both less than goal
+</span></span><span style="display:flex;"><span>3<span style="color:#f92672">)</span> While score0 is less than goal
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Question <span style="color:#ae81ff">5</span> &gt; Suite <span style="color:#ae81ff">1</span> &gt; Case <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 110<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Q: What is a strategy in the context of this game?
+</span></span><span style="display:flex;"><span>Choose the number of the correct choice:
+</span></span><span style="display:flex;"><span>0<span style="color:#f92672">)</span> A player<span style="color:#e6db74">&#39;s desired turn outcome
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">1) A function that returns the number of dice a player will roll
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">2) The number of dice a player will roll
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">? 1
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">-- OK! --
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">---------------------------------------------------------------------
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">Question 5 &gt; Suite 1 &gt; Case 3
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">(cases remaining: 109)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">Q: If strategy1 is Player 1&#39;</span>s strategy <span style="color:#66d9ef">function</span>, score0 is
+</span></span><span style="display:flex;"><span>Player 0<span style="color:#e6db74">&#39;s current score, and score1 is Player 1&#39;</span>s current
+</span></span><span style="display:flex;"><span>score, <span style="color:#66d9ef">then</span> which of the following demonstrates correct
+</span></span><span style="display:flex;"><span>usage of strategy1?
+</span></span><span style="display:flex;"><span>Choose the number of the correct choice:
+</span></span><span style="display:flex;"><span>0<span style="color:#f92672">)</span> strategy1<span style="color:#f92672">(</span>score1<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>1<span style="color:#f92672">)</span> strategy1<span style="color:#f92672">(</span>score0, score1<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>2<span style="color:#f92672">)</span> strategy1<span style="color:#f92672">(</span>score0<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>3<span style="color:#f92672">)</span> strategy1<span style="color:#f92672">(</span>score1, score0<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>-- Not quite. Try again! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Choose the number of the correct choice:
+</span></span><span style="display:flex;"><span>0<span style="color:#f92672">)</span> strategy1<span style="color:#f92672">(</span>score1<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>1<span style="color:#f92672">)</span> strategy1<span style="color:#f92672">(</span>score0, score1<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>2<span style="color:#f92672">)</span> strategy1<span style="color:#f92672">(</span>score0<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>3<span style="color:#f92672">)</span> strategy1<span style="color:#f92672">(</span>score1, score0<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Question <span style="color:#ae81ff">5</span> &gt; Suite <span style="color:#ae81ff">2</span> &gt; Case <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 108<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; import hog
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; always_three <span style="color:#f92672">=</span> hog.make_test_dice<span style="color:#f92672">(</span>3<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; always <span style="color:#f92672">=</span> hog.always_roll
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; <span style="color:#75715e">#</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; <span style="color:#75715e"># Play function stops at goal</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; s0, s1 <span style="color:#f92672">=</span> hog.play<span style="color:#f92672">(</span>always<span style="color:#f92672">(</span>5<span style="color:#f92672">)</span>, always<span style="color:#f92672">(</span>3<span style="color:#f92672">)</span>, score0<span style="color:#f92672">=</span>91, score1<span style="color:#f92672">=</span>10, dice<span style="color:#f92672">=</span>always_three<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; s0
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">15</span>
+</span></span><span style="display:flex;"><span>-- Not quite. Try again! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">106</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; s1
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Question <span style="color:#ae81ff">5</span> &gt; Suite <span style="color:#ae81ff">2</span> &gt; Case <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 107<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; import hog
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; always_three <span style="color:#f92672">=</span> hog.make_test_dice<span style="color:#f92672">(</span>3<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; always <span style="color:#f92672">=</span> hog.always_roll
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; <span style="color:#75715e">#</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; <span style="color:#75715e"># Goal score is not hardwired</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; s0, s1 <span style="color:#f92672">=</span> hog.play<span style="color:#f92672">(</span>always<span style="color:#f92672">(</span>5<span style="color:#f92672">)</span>, always<span style="color:#f92672">(</span>5<span style="color:#f92672">)</span>, goal<span style="color:#f92672">=</span>10, dice<span style="color:#f92672">=</span>always_three<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; s0
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">15</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; s1
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Question <span style="color:#ae81ff">5</span> &gt; Suite <span style="color:#ae81ff">2</span> &gt; Case <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 106<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>-- Already unlocked --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Question <span style="color:#ae81ff">5</span> &gt; Suite <span style="color:#ae81ff">2</span> &gt; Case <span style="color:#ae81ff">4</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 105<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>-- Already unlocked --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Question <span style="color:#ae81ff">5</span> &gt; Suite <span style="color:#ae81ff">3</span> &gt; Case <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 104<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; import hog
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; always_three <span style="color:#f92672">=</span> hog.make_test_dice<span style="color:#f92672">(</span>3<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; always_seven <span style="color:#f92672">=</span> hog.make_test_dice<span style="color:#f92672">(</span>7<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; <span style="color:#75715e">#</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; <span style="color:#75715e"># Use strategies</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; <span style="color:#75715e"># We recommend working this out turn-by-turn on a piece of paper (use Python for difficult calculations).</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; strat0 <span style="color:#f92672">=</span> lambda score, opponent: opponent % <span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; strat1 <span style="color:#f92672">=</span> lambda score, opponent: max<span style="color:#f92672">((</span>score // 10<span style="color:#f92672">)</span> - 4, 0<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; s0, s1 <span style="color:#f92672">=</span> hog.play<span style="color:#f92672">(</span>strat0, strat1, score0<span style="color:#f92672">=</span>71, score1<span style="color:#f92672">=</span>80, dice<span style="color:#f92672">=</span>always_seven<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; s0
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">74</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; s1
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">108</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>OK! All cases <span style="color:#66d9ef">for</span> Question <span style="color:#ae81ff">5</span> unlocked.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Cannot backup when running ok with --local.
+</span></span></code></pre></div><p>实现代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">play</span>(strategy0, strategy1, score0<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>, score1<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>, dice<span style="color:#f92672">=</span>six_sided,
+</span></span><span style="display:flex;"><span>         goal<span style="color:#f92672">=</span>GOAL_SCORE, say<span style="color:#f92672">=</span>silence):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Simulate a game and return the final scores of both players, with Player
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    0&#39;s score first, and Player 1&#39;s score second.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    A strategy is a function that takes two total scores as arguments (the
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    current player&#39;s score, and the opponent&#39;s score), and returns a number of
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    dice that the current player will roll this turn.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    strategy0:  The strategy function for Player 0, who plays first.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    strategy1:  The strategy function for Player 1, who plays second.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    score0:     Starting score for Player 0
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    score1:     Starting score for Player 1
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    dice:       A function of zero arguments that simulates a dice roll.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    goal:       The game ends and someone wins when this score is reached.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    say:        The commentary function to call at the end of the first turn.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    who <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>  <span style="color:#75715e"># Who is about to take a turn, 0 (first) or 1 (second)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># BEGIN PROBLEM 5</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;*** YOUR CODE HERE ***&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># END PROBLEM 5</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># (note that the indentation for the problem 6 prompt (***YOUR CODE HERE***) might be misleading)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># BEGIN PROBLEM 6</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;*** YOUR CODE HERE ***&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> score0 <span style="color:#f92672">&lt;</span> goal <span style="color:#f92672">and</span> score1 <span style="color:#f92672">&lt;</span> goal:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> who <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>            num_rolls <span style="color:#f92672">=</span> strategy0(score0, score1)
+</span></span><span style="display:flex;"><span>            score0 <span style="color:#f92672">+=</span> take_turn(num_rolls, score1, dice, goal)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> more_boar(score0, score1):
+</span></span><span style="display:flex;"><span>                who <span style="color:#f92672">=</span> next_player(who)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>            num_rolls <span style="color:#f92672">=</span> strategy1(score1, score0)
+</span></span><span style="display:flex;"><span>            score1 <span style="color:#f92672">+=</span> take_turn(num_rolls, score0, dice, goal)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> more_boar(score1, score0):
+</span></span><span style="display:flex;"><span>                who <span style="color:#f92672">=</span> next_player(who)
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># END PROBLEM 6</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> score0, score1
+</span></span></code></pre></div><p>可以使用如下命令进行测评：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>python3 ok -q <span style="color:#ae81ff">05</span> --local
+</span></span></code></pre></div><h3 id="phase-2-commentary">Phase 2: Commentary</h3>
+<h4 id="commentary-examples">Commentary examples</h4>
+<p><code>say_scores</code>函数：打印两位玩家的分数，返回自身函数</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">say_scores</span>(score0, score1):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;A commentary function that announces the score for each player.&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#34;Player 0 now has&#34;</span>, score0, <span style="color:#e6db74">&#34;and Player 1 now has&#34;</span>, score1)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> say_scores
+</span></span></code></pre></div><p><code>announce_lead_changes</code>：打印分数领先的玩家和分数差，返回一个评论函数<code>say</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">announce_lead_changes</span>(last_leader<span style="color:#f92672">=</span><span style="color:#66d9ef">None</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Return a commentary function that announces lead changes.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; f0 = announce_lead_changes()
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; f1 = f0(5, 0)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Player 0 takes the lead by 5
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; f2 = f1(5, 12)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Player 1 takes the lead by 7
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; f3 = f2(8, 12)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; f4 = f3(8, 13)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; f5 = f4(15, 13)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Player 0 takes the lead by 2
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">say</span>(score0, score1):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> score0 <span style="color:#f92672">&gt;</span> score1:
+</span></span><span style="display:flex;"><span>            leader <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">elif</span> score1 <span style="color:#f92672">&gt;</span> score0:
+</span></span><span style="display:flex;"><span>            leader <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>            leader <span style="color:#f92672">=</span> <span style="color:#66d9ef">None</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> leader <span style="color:#f92672">!=</span> <span style="color:#66d9ef">None</span> <span style="color:#f92672">and</span> leader <span style="color:#f92672">!=</span> last_leader:
+</span></span><span style="display:flex;"><span>            print(<span style="color:#e6db74">&#39;Player&#39;</span>, leader, <span style="color:#e6db74">&#39;takes the lead by&#39;</span>, abs(score0 <span style="color:#f92672">-</span> score1))
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> announce_lead_changes(leader)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> say
+</span></span></code></pre></div><p><code>both(f, g)</code>函数：返回一个能够打印<code>f</code>和<code>g</code>函数的评论的函数</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">both</span>(f, g):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Return a commentary function that says what f says, then what g says.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    NOTE: the following game is not possible under the rules, it&#39;s just
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    an example for the sake of the doctest
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; h0 = both(say_scores, announce_lead_changes())
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; h1 = h0(10, 0)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Player 0 now has 10 and Player 1 now has 0
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Player 0 takes the lead by 10
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; h2 = h1(10, 8)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Player 0 now has 10 and Player 1 now has 8
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; h3 = h2(10, 17)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Player 0 now has 10 and Player 1 now has 17
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Player 1 takes the lead by 7
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">say</span>(score0, score1):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> both(f(score0, score1), g(score0, score1))
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> say
+</span></span></code></pre></div><h4 id="problem-6-2-pt">Problem 6 (2 pt)</h4>
+<p>在<code>play</code>函数中，每回合结束时调用<code>say</code>函数，下一回合掉用本回合<code>say</code>的返回值</p>
+<p>运行如下代码进行解锁测评：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>python3 ok -q <span style="color:#ae81ff">06</span> -u --local
+</span></span></code></pre></div><p>结果如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>Assignment: Project 1: Hog
+</span></span><span style="display:flex;"><span>OK, version v1.18.1
+</span></span><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+</span></span><span style="display:flex;"><span>Unlocking tests
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>At each <span style="color:#e6db74">&#34;? &#34;</span>, type what you would expect the output to be.
+</span></span><span style="display:flex;"><span>Type exit<span style="color:#f92672">()</span> to quit
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Question <span style="color:#ae81ff">6</span> &gt; Suite <span style="color:#ae81ff">1</span> &gt; Case <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 8<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Q: What does a commentary <span style="color:#66d9ef">function</span> <span style="color:#66d9ef">return</span>?
+</span></span><span style="display:flex;"><span>Choose the number of the correct choice:
+</span></span><span style="display:flex;"><span>0<span style="color:#f92672">)</span> An integer representing the score.
+</span></span><span style="display:flex;"><span>1<span style="color:#f92672">)</span> None.
+</span></span><span style="display:flex;"><span>2<span style="color:#f92672">)</span> Another commentary <span style="color:#66d9ef">function</span>.
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Question <span style="color:#ae81ff">6</span> &gt; Suite <span style="color:#ae81ff">2</span> &gt; Case <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 7<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; from hog import play, always_roll
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; from dice import make_test_dice
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; <span style="color:#75715e">#</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; def echo<span style="color:#f92672">(</span>s0, s1<span style="color:#f92672">)</span>:
+</span></span><span style="display:flex;"><span>...     print<span style="color:#f92672">(</span>s0, s1<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>...     <span style="color:#66d9ef">return</span> echo
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; s0, s1 <span style="color:#f92672">=</span> play<span style="color:#f92672">(</span>always_roll<span style="color:#f92672">(</span>1<span style="color:#f92672">)</span>, always_roll<span style="color:#f92672">(</span>1<span style="color:#f92672">)</span>, dice<span style="color:#f92672">=</span>make_test_dice<span style="color:#f92672">(</span>3<span style="color:#f92672">)</span>, goal<span style="color:#f92672">=</span>5, say<span style="color:#f92672">=</span>echo<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>line 1<span style="color:#f92672">)</span>? <span style="color:#ae81ff">4</span> <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>-- Not quite. Try again! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>line 1<span style="color:#f92672">)</span>? <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>line 2<span style="color:#f92672">)</span>? <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>line 3<span style="color:#f92672">)</span>? <span style="color:#ae81ff">6</span> <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Question <span style="color:#ae81ff">6</span> &gt; Suite <span style="color:#ae81ff">2</span> &gt; Case <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 6<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; from hog import play, always_roll
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; from dice import make_test_dice
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; def count<span style="color:#f92672">(</span>n<span style="color:#f92672">)</span>:
+</span></span><span style="display:flex;"><span>...     def say<span style="color:#f92672">(</span>s0, s1<span style="color:#f92672">)</span>:
+</span></span><span style="display:flex;"><span>...         print<span style="color:#f92672">(</span>n, s0<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>...         <span style="color:#66d9ef">return</span> count<span style="color:#f92672">(</span>n + 1<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>...     <span style="color:#66d9ef">return</span> say
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; s0, s1 <span style="color:#f92672">=</span> play<span style="color:#f92672">(</span>always_roll<span style="color:#f92672">(</span>1<span style="color:#f92672">)</span>, always_roll<span style="color:#f92672">(</span>1<span style="color:#f92672">)</span>, dice<span style="color:#f92672">=</span>make_test_dice<span style="color:#f92672">(</span>5<span style="color:#f92672">)</span>, goal<span style="color:#f92672">=</span>10, say<span style="color:#f92672">=</span>count<span style="color:#f92672">(</span>1<span style="color:#f92672">))</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>line 1<span style="color:#f92672">)</span>? <span style="color:#ae81ff">1</span> <span style="color:#ae81ff">5</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>line 2<span style="color:#f92672">)</span>? <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">5</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>line 3<span style="color:#f92672">)</span>? <span style="color:#ae81ff">3</span> <span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Question <span style="color:#ae81ff">6</span> &gt; Suite <span style="color:#ae81ff">2</span> &gt; Case <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 5<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; from hog import play, always_roll
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; from dice import make_test_dice
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; <span style="color:#75715e">#</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; def echo<span style="color:#f92672">(</span>s0, s1<span style="color:#f92672">)</span>:
+</span></span><span style="display:flex;"><span>...     print<span style="color:#f92672">(</span>s0, s1<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>...     <span style="color:#66d9ef">return</span> echo
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; strat0 <span style="color:#f92672">=</span> lambda score, opponent: <span style="color:#ae81ff">1</span> - opponent // <span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; strat1 <span style="color:#f92672">=</span> always_roll<span style="color:#f92672">(</span>3<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; s0, s1 <span style="color:#f92672">=</span> play<span style="color:#f92672">(</span>strat0, strat1, dice<span style="color:#f92672">=</span>make_test_dice<span style="color:#f92672">(</span>4, 2, 6<span style="color:#f92672">)</span>, goal<span style="color:#f92672">=</span>15, say<span style="color:#f92672">=</span>echo<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>line 1<span style="color:#f92672">)</span>? <span style="color:#ae81ff">4</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>line 2<span style="color:#f92672">)</span>? <span style="color:#ae81ff">4</span> <span style="color:#ae81ff">12</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>line 3<span style="color:#f92672">)</span>? <span style="color:#ae81ff">6</span> <span style="color:#ae81ff">12</span>
+</span></span><span style="display:flex;"><span>-- Not quite. Try again! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>line 1<span style="color:#f92672">)</span>? <span style="color:#ae81ff">4</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>line 2<span style="color:#f92672">)</span>? <span style="color:#ae81ff">4</span> <span style="color:#ae81ff">12</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>line 3<span style="color:#f92672">)</span>? <span style="color:#ae81ff">8</span> <span style="color:#ae81ff">12</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>line 4<span style="color:#f92672">)</span>? <span style="color:#ae81ff">8</span> <span style="color:#ae81ff">24</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Question <span style="color:#ae81ff">6</span> &gt; Suite <span style="color:#ae81ff">2</span> &gt; Case <span style="color:#ae81ff">4</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 4<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; from hog import play, always_roll
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; from dice import make_test_dice
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; <span style="color:#75715e">#</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; <span style="color:#75715e"># Ensure that say is properly updated within the body of play</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; def total<span style="color:#f92672">(</span>s0, s1<span style="color:#f92672">)</span>:
+</span></span><span style="display:flex;"><span>...     print<span style="color:#f92672">(</span>s0 + s1<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>...     <span style="color:#66d9ef">return</span> echo
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; def echo<span style="color:#f92672">(</span>s0, s1<span style="color:#f92672">)</span>:
+</span></span><span style="display:flex;"><span>...     print<span style="color:#f92672">(</span>s0, s1<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>...     <span style="color:#66d9ef">return</span> total
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; s0, s1 <span style="color:#f92672">=</span> play<span style="color:#f92672">(</span>always_roll<span style="color:#f92672">(</span>1<span style="color:#f92672">)</span>, always_roll<span style="color:#f92672">(</span>1<span style="color:#f92672">)</span>, dice<span style="color:#f92672">=</span>make_test_dice<span style="color:#f92672">(</span>2, 5<span style="color:#f92672">)</span>, goal<span style="color:#f92672">=</span>10, say<span style="color:#f92672">=</span>echo<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>line 1<span style="color:#f92672">)</span>? <span style="color:#ae81ff">2</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>line 2<span style="color:#f92672">)</span>? <span style="color:#ae81ff">7</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>line 3<span style="color:#f92672">)</span>? <span style="color:#ae81ff">4</span> <span style="color:#ae81ff">5</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>line 4<span style="color:#f92672">)</span>? <span style="color:#ae81ff">14</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Question <span style="color:#ae81ff">6</span> &gt; Suite <span style="color:#ae81ff">2</span> &gt; Case <span style="color:#ae81ff">5</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 3<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; from hog import play, always_roll
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; from dice import make_test_dice
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; <span style="color:#75715e">#</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; <span style="color:#75715e"># Ensure that say is properly updated within the body of play even with extra turns</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; def total<span style="color:#f92672">(</span>s0, s1<span style="color:#f92672">)</span>:
+</span></span><span style="display:flex;"><span>...     print<span style="color:#f92672">(</span>s0 + s1<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>...     <span style="color:#66d9ef">return</span> echo
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; def echo<span style="color:#f92672">(</span>s0, s1<span style="color:#f92672">)</span>:
+</span></span><span style="display:flex;"><span>...     print<span style="color:#f92672">(</span>s0, s1<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>...     <span style="color:#66d9ef">return</span> total
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; s0, s1 <span style="color:#f92672">=</span> play<span style="color:#f92672">(</span>always_roll<span style="color:#f92672">(</span>1<span style="color:#f92672">)</span>, always_roll<span style="color:#f92672">(</span>1<span style="color:#f92672">)</span>, dice<span style="color:#f92672">=</span>make_test_dice<span style="color:#f92672">(</span>8, 2<span style="color:#f92672">)</span>, goal<span style="color:#f92672">=</span>20, say<span style="color:#f92672">=</span>echo<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>line 1<span style="color:#f92672">)</span>? <span style="color:#ae81ff">8</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>line 2<span style="color:#f92672">)</span>? <span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>line 3<span style="color:#f92672">)</span>? <span style="color:#ae81ff">16</span> <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>line 4<span style="color:#f92672">)</span>? <span style="color:#ae81ff">20</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>line 5<span style="color:#f92672">)</span>? <span style="color:#ae81ff">16</span> <span style="color:#ae81ff">12</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>line 6<span style="color:#f92672">)</span>? <span style="color:#ae81ff">30</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>line 7<span style="color:#f92672">)</span>? <span style="color:#ae81ff">18</span> <span style="color:#ae81ff">20</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Question <span style="color:#ae81ff">6</span> &gt; Suite <span style="color:#ae81ff">3</span> &gt; Case <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 2<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; from hog import play, always_roll, both, announce_lead_changes, say_scores
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; from dice import make_test_dice
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; <span style="color:#75715e">#</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; def echo_0<span style="color:#f92672">(</span>s0, s1<span style="color:#f92672">)</span>:
+</span></span><span style="display:flex;"><span>...     print<span style="color:#f92672">(</span><span style="color:#e6db74">&#39;*&#39;</span>, s0<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>...     <span style="color:#66d9ef">return</span> echo_0
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; def echo_1<span style="color:#f92672">(</span>s0, s1<span style="color:#f92672">)</span>:
+</span></span><span style="display:flex;"><span>...     print<span style="color:#f92672">(</span><span style="color:#e6db74">&#39;**&#39;</span>, s1<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>...     <span style="color:#66d9ef">return</span> echo_1
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; s0, s1 <span style="color:#f92672">=</span> play<span style="color:#f92672">(</span>always_roll<span style="color:#f92672">(</span>1<span style="color:#f92672">)</span>, always_roll<span style="color:#f92672">(</span>1<span style="color:#f92672">)</span>, dice<span style="color:#f92672">=</span>make_test_dice<span style="color:#f92672">(</span>2<span style="color:#f92672">)</span>, goal<span style="color:#f92672">=</span>3, say<span style="color:#f92672">=</span>both<span style="color:#f92672">(</span>echo_0, echo_1<span style="color:#f92672">))</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>line 1<span style="color:#f92672">)</span>? * <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>line 2<span style="color:#f92672">)</span>? ** <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>line 3<span style="color:#f92672">)</span>? * <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>line 4<span style="color:#f92672">)</span>? ** <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>line 5<span style="color:#f92672">)</span>? * <span style="color:#ae81ff">4</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>line 6<span style="color:#f92672">)</span>? ** <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Question <span style="color:#ae81ff">6</span> &gt; Suite <span style="color:#ae81ff">3</span> &gt; Case <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 1<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>-- Already unlocked --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>OK! All cases <span style="color:#66d9ef">for</span> Question <span style="color:#ae81ff">6</span> unlocked.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Cannot backup when running ok with --local.
+</span></span></code></pre></div><p>实现代码如下，在<code>play</code>函数中加入一行<code>say = say(score0, score1)</code>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">play</span>(strategy0, strategy1, score0<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>, score1<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>, dice<span style="color:#f92672">=</span>six_sided,
+</span></span><span style="display:flex;"><span>         goal<span style="color:#f92672">=</span>GOAL_SCORE, say<span style="color:#f92672">=</span>silence):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Simulate a game and return the final scores of both players, with Player
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    0&#39;s score first, and Player 1&#39;s score second.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    A strategy is a function that takes two total scores as arguments (the
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    current player&#39;s score, and the opponent&#39;s score), and returns a number of
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    dice that the current player will roll this turn.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    strategy0:  The strategy function for Player 0, who plays first.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    strategy1:  The strategy function for Player 1, who plays second.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    score0:     Starting score for Player 0
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    score1:     Starting score for Player 1
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    dice:       A function of zero arguments that simulates a dice roll.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    goal:       The game ends and someone wins when this score is reached.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    say:        The commentary function to call at the end of the first turn.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    who <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>  <span style="color:#75715e"># Who is about to take a turn, 0 (first) or 1 (second)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># BEGIN PROBLEM 5</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;*** YOUR CODE HERE ***&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># END PROBLEM 5</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># (note that the indentation for the problem 6 prompt (***YOUR CODE HERE***) might be misleading)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># BEGIN PROBLEM 6</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;*** YOUR CODE HERE ***&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> score0 <span style="color:#f92672">&lt;</span> goal <span style="color:#f92672">and</span> score1 <span style="color:#f92672">&lt;</span> goal:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> who <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>            num_rolls <span style="color:#f92672">=</span> strategy0(score0, score1)
+</span></span><span style="display:flex;"><span>            score0 <span style="color:#f92672">+=</span> take_turn(num_rolls, score1, dice, goal)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> more_boar(score0, score1):
+</span></span><span style="display:flex;"><span>                who <span style="color:#f92672">=</span> next_player(who)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>            num_rolls <span style="color:#f92672">=</span> strategy1(score1, score0)
+</span></span><span style="display:flex;"><span>            score1 <span style="color:#f92672">+=</span> take_turn(num_rolls, score0, dice, goal)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> more_boar(score1, score0):
+</span></span><span style="display:flex;"><span>                who <span style="color:#f92672">=</span> next_player(who)
+</span></span><span style="display:flex;"><span>        say <span style="color:#f92672">=</span> say(score0, score1)	<span style="color:#75715e"># here!</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># END PROBLEM 6</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> score0, score1
+</span></span></code></pre></div><p>可以使用如下命令进行测评：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>python3 ok -q <span style="color:#ae81ff">06</span> --local
+</span></span></code></pre></div><h4 id="problem-7-3-pt">Problem 7 (3 pt)</h4>
+<p>实现<code>announce_highest(who, last_score=0, running_high=0)</code>函数:</p>
+<ul>
+<li><code>who</code>：<code>1</code>表示玩家1，<code>0</code>表示玩家0</li>
+<li><code>last_score</code>：上一个分数</li>
+<li><code>running_high</code>：分数的最高增长</li>
+</ul>
+<p>运行如下代码进行解锁测评：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>python3 ok -q <span style="color:#ae81ff">07</span> -u --local
+</span></span></code></pre></div><p>结果如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>Assignment: Project 1: Hog
+</span></span><span style="display:flex;"><span>OK, version v1.18.1
+</span></span><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+</span></span><span style="display:flex;"><span>Unlocking tests
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>At each <span style="color:#e6db74">&#34;? &#34;</span>, type what you would expect the output to be.
+</span></span><span style="display:flex;"><span>Type exit<span style="color:#f92672">()</span> to quit
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Question <span style="color:#ae81ff">7</span> &gt; Suite <span style="color:#ae81ff">1</span> &gt; Case <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 5<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Q: What does announce_highest <span style="color:#66d9ef">return</span>?
+</span></span><span style="display:flex;"><span>Choose the number of the correct choice:
+</span></span><span style="display:flex;"><span>0<span style="color:#f92672">)</span> A string containing the largest point increase <span style="color:#66d9ef">for</span> the
+</span></span><span style="display:flex;"><span>   current player.
+</span></span><span style="display:flex;"><span>1<span style="color:#f92672">)</span> The current largest point increase between both
+</span></span><span style="display:flex;"><span>   players.
+</span></span><span style="display:flex;"><span>2<span style="color:#f92672">)</span> A commentary <span style="color:#66d9ef">function</span> that prints information about the
+</span></span><span style="display:flex;"><span>   biggest point increase <span style="color:#66d9ef">for</span> the current player.
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Question <span style="color:#ae81ff">7</span> &gt; Suite <span style="color:#ae81ff">1</span> &gt; Case <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 4<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Q: When does the commentary <span style="color:#66d9ef">function</span> returned by announce_highest
+</span></span><span style="display:flex;"><span>print something out?
+</span></span><span style="display:flex;"><span>Choose the number of the correct choice:
+</span></span><span style="display:flex;"><span>0<span style="color:#f92672">)</span> After each turn.
+</span></span><span style="display:flex;"><span>1<span style="color:#f92672">)</span> When the current player, given by the parameter <span style="color:#e6db74">`</span>who<span style="color:#e6db74">`</span>,
+</span></span><span style="display:flex;"><span>   earns the biggest point increase yet between both
+</span></span><span style="display:flex;"><span>   players in the game.
+</span></span><span style="display:flex;"><span>2<span style="color:#f92672">)</span> When the current player, given by the parameter <span style="color:#e6db74">`</span>who<span style="color:#e6db74">`</span>,
+</span></span><span style="display:flex;"><span>   earns their biggest point increase yet in the game.
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>-- Not quite. Try again! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Choose the number of the correct choice:
+</span></span><span style="display:flex;"><span>0<span style="color:#f92672">)</span> After each turn.
+</span></span><span style="display:flex;"><span>1<span style="color:#f92672">)</span> When the current player, given by the parameter <span style="color:#e6db74">`</span>who<span style="color:#e6db74">`</span>,
+</span></span><span style="display:flex;"><span>   earns the biggest point increase yet between both
+</span></span><span style="display:flex;"><span>   players in the game.
+</span></span><span style="display:flex;"><span>2<span style="color:#f92672">)</span> When the current player, given by the parameter <span style="color:#e6db74">`</span>who<span style="color:#e6db74">`</span>,
+</span></span><span style="display:flex;"><span>   earns their biggest point increase yet in the game.
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Question <span style="color:#ae81ff">7</span> &gt; Suite <span style="color:#ae81ff">1</span> &gt; Case <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 3<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Q: What does the parameter last_score represent?
+</span></span><span style="display:flex;"><span>Choose the number of the correct choice:
+</span></span><span style="display:flex;"><span>0<span style="color:#f92672">)</span> The relevant player<span style="color:#e6db74">&#39;s score before this turn.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">1) The opponent&#39;</span>s score before this turn.
+</span></span><span style="display:flex;"><span>2<span style="color:#f92672">)</span> The last highest gain <span style="color:#66d9ef">for</span> the current player.
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Question <span style="color:#ae81ff">7</span> &gt; Suite <span style="color:#ae81ff">2</span> &gt; Case <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 2<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>-- Already unlocked --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Question <span style="color:#ae81ff">7</span> &gt; Suite <span style="color:#ae81ff">2</span> &gt; Case <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 1<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>-- Already unlocked --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>OK! All cases <span style="color:#66d9ef">for</span> Question <span style="color:#ae81ff">7</span> unlocked.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Cannot backup when running ok with --local.
+</span></span></code></pre></div><p>思路：返回一个函数<code>func</code>，打印评论时更新<code>last_score</code>和<code>running_high</code>，返回<code>announce_highest</code>函数的调用，新的函数的环境帧会有新的值，<code>nonlocal</code>关键字可以引入父环境中的引用。</p>
+<p>实现代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">announce_highest</span>(who, last_score<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>, running_high<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Return a commentary function that announces when WHO&#39;s score
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    increases by more than ever before in the game.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    NOTE: the following game is not possible under the rules, it&#39;s just
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    an example for the sake of the doctest
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; f0 = announce_highest(1) # Only announce Player 1 score gains
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; f1 = f0(12, 0)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; f2 = f1(12, 9)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Player 1 has reached a new maximum point gain. 9 point(s)!
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; f3 = f2(20, 9)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; f4 = f3(20, 30)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Player 1 has reached a new maximum point gain. 21 point(s)!
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; f5 = f4(20, 47) # Player 1 gets 17 points; not enough for a new high
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; f6 = f5(21, 47)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; f7 = f6(21, 77)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Player 1 has reached a new maximum point gain. 30 point(s)!
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">assert</span> who <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">or</span> who <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>, <span style="color:#e6db74">&#39;The who argument should indicate a player.&#39;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># BEGIN PROBLEM 7</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;*** YOUR CODE HERE ***&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">func</span>(score0, score1):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">nonlocal</span> last_score
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">nonlocal</span> running_high
+</span></span><span style="display:flex;"><span>        ls <span style="color:#f92672">=</span> last_score
+</span></span><span style="display:flex;"><span>        rh <span style="color:#f92672">=</span> running_high
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> who <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>            tmp <span style="color:#f92672">=</span> score0 <span style="color:#f92672">-</span> ls
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> tmp <span style="color:#f92672">&gt;</span> rh:
+</span></span><span style="display:flex;"><span>                print(<span style="color:#e6db74">&#34;Player 0 has reached a new maximum point gain.&#34;</span>, tmp,<span style="color:#e6db74">&#34;point(s)!&#34;</span>)
+</span></span><span style="display:flex;"><span>                rh <span style="color:#f92672">=</span> tmp
+</span></span><span style="display:flex;"><span>            ls <span style="color:#f92672">=</span> score0
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>            tmp <span style="color:#f92672">=</span> score1 <span style="color:#f92672">-</span> ls
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> tmp <span style="color:#f92672">&gt;</span> rh:
+</span></span><span style="display:flex;"><span>                print(<span style="color:#e6db74">&#34;Player 1 has reached a new maximum point gain.&#34;</span>, tmp,<span style="color:#e6db74">&#34;point(s)!&#34;</span>)
+</span></span><span style="display:flex;"><span>                rh <span style="color:#f92672">=</span> tmp
+</span></span><span style="display:flex;"><span>            ls <span style="color:#f92672">=</span> score1
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> announce_highest(who, ls, rh)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> func
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># END PROBLEM 7</span>
+</span></span></code></pre></div><p>可以使用如下命令进行测评：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>python3 ok -q <span style="color:#ae81ff">07</span> --local
+</span></span></code></pre></div><h3 id="phase-3-strategies">Phase 3: Strategies</h3>
+<h4 id="problem-8-2-pt">Problem 8 (2 pt)</h4>
+<p>实现<code>make_averaged(original_function, trials_count=1000)</code>函数，返回一个函数，有和<code>original_function</code>一样的参数，调用后，计算调用<code>trials_count</code>次<code>original_function</code>函数的平均值。</p>
+<p>运行如下代码进行解锁测评：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>python3 ok -q <span style="color:#ae81ff">08</span> -u --local
+</span></span></code></pre></div><p>结果如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>Assignment: Project 1: Hog
+</span></span><span style="display:flex;"><span>OK, version v1.18.1
+</span></span><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+</span></span><span style="display:flex;"><span>Unlocking tests
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>At each <span style="color:#e6db74">&#34;? &#34;</span>, type what you would expect the output to be.
+</span></span><span style="display:flex;"><span>Type exit<span style="color:#f92672">()</span> to quit
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Question <span style="color:#ae81ff">8</span> &gt; Suite <span style="color:#ae81ff">1</span> &gt; Case <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 7<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Q: What makes make_averaged a higher order <span style="color:#66d9ef">function</span>?
+</span></span><span style="display:flex;"><span>Choose the number of the correct choice:
+</span></span><span style="display:flex;"><span>0<span style="color:#f92672">)</span> It uses the *args keyword
+</span></span><span style="display:flex;"><span>1<span style="color:#f92672">)</span> It calls a <span style="color:#66d9ef">function</span> that is not itself
+</span></span><span style="display:flex;"><span>2<span style="color:#f92672">)</span> It contains a nested <span style="color:#66d9ef">function</span>
+</span></span><span style="display:flex;"><span>3<span style="color:#f92672">)</span> It both takes in a <span style="color:#66d9ef">function</span> as an argument and returns a <span style="color:#66d9ef">function</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Question <span style="color:#ae81ff">8</span> &gt; Suite <span style="color:#ae81ff">1</span> &gt; Case <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 6<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Q: How many arguments does the <span style="color:#66d9ef">function</span> passed into make_averaged take?
+</span></span><span style="display:flex;"><span>Choose the number of the correct choice:
+</span></span><span style="display:flex;"><span>0<span style="color:#f92672">)</span> An arbitrary amount, which is why we need to use *args to call it
+</span></span><span style="display:flex;"><span>1<span style="color:#f92672">)</span> Two
+</span></span><span style="display:flex;"><span>2<span style="color:#f92672">)</span> None
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Question <span style="color:#ae81ff">8</span> &gt; Suite <span style="color:#ae81ff">2</span> &gt; Case <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 5<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; from hog import *
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; dice <span style="color:#f92672">=</span> make_test_dice<span style="color:#f92672">(</span>3, 1, 5, 6<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; averaged_dice <span style="color:#f92672">=</span> make_averaged<span style="color:#f92672">(</span>dice, 1000<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; <span style="color:#75715e"># Average of calling dice 1000 times</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; averaged_dice<span style="color:#f92672">()</span>
+</span></span><span style="display:flex;"><span>? 3.75
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Question <span style="color:#ae81ff">8</span> &gt; Suite <span style="color:#ae81ff">2</span> &gt; Case <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 4<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; from hog import *
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; dice <span style="color:#f92672">=</span> make_test_dice<span style="color:#f92672">(</span>3, 1, 5, 6<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; averaged_roll_dice <span style="color:#f92672">=</span> make_averaged<span style="color:#f92672">(</span>roll_dice, 1000<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; <span style="color:#75715e"># Average of calling roll_dice 1000 times</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; <span style="color:#75715e"># Enter a float (e.g. 1.0) instead of an integer</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; averaged_roll_dice<span style="color:#f92672">(</span>2, dice<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>? 7.5
+</span></span><span style="display:flex;"><span>-- Not quite. Try again! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">6</span>
+</span></span><span style="display:flex;"><span>-- Not quite. Try again! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>? 6.0
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Question <span style="color:#ae81ff">8</span> &gt; Suite <span style="color:#ae81ff">3</span> &gt; Case <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 3<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>-- Already unlocked --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Question <span style="color:#ae81ff">8</span> &gt; Suite <span style="color:#ae81ff">3</span> &gt; Case <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 2<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>-- Already unlocked --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Question <span style="color:#ae81ff">8</span> &gt; Suite <span style="color:#ae81ff">3</span> &gt; Case <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 1<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>-- Already unlocked --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>OK! All cases <span style="color:#66d9ef">for</span> Question <span style="color:#ae81ff">8</span> unlocked.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Cannot backup when running ok with --local.
+</span></span></code></pre></div><p>实现代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">make_averaged</span>(original_function, trials_count<span style="color:#f92672">=</span><span style="color:#ae81ff">1000</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Return a function that returns the average value of ORIGINAL_FUNCTION
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    when called.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    To implement this function, you will have to use *args syntax, a new Python
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    feature introduced in this project.  See the project description.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; dice = make_test_dice(4, 2, 5, 1)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; averaged_dice = make_averaged(roll_dice, 1000)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; averaged_dice(1, dice)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    3.0
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># BEGIN PROBLEM 8</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;*** YOUR CODE HERE ***&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">func</span>(<span style="color:#f92672">*</span>argv):
+</span></span><span style="display:flex;"><span>        sum <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, trials_count):
+</span></span><span style="display:flex;"><span>            sum <span style="color:#f92672">+=</span> original_function(<span style="color:#f92672">*</span>argv)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> sum <span style="color:#f92672">/</span> trials_count
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> func
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># END PROBLEM 8</span>
+</span></span></code></pre></div><p>可以使用如下命令进行测评：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>python3 ok -q <span style="color:#ae81ff">08</span> --local
+</span></span></code></pre></div><h4 id="problem-9-2-pt">Problem 9 (2 pt)</h4>
+<p>实现<code>max_scoring_num_rolls</code>函数，返回<code>1~10</code>中得分期望最大的骰子数量。</p>
+<p>运行如下代码进行解锁测评：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>python3 ok -q <span style="color:#ae81ff">09</span> -u --local
+</span></span></code></pre></div><p>结果如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>Assignment: Project 1: Hog
+</span></span><span style="display:flex;"><span>OK, version v1.18.1
+</span></span><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+</span></span><span style="display:flex;"><span>Unlocking tests
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>At each <span style="color:#e6db74">&#34;? &#34;</span>, type what you would expect the output to be.
+</span></span><span style="display:flex;"><span>Type exit<span style="color:#f92672">()</span> to quit
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Question <span style="color:#ae81ff">9</span> &gt; Suite <span style="color:#ae81ff">1</span> &gt; Case <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 8<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Q: If multiple num_rolls are tied <span style="color:#66d9ef">for</span> the highest scoring
+</span></span><span style="display:flex;"><span>average, which should you <span style="color:#66d9ef">return</span>?
+</span></span><span style="display:flex;"><span>Choose the number of the correct choice:
+</span></span><span style="display:flex;"><span>0<span style="color:#f92672">)</span> The highest num_rolls
+</span></span><span style="display:flex;"><span>1<span style="color:#f92672">)</span> A random num_rolls
+</span></span><span style="display:flex;"><span>2<span style="color:#f92672">)</span> The lowest num_rolls
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Question <span style="color:#ae81ff">9</span> &gt; Suite <span style="color:#ae81ff">2</span> &gt; Case <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 7<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; from hog import *
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; dice <span style="color:#f92672">=</span> make_test_dice<span style="color:#f92672">(</span>3<span style="color:#f92672">)</span>   <span style="color:#75715e"># dice always returns 3</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; max_scoring_num_rolls<span style="color:#f92672">(</span>dice, trials_count<span style="color:#f92672">=</span>1000<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>-- Not quite. Try again! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Question <span style="color:#ae81ff">9</span> &gt; Suite <span style="color:#ae81ff">2</span> &gt; Case <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 6<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>-- Already unlocked --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Question <span style="color:#ae81ff">9</span> &gt; Suite <span style="color:#ae81ff">2</span> &gt; Case <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 5<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>-- Already unlocked --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Question <span style="color:#ae81ff">9</span> &gt; Suite <span style="color:#ae81ff">3</span> &gt; Case <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 4<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; from hog import *
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; dice <span style="color:#f92672">=</span> make_test_dice<span style="color:#f92672">(</span>2<span style="color:#f92672">)</span>     <span style="color:#75715e"># dice always rolls 2</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; max_scoring_num_rolls<span style="color:#f92672">(</span>dice, trials_count<span style="color:#f92672">=</span>1000<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Question <span style="color:#ae81ff">9</span> &gt; Suite <span style="color:#ae81ff">3</span> &gt; Case <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 3<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; from hog import *
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; dice <span style="color:#f92672">=</span> make_test_dice<span style="color:#f92672">(</span>1, 2<span style="color:#f92672">)</span>  <span style="color:#75715e"># dice alternates 1 and 2</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; max_scoring_num_rolls<span style="color:#f92672">(</span>dice, trials_count<span style="color:#f92672">=</span>1000<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Question <span style="color:#ae81ff">9</span> &gt; Suite <span style="color:#ae81ff">3</span> &gt; Case <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 2<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>-- Already unlocked --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Question <span style="color:#ae81ff">9</span> &gt; Suite <span style="color:#ae81ff">3</span> &gt; Case <span style="color:#ae81ff">4</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 1<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>-- Already unlocked --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>OK! All cases <span style="color:#66d9ef">for</span> Question <span style="color:#ae81ff">9</span> unlocked.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Cannot backup when running ok with --local.
+</span></span></code></pre></div><p>实现代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">max_scoring_num_rolls</span>(dice<span style="color:#f92672">=</span>six_sided, trials_count<span style="color:#f92672">=</span><span style="color:#ae81ff">1000</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Return the number of dice (1 to 10) that gives the highest average turn score
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    by calling roll_dice with the provided DICE a total of TRIALS_COUNT times.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Assume that the dice always return positive outcomes.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; dice = make_test_dice(1, 6)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; max_scoring_num_rolls(dice)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    1
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># BEGIN PROBLEM 9</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;*** YOUR CODE HERE ***&#34;</span>
+</span></span><span style="display:flex;"><span>    num_rolls <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    max_scores <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">11</span>):
+</span></span><span style="display:flex;"><span>        averaged_dice <span style="color:#f92672">=</span> make_averaged(roll_dice, trials_count)
+</span></span><span style="display:flex;"><span>        tmp <span style="color:#f92672">=</span> averaged_dice(i, dice)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> max_scores <span style="color:#f92672">&lt;</span> tmp:
+</span></span><span style="display:flex;"><span>            num_rolls <span style="color:#f92672">=</span> i
+</span></span><span style="display:flex;"><span>            max_scores <span style="color:#f92672">=</span> tmp
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> num_rolls
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># END PROBLEM 9</span>
+</span></span></code></pre></div><p>可以使用如下命令进行测评：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>python3 ok -q <span style="color:#ae81ff">09</span> --local
+</span></span></code></pre></div><p>可以使用如下命令测试策略的胜率（<code>win rate</code>）：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>python3 hog.py -r
+</span></span></code></pre></div><p>结果如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>Max scoring num rolls <span style="color:#66d9ef">for</span> six-sided dice: <span style="color:#ae81ff">5</span>
+</span></span><span style="display:flex;"><span>always_roll<span style="color:#f92672">(</span>6<span style="color:#f92672">)</span> win rate: 0.4955
+</span></span><span style="display:flex;"><span>always_roll<span style="color:#f92672">(</span>8<span style="color:#f92672">)</span> win rate: 0.532
+</span></span><span style="display:flex;"><span>piggypoints_strategy win rate: 0.484
+</span></span><span style="display:flex;"><span>more_boar_strategy win rate: 0.51
+</span></span><span style="display:flex;"><span>final_strategy win rate: 0.5165
+</span></span></code></pre></div><h4 id="problem-10-1-pt">Problem 10 (1 pt)</h4>
+<p>实现<code>piggypoints_strategy(score, opponent_score, cutoff=8, num_rolls=6)</code>函数，如果使用<code>Piggy Points</code>规则至少能得到<code>cutoff</code>分数，就摇<code>0</code>个骰子。</p>
+<p>运行如下代码进行解锁测评：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>python3 ok -q <span style="color:#ae81ff">10</span> -u --local
+</span></span></code></pre></div><p>结果如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>Assignment: Project 1: Hog
+</span></span><span style="display:flex;"><span>OK, version v1.18.1
+</span></span><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+</span></span><span style="display:flex;"><span>Unlocking tests
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>At each <span style="color:#e6db74">&#34;? &#34;</span>, type what you would expect the output to be.
+</span></span><span style="display:flex;"><span>Type exit<span style="color:#f92672">()</span> to quit
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Question <span style="color:#ae81ff">10</span> &gt; Suite <span style="color:#ae81ff">1</span> &gt; Case <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 106<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; from hog import *
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; piggypoints_strategy<span style="color:#f92672">(</span>0, 3, cutoff<span style="color:#f92672">=</span>8, num_rolls<span style="color:#f92672">=</span>5<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Question <span style="color:#ae81ff">10</span> &gt; Suite <span style="color:#ae81ff">1</span> &gt; Case <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 105<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; from hog import *
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; piggypoints_strategy<span style="color:#f92672">(</span>9, 0, cutoff<span style="color:#f92672">=</span>6, num_rolls<span style="color:#f92672">=</span>5<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">5</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Question <span style="color:#ae81ff">10</span> &gt; Suite <span style="color:#ae81ff">1</span> &gt; Case <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 104<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; from hog import *
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; piggypoints_strategy<span style="color:#f92672">(</span>50, 2, cutoff<span style="color:#f92672">=</span>7, num_rolls<span style="color:#f92672">=</span>5<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Question <span style="color:#ae81ff">10</span> &gt; Suite <span style="color:#ae81ff">1</span> &gt; Case <span style="color:#ae81ff">4</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 103<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; from hog import *
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; piggypoints_strategy<span style="color:#f92672">(</span>32, 0, cutoff<span style="color:#f92672">=</span>8, num_rolls<span style="color:#f92672">=</span>4<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">4</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Question <span style="color:#ae81ff">10</span> &gt; Suite <span style="color:#ae81ff">1</span> &gt; Case <span style="color:#ae81ff">5</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 102<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; from hog import *
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; piggypoints_strategy<span style="color:#f92672">(</span>20, 1, cutoff<span style="color:#f92672">=</span>1, num_rolls<span style="color:#f92672">=</span>4<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>OK! All cases <span style="color:#66d9ef">for</span> Question <span style="color:#ae81ff">10</span> unlocked.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Cannot backup when running ok with --local.
+</span></span></code></pre></div><p>实现代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">piggypoints_strategy</span>(score, opponent_score, cutoff<span style="color:#f92672">=</span><span style="color:#ae81ff">8</span>, num_rolls<span style="color:#f92672">=</span><span style="color:#ae81ff">6</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;This strategy rolls 0 dice if that gives at least CUTOFF points, and
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    rolls NUM_ROLLS otherwise.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># BEGIN PROBLEM 10</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> (<span style="color:#ae81ff">0</span> <span style="color:#66d9ef">if</span> piggy_points(opponent_score) <span style="color:#f92672">&gt;=</span> cutoff <span style="color:#66d9ef">else</span> num_rolls)
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># END PROBLEM 10</span>
+</span></span></code></pre></div><p>可以使用如下命令进行测评：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>python3 ok -q <span style="color:#ae81ff">10</span> --local
+</span></span></code></pre></div><h4 id="problem-11-2-pt">Problem 11 (2 pt)</h4>
+<p>实现<code>more_boar_strategy(score, opponent_score, cutoff=8, num_rolls=6)</code>函数，如果能使用<code>More Boar</code>规则，就摇<code>0</code>个骰子；否则，若摇<code>0</code>个骰子得分大于<code>cutoff</code>，就摇<code>0</code>个骰子，不然返回<code>num_rolls</code>。</p>
+<p>运行如下代码进行解锁测评：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>python3 ok -q <span style="color:#ae81ff">11</span> -u --local
+</span></span></code></pre></div><p>结果如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>Assignment: Project 1: Hog
+</span></span><span style="display:flex;"><span>OK, version v1.18.1
+</span></span><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+</span></span><span style="display:flex;"><span>Unlocking tests
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>At each <span style="color:#e6db74">&#34;? &#34;</span>, type what you would expect the output to be.
+</span></span><span style="display:flex;"><span>Type exit<span style="color:#f92672">()</span> to quit
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Question <span style="color:#ae81ff">11</span> &gt; Suite <span style="color:#ae81ff">1</span> &gt; Case <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 105<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; from hog import *
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; more_boar_strategy<span style="color:#f92672">(</span>3, 19, cutoff<span style="color:#f92672">=</span>8, num_rolls<span style="color:#f92672">=</span>6<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Question <span style="color:#ae81ff">11</span> &gt; Suite <span style="color:#ae81ff">1</span> &gt; Case <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 104<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; from hog import *
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; more_boar_strategy<span style="color:#f92672">(</span>30, 54, cutoff<span style="color:#f92672">=</span>7, num_rolls<span style="color:#f92672">=</span>6<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>-- Not quite. Try again! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">6</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Question <span style="color:#ae81ff">11</span> &gt; Suite <span style="color:#ae81ff">1</span> &gt; Case <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 103<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; from hog import *
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; more_boar_strategy<span style="color:#f92672">(</span>17, 36, cutoff<span style="color:#f92672">=</span>100, num_rolls<span style="color:#f92672">=</span>6<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">6</span>
+</span></span><span style="display:flex;"><span>-- Not quite. Try again! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Question <span style="color:#ae81ff">11</span> &gt; Suite <span style="color:#ae81ff">1</span> &gt; Case <span style="color:#ae81ff">4</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 102<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; from hog import *
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; more_boar_strategy<span style="color:#f92672">(</span>24, 3, cutoff<span style="color:#f92672">=</span>8, num_rolls<span style="color:#f92672">=</span>6<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>OK! All cases <span style="color:#66d9ef">for</span> Question <span style="color:#ae81ff">11</span> unlocked.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Cannot backup when running ok with --local.
+</span></span></code></pre></div><p>思路：注意到，检测<code>More Boar</code>规则要在加上<code>Piggy Points</code>规则的得分之后进行。</p>
+<p>实现代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">more_boar_strategy</span>(score, opponent_score, cutoff<span style="color:#f92672">=</span><span style="color:#ae81ff">8</span>, num_rolls<span style="color:#f92672">=</span><span style="color:#ae81ff">6</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;This strategy rolls 0 dice when it triggers an extra turn. It also
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    rolls 0 dice if it gives at least CUTOFF points and does not give an extra turn.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Otherwise, it rolls NUM_ROLLS.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># BEGIN PROBLEM 11</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span> <span style="color:#66d9ef">if</span> more_boar(score <span style="color:#f92672">+</span> piggy_points(opponent_score), opponent_score) <span style="color:#66d9ef">else</span> piggypoints_strategy(score, opponent_score, cutoff, num_rolls)
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># END PROBLEM 11</span>
+</span></span></code></pre></div><p>可以使用如下命令进行测评：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>python3 ok -q <span style="color:#ae81ff">11</span> --local
+</span></span></code></pre></div><h4 id="optional-problem-12-0-pt">Optional: Problem 12 (0 pt)</h4>
+<p>自己实现一个策略，追求更高胜率，有时间再来填坑。</p>
+<p>实现代码如下：</p>
+<pre tabindex="0"><code></code></pre><p>可以使用如下命令进行测评：</p>
+<pre tabindex="0"><code>python3 ok -q 12 --local
+</code></pre><h3 id="最终测评">最终测评</h3>
+<p>可以使用如下命令进行测评：</p>
+<pre tabindex="0"><code>python3 ok --local
+</code></pre><p>结果如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>Assignment: Project <span style="color:#ae81ff">1</span>: Hog
+</span></span><span style="display:flex;"><span>OK, version v1<span style="color:#ae81ff">.18.1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>
+</span></span><span style="display:flex;"><span>Running tests
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">---------------------------------------------------------------------</span>
+</span></span><span style="display:flex;"><span>Test summary
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">565</span> test cases passed<span style="color:#960050;background-color:#1e0010">!</span> No cases failed<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Cannot backup when running ok <span style="color:#66d9ef">with</span> <span style="color:#f92672">--</span>local<span style="color:#f92672">.</span>
+</span></span></code></pre></div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-07-29</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://Maxwell2020152049.github.io/posts/cs61a_project_hog/" data-title="CS61A Project Hog" data-hashtags="Python"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://Maxwell2020152049.github.io/posts/cs61a_project_hog/" data-hashtag="Python"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://Maxwell2020152049.github.io/posts/cs61a_project_hog/" data-title="CS61A Project Hog"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://Maxwell2020152049.github.io/posts/cs61a_project_hog/" data-title="CS61A Project Hog"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://Maxwell2020152049.github.io/posts/cs61a_project_hog/" data-title="CS61A Project Hog"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/python/">Python</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/cs61a_notes_week2/" class="prev" rel="prev" title="CS61A week2 study note"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>CS61A week2 study note</a>
+            <a href="/posts/cs61a_lab_lab00/" class="next" rel="next" title="CS61A Lab lab00">CS61A Lab lab00<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.115.4">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank"></a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

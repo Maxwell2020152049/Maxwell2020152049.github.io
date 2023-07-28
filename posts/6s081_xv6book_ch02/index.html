@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>ch02 Operating system organization - Rex&#39;s Blog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="ch02 Operating system organization" />
+<meta property="og:description" content="ch02 Operating system organization 操作系统必须满足以下的需求：
+多路复用（资源由进程共享） 隔离性（Isolation，进程之间不会互相影响） 交互性（进程之间可以互相通信） 2.1 Abstract physical resources 为了实现强隔离，操作系统应该禁止应用程序直接访问硬件资源，而提供对于硬件资源的抽象，如文件系统等（open、read、write、close）。
+process：可以视为CPU的抽象 exec：可以视为内存的抽象 file：可以视为磁盘的抽象 2.2 User mode, supervisor mode, and system calls 强隔离性需要的硬件支持：
+user/kernel mode virtual memory RISC-V有三种模式：
+机器模式 监督者模式 用户模式 ​	机器模式主要用于配置计算机，启动CPU。在监督者模式（supervisor mode）下，CPU被允许运行特权指令（内核空间）。如果用户模式下的应用程序试图执行一条特权指令，CPU不会执行该指令，而是切换到监督者模式。应用程序只能执行用户模式的指令，如计算（用户空间）。
+​	一个应用程序如果要调用内核函数（如xv6中的读系统调用），必须过渡到内核。
+​	CPU提供了一个特殊的指令ecall，可以让CPU从用户模式切换为监督者模式，并在内核指定的入口进入内核。
+​	CPU提供了一个特殊的指令sret，当系统调用完成后，内核切换回用户栈，并通过调用sret指令返回用户空间，降低硬件特权级别，恢复执行系统调用前的用户指令。
+2.3 Kernel organization 宏内核 ：整个操作系统都在内核中，所有的系统调用都在监督者模式下运行。
+微内核 ：在用户模式下运行操作系统的大部分代码。
+从概念上讲，xv6是宏内核。
+2.4 Code: xv6 organization xv6内核源码在kernel/子目录下。模块间的接口在kernel/defs.h中定义。
+2.5 Process overview Xv6使用页表（由硬件实现）给每个进程提供自己的地址空间。
+2.6 Code: starting xv6 and the first process " />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://Maxwell2020152049.github.io/posts/6s081_xv6book_ch02/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-07-29T01:30:55+08:00" />
+<meta property="article:modified_time" content="2023-07-29T01:30:55+08:00" /><meta property="og:site_name" content="My cool site" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="ch02 Operating system organization"/>
+<meta name="twitter:description" content="ch02 Operating system organization 操作系统必须满足以下的需求：
+多路复用（资源由进程共享） 隔离性（Isolation，进程之间不会互相影响） 交互性（进程之间可以互相通信） 2.1 Abstract physical resources 为了实现强隔离，操作系统应该禁止应用程序直接访问硬件资源，而提供对于硬件资源的抽象，如文件系统等（open、read、write、close）。
+process：可以视为CPU的抽象 exec：可以视为内存的抽象 file：可以视为磁盘的抽象 2.2 User mode, supervisor mode, and system calls 强隔离性需要的硬件支持：
+user/kernel mode virtual memory RISC-V有三种模式：
+机器模式 监督者模式 用户模式 ​	机器模式主要用于配置计算机，启动CPU。在监督者模式（supervisor mode）下，CPU被允许运行特权指令（内核空间）。如果用户模式下的应用程序试图执行一条特权指令，CPU不会执行该指令，而是切换到监督者模式。应用程序只能执行用户模式的指令，如计算（用户空间）。
+​	一个应用程序如果要调用内核函数（如xv6中的读系统调用），必须过渡到内核。
+​	CPU提供了一个特殊的指令ecall，可以让CPU从用户模式切换为监督者模式，并在内核指定的入口进入内核。
+​	CPU提供了一个特殊的指令sret，当系统调用完成后，内核切换回用户栈，并通过调用sret指令返回用户空间，降低硬件特权级别，恢复执行系统调用前的用户指令。
+2.3 Kernel organization 宏内核 ：整个操作系统都在内核中，所有的系统调用都在监督者模式下运行。
+微内核 ：在用户模式下运行操作系统的大部分代码。
+从概念上讲，xv6是宏内核。
+2.4 Code: xv6 organization xv6内核源码在kernel/子目录下。模块间的接口在kernel/defs.h中定义。
+2.5 Process overview Xv6使用页表（由硬件实现）给每个进程提供自己的地址空间。
+2.6 Code: starting xv6 and the first process "/>
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://Maxwell2020152049.github.io/posts/6s081_xv6book_ch02/" /><link rel="prev" href="https://Maxwell2020152049.github.io/posts/6s081_xv6book_ch01/" /><link rel="next" href="https://Maxwell2020152049.github.io/posts/cs61a_notes_week1/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "ch02 Operating system organization",
+        "inLanguage": "en-us",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/Maxwell2020152049.github.io\/posts\/6s081_xv6book_ch02\/"
+        },"genre": "posts","keywords": "操作系统","wordcount":  67 ,
+        "url": "https:\/\/Maxwell2020152049.github.io\/posts\/6s081_xv6book_ch02\/","datePublished": "2023-07-29T01:30:55+08:00","dateModified": "2023-07-29T01:30:55+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Author"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Rex&#39;s Blog"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg"
+        data-srcset="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg, https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg 1.5x, https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg 2x"
+        data-sizes="auto"
+        alt="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg"
+        title="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg" />Rex&#39;s cool site</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Rex&#39;s Blog"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg"
+        data-srcset="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg, https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg 1.5x, https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg 2x"
+        data-sizes="auto"
+        alt="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg"
+        title="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg" />Rex&#39;s cool site</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">ch02 Operating system organization</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-category">included in <a href="/categories/6s081/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>6s081</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-07-29">2023-07-29</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;67 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;One minute&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#ch02-operating-system-organization">ch02 Operating system organization</a>
+      <ul>
+        <li><a href="#21-abstract-physical-resources">2.1 Abstract physical resources</a></li>
+        <li><a href="#22-user-mode-supervisor-mode-and-system-calls">2.2 User mode, supervisor mode, and system calls</a></li>
+        <li><a href="#23-kernel-organization">2.3 Kernel organization</a></li>
+        <li><a href="#24-code-xv6-organization">2.4 Code: xv6 organization</a></li>
+        <li><a href="#25-process-overview">2.5 Process overview</a></li>
+        <li><a href="#26-code-starting-xv6-and-the-first-process">2.6 Code: starting xv6 and the first process</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="ch02-operating-system-organization">ch02 Operating system organization</h2>
+<p>操作系统必须满足以下的需求：</p>
+<ul>
+<li>多路复用（资源由进程共享）</li>
+<li>隔离性（<code>Isolation</code>，进程之间不会互相影响）</li>
+<li>交互性（进程之间可以互相通信）</li>
+</ul>
+<h3 id="21-abstract-physical-resources">2.1 Abstract physical resources</h3>
+<p>为了实现强隔离，操作系统应该禁止应用程序直接访问硬件资源，而提供对于硬件资源的抽象，如文件系统等（<code>open</code>、<code>read</code>、<code>write</code>、<code>close</code>）。</p>
+<ul>
+<li><code>process</code>：可以视为<code>CPU</code>的抽象</li>
+<li><code>exec</code>：可以视为内存的抽象</li>
+<li><code>file</code>：可以视为磁盘的抽象</li>
+</ul>
+<h3 id="22-user-mode-supervisor-mode-and-system-calls">2.2 User mode, supervisor mode, and system calls</h3>
+<p>强隔离性需要的硬件支持：</p>
+<ul>
+<li><code>user/kernel mode</code></li>
+<li><code>virtual memory</code></li>
+</ul>
+<p><code>RISC-V</code>有三种模式：</p>
+<ul>
+<li>机器模式</li>
+<li>监督者模式</li>
+<li>用户模式</li>
+</ul>
+<p>​	机器模式主要用于配置计算机，启动CPU。在监督者模式（<code>supervisor mode</code>）下，CPU被允许运行特权指令（内核空间）。如果用户模式下的应用程序试图执行一条特权指令，CPU不会执行该指令，而是切换到监督者模式。应用程序只能执行用户模式的指令，如计算（用户空间）。</p>
+<p>​	一个应用程序如果要调用内核函数（如<code>xv6</code>中的读系统调用），必须过渡到内核。</p>
+<p>​	CPU提供了一个特殊的指令<code>ecall</code>，可以让CPU从用户模式切换为监督者模式，并在内核指定的入口进入内核。</p>
+<p>​	CPU提供了一个特殊的指令<code>sret</code>，当系统调用完成后，内核切换回用户栈，并通过调用<code>sret</code>指令返回用户空间，降低硬件特权级别，恢复执行系统调用前的用户指令。</p>
+<h3 id="23-kernel-organization">2.3 Kernel organization</h3>
+<p><strong><code>宏内核</code></strong> ：整个操作系统都在内核中，所有的系统调用都在监督者模式下运行。</p>
+<p><strong><code>微内核</code></strong> ：在用户模式下运行操作系统的大部分代码。</p>
+<p>从概念上讲，<code>xv6</code>是宏内核。</p>
+<h3 id="24-code-xv6-organization">2.4 Code: xv6 organization</h3>
+<p><code>xv6</code>内核源码在<code>kernel/子目录</code>下。模块间的接口在<code>kernel/defs.h</code>中定义。</p>
+<h3 id="25-process-overview">2.5 Process overview</h3>
+<p><code>Xv6</code>使用页表（由硬件实现）给每个进程提供自己的地址空间。</p>
+<h3 id="26-code-starting-xv6-and-the-first-process">2.6 Code: starting xv6 and the first process</h3>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-07-29</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://Maxwell2020152049.github.io/posts/6s081_xv6book_ch02/" data-title="ch02 Operating system organization" data-hashtags="操作系统"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://Maxwell2020152049.github.io/posts/6s081_xv6book_ch02/" data-hashtag="操作系统"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://Maxwell2020152049.github.io/posts/6s081_xv6book_ch02/" data-title="ch02 Operating system organization"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://Maxwell2020152049.github.io/posts/6s081_xv6book_ch02/" data-title="ch02 Operating system organization"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://Maxwell2020152049.github.io/posts/6s081_xv6book_ch02/" data-title="ch02 Operating system organization"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/6s081_xv6book_ch01/" class="prev" rel="prev" title="ch01 Operating system interface"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>ch01 Operating system interface</a>
+            <a href="/posts/cs61a_notes_week1/" class="next" rel="next" title="CS61A week1 study note">CS61A week1 study note<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.115.4">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank"></a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

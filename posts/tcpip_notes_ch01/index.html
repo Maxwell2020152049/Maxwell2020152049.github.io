@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>《TCP IP网络编程》学习笔记 ch01 - Rex&#39;s Blog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="《TCP IP网络编程》学习笔记 ch01" />
+<meta property="og:description" content="《TCP IP网络编程》学习笔记 ch01 理解网络编程和套接字 1.1 理解网络编程和套接字 构建 接电话 套接字（服务器端） 创建服务器端的套接字需要以下函数：
+#include &lt;sys/socket.h&gt; // 创建套接字成功时返回文件描述符，失败时返回－1。 int socket(int domain, int type, int protocol); #include &lt;sys/socket.h&gt; // 绑定成功时返回0，失败时返回-1。 int bind(int sockfd, struct sockaddr *myaddr, socklen_t addrlen); #include &lt;sys/socket.h&gt; // 将套接字转化为可接收连接的状态，成功时返回0，失败时返回-1。 int listen(int sockfd, int backlog); #include &lt;sys/socket.h&gt; // 接受网络连接，成功时返回文件描述符，失败时返回-1。 int accept(int sockfd, struct sockaddr *addr, socklen_t *addrlen); 创建服务器端的套接字的基本步骤如下：
+第一步：调用socket()函数创建套接字
+第二步：调用bind()函数绑定套接字的IP和 端口号
+第三步：调用listen()函数把套接字转化为可接收连接状态
+第四步：调用accept()函数接受网络连接
+服务器端hello_server.c代码如下：
+#include &lt;stdio.h&gt; #include &lt;stdlib.h&gt; #include &lt;string.h&gt; #include &lt;unistd.h&gt; #include &lt;arpa/inet." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://Maxwell2020152049.github.io/posts/tcpip_notes_ch01/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-07-29T02:10:47+08:00" />
+<meta property="article:modified_time" content="2023-07-29T02:10:47+08:00" /><meta property="og:site_name" content="My cool site" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="《TCP IP网络编程》学习笔记 ch01"/>
+<meta name="twitter:description" content="《TCP IP网络编程》学习笔记 ch01 理解网络编程和套接字 1.1 理解网络编程和套接字 构建 接电话 套接字（服务器端） 创建服务器端的套接字需要以下函数：
+#include &lt;sys/socket.h&gt; // 创建套接字成功时返回文件描述符，失败时返回－1。 int socket(int domain, int type, int protocol); #include &lt;sys/socket.h&gt; // 绑定成功时返回0，失败时返回-1。 int bind(int sockfd, struct sockaddr *myaddr, socklen_t addrlen); #include &lt;sys/socket.h&gt; // 将套接字转化为可接收连接的状态，成功时返回0，失败时返回-1。 int listen(int sockfd, int backlog); #include &lt;sys/socket.h&gt; // 接受网络连接，成功时返回文件描述符，失败时返回-1。 int accept(int sockfd, struct sockaddr *addr, socklen_t *addrlen); 创建服务器端的套接字的基本步骤如下：
+第一步：调用socket()函数创建套接字
+第二步：调用bind()函数绑定套接字的IP和 端口号
+第三步：调用listen()函数把套接字转化为可接收连接状态
+第四步：调用accept()函数接受网络连接
+服务器端hello_server.c代码如下：
+#include &lt;stdio.h&gt; #include &lt;stdlib.h&gt; #include &lt;string.h&gt; #include &lt;unistd.h&gt; #include &lt;arpa/inet."/>
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://Maxwell2020152049.github.io/posts/tcpip_notes_ch01/" /><link rel="prev" href="https://Maxwell2020152049.github.io/posts/cs61a_homework_hw02/" /><link rel="next" href="https://Maxwell2020152049.github.io/posts/tcpip_notes_ch02/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "《TCP IP网络编程》学习笔记 ch01",
+        "inLanguage": "en-us",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/Maxwell2020152049.github.io\/posts\/tcpip_notes_ch01\/"
+        },"genre": "posts","keywords": "网络编程","wordcount":  1248 ,
+        "url": "https:\/\/Maxwell2020152049.github.io\/posts\/tcpip_notes_ch01\/","datePublished": "2023-07-29T02:10:47+08:00","dateModified": "2023-07-29T02:10:47+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Author"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Rex&#39;s Blog"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg"
+        data-srcset="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg, https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg 1.5x, https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg 2x"
+        data-sizes="auto"
+        alt="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg"
+        title="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg" />Rex&#39;s cool site</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Rex&#39;s Blog"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg"
+        data-srcset="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg, https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg 1.5x, https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg 2x"
+        data-sizes="auto"
+        alt="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg"
+        title="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg" />Rex&#39;s cool site</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">《TCP IP网络编程》学习笔记 ch01</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-category">included in <a href="/categories/tcp-ip%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>《TCP IP网络编程》学习笔记</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-07-29">2023-07-29</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1248 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;6 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#ch01-理解网络编程和套接字">ch01 理解网络编程和套接字</a>
+      <ul>
+        <li><a href="#11-理解网络编程和套接字">1.1 理解网络编程和套接字</a></li>
+        <li><a href="#12-基于linux的文件操作">1.2 基于Linux的文件操作</a></li>
+        <li><a href="#15-习题">1.5 习题</a></li>
+        <li><a href="#以_t为后缀的数据类型">以<code>_t</code>为后缀的数据类型</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="tcp-ip网络编程学习笔记">《TCP IP网络编程》学习笔记</h1>
+<h2 id="ch01-理解网络编程和套接字">ch01 理解网络编程和套接字</h2>
+<h3 id="11-理解网络编程和套接字">1.1 理解网络编程和套接字</h3>
+<h4 id="构建-接电话-套接字服务器端">构建 <strong><code>接电话</code></strong> 套接字（服务器端）</h4>
+<p>创建服务器端的套接字需要以下函数：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;sys/socket.h&gt; </span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#75715e">// 创建套接字成功时返回文件描述符，失败时返回－1。
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">socket</span>(<span style="color:#66d9ef">int</span> domain, <span style="color:#66d9ef">int</span> type, <span style="color:#66d9ef">int</span> protocol);
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;sys/socket.h&gt; </span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#75715e">// 绑定成功时返回0，失败时返回-1。
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">bind</span>(<span style="color:#66d9ef">int</span> sockfd, <span style="color:#66d9ef">struct</span> sockaddr <span style="color:#f92672">*</span>myaddr, <span style="color:#66d9ef">socklen_t</span> addrlen);
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;sys/socket.h&gt; </span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#75715e">// 将套接字转化为可接收连接的状态，成功时返回0，失败时返回-1。
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">listen</span>(<span style="color:#66d9ef">int</span> sockfd, <span style="color:#66d9ef">int</span> backlog);
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;sys/socket.h&gt; </span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#75715e">// 接受网络连接，成功时返回文件描述符，失败时返回-1。
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">accept</span>(<span style="color:#66d9ef">int</span> sockfd, <span style="color:#66d9ef">struct</span> sockaddr <span style="color:#f92672">*</span>addr, <span style="color:#66d9ef">socklen_t</span> <span style="color:#f92672">*</span>addrlen);
+</span></span></code></pre></div><p>创建服务器端的套接字的基本步骤如下：</p>
+<ul>
+<li>
+<p>第一步：调用<code>socket()</code>函数创建套接字</p>
+</li>
+<li>
+<p>第二步：调用<code>bind()</code>函数绑定套接字的<code>IP</code>和 <strong><code>端口号</code></strong></p>
+</li>
+<li>
+<p>第三步：调用<code>listen()</code>函数把套接字转化为可接收连接状态</p>
+</li>
+<li>
+<p>第四步：调用<code>accept()</code>函数接受网络连接</p>
+</li>
+</ul>
+<p>服务器端<code>hello_server.c</code>代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdlib.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;string.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;unistd.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;arpa/inet.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;sys/socket.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">error_handling</span>(<span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>message);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">int</span> argc, <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>argv[])
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> serv_sock;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> clnt_sock;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">struct</span> sockaddr_in serv_addr;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">struct</span> sockaddr_in clnt_addr;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">socklen_t</span> clnt_addr_size;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">char</span> message[] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Hello World!&#34;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (argc <span style="color:#f92672">!=</span> <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;Usage : %s &lt;port&gt;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, argv[<span style="color:#ae81ff">0</span>]);
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">exit</span>(<span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// socket()
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    serv_sock <span style="color:#f92672">=</span> <span style="color:#a6e22e">socket</span>(PF_INET, SOCK_STREAM, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (serv_sock <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">error_handling</span>(<span style="color:#e6db74">&#34;socket() error&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">memset</span>(<span style="color:#f92672">&amp;</span>serv_addr, <span style="color:#ae81ff">0</span>, <span style="color:#66d9ef">sizeof</span>(serv_addr));
+</span></span><span style="display:flex;"><span>    serv_addr.sin_family <span style="color:#f92672">=</span> AF_INET;
+</span></span><span style="display:flex;"><span>    serv_addr.sin_addr.s_addr <span style="color:#f92672">=</span> <span style="color:#a6e22e">htonl</span>(INADDR_ANY);
+</span></span><span style="display:flex;"><span>    serv_addr.sin_port <span style="color:#f92672">=</span> <span style="color:#a6e22e">htons</span>(<span style="color:#a6e22e">atoi</span>(argv[<span style="color:#ae81ff">1</span>]));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// bind()
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">bind</span>(serv_sock, (<span style="color:#66d9ef">struct</span> sockaddr <span style="color:#f92672">*</span>)<span style="color:#f92672">&amp;</span>serv_addr, <span style="color:#66d9ef">sizeof</span>(serv_addr)) <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">error_handling</span>(<span style="color:#e6db74">&#34;bind() error&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// listen()
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">listen</span>(serv_sock, <span style="color:#ae81ff">5</span>) <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">error_handling</span>(<span style="color:#e6db74">&#34;listen() error&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    clnt_addr_size <span style="color:#f92672">=</span> <span style="color:#66d9ef">sizeof</span>(clnt_addr);
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// accept()
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    clnt_sock <span style="color:#f92672">=</span> <span style="color:#a6e22e">accept</span>(serv_sock, (<span style="color:#66d9ef">struct</span> sockaddr <span style="color:#f92672">*</span>)<span style="color:#f92672">&amp;</span>clnt_addr, <span style="color:#f92672">&amp;</span>clnt_addr_size);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (clnt_sock <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">error_handling</span>(<span style="color:#e6db74">&#34;accept() error&#34;</span>);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// write()
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">write</span>(clnt_sock, message, <span style="color:#66d9ef">sizeof</span>(message));
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">close</span>(clnt_sock);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">close</span>(serv_sock);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">error_handling</span>(<span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>message)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">fputs</span>(message, stderr);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">fputc</span>(<span style="color:#e6db74">&#39;\n&#39;</span>, stderr);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">exit</span>(<span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="构建-打电话-套接字客户端">构建 <strong><code>打电话</code></strong> 套接字（客户端）</h4>
+<p>创建客户端的套接字需要以下函数：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;sys/socket.h&gt; </span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#75715e">// 请求连接，成功时返回文件描述符，失败时返回-1。
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">connect</span>(<span style="color:#66d9ef">int</span> sockfd, <span style="color:#66d9ef">struct</span> sockaddr <span style="color:#f92672">*</span>serv_addr, <span style="color:#66d9ef">socklen_t</span> addrlen);
+</span></span></code></pre></div><p>客户端<code>hello_client.c</code>代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdlib.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;string.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;unistd.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;arpa/inet.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;sys/socket.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">error_handling</span>(<span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>message);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">int</span> argc, <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>argv[])
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> sock;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">struct</span> sockaddr_in serv_addr;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">char</span> message[<span style="color:#ae81ff">30</span>];
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> str_len;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (argc <span style="color:#f92672">!=</span> <span style="color:#ae81ff">3</span>)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;Usage : %s &lt;IP&gt; &lt;port&gt;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, argv[<span style="color:#ae81ff">0</span>]);
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">exit</span>(<span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// socket()
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    sock <span style="color:#f92672">=</span> <span style="color:#a6e22e">socket</span>(PF_INET, SOCK_STREAM, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (sock <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">error_handling</span>(<span style="color:#e6db74">&#34;socket() error&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">memset</span>(<span style="color:#f92672">&amp;</span>serv_addr, <span style="color:#ae81ff">0</span>, <span style="color:#66d9ef">sizeof</span>(serv_addr));
+</span></span><span style="display:flex;"><span>    serv_addr.sin_family <span style="color:#f92672">=</span> AF_INET;
+</span></span><span style="display:flex;"><span>    serv_addr.sin_addr.s_addr <span style="color:#f92672">=</span> <span style="color:#a6e22e">inet_addr</span>(argv[<span style="color:#ae81ff">1</span>]);
+</span></span><span style="display:flex;"><span>    serv_addr.sin_port <span style="color:#f92672">=</span> <span style="color:#a6e22e">htons</span>(<span style="color:#a6e22e">atoi</span>(argv[<span style="color:#ae81ff">2</span>]));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// connect
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">connect</span>(sock, (<span style="color:#66d9ef">struct</span> sockaddr <span style="color:#f92672">*</span>)<span style="color:#f92672">&amp;</span>serv_addr, <span style="color:#66d9ef">sizeof</span>(serv_addr)) <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">error_handling</span>(<span style="color:#e6db74">&#34;connect() error!&#34;</span>);
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// read()
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    str_len <span style="color:#f92672">=</span> <span style="color:#a6e22e">read</span>(sock, message, <span style="color:#66d9ef">sizeof</span>(message) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (str_len <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">error_handling</span>(<span style="color:#e6db74">&#34;read() error!&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;Message from server : %s </span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, message);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">close</span>(sock);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">error_handling</span>(<span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>message)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">fputs</span>(message, stderr);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">fputc</span>(<span style="color:#e6db74">&#39;\n&#39;</span>, stderr);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">exit</span>(<span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="在linux平台下运行">在Linux平台下运行</h4>
+<p>先运行服务器端，等待客户端发送连接：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>rex@rex-virtual-machine:~/tcpip/ch01$ ./hserver <span style="color:#ae81ff">7890</span>
+</span></span></code></pre></div><p>启动客户端，向客户端发送连接，此时服务器端接受连接，并向客户端发送<code>&quot;Hello World!&quot;</code>，客户端接受到该字符串，并打印其内容：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>rex@rex-virtual-machine:~/tcpip/ch01$ ./hclient 127.0.0.1 <span style="color:#ae81ff">7890</span>
+</span></span><span style="display:flex;"><span>Message from server : Hello World!
+</span></span></code></pre></div><p>此时发现服务器端和客户端都结束运行：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>rex@rex-virtual-machine:~/tcpip/ch01$ ./hserver <span style="color:#ae81ff">7890</span>
+</span></span><span style="display:flex;"><span>rex@rex-virtual-machine:~/tcpip/ch01$ 
+</span></span></code></pre></div><h3 id="12-基于linux的文件操作">1.2 基于Linux的文件操作</h3>
+<p>对于<code>Linux</code>而言，文件和<code>socket</code>没有区别，但对于Windows而言，两者时不一样的。</p>
+<blockquote>
+<p>文件描述符有时也称为文件句柄，但“句柄“主要是Windows中的术语。 因此，本书中如果涉及Windows平台将使用 <strong><code>句柄 </code></strong> ，如果是Linux平台则用 <strong><code>描述符</code></strong>。</p>
+</blockquote>
+<p>在<code>Linux</code>中，标准输入（<code>Standard Input</code>）、标准输出（<code>Standard Output</code>）、标准错误（<code>Standard Error</code>）默认分别分配了文件描述符<code>0</code>、<code>1</code>、<code>2</code></p>
+<p>文件操作包括打开文件、读取文件、写入文件、关闭文件，分别对应以下函数：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;sys/types.h&gt; </span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;sys/stat.h&gt; </span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;fcntl.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#75715e">// path：文件的路径
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// flag：打开文件的模式
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// open：打开文件，如果成功就返回该文件的文件描述符，如果失败就返回-1。
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">open</span>(<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>path, <span style="color:#66d9ef">int</span> flag);
+</span></span></code></pre></div><p>文件打开模式如下：</p>
+<ul>
+<li><code>O_CREAT</code>：若文件不存在，创建文件</li>
+<li><code>O_TRUNC</code>：删除文件的内容</li>
+<li><code>O_APPEND</code>：若写入数据，追加到文件尾部</li>
+<li><code>O_RDONLY</code>：只读打开</li>
+<li><code>O_WRONLY</code>：只写打开</li>
+<li><code>O_RDWR</code>：读写打开</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;unistd.h&gt; </span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#75715e">// fd：文件描述符
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// buf：读取文件的缓存地址
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// nbytes：读取文件的字节数
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// 成功时返回接收的字节数（但遇到文件结尾则返回0) ，失败时返回－1 。
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">ssize_t</span> <span style="color:#a6e22e">read</span>(<span style="color:#66d9ef">int</span> fd, <span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> buf, <span style="color:#66d9ef">size_t</span> nbytes);
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;unistd.h&gt; </span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#75715e">// fd：文件描述符
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// buf：写入文件的缓存地址
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// nbytes：写入文件的字节数
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// 成功时返回写入的字节数，失败时返回－1 。
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">ssize_t</span> <span style="color:#a6e22e">write</span>(<span style="color:#66d9ef">int</span> fd, <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> buf, <span style="color:#66d9ef">size_t</span> nbytes);
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;unistd.h&gt; </span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#75715e">// fd：文件描述符
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// 关闭文件描述符
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">close</span>(<span style="color:#66d9ef">int</span> fd);
+</span></span></code></pre></div><hr>
+<p>编写一个C语言程序<code>lower_open_write.c</code>，向<code>test.txt</code>文件写入字符串<code>&quot;Hello World!\n&quot;</code>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdlib.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;sys/fcntl.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;unistd.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;sys/stat.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#define BUF_SIZE 128
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">error_handling</span>(<span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> msg)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">fprintf</span>(stderr, <span style="color:#e6db74">&#34;%s</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, msg);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">exit</span>(<span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> fd;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">char</span> buf[BUF_SIZE] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Hello World!</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    fd <span style="color:#f92672">=</span> <span style="color:#a6e22e">open</span>(<span style="color:#e6db74">&#34;test.txt&#34;</span>, O_CREAT <span style="color:#f92672">|</span> O_TRUNC <span style="color:#f92672">|</span> O_WRONLY, S_IRUSR <span style="color:#f92672">|</span> S_IWUSR);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (fd <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">error_handling</span>(<span style="color:#e6db74">&#34;open() error!&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;file descriptor: %d</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, fd);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">write</span>(fd, buf, <span style="color:#66d9ef">sizeof</span> buf) <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">error_handling</span>(<span style="color:#e6db74">&#34;write() error!&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">close</span>(fd);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>运行结果如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>rex@rex-virtual-machine:~/tcpip/ch01$ gcc lower_open_write.c -o low
+</span></span><span style="display:flex;"><span>rex@rex-virtual-machine:~/tcpip/ch01$ ./low 
+</span></span><span style="display:flex;"><span>file descriptor: <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>rex@rex-virtual-machine:~/tcpip/ch01$ cat test.txt 
+</span></span><span style="display:flex;"><span>Hello World!
+</span></span></code></pre></div><hr>
+<p>编写一个C语言程序<code>lower_open_read.c</code>，从<code>test.txt</code>中读取内容：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdlib.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;sys/fcntl.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;unistd.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;sys/stat.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#define BUF_SIZE 128
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">error_handling</span>(<span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> msg)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">fprintf</span>(stderr, <span style="color:#e6db74">&#34;%s</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, msg);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">exit</span>(<span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> fd;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">char</span> buf[BUF_SIZE];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    fd <span style="color:#f92672">=</span> <span style="color:#a6e22e">open</span>(<span style="color:#e6db74">&#34;test.txt&#34;</span>, O_CREAT <span style="color:#f92672">|</span> O_RDONLY);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (fd <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">error_handling</span>(<span style="color:#e6db74">&#34;open() error!&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;file descriptor: %d</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, fd);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">read</span>(fd, buf, <span style="color:#66d9ef">sizeof</span> buf) <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">error_handling</span>(<span style="color:#e6db74">&#34;read() error!&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;fild data is %s</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, buf);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">close</span>(fd);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>运行效果如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>rex@rex-virtual-machine:~/tcpip/ch01$ gcc lower_open_read.c -o lor
+</span></span><span style="display:flex;"><span>rex@rex-virtual-machine:~/tcpip/ch01$ ./lor 
+</span></span><span style="display:flex;"><span>file descriptor: <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>fild data is Hello World!
+</span></span></code></pre></div><hr>
+<p>编写一个C语言程序<code>fd_cmp.c</code>，分别打开文件和socket，比较其文件描述符：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;fcntl.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;unistd.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;sys/socket.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> fd1, fd2, fd3;
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// create a file and two socket
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    fd1 <span style="color:#f92672">=</span> <span style="color:#a6e22e">socket</span>(PF_INET, SOCK_STREAM, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>    fd2 <span style="color:#f92672">=</span> <span style="color:#a6e22e">open</span>(<span style="color:#e6db74">&#34;test.dat&#34;</span>, O_CREAT <span style="color:#f92672">|</span> O_WRONLY <span style="color:#f92672">|</span> O_TRUNC);
+</span></span><span style="display:flex;"><span>    fd3 <span style="color:#f92672">=</span> <span style="color:#a6e22e">socket</span>(PF_INET, SOCK_DGRAM, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// output their file descriptor
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;file descriptor 1: %d</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, fd1);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;file descriptor 2: %d</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, fd2);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;file descriptor 3: %d</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, fd3);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">close</span>(fd1);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">close</span>(fd2);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">close</span>(fd3);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>运行结果如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>rex@rex-virtual-machine:~/tcpip/ch01$ gcc fd_cmp.c -o fc
+</span></span><span style="display:flex;"><span>rex@rex-virtual-machine:~/tcpip/ch01$ ./fc
+</span></span><span style="display:flex;"><span>file descriptor 1: <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>file descriptor 2: <span style="color:#ae81ff">4</span>
+</span></span><span style="display:flex;"><span>file descriptor 3: <span style="color:#ae81ff">5</span>
+</span></span></code></pre></div><h3 id="15-习题">1.5 习题</h3>
+<ul>
+<li>
+<p>(1) 套接字在网络编程中的作用是什么？为何称它为套接字？</p>
+<ul>
+<li>
+<p>答：套接字的作用是连接互联网，进行网络通信，<code>socket</code>有连接网络的作用，故名套接字。</p>
+</li>
+<li>
+<blockquote>
+<p>套接字在网络编程中扮演着关键的角色，它是实现网络通信的一种机制。套接字提供了一种抽象接口，使应用程序能够通过网络进行数据传输和通信。</p>
+<p>套接字可以看作是应用程序与网络之间的“插座”或“接口”，类似于电话插座，它允许应用程序通过网络与其他应用程序或设备进行通信。通过套接字，应用程序可以建立连接、发送和接收数据，并进行网络通信协议的交互。</p>
+<p>套接字的名称来源于 Unix 系统的文件抽象概念。在 Unix 中，几乎所有的 I/O 都被视为文件，包括磁盘文件、设备文件以及网络连接。为了提供一致的接口，Unix 将网络连接也抽象为一种特殊类型的文件，称为套接字（socket）。这个术语后来被广泛采用，并成为网络编程中的标准术语。</p>
+<p>套接字之所以被称为套接字，是因为它提供了一种“插座”或“接口”的概念，类似于电源插座或电话插座。就像插座允许设备连接到电源或电话线路一样，套接字允许应用程序连接到网络并进行数据传输。套接字提供了一种标准化的接口，使得应用程序可以通过网络进行通信，就像插入插座一样简单。</p>
+<p>总结而言，套接字在网络编程中扮演着重要的角色，它是应用程序与网络之间的接口，允许应用程序通过网络进行数据传输和通信。套接字被称为套接字是因为它提供了一种类似于插座的抽象概念，使得应用程序能够连接到网络并进行通信。</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>
+<p>(2) 在服务器端创建套接字后，会依次调用listen函数和accept函数。 请比较并说明二者作用 ？</p>
+<ul>
+<li>
+<p>答：<code>listen()</code>函数：将套接字状态转化为可接收连接的状态，成功时，返回0，失败时，返回-1；</p>
+</li>
+<li>
+<p><code>accpet()</code>函数：等待连接，成功时，返回文件描述符，失败时返回-1。</p>
+</li>
+<li>
+<blockquote>
+<p>在服务器端创建套接字后，通常会按照以下顺序调用 <code>listen()</code> 函数和 <code>accept()</code> 函数。它们的作用如下：</p>
+<ol>
+<li><code>listen()</code>:
+<ul>
+<li><code>listen()</code> 函数用于将套接字设置为监听状态，以便接受客户端的连接请求。</li>
+<li>它接受两个参数：套接字描述符和等待连接队列的最大长度。</li>
+<li>调用 <code>listen()</code> 后，套接字开始监听指定的端口，并准备接受传入的连接请求。</li>
+<li><code>listen()</code> 并不会阻塞程序执行，它只是将套接字置于监听状态，等待客户端连接。</li>
+</ul>
+</li>
+<li><code>accept()</code>:
+<ul>
+<li><code>accept()</code> 函数用于接受客户端的连接请求，并创建一个新的套接字来处理与该客户端的通信。</li>
+<li>当有客户端连接请求到达时，<code>accept()</code> 会返回一个新的套接字描述符，该描述符用于与客户端进行通信。</li>
+<li>它接受三个参数：监听套接字描述符、客户端地址结构体指针和客户端地址结构体的长度。</li>
+<li>调用 <code>accept()</code> 会阻塞程序执行，直到有客户端连接请求到达。一旦有连接请求到达，<code>accept()</code> 返回并提供一个新的套接字，通过该套接字可以与客户端进行通信。</li>
+<li>可以使用返回的新套接字进行数据传输和通信，而原始监听套接字仍然保持在监听状态，可以继续接受其他客户端连接请求。</li>
+</ul>
+</li>
+</ol>
+<p>总结：</p>
+<ul>
+<li><code>listen()</code> 函数用于将套接字设置为监听状态，开始监听指定的端口，并准备接受传入的连接请求。</li>
+<li><code>accept()</code> 函数用于接受客户端的连接请求，并创建一个新的套接字来处理与该客户端的通信。它会阻塞程序执行，直到有客户端连接请求到达，并返回一个新的套接字供与客户端通信使用。</li>
+<li><code>listen()</code> 和 <code>accept()</code> 通常配合使用，<code>listen()</code> 将套接字置于监听状态，而 <code>accept()</code> 接受实际的连接请求并创建新的套接字用于通信。这样服务器可以同时处理多个客户端连接请求，并与每个客户端进行独立的通信。</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>
+<p>(3) Linux中，对套接字数据进行<code>I/O</code>时可以直接使用文件<code>I/O</code>相关函数；而在Windows中则不可以。原因为何？</p>
+<ul>
+<li>
+<p>答：Linux中，文件和socket是一样的，但在Windows上，两者不同。</p>
+</li>
+<li>
+<blockquote>
+<p>在 Linux 中，套接字被视为一种特殊类型的文件描述符，因此可以使用文件 I/O 相关函数（如 <code>read()</code> 和 <code>write()</code>）直接对套接字进行读写操作。这是因为在 Linux 的设计中，将套接字和其他文件类型统一抽象为文件描述符，使得对它们的操作具有一致性。</p>
+<p>然而，在 Windows 中，套接字并不被视为文件描述符，因此不能直接使用文件 I/O 相关函数进行读写操作。Windows 使用了一种不同的模型来处理套接字，称为套接字 API（Socket API），其中包含了专门用于套接字操作的函数，如 <code>send()</code> 和 <code>recv()</code>。</p>
+<p>主要原因是 Windows 和 Linux 在网络编程方面采用了不同的设计理念和实现方式。Windows 套接字 API 提供了更多的功能和灵活性，例如支持异步操作、事件驱动等特性，以满足 Windows 平台上复杂的网络编程需求。相比之下，Linux 选择了简化的设计，将套接字作为文件描述符的一种形式，以提供一致的接口和易用性。</p>
+<p>虽然在 Windows 中不能直接使用文件 I/O 相关函数对套接字进行读写操作，但可以使用 Windows 套接字 API 提供的函数来实现类似的功能。这些函数与文件 I/O 函数在用法和参数上可能有所不同，但可以实现相似的功能。</p>
+<p>总结：在 Linux 中，套接字被视为文件描述符，可以直接使用文件 I/O 相关函数进行读写操作。而在 Windows 中，套接字不是文件描述符，需要使用专门的套接字 API 函数进行读写操作，这是因为两个操作系统在网络编程方面采用了不同的设计理念和实现方式。</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>
+<p>(4) 创建套接字后一般会给它分配地址，为什么？为了完成地址分配需要调用哪个函数？</p>
+<ul>
+<li>
+<p>答：socket需要指定IP和端口，所以需要分配地址；使用<code>bind()</code>函数，给socket绑定IP和端口号。</p>
+</li>
+<li>
+<blockquote>
+<p>在创建套接字后，需要为它分配地址，以便能够在网络中唯一标识和定位该套接字。地址分配是为了确保数据能够正确地发送到目标套接字，并使得其他套接字能够正确地与该套接字进行通信。</p>
+<p>在网络编程中，套接字地址通常由 IP 地址和端口号组成。IP 地址用于标识网络中的主机或设备，而端口号用于标识主机上的具体应用程序或服务。通过将套接字与特定的 IP 地址和端口号关联起来，可以确保数据能够准确地传递给目标套接字。</p>
+<p>要完成地址分配，需要调用 <code>bind()</code> 函数。<code>bind()</code> 函数用于将一个套接字与指定的 IP 地址和端口号绑定在一起。它接受三个参数：套接字描述符、指向地址结构体的指针和地址结构体的长度。</p>
+<p>在调用 <code>bind()</code> 函数时，需要提供一个包含所需 IP 地址和端口号的地址结构体，并将其作为参数传递给 <code>bind()</code> 函数。这样，操作系统就会将套接字与指定的地址关联起来，从而完成地址分配。</p>
+<p>需要注意的是，在使用 <code>bind()</code> 函数之前，需要确保套接字已经被创建并处于可用状态。通常，在创建套接字后，会先设置一些套接字选项（如重用地址选项），然后再调用 <code>bind()</code> 函数进行地址分配。</p>
+<p>总结：为了在网络中唯一标识和定位套接字，需要为其分配地址，通常由 IP 地址和端口号组成。地址分配可以通过调用 <code>bind()</code> 函数来完成，将套接字与指定的地址关联起来。</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>
+<p>(5) Linux中的文件描述符与Windows的句柄实际上非常类似。请以套接字为对象说明它们的含义。</p>
+<ul>
+<li>
+<p>答：</p>
+</li>
+<li>
+<blockquote>
+<p>在Linux和Windows操作系统中，文件描述符和句柄都是用于表示打开的文件或资源的标识符。虽然它们在不同的操作系统中具体实现有所不同，但在功能上非常相似。</p>
+<p>在Linux中，文件描述符是一个非负整数，用于唯一标识一个打开的文件、设备或套接字。它是通过调用系统调用（如open()、socket()等）返回的。Linux将文件、设备和套接字都视为文件，并使用文件描述符来引用它们。例如，当你在Linux上创建一个套接字时，系统会返回一个文件描述符，你可以使用该文件描述符进行读取、写入和关闭套接字。</p>
+<p>在Windows中，句柄是一个特殊的数据类型，用于标识和访问打开的对象，包括文件、设备和套接字。与Linux的文件描述符类似，句柄也是通过调用相应的函数（如CreateFile()、CreateSocket()等）返回的。对于套接字，Windows使用套接字句柄来进行网络通信操作，比如发送和接收数据。</p>
+<p>无论是文件描述符还是句柄，它们都充当了一个抽象层，使应用程序能够通过它们与底层资源进行交互，而无需关心底层实现的细节。通过使用文件描述符或句柄，应用程序可以执行诸如读取、写入、关闭等操作，以及其他与文件或套接字相关的操作。</p>
+<p>需要注意的是，尽管文件描述符和句柄在功能上非常相似，但它们的值不能互通。也就是说，你不能将一个文件描述符直接传递给Windows函数，也不能将一个句柄直接传递给Linux函数。这是因为它们在底层实现上有所不同，操作系统使用不同的机制来管理和操作文件描述符和句柄。</p>
+<p>总结而言，文件描述符和句柄都是用于标识打开的文件、设备或套接字的标识符。它们提供了一种抽象的方式，使应用程序能够对这些资源进行操作，而无需关心底层实现的细节。</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>
+<p>(6) 底层文件<code>I/O</code>函数与ANSI标准定义的<code>I/O</code>文件函数之间有何区别？</p>
+<ul>
+<li>
+<p>答：</p>
+</li>
+<li>
+<blockquote>
+<p>底层文件 I/O 函数和 ANSI 标准定义的 I/O 文件函数之间存在一些区别。下面是它们之间的主要区别：</p>
+<ol>
+<li>抽象级别：底层文件 I/O 函数提供了对操作系统底层的直接访问，而 ANSI 标准定义的 I/O 文件函数提供了更高级别的抽象。底层文件 I/O 函数通常更接近于操作系统提供的原始功能，而 ANSI 标准定义的 I/O 文件函数则提供了更方便、更易用的接口。</li>
+<li>缓冲：ANSI 标准定义的 I/O 文件函数通常使用缓冲来提高性能。例如，stdio.h 中的函数（如fread()、fwrite()）会在内存中使用缓冲区进行读写操作，然后批量地将数据传输到底层文件。这种缓冲机制可以显著提高 I/O 性能。而底层文件 I/O 函数通常不提供缓冲功能，需要手动实现。</li>
+<li>可移植性：ANSI 标准定义的 I/O 文件函数是跨平台的，可以在不同的操作系统上使用相同的代码。这些函数已经被广泛实现和标准化，因此具有较好的可移植性。而底层文件 I/O 函数在不同的操作系统上可能有所不同，需要根据具体的操作系统进行适配。</li>
+<li>错误处理：ANSI 标准定义的 I/O 文件函数通常使用返回值来指示错误。例如，当读取文件时，可以通过返回值来判断是否读取成功。而底层文件 I/O 函数通常使用错误码或异常机制来处理错误。这些函数可能会返回特定的错误码，或者抛出异常供应用程序捕获和处理。</li>
+<li>功能扩展：ANSI 标准定义的 I/O 文件函数提供了一系列功能丰富的函数，如格式化输入输出、文件定位等。这些函数使得对文件的操作更加方便和灵活。而底层文件 I/O 函数通常只提供基本的读写功能，其他高级功能需要手动实现。</li>
+</ol>
+<p>总的来说，底层文件 I/O 函数提供了对操作系统底层的直接访问，更接近于操作系统提供的原始功能，但使用起来相对较复杂。而 ANSI 标准定义的 I/O 文件函数提供了更高级别的抽象，更易用、可移植，并提供了丰富的功能扩展。选择使用哪种函数取决于具体的需求和平台要求。</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>
+<p>参考本书给出的示例<code>low—open.c</code>和<code>low_read.c</code>，分别利用底层文件<code>I/O</code>和ANSI标准<code>I/O</code>编写文件复制程序。可任意指定复制程序的使用方法。</p>
+<ul>
+<li>
+<p>使用底层文件<code>I/O</code>编写的文件复制程序如下：</p>
+</li>
+<li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;fcntl.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;unistd.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdlib.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;sys/stat.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#define BUF_SIZE 128
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">error_handling</span>(<span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> msg);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">int</span> argc, <span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> argv[])
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (argc <span style="color:#f92672">!=</span> <span style="color:#ae81ff">3</span>)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">error_handling</span>(<span style="color:#e6db74">&#34;arguments number error!&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> fd1, fd2;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">char</span> buf[BUF_SIZE];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    fd1 <span style="color:#f92672">=</span> <span style="color:#a6e22e">open</span>(argv[<span style="color:#ae81ff">1</span>], O_CREAT <span style="color:#f92672">|</span> O_RDONLY, S_IRUSR <span style="color:#f92672">|</span> S_IWUSR);
+</span></span><span style="display:flex;"><span>    fd2 <span style="color:#f92672">=</span> <span style="color:#a6e22e">open</span>(argv[<span style="color:#ae81ff">2</span>], O_CREAT <span style="color:#f92672">|</span> O_WRONLY <span style="color:#f92672">|</span> O_TRUNC, S_IRUSR <span style="color:#f92672">|</span> S_IWUSR);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (fd1 <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">||</span> fd2 <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">error_handling</span>(<span style="color:#e6db74">&#34;open() error!&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> (<span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>    {   
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> num_rd;
+</span></span><span style="display:flex;"><span>        num_rd <span style="color:#f92672">=</span> <span style="color:#a6e22e">read</span>(fd1, buf, <span style="color:#66d9ef">sizeof</span> buf);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (num_rd <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">error_handling</span>(<span style="color:#e6db74">&#34;read() error!&#34;</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (num_rd <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> num_wr;
+</span></span><span style="display:flex;"><span>        num_wr <span style="color:#f92672">=</span> <span style="color:#a6e22e">write</span>(fd2, buf, num_rd);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (num_wr <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">error_handling</span>(<span style="color:#e6db74">&#34;write() error!&#34;</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }   
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">error_handling</span>(<span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> msg)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">fprintf</span>(stderr, <span style="color:#e6db74">&#34;%s</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, msg);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">exit</span>(<span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+<li>
+<p>运行结果如下：</p>
+</li>
+<li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>rex@rex-virtual-machine:~/tcpip/ch01$ gcc lower_copy.c -o lc
+</span></span><span style="display:flex;"><span>rex@rex-virtual-machine:~/tcpip/ch01$ cat file1.txt 
+</span></span><span style="display:flex;"><span>Studying In SZU.
+</span></span><span style="display:flex;"><span>Studying In SZU.
+</span></span><span style="display:flex;"><span>Studying In SZU.
+</span></span><span style="display:flex;"><span>Studying In SZU.
+</span></span><span style="display:flex;"><span>Studying In SZU.
+</span></span><span style="display:flex;"><span>Studying In SZU.
+</span></span><span style="display:flex;"><span>Studying In SZU.
+</span></span><span style="display:flex;"><span>Studying In SZU.
+</span></span><span style="display:flex;"><span>rex@rex-virtual-machine:~/tcpip/ch01$ ./lc file1.txt file2.txt 
+</span></span><span style="display:flex;"><span>rex@rex-virtual-machine:~/tcpip/ch01$ cat file2.txt 
+</span></span><span style="display:flex;"><span>Studying In SZU.
+</span></span><span style="display:flex;"><span>Studying In SZU.
+</span></span><span style="display:flex;"><span>Studying In SZU.
+</span></span><span style="display:flex;"><span>Studying In SZU.
+</span></span><span style="display:flex;"><span>Studying In SZU.
+</span></span><span style="display:flex;"><span>Studying In SZU.
+</span></span><span style="display:flex;"><span>Studying In SZU.
+</span></span><span style="display:flex;"><span>Studying In SZU.
+</span></span></code></pre></div></li>
+<li>
+<p>使用底层文件<code>I/O</code>编写的文件复制程序如下：</p>
+</li>
+<li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;fcntl.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;unistd.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdlib.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;sys/stat.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#define BUF_SIZE 128
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">error_handling</span>(<span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> msg);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">int</span> argc, <span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> argv[])
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (argc <span style="color:#f92672">!=</span> <span style="color:#ae81ff">3</span>)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">error_handling</span>(<span style="color:#e6db74">&#34;arguments number error!&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    FILE <span style="color:#f92672">*</span>fd1, <span style="color:#f92672">*</span>fd2;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">char</span> buf[BUF_SIZE];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    fd1 <span style="color:#f92672">=</span> <span style="color:#a6e22e">fopen</span>(argv[<span style="color:#ae81ff">1</span>], <span style="color:#e6db74">&#34;r&#34;</span>);
+</span></span><span style="display:flex;"><span>    fd2 <span style="color:#f92672">=</span> <span style="color:#a6e22e">fopen</span>(argv[<span style="color:#ae81ff">2</span>], <span style="color:#e6db74">&#34;w&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (fd1 <span style="color:#f92672">==</span> NULL <span style="color:#f92672">||</span> fd2 <span style="color:#f92672">==</span> NULL)
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">error_handling</span>(<span style="color:#e6db74">&#34;fopen() error!&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> (<span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>    {   
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">size_t</span> num_rd;
+</span></span><span style="display:flex;"><span>        num_rd <span style="color:#f92672">=</span> <span style="color:#a6e22e">fread</span>(buf, <span style="color:#ae81ff">1</span>, <span style="color:#66d9ef">sizeof</span> buf, fd1);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (num_rd <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">error_handling</span>(<span style="color:#e6db74">&#34;fread() error!&#34;</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (num_rd <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">size_t</span> num_wr;
+</span></span><span style="display:flex;"><span>        num_wr <span style="color:#f92672">=</span> <span style="color:#a6e22e">fwrite</span>(buf, <span style="color:#ae81ff">1</span>, num_rd, fd2);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (num_wr <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">error_handling</span>(<span style="color:#e6db74">&#34;fwrite() error!&#34;</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }   
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">error_handling</span>(<span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> msg)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">fprintf</span>(stderr, <span style="color:#e6db74">&#34;%s</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, msg);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">exit</span>(<span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+<li>
+<p>运行结果如下：</p>
+</li>
+<li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>rex@rex-virtual-machine:~/tcpip/ch01$ gcc ansi_copy.c -o ac
+</span></span><span style="display:flex;"><span>rex@rex-virtual-machine:~/tcpip/ch01$ rm file2.txt 
+</span></span><span style="display:flex;"><span>rex@rex-virtual-machine:~/tcpip/ch01$ ./ac file1.txt file2.txt 
+</span></span><span style="display:flex;"><span>rex@rex-virtual-machine:~/tcpip/ch01$ cat file2.txt 
+</span></span><span style="display:flex;"><span>Studying In SZU.
+</span></span><span style="display:flex;"><span>Studying In SZU.
+</span></span><span style="display:flex;"><span>Studying In SZU.
+</span></span><span style="display:flex;"><span>Studying In SZU.
+</span></span><span style="display:flex;"><span>Studying In SZU.
+</span></span><span style="display:flex;"><span>Studying In SZU.
+</span></span><span style="display:flex;"><span>Studying In SZU.
+</span></span><span style="display:flex;"><span>Studying In SZU.
+</span></span></code></pre></div></li>
+</ul>
+</li>
+</ul>
+<h3 id="以_t为后缀的数据类型">以<code>_t</code>为后缀的数据类型</h3>
+<blockquote>
+<ul>
+<li>
+<p>我们已经接触到<code>ssize_t</code> 、 <code>size_t</code>等陌生的数据类型。这些都是元数据类型 (<code>primitive</code>)，在<code>sys/types.h</code>头文件中一般由<code>typedef</code>声明定义，算是给大家熟悉的基本数据类型起了别名。</p>
+</li>
+<li>
+<p>既然已经有了基本数据类型，为何还要声明并使用这些新的呢？人们目前普遍认为<code>int</code>是32位的，因为主流操作系统和计算机仍采用32位。而在过去
+16位操作系统时代，int类型是16位的。 根据系统的不同、时代的变化，数据类型的表现形式也随之改变，需要修改程序中使用的数据类型 。</p>
+</li>
+<li>
+<p>如果之前已在需要声明4字节数据类型之处使用了<code>size_t</code>或<code>ssize_t</code>， 则将大大减少代码变动，因为只需要修改并编译<code>size_t</code>和<code>ssize_t</code>的<code>typedef</code>声明即可。在项目中，为了给基本数据类型赋予别名，一般会添加大量<code>typedef</code>声明 。而为了与程序员定义的新数据类型加以区分，操作系统定义的数据类型会添加后缀<code>＿t</code> 。</p>
+</li>
+</ul>
+</blockquote>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-07-29</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://Maxwell2020152049.github.io/posts/tcpip_notes_ch01/" data-title="《TCP IP网络编程》学习笔记 ch01" data-hashtags="网络编程"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://Maxwell2020152049.github.io/posts/tcpip_notes_ch01/" data-hashtag="网络编程"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://Maxwell2020152049.github.io/posts/tcpip_notes_ch01/" data-title="《TCP IP网络编程》学习笔记 ch01"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://Maxwell2020152049.github.io/posts/tcpip_notes_ch01/" data-title="《TCP IP网络编程》学习笔记 ch01"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://Maxwell2020152049.github.io/posts/tcpip_notes_ch01/" data-title="《TCP IP网络编程》学习笔记 ch01"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">网络编程</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/cs61a_homework_hw02/" class="prev" rel="prev" title="CS61A Homework hw02"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>CS61A Homework hw02</a>
+            <a href="/posts/tcpip_notes_ch02/" class="next" rel="next" title="《TCP IP网络编程》学习笔记 ch02">《TCP IP网络编程》学习笔记 ch02<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.115.4">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank"></a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

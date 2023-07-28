@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>CS61A week1 study note - Rex&#39;s Blog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="CS61A week1 study note" />
+<meta property="og:description" content="Week1 CS 61A 2021 Fall官网：CS 61A: Structure and Interpretation of Computer Programs
+翻译视频：【计算机程序的构造和解释】精译【UC Berkeley 公开课-CS61A (Spring 2021)】-中英双语字幕
+github:Maxwell2020152049/CS61A
+Lecture #1: Introduction Lab： Lab 00: Getting Started
+Slide： 01-Introduction_full.pdf
+Computer Science 简单介绍了计算机科学的分支：
+Programming
+Theory
+Programming Languages
+Graphics
+Artificial Intelligence
+Systems
+CS 61A是关于Programming(编程)的课程，需要使用一门编程语言Python。
+CS10 如果感觉本课程太困难，可以考虑CS10，关于CS10：https://cs10.org/su23/
+Course Organization Readings Lectures Labs Discussion Tutorials Homework Projects Lecture #2: Functions, Expressions, Environments Homework：Homework 1: Variables &amp; Functions, Control
+Slide：02-Functions_full.pdf
+Functions as Values 在Python中，functions(函数)可以作为fisrt class values（第一类实体）" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://Maxwell2020152049.github.io/posts/cs61a_notes_week1/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-07-29T01:37:07+08:00" />
+<meta property="article:modified_time" content="2023-07-29T01:37:07+08:00" /><meta property="og:site_name" content="My cool site" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="CS61A week1 study note"/>
+<meta name="twitter:description" content="Week1 CS 61A 2021 Fall官网：CS 61A: Structure and Interpretation of Computer Programs
+翻译视频：【计算机程序的构造和解释】精译【UC Berkeley 公开课-CS61A (Spring 2021)】-中英双语字幕
+github:Maxwell2020152049/CS61A
+Lecture #1: Introduction Lab： Lab 00: Getting Started
+Slide： 01-Introduction_full.pdf
+Computer Science 简单介绍了计算机科学的分支：
+Programming
+Theory
+Programming Languages
+Graphics
+Artificial Intelligence
+Systems
+CS 61A是关于Programming(编程)的课程，需要使用一门编程语言Python。
+CS10 如果感觉本课程太困难，可以考虑CS10，关于CS10：https://cs10.org/su23/
+Course Organization Readings Lectures Labs Discussion Tutorials Homework Projects Lecture #2: Functions, Expressions, Environments Homework：Homework 1: Variables &amp; Functions, Control
+Slide：02-Functions_full.pdf
+Functions as Values 在Python中，functions(函数)可以作为fisrt class values（第一类实体）"/>
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://Maxwell2020152049.github.io/posts/cs61a_notes_week1/" /><link rel="prev" href="https://Maxwell2020152049.github.io/posts/6s081_xv6book_ch02/" /><link rel="next" href="https://Maxwell2020152049.github.io/posts/cs61a_notes_week2/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "CS61A week1 study note",
+        "inLanguage": "en-us",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/Maxwell2020152049.github.io\/posts\/cs61a_notes_week1\/"
+        },"genre": "posts","keywords": "Python","wordcount":  364 ,
+        "url": "https:\/\/Maxwell2020152049.github.io\/posts\/cs61a_notes_week1\/","datePublished": "2023-07-29T01:37:07+08:00","dateModified": "2023-07-29T01:37:07+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Author"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Rex&#39;s Blog"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg"
+        data-srcset="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg, https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg 1.5x, https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg 2x"
+        data-sizes="auto"
+        alt="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg"
+        title="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg" />Rex&#39;s cool site</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Rex&#39;s Blog"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg"
+        data-srcset="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg, https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg 1.5x, https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg 2x"
+        data-sizes="auto"
+        alt="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg"
+        title="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg" />Rex&#39;s cool site</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">CS61A week1 study note</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-category">included in <a href="/categories/cs61a/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>CS61A</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-07-29">2023-07-29</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;364 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;2 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#week1">Week1</a>
+      <ul>
+        <li><a href="#lecture-1-introduction">Lecture #1: Introduction</a></li>
+        <li><a href="#lecture-2-functions-expressions-environments">Lecture #2: Functions, Expressions, Environments</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="week1">Week1</h2>
+<p><code>CS 61A 2021 Fall</code>官网：<a href="https://inst.eecs.berkeley.edu/~cs61a/sp21/" target="_blank" rel="noopener noreffer ">CS 61A: Structure and Interpretation of Computer Programs</a></p>
+<p><code>翻译视频</code>：<a href="https://www.bilibili.com/video/BV1v64y1Q78o/?spm_id_from=444.41.top_right_bar_window_default_collection.content.click&amp;vd_source=249a8ad55bb26717dd55ec3dd295f644" target="_blank" rel="noopener noreffer ">【计算机程序的构造和解释】精译【UC Berkeley 公开课-CS61A (Spring 2021)】-中英双语字幕</a></p>
+<p><code>github</code>:<a href="https://github.com/Maxwell2020152049/CS61A" target="_blank" rel="noopener noreffer ">Maxwell2020152049/CS61A</a></p>
+<h3 id="lecture-1-introduction">Lecture #1: Introduction</h3>
+<p><code>Lab</code>： <a href="https://inst.eecs.berkeley.edu/~cs61a/sp21/lab/lab00/" target="_blank" rel="noopener noreffer "> Lab 00: Getting Started</a></p>
+<p><code>Slide</code>： <a href="https://inst.eecs.berkeley.edu/~cs61a/sp21/assets/slides/01-Introduction_full.pdf" target="_blank" rel="noopener noreffer ">01-Introduction_full.pdf</a></p>
+<h4 id="computer-science">Computer Science</h4>
+<p>简单介绍了计算机科学的分支：</p>
+<ul>
+<li>
+<p><code>Programming</code></p>
+</li>
+<li>
+<p><code>Theory</code></p>
+</li>
+<li>
+<p><code>Programming Languages</code></p>
+</li>
+<li>
+<p><code>Graphics</code></p>
+</li>
+<li>
+<p><code>Artificial Intelligence</code></p>
+</li>
+<li>
+<p><code>Systems</code></p>
+</li>
+</ul>
+<p><code>CS 61A</code>是关于<code>Programming</code>(编程)的课程，需要使用一门编程语言<code>Python</code>。</p>
+<h4 id="cs10">CS10</h4>
+<p>如果感觉本课程太困难，可以考虑<code>CS10</code>，关于<code>CS10</code>：<a href="https://cs10.org/su23/" target="_blank" rel="noopener noreffer ">https://cs10.org/su23/</a></p>
+<h4 id="course-organization">Course Organization</h4>
+<ul>
+<li><code>Readings</code></li>
+<li><code>Lectures</code></li>
+<li><code>Labs</code></li>
+<li><code>Discussion</code></li>
+<li><code>Tutorials</code></li>
+<li><code>Homework</code></li>
+<li><code>Projects</code></li>
+</ul>
+<h3 id="lecture-2-functions-expressions-environments">Lecture #2: Functions, Expressions, Environments</h3>
+<p><code>Homework</code>：<a href="https://inst.eecs.berkeley.edu/~cs61a/sp21/hw/hw01/" target="_blank" rel="noopener noreffer ">Homework 1: Variables &amp; Functions, Control</a></p>
+<p><code>Slide</code>：<a href="https://inst.eecs.berkeley.edu/~cs61a/sp21/assets/slides/02-Functions_full.pdf" target="_blank" rel="noopener noreffer ">02-Functions_full.pdf</a></p>
+<h4 id="functions-as-values">Functions as Values</h4>
+<p>在<code>Python</code>中，<code>functions</code>(函数)可以作为<code>fisrt class values</code>（第一类实体）</p>
+<blockquote>
+<p>在计算机科学中，&ldquo;first-class values&rdquo; 是指将值（或数据）视为第一类实体，具有与其他实体相同的地位和权利。这意味着在编程语言中，可以像对待其他变量、函数或对象一样对待值。</p>
+<p>首先，&ldquo;first-class values&rdquo; 可以存储在变量中，就像任何其他值一样。可以将它们传递给函数作为参数，也可以从函数中返回。这使得值可以在程序中被传递和操作，而不仅限于某些特定的用法。</p>
+<p>其次，&ldquo;first-class values&rdquo; 可以赋予其他特性，例如可以动态地创建和销毁。这允许在运行时生成新的值，以便根据需要进行计算和处理。</p>
+<p>最重要的是，&ldquo;first-class values&rdquo; 具有与其他语言构造（如函数、方法、类等）相同的能力和权益。这包括对值进行操作、组合、扩展和抽象的能力，从而使程序具有更高的灵活性和表达能力。</p>
+<p>使用支持 &ldquo;first-class values&rdquo; 的编程语言，开发者可以更自由地处理数据，并以更精确的方式描述问题和解决方案。这种概念在函数式编程、面向对象编程和许多现代编程语言中都得到了广泛应用。</p>
+</blockquote>
+<h4 id="functions-values">Functions Values</h4>
+<p>在<code>Python</code>中，函数分为两种：</p>
+<ul>
+<li>
+<p><code>Python</code>的内置函数（<code>built-in Function</code>）</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>func abs(number), func add(left, right)
+</span></span></code></pre></div></li>
+<li>
+<p>用户自定义函数（<code>function definitions</code>）</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">saxb</span>(a, x, b): <span style="color:#75715e"># Header: Name and formal parameters</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> a <span style="color:#f92672">*</span> x <span style="color:#f92672">+</span> b <span style="color:#75715e"># Body: Computation performed by function</span>
+</span></span></code></pre></div></li>
+</ul>
+<p>函数的参数列表是函数签名的一部分。</p>
+<h4 id="anonymous-functions匿名函数">Anonymous Functions（匿名函数）</h4>
+<p>在<code>Python</code>中，可以使用<code>lambda</code>表达式定义匿名函数，上述<code>saxb()</code>函数可以定义如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">lambda</span> a, x, b: a <span style="color:#f92672">*</span> x <span style="color:#f92672">+</span> b
+</span></span></code></pre></div><h4 id="pure-functions纯函数">Pure Functions（纯函数）</h4>
+<p>纯函数调用参数列表传入的实参，并进行计算，返回结果，没有副作用（<code>side effects</code>）。</p>
+<h4 id="impure-functions非纯函数">Impure Functions（非纯函数）</h4>
+<p>非纯函数除了返回值之外，还会产生副作用（<code>side effects</code>），像<code>print()</code>函数，会有输出（<code>output</code>）；随机值函数<code>randint()</code>也有副作用。</p>
+<h4 id="call-expressions">Call Expressions</h4>
+<blockquote>
+<p>A call expression denotes the operation of calling a function.</p>
+</blockquote>
+<p>调用顺序是 <strong><code>从外到内，从左到右</code></strong>。</p>
+<p>下面的一个调用表达式很好地展示了这个原则（<code>2</code>在被调用前是<code>numeral</code>，<code>2</code>在被调用前是<code>number</code>）：</p>
+<blockquote>
+<p>&ldquo;Numeral&quot;和&quot;number&quot;是两个与数字相关的术语，它们有一些区别：</p>
+<ol>
+<li>Number（数字）：Number是一个广义的术语，用于表示数值或数量。它可以指代任何实际的、抽象的或符号化的数值，无论是整数、分数、小数还是负数。Number是数学中基本的概念，并且通常用来进行计算、比较和量化。</li>
+<li>Numeral（数字符号）：Numeral是一种表示数字的符号或字符。它是一种书写系统，用于表示具体的数值。不同的文化和语言使用不同的数字符号和系统。例如，阿拉伯数字系统（0、1、2、3等）是世界上最常见的数字符号，而罗马数字（I、V、X、L等）是罗马帝国时期广泛使用的一种特殊符号系统。</li>
+</ol>
+<p>总结起来，&ldquo;number&quot;是指任何数值或数量，而&quot;numeral&quot;是指用于表示具体数值的符号或字符</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> operator <span style="color:#f92672">import</span> mul, add
+</span></span><span style="display:flex;"><span>mul(add(<span style="color:#ae81ff">2</span>, mul(<span style="color:#ae81ff">0x10</span>, <span style="color:#ae81ff">0o10</span>)), add(<span style="color:#ae81ff">0x3</span>, <span style="color:#ae81ff">5</span>))
+</span></span></code></pre></div><p>思考下面<code>Python</code>语句的输出：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>print(print(<span style="color:#ae81ff">1</span>), print(<span style="color:#ae81ff">2</span>))
+</span></span></code></pre></div><p>函数名也是函数签名的一部分。</p>
+<h4 id="substitution">Substitution</h4>
+<p><code>Python</code>定义变量名的方法：</p>
+<ul>
+<li>
+<p><code>assignment</code></p>
+</li>
+<li>
+<p><code>functions definitions</code></p>
+</li>
+<li>
+<p><code>parameter passing</code></p>
+</li>
+</ul>
+<p>简单的代换示例1：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">compute</span>(x, y):
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> (x <span style="color:#f92672">*</span> y) <span style="color:#f92672">**</span> x
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> compute(<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">216</span>
+</span></span></code></pre></div><p>简单的代换示例2：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">incr</span>(n):
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">f</span>(x):
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> n <span style="color:#f92672">+</span> x
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">return</span> f
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> incr(<span style="color:#ae81ff">5</span>)(<span style="color:#ae81ff">6</span>) 
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">11</span>
+</span></span></code></pre></div><p>简单的代换示例3（<code>f()</code>内部的<code>x</code>不会被）：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">hmmmm</span>(x):           
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">f</span>(x):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> x
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> f
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> hmmmm(<span style="color:#ae81ff">5</span>)(<span style="color:#ae81ff">6</span>)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">6</span>
+</span></span></code></pre></div><p>对下面这个例子，代换就不能很好的解释了：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>x <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>
+</span></span><span style="display:flex;"><span>x <span style="color:#f92672">=</span> <span style="color:#ae81ff">8</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>print(x)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">8</span>
+</span></span></code></pre></div><p>这时候，就需要引入环境（<code>environment</code>）来进行解释。</p>
+<h4 id="environment">Environment</h4>
+<blockquote>
+<ul>
+<li>
+<p>An environment is a mapping from names to values.</p>
+</li>
+<li>
+<p>We say that a name is bound to a value in this environment.</p>
+</li>
+<li>
+<p>In its simplest form, it consists of a single global environment frame:</p>
+</li>
+</ul>
+</blockquote>
+<h4 id="evaluation">Evaluation</h4>
+<blockquote>
+<ul>
+<li>
+<p>Every expression is evaluated in an environment, which supplies the meanings of any names in it.</p>
+</li>
+<li>
+<p>Evaluating an expression typically involves first evaluating its subexpressions (the operators and operands of calls, the operands of conventional expressions such as <code>x*(y+z)</code>, . . . ).</p>
+</li>
+<li>
+<p>These subexpressions are evaluated in the same environment as the expression that contains them.</p>
+</li>
+<li>
+<p>Once their subexpressions (operator + operands) are evaluated, calls to user-defined functions must evaluate the expressions and statements from the definitions of those functions.</p>
+</li>
+</ul>
+</blockquote>
+<p><code>Environment</code>和<code>Evaluation</code>这个概念可以解释下面的程序：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> operator <span style="color:#f92672">import</span> mul
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">square</span>(x):
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">return</span> mul(x,x)
+</span></span><span style="display:flex;"><span>x <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> square(mul(x, x))
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">16</span>
+</span></span></code></pre></div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-07-29</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://Maxwell2020152049.github.io/posts/cs61a_notes_week1/" data-title="CS61A week1 study note" data-hashtags="Python"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://Maxwell2020152049.github.io/posts/cs61a_notes_week1/" data-hashtag="Python"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://Maxwell2020152049.github.io/posts/cs61a_notes_week1/" data-title="CS61A week1 study note"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://Maxwell2020152049.github.io/posts/cs61a_notes_week1/" data-title="CS61A week1 study note"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://Maxwell2020152049.github.io/posts/cs61a_notes_week1/" data-title="CS61A week1 study note"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/python/">Python</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/6s081_xv6book_ch02/" class="prev" rel="prev" title="ch02 Operating system organization"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>ch02 Operating system organization</a>
+            <a href="/posts/cs61a_notes_week2/" class="next" rel="next" title="CS61A week2 study note">CS61A week2 study note<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.115.4">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank"></a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
