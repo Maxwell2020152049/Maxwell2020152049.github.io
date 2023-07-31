@@ -76,6 +76,16 @@
         alt="https://th.bing.com/th/id/OIP.bs9ePxW88yyxsxRKmQt_MQHaHa?w=193&amp;h=193&amp;c=7&amp;r=0&amp;o=5&amp;pid=1.7"
         title="https://th.bing.com/th/id/OIP.bs9ePxW88yyxsxRKmQt_MQHaHa?w=193&amp;h=193&amp;c=7&amp;r=0&amp;o=5&amp;pid=1.7" /></div><div class="home-subtitle"><div id="id-1" class="typeit"></div></div><div class="links"><a href="https://github.com/Maxwell2020152049" title="GitHub" target="_blank" rel="noopener noreffer me"><i class="fab fa-github fa-fw" aria-hidden="true"></i></a></div></div>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/cs61a_lab_lab01/">CS61A Lab lab01</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-07-29">2023-07-29</time></span>&nbsp;<span class="post-category">included in <a href="/categories/cs61a/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>CS61A</a></span></div><div class="content">Lab 1: Variables &amp; Functions, Control 实验链接：Lab 1: Variables &amp; Functions, Control
+如何下载实验压缩包：
+wget https://inst.eecs.berkeley.edu/~cs61a/sp21/lab/lab01/lab01.zip What Would Python Display(WWPD)? (Part 1) Q1: WWPD: Control 使用如下命令进行测试：
+python3 ok -q control -u --local 需要注意：
+若用整型或浮点型做控制语句的判断条件，0会被当作False，非0会被当作True 测试过程如下：
+===================================================================== Assignment: Lab 1 OK, version v1.18.1 ===================================================================== ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Unlocking tests At each &#34;? &#34;, type what you would expect the output to be. Type exit() to quit --------------------------------------------------------------------- Control &gt; Suite 1 &gt; Case 1 (cases remaining: 5) What would Python display?</div><div class="post-footer">
+        <a href="/posts/cs61a_lab_lab01/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/python/">Python</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
         <a href="/posts/cs61a_lab_lab00/">CS61A Lab lab00</a>
     </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-07-29">2023-07-29</time></span>&nbsp;<span class="post-category">included in <a href="/categories/cs61a/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>CS61A</a></span></div><div class="content">关于.gitignore **/*.zip **/__pycache__ git不需要维护**压缩包** 和 缓存文件
 Lab 0: Getting Started 实验链接：Lab 0: Getting Started
@@ -160,18 +170,6 @@ user/kernel mode virtual memory RISC-V有三种模式：
 2.5 Process overview Xv6使用页表（由硬件实现）给每个进程提供自己的地址空间。
 2.6 Code: starting xv6 and the first process </div><div class="post-footer">
         <a href="/posts/6s081_xv6book_ch02/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/6s081_xv6book_ch01/">ch01 Operating system interface</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-07-28">2023-07-28</time></span>&nbsp;<span class="post-category">included in <a href="/categories/6s081/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>6s081</a></span></div><div class="content">ch01 Operating system interface xv6的系统调用，详见bookriscv-rev1-chinese.pdf的P7
-1.1 Processes and memory xv6上的系统调用如下：
-在xv6上使用系统调用，一般要用到以下头文件：
-#include &#34;kernel/types.h&#34; #include &#34;user/user.h&#34; #include &#34;kernel/fcntl.h&#34; fork系统调用可以为父进程创建一个子进程，创建成功时，为子进程返回0，为父进程返回子进程的PID，失败时返回-1。
-int fork(); exit系统调用退出调用进程，并释放资源，如内存和打开的文件。exit需要一个整形参数，一般来说，0表示成功，1表示失败。
-int exit(int status); wait系统调用返回一个当前进程的已退出的子进程的PID，并将其退出状态复制到指针addr所指的地址上；若调用进程的子进程都没有退出，则等待一个子进程退出。若调用者没有子进程，则返回-1；若不关心子进程的退出状态，可以传一个0地址作为参数。
-int wait(uint64 addr); 实现一个xv6的用户应用test，编写/user/test.c，在Makefile的UPROGS中加入$U/_test\，验证以上系统调用的功能：
-#include &#34;kernel/types.h&#34; #include &#34;user/user.h&#34; #include &#34;kernel/fcntl.h&#34; int main(int argc, char* argv[]) { int pid; pid = fork(); if (pid &gt; 0) { wait(0); printf(&#34;Here is parent process.\n&#34;); printf(&#34;child %d is done.\n&#34;, pid); } else if (pid == 0) { printf(&#34;Here is child process.</div><div class="post-footer">
-        <a href="/posts/6s081_xv6book_ch01/">Read More</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a></div></div>
 </article><ul class="pagination"><li class="page-item ">
                     <span class="page-link">
