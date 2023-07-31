@@ -3,7 +3,23 @@
         <title>Python - Tag - Rex&#39;s Blog</title>
         <link>https://Maxwell2020152049.github.io/tags/python/</link>
         <description>Python - Tag - Rex&#39;s Blog</description>
-        <generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 31 Jul 2023 15:18:23 &#43;0800</lastBuildDate><atom:link href="https://Maxwell2020152049.github.io/tags/python/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 01 Aug 2023 01:00:34 &#43;0800</lastBuildDate><atom:link href="https://Maxwell2020152049.github.io/tags/python/" rel="self" type="application/rss+xml" /><item>
+    <title>CS61A week5 study note</title>
+    <link>https://Maxwell2020152049.github.io/posts/cs61a_notes_week5/</link>
+    <pubDate>Tue, 01 Aug 2023 01:00:34 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://Maxwell2020152049.github.io/posts/cs61a_notes_week5/</guid>
+    <description><![CDATA[Week5 CS 61A 2021 Fall官网：CS 61A: Structure and Interpretation of Computer Programs
+翻译视频：【计算机程序的构造和解释】精译【UC Berkeley 公开课-CS61A (Spring 2021)】-中英双语字幕
+github:Maxwell2020152049/CS61A
+Lecture #12: Dictionaries, Matrices, and Trees： Project：Project 2: CS 61A Autocorrected Typing Software
+Slide：12-Trees_full.pdf or 12-Trees.html
+抽象层次的复习（Review: Layers of abstraction） Python类型的复习（Review: Python types） 字典（Dictionary） 字典是一种可修改的键-值对映射（key-value pair）。
+可以使用Key in Dict检查某个Key是否是字典的键，若是，返回True；若不是，返回False。
+eg：
+# Dictionaries states = { &#34;CA&#34;: &#34;California&#34;, &#34;DE&#34;: &#34;Delaware&#34;, &#34;NY&#34;: &#34;New York&#34;, &#34;TX&#34;: &#34;Texas&#34;, &#34;WY&#34;: &#34;Wyoming&#34; } print(len(states)) print(&#34;CA&#34; in states) print(&#34;ZZ&#34; in states) 输出：]]></description>
+</item>
+<item>
     <title>CS61A week4 study note</title>
     <link>https://Maxwell2020152049.github.io/posts/cs61a_notes_week4/</link>
     <pubDate>Mon, 31 Jul 2023 15:18:23 &#43;0800</pubDate>

@@ -76,6 +76,14 @@
         alt="https://th.bing.com/th/id/OIP.bs9ePxW88yyxsxRKmQt_MQHaHa?w=193&amp;h=193&amp;c=7&amp;r=0&amp;o=5&amp;pid=1.7"
         title="https://th.bing.com/th/id/OIP.bs9ePxW88yyxsxRKmQt_MQHaHa?w=193&amp;h=193&amp;c=7&amp;r=0&amp;o=5&amp;pid=1.7" /></div><div class="home-subtitle"><div id="id-1" class="typeit"></div></div><div class="links"><a href="https://github.com/Maxwell2020152049" title="GitHub" target="_blank" rel="noopener noreffer me"><i class="fab fa-github fa-fw" aria-hidden="true"></i></a></div></div>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/cs61a_homework_hw01/">CS61A Homework hw01</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-07-29">2023-07-29</time></span>&nbsp;<span class="post-category">included in <a href="/categories/cs61a/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>CS61A</a></span></div><div class="content">Homework 1: Variables &amp; Functions, Control 作业链接：Homework 1: Variables &amp; Functions, Control
+Q1: Syllabus Quiz 教学大纲和课程政策，详见Syllabus Quiz和Syllabus &amp; Course Policies。
+Q2: A Plus Abs B Fill in the blanks in the following function for adding a to the absolute value of b, without calling abs. You may not modify any of the provided code other than the two blanks.
+题意就是实现如下函数f： $$ f(a, b) = a + \lvert b \rvert $$</div><div class="post-footer">
+        <a href="/posts/cs61a_homework_hw01/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/python/">Python</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
         <a href="/posts/cs61a_lab_lab01/">CS61A Lab lab01</a>
     </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-07-29">2023-07-29</time></span>&nbsp;<span class="post-category">included in <a href="/categories/cs61a/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>CS61A</a></span></div><div class="content">Lab 1: Variables &amp; Functions, Control 实验链接：Lab 1: Variables &amp; Functions, Control
 如何下载实验压缩包：
@@ -153,24 +161,6 @@ Slide：02-Functions_full.pdf
 Functions as Values 在Python中，functions(函数)可以作为fisrt class values（第一类实体）</div><div class="post-footer">
         <a href="/posts/cs61a_notes_week1/">Read More</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/python/">Python</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/6s081_xv6book_ch02/">ch02 Operating system organization</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-07-29">2023-07-29</time></span>&nbsp;<span class="post-category">included in <a href="/categories/6s081/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>6s081</a></span></div><div class="content">ch02 Operating system organization 操作系统必须满足以下的需求：
-多路复用（资源由进程共享） 隔离性（Isolation，进程之间不会互相影响） 交互性（进程之间可以互相通信） 2.1 Abstract physical resources 为了实现强隔离，操作系统应该禁止应用程序直接访问硬件资源，而提供对于硬件资源的抽象，如文件系统等（open、read、write、close）。
-process：可以视为CPU的抽象 exec：可以视为内存的抽象 file：可以视为磁盘的抽象 2.2 User mode, supervisor mode, and system calls 强隔离性需要的硬件支持：
-user/kernel mode virtual memory RISC-V有三种模式：
-机器模式 监督者模式 用户模式 ​	机器模式主要用于配置计算机，启动CPU。在监督者模式（supervisor mode）下，CPU被允许运行特权指令（内核空间）。如果用户模式下的应用程序试图执行一条特权指令，CPU不会执行该指令，而是切换到监督者模式。应用程序只能执行用户模式的指令，如计算（用户空间）。
-​	一个应用程序如果要调用内核函数（如xv6中的读系统调用），必须过渡到内核。
-​	CPU提供了一个特殊的指令ecall，可以让CPU从用户模式切换为监督者模式，并在内核指定的入口进入内核。
-​	CPU提供了一个特殊的指令sret，当系统调用完成后，内核切换回用户栈，并通过调用sret指令返回用户空间，降低硬件特权级别，恢复执行系统调用前的用户指令。
-2.3 Kernel organization 宏内核 ：整个操作系统都在内核中，所有的系统调用都在监督者模式下运行。
-微内核 ：在用户模式下运行操作系统的大部分代码。
-从概念上讲，xv6是宏内核。
-2.4 Code: xv6 organization xv6内核源码在kernel/子目录下。模块间的接口在kernel/defs.h中定义。
-2.5 Process overview Xv6使用页表（由硬件实现）给每个进程提供自己的地址空间。
-2.6 Code: starting xv6 and the first process </div><div class="post-footer">
-        <a href="/posts/6s081_xv6book_ch02/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a></div></div>
 </article><ul class="pagination"><li class="page-item ">
                     <span class="page-link">
                         <a href="/">1</a>
