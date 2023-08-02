@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>CS61A Lab lab02 - Rex&#39;s Blog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="CS61A Lab lab02" />
+<meta property="og:description" content="Lab 2: Higher-Order Functions, Lambda Expressions 实验链接：Lab 2: Higher-Order Functions, Lambda Expressions
+如何下载实验压缩包：
+wget https://inst.eecs.berkeley.edu/~cs61a/sp21/lab/lab02/lab02.zip What Would Python Display? Q1: WWPD: Lambda the Free 输入以下命令进行测试：
+如果结果是函数，就输入Function，如果是错误就输入Error，如果没有输出就输入Nothing。
+python3 ok -q lambda -u --local 过程如下：
+===================================================================== Assignment: Lab 2 OK, version v1.18.1 ===================================================================== ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Unlocking tests At each &#34;? &#34;, type what you would expect the output to be. Type exit() to quit --------------------------------------------------------------------- Lambda the Free &gt; Suite 1 &gt; Case 1 (cases remaining: 7) Q: Which of the following statements describes a difference between a def statement and a lambda expression?" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://Maxwell2020152049.github.io/posts/cs61a_lab_lab02/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-08-01T16:55:23+08:00" />
+<meta property="article:modified_time" content="2023-08-01T16:55:23+08:00" /><meta property="og:site_name" content="My cool site" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="CS61A Lab lab02"/>
+<meta name="twitter:description" content="Lab 2: Higher-Order Functions, Lambda Expressions 实验链接：Lab 2: Higher-Order Functions, Lambda Expressions
+如何下载实验压缩包：
+wget https://inst.eecs.berkeley.edu/~cs61a/sp21/lab/lab02/lab02.zip What Would Python Display? Q1: WWPD: Lambda the Free 输入以下命令进行测试：
+如果结果是函数，就输入Function，如果是错误就输入Error，如果没有输出就输入Nothing。
+python3 ok -q lambda -u --local 过程如下：
+===================================================================== Assignment: Lab 2 OK, version v1.18.1 ===================================================================== ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Unlocking tests At each &#34;? &#34;, type what you would expect the output to be. Type exit() to quit --------------------------------------------------------------------- Lambda the Free &gt; Suite 1 &gt; Case 1 (cases remaining: 7) Q: Which of the following statements describes a difference between a def statement and a lambda expression?"/>
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://Maxwell2020152049.github.io/posts/cs61a_lab_lab02/" /><link rel="prev" href="https://Maxwell2020152049.github.io/posts/cs61a_notes_week5/" /><link rel="next" href="https://Maxwell2020152049.github.io/posts/cs61a_homework_hw03/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "CS61A Lab lab02",
+        "inLanguage": "en-us",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/Maxwell2020152049.github.io\/posts\/cs61a_lab_lab02\/"
+        },"genre": "posts","keywords": "Python","wordcount":  2044 ,
+        "url": "https:\/\/Maxwell2020152049.github.io\/posts\/cs61a_lab_lab02\/","datePublished": "2023-08-01T16:55:23+08:00","dateModified": "2023-08-01T16:55:23+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Author"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Rex&#39;s Blog"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg"
+        data-srcset="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg, https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg 1.5x, https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg 2x"
+        data-sizes="auto"
+        alt="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg"
+        title="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg" />Rex&#39;s cool site</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Rex&#39;s Blog"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg"
+        data-srcset="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg, https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg 1.5x, https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg 2x"
+        data-sizes="auto"
+        alt="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg"
+        title="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg" />Rex&#39;s cool site</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">CS61A Lab lab02</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-category">included in <a href="/categories/cs61a/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>CS61A</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-08-01">2023-08-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2044 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;10 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#what-would-python-display">What Would Python Display?</a>
+      <ul>
+        <li><a href="#q1-wwpd-lambda-the-free">Q1: WWPD: Lambda the Free</a></li>
+        <li><a href="#q2-wwpd-higher-order-functions">Q2: WWPD: Higher Order Functions</a></li>
+      </ul>
+    </li>
+    <li><a href="#coding-practice">Coding Practice</a>
+      <ul>
+        <li><a href="#q3-lambdas-and-currying">Q3: Lambdas and Currying</a></li>
+        <li><a href="#q4-count-van-count">Q4: Count van Count</a></li>
+      </ul>
+    </li>
+    <li><a href="#environment-diagram-practice">Environment Diagram Practice</a>
+      <ul>
+        <li><a href="#q5-make-adder">Q5: Make Adder</a></li>
+        <li><a href="#q6-lambda-the-environment-diagram">Q6: Lambda the Environment Diagram</a></li>
+      </ul>
+    </li>
+    <li><a href="#optional-questions">Optional Questions</a>
+      <ul>
+        <li><a href="#q7-composite-identity-function">Q7: Composite Identity Function</a></li>
+        <li><a href="#q8-i-heard-you-liked-functions">Q8: I Heard You Liked Functions&hellip;</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="lab-2-higher-order-functions-lambda-expressions">Lab 2: Higher-Order Functions, Lambda Expressions</h1>
+<p>实验链接：<a href="https://inst.eecs.berkeley.edu/~cs61a/sp21/lab/lab02/" target="_blank" rel="noopener noreffer ">Lab 2: Higher-Order Functions, Lambda Expressions</a></p>
+<p>如何下载实验压缩包：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>wget https://inst.eecs.berkeley.edu/~cs61a/sp21/lab/lab02/lab02.zip
+</span></span></code></pre></div><h2 id="what-would-python-display">What Would Python Display?</h2>
+<h3 id="q1-wwpd-lambda-the-free">Q1: WWPD: Lambda the Free</h3>
+<p>输入以下命令进行测试：</p>
+<p>如果结果是函数，就输入<code>Function</code>，如果是错误就输入<code>Error</code>，如果没有输出就输入<code>Nothing</code>。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>python3 ok -q lambda -u --local
+</span></span></code></pre></div><p>过程如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>Assignment: Lab <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>OK, version v1.18.1
+</span></span><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+</span></span><span style="display:flex;"><span>Unlocking tests
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>At each <span style="color:#e6db74">&#34;? &#34;</span>, type what you would expect the output to be.
+</span></span><span style="display:flex;"><span>Type exit<span style="color:#f92672">()</span> to quit
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Lambda the Free &gt; Suite <span style="color:#ae81ff">1</span> &gt; Case <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 7<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Q: Which of the following statements describes a difference between a def statement and a lambda expression?
+</span></span><span style="display:flex;"><span>Choose the number of the correct choice:
+</span></span><span style="display:flex;"><span>0<span style="color:#f92672">)</span> A def statement can only have one line in its body.
+</span></span><span style="display:flex;"><span>1<span style="color:#f92672">)</span> A lambda expression cannot have more than two parameters.
+</span></span><span style="display:flex;"><span>2<span style="color:#f92672">)</span> A lambda expression does not automatically bind the <span style="color:#66d9ef">function</span> object that it returns to any name.
+</span></span><span style="display:flex;"><span>3<span style="color:#f92672">)</span> A lambda expression cannot <span style="color:#66d9ef">return</span> another <span style="color:#66d9ef">function</span>.
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Lambda the Free &gt; Suite <span style="color:#ae81ff">1</span> &gt; Case <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 6<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Q: How many parameters does the following lambda expression have?
+</span></span><span style="display:flex;"><span>lambda a, b: c + d
+</span></span><span style="display:flex;"><span>Choose the number of the correct choice:
+</span></span><span style="display:flex;"><span>0<span style="color:#f92672">)</span> Not enough information
+</span></span><span style="display:flex;"><span>1<span style="color:#f92672">)</span> two
+</span></span><span style="display:flex;"><span>2<span style="color:#f92672">)</span> three
+</span></span><span style="display:flex;"><span>3<span style="color:#f92672">)</span> one
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Lambda the Free &gt; Suite <span style="color:#ae81ff">1</span> &gt; Case <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 5<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Q: When is the <span style="color:#66d9ef">return</span> expression of a lambda expression executed?
+</span></span><span style="display:flex;"><span>Choose the number of the correct choice:
+</span></span><span style="display:flex;"><span>0<span style="color:#f92672">)</span> When the lambda expression is evaluated.
+</span></span><span style="display:flex;"><span>1<span style="color:#f92672">)</span> When you pass the lambda expression into another <span style="color:#66d9ef">function</span>.
+</span></span><span style="display:flex;"><span>2<span style="color:#f92672">)</span> When the <span style="color:#66d9ef">function</span> returned by the lambda expression is called.
+</span></span><span style="display:flex;"><span>3<span style="color:#f92672">)</span> When you assign the lambda expression to a name.
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>-- Not quite. Try again! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Choose the number of the correct choice:
+</span></span><span style="display:flex;"><span>0<span style="color:#f92672">)</span> When the lambda expression is evaluated.
+</span></span><span style="display:flex;"><span>1<span style="color:#f92672">)</span> When you pass the lambda expression into another <span style="color:#66d9ef">function</span>.
+</span></span><span style="display:flex;"><span>2<span style="color:#f92672">)</span> When the <span style="color:#66d9ef">function</span> returned by the lambda expression is called.
+</span></span><span style="display:flex;"><span>3<span style="color:#f92672">)</span> When you assign the lambda expression to a name.
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Lambda the Free &gt; Suite <span style="color:#ae81ff">2</span> &gt; Case <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 4<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>What would Python display? If you get stuck, try it out in the Python
+</span></span><span style="display:flex;"><span>interpreter!
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; <span style="color:#75715e"># If Python displays &lt;function...&gt;, type Function, if it errors type Error, if it displays nothing type Nothing</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; lambda x: x  <span style="color:#75715e"># A lambda expression with one parameter x</span>
+</span></span><span style="display:flex;"><span>? Function
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; a <span style="color:#f92672">=</span> lambda x: x  <span style="color:#75715e"># Assigning a lambda function to the name a</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; a<span style="color:#f92672">(</span>5<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">5</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; <span style="color:#f92672">(</span>lambda: 3<span style="color:#f92672">)()</span>  <span style="color:#75715e"># Using a lambda expression as an operator in a call exp.</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; b <span style="color:#f92672">=</span> lambda x: lambda: x  <span style="color:#75715e"># Lambdas can return other lambdas!</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; c <span style="color:#f92672">=</span> b<span style="color:#f92672">(</span>88<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; c
+</span></span><span style="display:flex;"><span>? Function
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; c<span style="color:#f92672">()</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">88</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; d <span style="color:#f92672">=</span> lambda f: f<span style="color:#f92672">(</span>4<span style="color:#f92672">)</span>  <span style="color:#75715e"># They can have functions as arguments as well</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; def square<span style="color:#f92672">(</span>x<span style="color:#f92672">)</span>:
+</span></span><span style="display:flex;"><span>...     <span style="color:#66d9ef">return</span> x * x
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; d<span style="color:#f92672">(</span>square<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">16</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Lambda the Free &gt; Suite <span style="color:#ae81ff">2</span> &gt; Case <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 3<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>What would Python display? If you get stuck, try it out in the Python
+</span></span><span style="display:flex;"><span>interpreter!
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; x <span style="color:#f92672">=</span> None <span style="color:#75715e"># remember to review the rules of WWPD given above!</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; x
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; lambda x: x
+</span></span><span style="display:flex;"><span>? Function
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Lambda the Free &gt; Suite <span style="color:#ae81ff">2</span> &gt; Case <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 2<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>What would Python display? If you get stuck, try it out in the Python
+</span></span><span style="display:flex;"><span>interpreter!
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; <span style="color:#75715e">#</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; <span style="color:#75715e"># Pay attention to the scope of variables</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; z <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; e <span style="color:#f92672">=</span> lambda x: lambda y: lambda: x + y + z
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; e<span style="color:#f92672">(</span>0<span style="color:#f92672">)(</span>1<span style="color:#f92672">)()</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">4</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; f <span style="color:#f92672">=</span> lambda z: x + z
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; f<span style="color:#f92672">(</span>3<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>? Error
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Lambda the Free &gt; Suite <span style="color:#ae81ff">2</span> &gt; Case <span style="color:#ae81ff">4</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 1<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>What would Python display? If you get stuck, try it out in the Python
+</span></span><span style="display:flex;"><span>interpreter!
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; <span style="color:#75715e"># Try drawing an environment diagram if you get stuck!</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; higher_order_lambda <span style="color:#f92672">=</span> lambda f: lambda x: f<span style="color:#f92672">(</span>x<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; g <span style="color:#f92672">=</span> lambda x: x * x
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; higher_order_lambda<span style="color:#f92672">(</span>2<span style="color:#f92672">)(</span>g<span style="color:#f92672">)</span> <span style="color:#75715e"># Which argument belongs to which function call?</span>
+</span></span><span style="display:flex;"><span>? Error
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; higher_order_lambda<span style="color:#f92672">(</span>g<span style="color:#f92672">)(</span>2<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">4</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; call_thrice <span style="color:#f92672">=</span> lambda f: lambda x: f<span style="color:#f92672">(</span>f<span style="color:#f92672">(</span>f<span style="color:#f92672">(</span>x<span style="color:#f92672">)))</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; call_thrice<span style="color:#f92672">(</span>lambda y: y + 1<span style="color:#f92672">)(</span>0<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; print_lambda <span style="color:#f92672">=</span> lambda z: print<span style="color:#f92672">(</span>z<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; print_lambda
+</span></span><span style="display:flex;"><span>? Function
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; one_thousand <span style="color:#f92672">=</span> print_lambda<span style="color:#f92672">(</span>1000<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">1000</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; one_thousand
+</span></span><span style="display:flex;"><span>? None
+</span></span><span style="display:flex;"><span>-- Not quite. Try again! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>? Nothing
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>OK! All cases <span style="color:#66d9ef">for</span> Lambda the Free unlocked.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Cannot backup when running ok with --local.
+</span></span></code></pre></div><h3 id="q2-wwpd-higher-order-functions">Q2: WWPD: Higher Order Functions</h3>
+<p>输入以下命令进行测试：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>python3 ok -q hof-wwpd -u --local
+</span></span></code></pre></div><p>如果结果是函数，就输入<code>Function</code>，如果是错误就输入<code>Error</code>，如果没有输出就输入<code>Nothing</code>。</p>
+<p>过程如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>Assignment: Lab <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>OK, version v1.18.1
+</span></span><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+</span></span><span style="display:flex;"><span>Unlocking tests
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>At each <span style="color:#e6db74">&#34;? &#34;</span>, type what you would expect the output to be.
+</span></span><span style="display:flex;"><span>Type exit<span style="color:#f92672">()</span> to quit
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Higher Order Functions &gt; Suite <span style="color:#ae81ff">1</span> &gt; Case <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 2<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>What would Python display? If you get stuck, try it out in the Python
+</span></span><span style="display:flex;"><span>interpreter!
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; def even<span style="color:#f92672">(</span>f<span style="color:#f92672">)</span>:
+</span></span><span style="display:flex;"><span>...     def odd<span style="color:#f92672">(</span>x<span style="color:#f92672">)</span>:
+</span></span><span style="display:flex;"><span>...         <span style="color:#66d9ef">if</span> x &lt; 0:
+</span></span><span style="display:flex;"><span>...             <span style="color:#66d9ef">return</span> f<span style="color:#f92672">(</span>-x<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>...         <span style="color:#66d9ef">return</span> f<span style="color:#f92672">(</span>x<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>...     <span style="color:#66d9ef">return</span> odd
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; steven <span style="color:#f92672">=</span> lambda x: x
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; stewart <span style="color:#f92672">=</span> even<span style="color:#f92672">(</span>steven<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; stewart
+</span></span><span style="display:flex;"><span>? Function
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; stewart<span style="color:#f92672">(</span>61<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">61</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; stewart<span style="color:#f92672">(</span>-4<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">4</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Higher Order Functions &gt; Suite <span style="color:#ae81ff">1</span> &gt; Case <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 1<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>What would Python display? If you get stuck, try it out in the Python
+</span></span><span style="display:flex;"><span>interpreter!
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; def cake<span style="color:#f92672">()</span>:
+</span></span><span style="display:flex;"><span>...    print<span style="color:#f92672">(</span><span style="color:#e6db74">&#39;beets&#39;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>...    def pie<span style="color:#f92672">()</span>:
+</span></span><span style="display:flex;"><span>...        print<span style="color:#f92672">(</span><span style="color:#e6db74">&#39;sweets&#39;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>...        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;cake&#39;</span>
+</span></span><span style="display:flex;"><span>...    <span style="color:#66d9ef">return</span> pie
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; chocolate <span style="color:#f92672">=</span> cake<span style="color:#f92672">()</span>
+</span></span><span style="display:flex;"><span>? beets
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; chocolate
+</span></span><span style="display:flex;"><span>? Function
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; chocolate<span style="color:#f92672">()</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>line 1<span style="color:#f92672">)</span>? sweets
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>line 2<span style="color:#f92672">)</span>? <span style="color:#e6db74">&#39;cake&#39;</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; more_chocolate, more_cake <span style="color:#f92672">=</span> chocolate<span style="color:#f92672">()</span>, cake
+</span></span><span style="display:flex;"><span>? sweets
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; more_chocolate
+</span></span><span style="display:flex;"><span>? <span style="color:#e6db74">&#39;cake&#39;</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; def snake<span style="color:#f92672">(</span>x, y<span style="color:#f92672">)</span>:
+</span></span><span style="display:flex;"><span>...    <span style="color:#66d9ef">if</span> cake <span style="color:#f92672">==</span> more_cake:
+</span></span><span style="display:flex;"><span>...        <span style="color:#66d9ef">return</span> chocolate
+</span></span><span style="display:flex;"><span>...    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>...        <span style="color:#66d9ef">return</span> x + y
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; snake<span style="color:#f92672">(</span>10, 20<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">30</span>
+</span></span><span style="display:flex;"><span>-- Not quite. Try again! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>? Function
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; snake<span style="color:#f92672">(</span>10, 20<span style="color:#f92672">)()</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>line 1<span style="color:#f92672">)</span>? sweets
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>line 2<span style="color:#f92672">)</span>? <span style="color:#e6db74">&#39;cake&#39;</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; cake <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;cake&#39;</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; snake<span style="color:#f92672">(</span>10, 20<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">30</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>OK! All cases <span style="color:#66d9ef">for</span> Higher Order Functions unlocked.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Cannot backup when running ok with --local.
+</span></span></code></pre></div><h2 id="coding-practice">Coding Practice</h2>
+<h3 id="q3-lambdas-and-currying">Q3: Lambdas and Currying</h3>
+<p>实现<code>lambda_curry2(func)</code>函数，返回一个可以接收一个参数<code>x</code>的函数<code>f</code>，<code>f</code>也是一个可以接收一个参数<code>y</code>的函数<code>g</code>，最后返回<code>func(x, y)</code>。</p>
+<p>实现代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">lambda_curry2</span>(func):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Returns a Curried version of a two-argument function FUNC.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; from operator import add, mul, mod
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; curried_add = lambda_curry2(add)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; add_three = curried_add(3)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; add_three(5)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    8
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; curried_mul = lambda_curry2(mul)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; mul_5 = curried_mul(5)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; mul_5(42)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    210
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; lambda_curry2(mod)(123)(10)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    3
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;*** YOUR CODE HERE ***&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">lambda</span> x: <span style="color:#66d9ef">lambda</span> y: func(x, y)
+</span></span></code></pre></div><h3 id="q4-count-van-count">Q4: Count van Count</h3>
+<p>阅读<code>count_factors(n)</code>和<code>count_primes(n)</code>函数，对其进行泛化，实现一个<code>count_cond(condition)</code>函数，返回一个可以接收参数<code>n</code>的函数，调用时，能够完成上述两个函数的功能。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">count_factors</span>(n):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Return the number of positive factors that n has.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; count_factors(6)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    4   # 1, 2, 3, 6
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; count_factors(4)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    3   # 1, 2, 4
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>    count <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> i <span style="color:#f92672">&lt;=</span> n:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> n <span style="color:#f92672">%</span> i <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>            count <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>        i <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> count
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">count_primes</span>(n):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Return the number of prime numbers up to and including n.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; count_primes(6)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    3   # 2, 3, 5
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; count_primes(13)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    6   # 2, 3, 5, 7, 11, 13
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>    count <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> i <span style="color:#f92672">&lt;=</span> n:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> is_prime(i):
+</span></span><span style="display:flex;"><span>            count <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>        i <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> count
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">is_prime</span>(n):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> count_factors(n) <span style="color:#f92672">==</span> <span style="color:#ae81ff">2</span> <span style="color:#75715e"># only factors are 1 and n</span>
+</span></span></code></pre></div><p>实现代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">count_cond</span>(condition):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Returns a function with one parameter N that counts all the numbers from
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    1 to N that satisfy the two-argument predicate function Condition, where
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    the first argument for Condition is N and the second argument is the
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    number from 1 to N.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; count_factors = count_cond(lambda n, i: n </span><span style="color:#e6db74">% i</span><span style="color:#e6db74"> == 0)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; count_factors(2)   # 1, 2
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    2
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; count_factors(4)   # 1, 2, 4
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    3
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; count_factors(12)  # 1, 2, 3, 4, 6, 12
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    6
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; is_prime = lambda n, i: count_factors(i) == 2
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; count_primes = count_cond(is_prime)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; count_primes(2)    # 2
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    1
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; count_primes(3)    # 2, 3
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    2
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; count_primes(4)    # 2, 3
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    2
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; count_primes(5)    # 2, 3, 5
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    3
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; count_primes(20)   # 2, 3, 5, 7, 11, 13, 17, 19
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    8
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;*** YOUR CODE HERE ***&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">func</span>(n):
+</span></span><span style="display:flex;"><span>        i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>        count <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span> i <span style="color:#f92672">&lt;=</span> n:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> condition(n ,i):
+</span></span><span style="display:flex;"><span>                count <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>            i <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> count
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> func
+</span></span></code></pre></div><p>使用如下命令进行测试：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>python3 ok --local
+</span></span></code></pre></div><p>结果如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>Assignment: Lab <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>OK, version v1.18.1
+</span></span><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+</span></span><span style="display:flex;"><span>Running tests
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Test summary
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">11</span> test cases passed! No cases failed.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Cannot backup when running ok with --local.
+</span></span></code></pre></div><h2 id="environment-diagram-practice">Environment Diagram Practice</h2>
+<p>这部分就是看代码画环境图，在用<code>PythonTutor</code>检查结果。</p>
+<h3 id="q5-make-adder">Q5: Make Adder</h3>
+<p>根据以下代码画出环境图：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>n <span style="color:#f92672">=</span> <span style="color:#ae81ff">9</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">make_adder</span>(n):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">lambda</span> k: k <span style="color:#f92672">+</span> n
+</span></span><span style="display:flex;"><span>add_ten <span style="color:#f92672">=</span> make_adder(n<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>result <span style="color:#f92672">=</span> add_ten(n)
+</span></span></code></pre></div><p>并回答问题：</p>
+<blockquote>
+<p>There are 3 frames total (including the Global frame). In addition, consider the following questions:</p>
+<ol>
+<li>In the Global frame, the name <code>add_ten</code> points to a function object. What is the intrinsic name of that function object, and what frame is its parent?</li>
+<li>What name is frame <code>f2</code> labeled with (<code>add_ten</code> or λ)? Which frame is the parent of <code>f2</code>?</li>
+<li>What value is the variable <code>result</code> bound to in the Global frame?</li>
+</ol>
+</blockquote>
+<p>答案：</p>
+<blockquote>
+<ol>
+<li>The intrinsic name of the function object that <code>add_ten</code> points to is λ (specifically, the lambda whose parameter is <code>k</code>). The parent frame of this lambda is <code>f1</code>.</li>
+<li><code>f2</code> is labeled with the name λ. The parent frame of <code>f2</code> is <code>f1</code>, since that is where λ is defined.</li>
+<li>The variable <code>result</code> is bound to 19.</li>
+</ol>
+</blockquote>
+<p>我画的环境图：</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/img/image_cs61a_labs/image01.png"
+        data-srcset="/img/image_cs61a_labs/image01.png, /img/image_cs61a_labs/image01.png 1.5x, /img/image_cs61a_labs/image01.png 2x"
+        data-sizes="auto"
+        alt="/img/image_cs61a_labs/image01.png"
+        title="/img/image_cs61a_labs/image01.png" /></p>
+<p>在<a href="https://pythontutor.com/cp/composingprograms.html#code=n%20%3D%209%0Adef%20make_adder%28n%29%3A%0A%20%20%20%20return%20lambda%20k%3A%20k%20%2B%20n%0Aadd_ten%20%3D%20make_adder%28n%2B1%29%0Aresult%20%3D%20add_ten%28n%29&amp;cumulative=true&amp;curInstr=10&amp;mode=display&amp;origin=composingprograms.js&amp;py=3&amp;rawInputLstJSON=%5B%5D" target="_blank" rel="noopener noreffer ">Pythontutor</a>中：</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/img/image_cs61a_labs/image03.png"
+        data-srcset="/img/image_cs61a_labs/image03.png, /img/image_cs61a_labs/image03.png 1.5x, /img/image_cs61a_labs/image03.png 2x"
+        data-sizes="auto"
+        alt="/img/image_cs61a_labs/image03.png"
+        title="/img/image_cs61a_labs/image03.png" /></p>
+<h3 id="q6-lambda-the-environment-diagram">Q6: Lambda the Environment Diagram</h3>
+<p>根据以下代码画出环境图：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> a <span style="color:#f92672">=</span> <span style="color:#66d9ef">lambda</span> x: x <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">b</span>(b, x):
+</span></span><span style="display:flex;"><span><span style="color:#f92672">...</span>     <span style="color:#66d9ef">return</span> b(x <span style="color:#f92672">+</span> a(x))
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> x <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> b(a, x)
+</span></span></code></pre></div><p>我画的环境图：</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/img/image_cs61a_labs/image02.png"
+        data-srcset="/img/image_cs61a_labs/image02.png, /img/image_cs61a_labs/image02.png 1.5x, /img/image_cs61a_labs/image02.png 2x"
+        data-sizes="auto"
+        alt="/img/image_cs61a_labs/image02.png"
+        title="/img/image_cs61a_labs/image02.png" /></p>
+<p>在<a href="https://pythontutor.com/cp/composingprograms.html#code=a%20%3D%20lambda%20x%3A%20x%20*%202%20%2B%201%0Adef%20b%28b,%20x%29%3A%0A%20%20%20%20return%20b%28x%20%2B%20a%28x%29%29%0Ax%20%3D%203%0Ab%28a,%20x%29&amp;cumulative=true&amp;curInstr=13&amp;mode=display&amp;origin=composingprograms.js&amp;py=3&amp;rawInputLstJSON=%5B%5D" target="_blank" rel="noopener noreffer ">Python tutor</a>中：</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/img/image_cs61a_labs/image04.png"
+        data-srcset="/img/image_cs61a_labs/image04.png, /img/image_cs61a_labs/image04.png 1.5x, /img/image_cs61a_labs/image04.png 2x"
+        data-sizes="auto"
+        alt="/img/image_cs61a_labs/image04.png"
+        title="/img/image_cs61a_labs/image04.png" /></p>
+<h2 id="optional-questions">Optional Questions</h2>
+<h3 id="q7-composite-identity-function">Q7: Composite Identity Function</h3>
+<p>实现一个<code>composite_identity(f, g)</code>函数，返回一个接收一个参数<code>x</code>的函数<code>func</code>。当<code>f(g(x) == g(f(x))</code>时，<code>func</code>返回<code>True</code>，否则返回<code>False</code>。</p>
+<p>题目已经定义好了<code>compose1(f, g)</code>函数：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">compose1</span>(f, g):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Return the composition function which given x, computes f(g(x)).
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; add_one = lambda x: x + 1        # adds one to x
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; square = lambda x: x**2
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; a1 = compose1(square, add_one)   # (x + 1)^2
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; a1(4)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    25
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; mul_three = lambda x: x * 3      # multiplies 3 to x
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; a2 = compose1(mul_three, a1)    # ((x + 1)^2) * 3
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; a2(4)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    75
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; a2(5)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    108
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">lambda</span> x: f(g(x))
+</span></span></code></pre></div><p>实现代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">composite_identity</span>(f, g):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Return a function with one parameter x that returns True if f(g(x)) is
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    equal to g(f(x)). You can assume the result of g(x) is a valid input for f
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    and vice versa.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; add_one = lambda x: x + 1        # adds one to x
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; square = lambda x: x**2
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; b1 = composite_identity(square, add_one)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; b1(0)                            # (0 + 1)^2 == 0^2 + 1
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    True
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; b1(4)                            # (4 + 1)^2 != 4^2 + 1
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    False
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;*** YOUR CODE HERE ***&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">func</span>(x):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> compose1(f, g)(x) <span style="color:#f92672">==</span> compose1(g, f)(x)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> func
+</span></span></code></pre></div><p>使用以下命令可以进行测试：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>python3 ok -q composite_identity --local
+</span></span></code></pre></div><p>结果如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>Assignment: Lab <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>OK, version v1.18.1
+</span></span><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+</span></span><span style="display:flex;"><span>Running tests
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Test summary
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">1</span> test cases passed! No cases failed.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Cannot backup when running ok with --local.
+</span></span></code></pre></div><h3 id="q8-i-heard-you-liked-functions">Q8: I Heard You Liked Functions&hellip;</h3>
+<p>实现一个函数<code>cycle(f1, f2, f3)</code>，返回一个接收参数<code>n</code>的函数<code>my_cycle</code>，<code>my_cycle(x)</code>函数接收一个参数<code>x</code>，循环调用<code>f1</code>、<code>f2</code>、<code>f3</code>作用于<code>x</code>上。</p>
+<p>实现代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">cycle</span>(f1, f2, f3):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Returns a function that is itself a higher-order function.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; def add1(x):
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    ...     return x + 1
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; def times2(x):
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    ...     return x * 2
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; def add3(x):
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    ...     return x + 3
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; my_cycle = cycle(add1, times2, add3)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; identity = my_cycle(0)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; identity(5)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    5
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; add_one_then_double = my_cycle(2)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; add_one_then_double(1)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    4
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; do_all_functions = my_cycle(3)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; do_all_functions(2)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    9
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; do_more_than_a_cycle = my_cycle(4)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; do_more_than_a_cycle(2)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    10
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; do_two_cycles = my_cycle(6)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; do_two_cycles(1)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    19
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;*** YOUR CODE HERE ***&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">my_cycle</span>(n):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">func</span>(x):
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> n <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> x
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">elif</span> n <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>:
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> f1(x)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">elif</span> n <span style="color:#f92672">==</span> <span style="color:#ae81ff">2</span>:
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> f2(f1(x))
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">elif</span> n <span style="color:#f92672">==</span> <span style="color:#ae81ff">3</span>:
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> f3(f2(f1(x)))
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">elif</span> n <span style="color:#f92672">%</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>:
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> f1(my_cycle(n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>)(x))
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">elif</span> n <span style="color:#f92672">%</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">2</span>:
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> f2(f1(my_cycle(n <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span>)(x)))
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">elif</span> n <span style="color:#f92672">%</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> f3(f2(f1(my_cycle(n <span style="color:#f92672">-</span> <span style="color:#ae81ff">3</span>)(x))))
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> func
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> my_cycle
+</span></span></code></pre></div><p>使用以下命令可以进行测试：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>python3 ok -q cycle --local
+</span></span></code></pre></div><p>结果如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>Assignment: Lab <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>OK, version v1.18.1
+</span></span><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+</span></span><span style="display:flex;"><span>Running tests
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Test summary
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">1</span> test cases passed! No cases failed.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Cannot backup when running ok with --local.
+</span></span></code></pre></div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-08-01</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://Maxwell2020152049.github.io/posts/cs61a_lab_lab02/" data-title="CS61A Lab lab02" data-hashtags="Python"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://Maxwell2020152049.github.io/posts/cs61a_lab_lab02/" data-hashtag="Python"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://Maxwell2020152049.github.io/posts/cs61a_lab_lab02/" data-title="CS61A Lab lab02"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://Maxwell2020152049.github.io/posts/cs61a_lab_lab02/" data-title="CS61A Lab lab02"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://Maxwell2020152049.github.io/posts/cs61a_lab_lab02/" data-title="CS61A Lab lab02"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/python/">Python</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/cs61a_notes_week5/" class="prev" rel="prev" title="CS61A week5 study note"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>CS61A week5 study note</a>
+            <a href="/posts/cs61a_homework_hw03/" class="next" rel="next" title="CS61A Homework hw03">CS61A Homework hw03<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.115.4">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank"></a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

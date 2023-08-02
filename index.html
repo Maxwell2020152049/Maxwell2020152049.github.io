@@ -76,6 +76,36 @@
         alt="https://th.bing.com/th/id/OIP.bs9ePxW88yyxsxRKmQt_MQHaHa?w=193&amp;h=193&amp;c=7&amp;r=0&amp;o=5&amp;pid=1.7"
         title="https://th.bing.com/th/id/OIP.bs9ePxW88yyxsxRKmQt_MQHaHa?w=193&amp;h=193&amp;c=7&amp;r=0&amp;o=5&amp;pid=1.7" /></div><div class="home-subtitle"><div id="id-1" class="typeit"></div></div><div class="links"><a href="https://github.com/Maxwell2020152049" title="GitHub" target="_blank" rel="noopener noreffer me"><i class="fab fa-github fa-fw" aria-hidden="true"></i></a></div></div>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/cs61a_lab_lab03/">CS61A Lab lab03</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-08-02">2023-08-02</time></span>&nbsp;<span class="post-category">included in <a href="/categories/cs61a/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>CS61A</a></span></div><div class="content">Lab 3: Recursion, Tree Recursion 实验链接：Lab 3: Recursion, Tree Recursion
+如何下载实验压缩包：
+wget https://inst.eecs.berkeley.edu/~cs61a/sp21/lab/lab03/lab03.zip What Would Python Display? Q1: WWPD: Recursion 使用如下命令进行测试：
+如果结果是函数，就输入Function，如果是错误就输入Error，如果没有输出就输入Nothing，如果出现无限循环或者无限递归，输出Infinite。
+python3 ok -q recursion-wwpd -u --local 结果如下：
+===================================================================== Assignment: Lab 3 OK, version v1.18.1 ===================================================================== ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Unlocking tests At each &#34;? &#34;, type what you would expect the output to be. Type exit() to quit --------------------------------------------------------------------- Recursion &gt; Suite 1 &gt; Case 1 (cases remaining: 1) What would Python display?</div><div class="post-footer">
+        <a href="/posts/cs61a_lab_lab03/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/python/">Python</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/cs61a_homework_hw03/">CS61A Homework hw03</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-08-02">2023-08-02</time></span>&nbsp;<span class="post-category">included in <a href="/categories/cs61a/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>CS61A</a></span></div><div class="content">Homework 2: Higher Order Functions 作业链接：Homework 3: Recursion
+使用以下命令可以下载作业：
+wget https://inst.eecs.berkeley.edu/~cs61a/sp21/hw/hw03/hw03.zip Required questions Q1: Num eights 实现一个递归函数num_eights(x)，返回x的位等于8的个数。
+不允许使用=、+=等赋值运算符。
+实现代码如下：
+def num_eights(x): &#34;&#34;&#34;Returns the number of times 8 appears as a digit of x. &gt;&gt;&gt; num_eights(3) 0 &gt;&gt;&gt; num_eights(8) 1 &gt;&gt;&gt; num_eights(88888888) 8 &gt;&gt;&gt; num_eights(2638) 1 &gt;&gt;&gt; num_eights(86380) 2 &gt;&gt;&gt; num_eights(12345) 0 &gt;&gt;&gt; from construct_check import check &gt;&gt;&gt; # ban all assignment statements &gt;&gt;&gt; check(HW_SOURCE_FILE, &#39;num_eights&#39;, ... [&#39;Assign&#39;, &#39;AugAssign&#39;]) True &#34;&#34;&#34; &#34;*** YOUR CODE HERE ***&#34; if x &lt; 10: return 1 if x == 8 else 0 return (1 if x % 10 == 8 else 0) + num_eights(x // 10) 使用python中布尔值和整数相加返回整数的特性，也可以实现如下：</div><div class="post-footer">
+        <a href="/posts/cs61a_homework_hw03/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/python/">Python</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/cs61a_lab_lab02/">CS61A Lab lab02</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-08-01">2023-08-01</time></span>&nbsp;<span class="post-category">included in <a href="/categories/cs61a/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>CS61A</a></span></div><div class="content">Lab 2: Higher-Order Functions, Lambda Expressions 实验链接：Lab 2: Higher-Order Functions, Lambda Expressions
+如何下载实验压缩包：
+wget https://inst.eecs.berkeley.edu/~cs61a/sp21/lab/lab02/lab02.zip What Would Python Display? Q1: WWPD: Lambda the Free 输入以下命令进行测试：
+如果结果是函数，就输入Function，如果是错误就输入Error，如果没有输出就输入Nothing。
+python3 ok -q lambda -u --local 过程如下：
+===================================================================== Assignment: Lab 2 OK, version v1.18.1 ===================================================================== ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Unlocking tests At each &#34;? &#34;, type what you would expect the output to be. Type exit() to quit --------------------------------------------------------------------- Lambda the Free &gt; Suite 1 &gt; Case 1 (cases remaining: 7) Q: Which of the following statements describes a difference between a def statement and a lambda expression?</div><div class="post-footer">
+        <a href="/posts/cs61a_lab_lab02/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/python/">Python</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
         <a href="/posts/cs61a_notes_week5/">CS61A week5 study note</a>
     </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-08-01">2023-08-01</time></span>&nbsp;<span class="post-category">included in <a href="/categories/cs61a/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>CS61A</a></span></div><div class="content">Week5 CS 61A 2021 Fall官网：CS 61A: Structure and Interpretation of Computer Programs
 翻译视频：【计算机程序的构造和解释】精译【UC Berkeley 公开课-CS61A (Spring 2021)】-中英双语字幕
@@ -113,54 +143,6 @@ from operator import add def curry2(f): return lambda x: \ lambda y: \ f(x, y) p
 42 &lt;function curry2.&lt;locals&gt;.&lt;lambda&gt;.&lt;locals&gt;.&lt;lambda&gt; at 0x7fa093dc1620&gt; 函数哲学（Philosophy of Functions） 语法规范说明了函数调用的语法（函数参数） 语义规范说明了如果工作： 前置条件说明了对调用者的要求 后置条件说明了来自函数实现者的承诺 Specifies a contract between caller and function implementer.</div><div class="post-footer">
         <a href="/posts/cs61a_notes_week3/">Read More</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/python/">Python</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/tcpip_notes_ch02/">《TCP IP网络编程》学习笔记 ch02</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-07-29">2023-07-29</time></span>&nbsp;<span class="post-category">included in <a href="/categories/tcp-ip%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>《TCP IP网络编程》学习笔记</a></span></div><div class="content">ch02 套接字类型与协议设置 2.1 套接字协议及其数据传输特性 协议（Protocol） 协议是计算机之间对话必备的通信规则。
-创建套接字 #include &lt;sys/socket.h&gt; int socket(int domain, i nt type, int protocol); C语言中，创建套接字要使用socket()函数，下面介绍其参数以及具体使用：
-协议族（Protocol Family） PF_INET：IPv4互联网协议族 PF_INET6：IPv6互联网协议族 PF_LOCAL：本地通信的UNIX协议族 PF_PACKET：底层套接字的协议族 PF__IPX：IPX Novell协议族 本书重点讲解PF_INET，即IPv4互联网协议族。
-套接字类型（Type）
-面向连接的套接字（SOCK_STREAM）
-传输过程中数据不会丢失
-数据有序到达
-传输的数据不存在数据边界
-在面向连接的套接字中， read函数和write函数的调用次数并无太大意义
-可靠的、按序传递的、基于宇节的面向连接的数据传输方式的套接字
-面向消息的套接字（SOCK_DGRAM）
-强调快速传输而非传输顺序
-传输的数据可能丢失也可能损毁
-传输的数据存在数据边界
-限制每次传输的数据大小
-不可靠的、不按序传递的、以数据的高速传输为目的的套接字
-协议的最终选择
-同个协议族中可能存在多个数据传输方式相同的协议，所以还需指定最终选择的协议
-参数PF_INET指IPv4网络协议族，SOCK_STREAM是面向连接的数据传输。 满足这2个条件的协议只有IPPROTO_TCP
-参数PF_INET指IPv4网络协议族，SOCK_DGRAM指的是面向消息的数据传输方式，满足上述条件的协议只有IPPROTO_UDP
-验证 面向连接的套接字 的 传输数据无边界性 修改ch01中的hello_clint.c中read()函数的调用方式：
-// read() while (1) { str_len = read(sock, &amp;message[idx ++], 1); if (str_len == -1) error_handling(&#34;read() error!&#34;); else if (str_len == 0) break; cnt += str_len; } printf(&#34;Message from server : %s \n&#34;, message); printf(&#34;function read() call count is %d\n&#34;, cnt); 客户端运行效果如下：</div><div class="post-footer">
-        <a href="/posts/tcpip_notes_ch02/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">网络编程</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/tcpip_notes_ch01/">《TCP IP网络编程》学习笔记 ch01</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-07-29">2023-07-29</time></span>&nbsp;<span class="post-category">included in <a href="/categories/tcp-ip%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>《TCP IP网络编程》学习笔记</a></span></div><div class="content">《TCP IP网络编程》学习笔记 ch01 理解网络编程和套接字 1.1 理解网络编程和套接字 构建 接电话 套接字（服务器端） 创建服务器端的套接字需要以下函数：
-#include &lt;sys/socket.h&gt; // 创建套接字成功时返回文件描述符，失败时返回－1。 int socket(int domain, int type, int protocol); #include &lt;sys/socket.h&gt; // 绑定成功时返回0，失败时返回-1。 int bind(int sockfd, struct sockaddr *myaddr, socklen_t addrlen); #include &lt;sys/socket.h&gt; // 将套接字转化为可接收连接的状态，成功时返回0，失败时返回-1。 int listen(int sockfd, int backlog); #include &lt;sys/socket.h&gt; // 接受网络连接，成功时返回文件描述符，失败时返回-1。 int accept(int sockfd, struct sockaddr *addr, socklen_t *addrlen); 创建服务器端的套接字的基本步骤如下：
-第一步：调用socket()函数创建套接字
-第二步：调用bind()函数绑定套接字的IP和 端口号
-第三步：调用listen()函数把套接字转化为可接收连接状态
-第四步：调用accept()函数接受网络连接
-服务器端hello_server.c代码如下：
-#include &lt;stdio.h&gt; #include &lt;stdlib.h&gt; #include &lt;string.h&gt; #include &lt;unistd.h&gt; #include &lt;arpa/inet.</div><div class="post-footer">
-        <a href="/posts/tcpip_notes_ch01/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">网络编程</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/cs61a_homework_hw02/">CS61A Homework hw02</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-07-29">2023-07-29</time></span>&nbsp;<span class="post-category">included in <a href="/categories/cs61a/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>CS61A</a></span></div><div class="content">Homework 2: Higher Order Functions 作业链接：Homework 2: Higher Order Functions
-Important Functions 一些文档测试可能基于以下函数：
-from operator import add, mul, sub square = lambda x: x * x identity = lambda x: x triple = lambda x: 3 * x increment = lambda x: x + 1 Q1: Product 仿照能够计算term(1) + ... + term(n)的summation(n, term)函数，编写一个能够计算term(1) * ... * term(n)的product(n, term)函数。
-思路：注意range函数的区间是左闭右开的。
-实现代码如下：
-def product(n, term): &#34;&#34;&#34;Return the product of the first n terms in a sequence.</div><div class="post-footer">
-        <a href="/posts/cs61a_homework_hw02/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/python/">Python</a></div></div>
 </article><ul class="pagination"><li class="page-item active">
                     <span class="page-link">
                         <a href="/">1</a>
@@ -172,6 +154,10 @@ def product(n, term): &#34;&#34;&#34;Return the product of the first n terms in 
                 </li><li class="page-item ">
                     <span class="page-link">
                         <a href="/page/3/">3</a>
+                    </span>
+                </li><li class="page-item ">
+                    <span class="page-link">
+                        <a href="/page/4/">4</a>
                     </span>
                 </li></ul></div></div>
             </main><footer class="footer">

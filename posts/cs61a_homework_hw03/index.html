@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>CS61A Homework hw03 - Rex&#39;s Blog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="CS61A Homework hw03" />
+<meta property="og:description" content="Homework 2: Higher Order Functions 作业链接：Homework 3: Recursion
+使用以下命令可以下载作业：
+wget https://inst.eecs.berkeley.edu/~cs61a/sp21/hw/hw03/hw03.zip Required questions Q1: Num eights 实现一个递归函数num_eights(x)，返回x的位等于8的个数。
+不允许使用=、&#43;=等赋值运算符。
+实现代码如下：
+def num_eights(x): &#34;&#34;&#34;Returns the number of times 8 appears as a digit of x. &gt;&gt;&gt; num_eights(3) 0 &gt;&gt;&gt; num_eights(8) 1 &gt;&gt;&gt; num_eights(88888888) 8 &gt;&gt;&gt; num_eights(2638) 1 &gt;&gt;&gt; num_eights(86380) 2 &gt;&gt;&gt; num_eights(12345) 0 &gt;&gt;&gt; from construct_check import check &gt;&gt;&gt; # ban all assignment statements &gt;&gt;&gt; check(HW_SOURCE_FILE, &#39;num_eights&#39;, ... [&#39;Assign&#39;, &#39;AugAssign&#39;]) True &#34;&#34;&#34; &#34;*** YOUR CODE HERE ***&#34; if x &lt; 10: return 1 if x == 8 else 0 return (1 if x % 10 == 8 else 0) &#43; num_eights(x // 10) 使用python中布尔值和整数相加返回整数的特性，也可以实现如下：" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://Maxwell2020152049.github.io/posts/cs61a_homework_hw03/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-08-02T01:02:48+08:00" />
+<meta property="article:modified_time" content="2023-08-02T01:02:48+08:00" /><meta property="og:site_name" content="My cool site" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="CS61A Homework hw03"/>
+<meta name="twitter:description" content="Homework 2: Higher Order Functions 作业链接：Homework 3: Recursion
+使用以下命令可以下载作业：
+wget https://inst.eecs.berkeley.edu/~cs61a/sp21/hw/hw03/hw03.zip Required questions Q1: Num eights 实现一个递归函数num_eights(x)，返回x的位等于8的个数。
+不允许使用=、&#43;=等赋值运算符。
+实现代码如下：
+def num_eights(x): &#34;&#34;&#34;Returns the number of times 8 appears as a digit of x. &gt;&gt;&gt; num_eights(3) 0 &gt;&gt;&gt; num_eights(8) 1 &gt;&gt;&gt; num_eights(88888888) 8 &gt;&gt;&gt; num_eights(2638) 1 &gt;&gt;&gt; num_eights(86380) 2 &gt;&gt;&gt; num_eights(12345) 0 &gt;&gt;&gt; from construct_check import check &gt;&gt;&gt; # ban all assignment statements &gt;&gt;&gt; check(HW_SOURCE_FILE, &#39;num_eights&#39;, ... [&#39;Assign&#39;, &#39;AugAssign&#39;]) True &#34;&#34;&#34; &#34;*** YOUR CODE HERE ***&#34; if x &lt; 10: return 1 if x == 8 else 0 return (1 if x % 10 == 8 else 0) &#43; num_eights(x // 10) 使用python中布尔值和整数相加返回整数的特性，也可以实现如下："/>
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://Maxwell2020152049.github.io/posts/cs61a_homework_hw03/" /><link rel="prev" href="https://Maxwell2020152049.github.io/posts/cs61a_lab_lab02/" /><link rel="next" href="https://Maxwell2020152049.github.io/posts/cs61a_lab_lab03/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "CS61A Homework hw03",
+        "inLanguage": "en-us",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/Maxwell2020152049.github.io\/posts\/cs61a_homework_hw03\/"
+        },"genre": "posts","keywords": "Python","wordcount":  997 ,
+        "url": "https:\/\/Maxwell2020152049.github.io\/posts\/cs61a_homework_hw03\/","datePublished": "2023-08-02T01:02:48+08:00","dateModified": "2023-08-02T01:02:48+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Author"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Rex&#39;s Blog"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg"
+        data-srcset="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg, https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg 1.5x, https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg 2x"
+        data-sizes="auto"
+        alt="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg"
+        title="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg" />Rex&#39;s cool site</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Rex&#39;s Blog"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg"
+        data-srcset="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg, https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg 1.5x, https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg 2x"
+        data-sizes="auto"
+        alt="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg"
+        title="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg" />Rex&#39;s cool site</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">CS61A Homework hw03</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-category">included in <a href="/categories/cs61a/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>CS61A</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-08-02">2023-08-02</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;997 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;5 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#required-questions">Required questions</a>
+      <ul>
+        <li><a href="#q1-num-eights">Q1: Num eights</a></li>
+        <li><a href="#q2-ping-pong">Q2: Ping-pong</a></li>
+        <li><a href="#q3-missing-digits">Q3: Missing Digits</a></li>
+        <li><a href="#q4-count-coins">Q4: Count coins</a></li>
+      </ul>
+    </li>
+    <li><a href="#just-for-fun-questions">Just for Fun Questions</a>
+      <ul>
+        <li><a href="#q5-anonymous-factorial">Q5: Anonymous factorial</a></li>
+        <li><a href="#q6-towers-of-hanoi">Q6: Towers of Hanoi</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="homework-2-higher-order-functions">Homework 2: Higher Order Functions</h1>
+<p>作业链接：<a href="https://inst.eecs.berkeley.edu/~cs61a/sp21/hw/hw03/" target="_blank" rel="noopener noreffer ">Homework 3: Recursion</a></p>
+<p>使用以下命令可以下载作业：</p>
+<pre tabindex="0"><code>wget https://inst.eecs.berkeley.edu/~cs61a/sp21/hw/hw03/hw03.zip
+</code></pre><h2 id="required-questions">Required questions</h2>
+<h3 id="q1-num-eights">Q1: Num eights</h3>
+<p>实现一个递归函数<code>num_eights(x)</code>，返回<code>x</code>的位等于<code>8</code>的个数。</p>
+<p>不允许使用<code>=</code>、<code>+=</code>等赋值运算符。</p>
+<p>实现代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">num_eights</span>(x):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Returns the number of times 8 appears as a digit of x.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; num_eights(3)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    0
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; num_eights(8)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    1
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; num_eights(88888888)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    8
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; num_eights(2638)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    1
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; num_eights(86380)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    2
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; num_eights(12345)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    0
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; from construct_check import check
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; # ban all assignment statements
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; check(HW_SOURCE_FILE, &#39;num_eights&#39;,
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    ...       [&#39;Assign&#39;, &#39;AugAssign&#39;])
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    True
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;*** YOUR CODE HERE ***&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> x <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">10</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">if</span> x <span style="color:#f92672">==</span> <span style="color:#ae81ff">8</span> <span style="color:#66d9ef">else</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> (<span style="color:#ae81ff">1</span> <span style="color:#66d9ef">if</span> x <span style="color:#f92672">%</span> <span style="color:#ae81ff">10</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">8</span> <span style="color:#66d9ef">else</span> <span style="color:#ae81ff">0</span>) <span style="color:#f92672">+</span> num_eights(x <span style="color:#f92672">//</span> <span style="color:#ae81ff">10</span>)
+</span></span></code></pre></div><p>使用<code>python</code>中布尔值和整数相加返回整数的特性，也可以实现如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> x <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">10</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> (x <span style="color:#f92672">==</span> <span style="color:#ae81ff">8</span>) <span style="color:#f92672">+</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">return</span> (x <span style="color:#f92672">%</span> <span style="color:#ae81ff">10</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">8</span>) <span style="color:#f92672">+</span> num_eights(x <span style="color:#f92672">//</span> <span style="color:#ae81ff">10</span>) <span style="color:#f92672">+</span> <span style="color:#ae81ff">0</span>
+</span></span></code></pre></div><h3 id="q2-ping-pong">Q2: Ping-pong</h3>
+<p>实现一个递归函数<code>pingpong(n)</code>，计算<code>n</code>次加<code>1</code>或<code>-1</code>的结果，当累加次数<code>i</code>是<code>8</code>的倍数或者含有<code>8</code>时，原本加<code>1</code>变成加<code>-1</code>，反之也成立。</p>
+<p>实现代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">pingpong</span>(n):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Return the nth element of the ping-pong sequence.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; pingpong(8)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    8
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; pingpong(10)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    6
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; pingpong(15)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    1
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; pingpong(21)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    -1
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; pingpong(22)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    -2
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; pingpong(30)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    -2
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; pingpong(68)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    0
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; pingpong(69)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    -1
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; pingpong(80)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    0
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; pingpong(81)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    1
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; pingpong(82)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    0
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; pingpong(100)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    -6
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; from construct_check import check
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; # ban assignment statements
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; check(HW_SOURCE_FILE, &#39;pingpong&#39;, [&#39;Assign&#39;, &#39;AugAssign&#39;])
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    True
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;*** YOUR CODE HERE ***&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># recursion version</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">func</span>(i, delta, ans, n):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> i <span style="color:#f92672">&gt;</span> n:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> ans
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> i <span style="color:#f92672">%</span> <span style="color:#ae81ff">8</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">or</span> num_eights(i) <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> func(i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, <span style="color:#f92672">-</span>delta, ans <span style="color:#f92672">+</span> delta, n)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> func(i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, delta, ans <span style="color:#f92672">+</span> delta, n)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> func(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, n)
+</span></span></code></pre></div><p>迭代版本：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># iteration version</span>
+</span></span><span style="display:flex;"><span>ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>delta <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1</span>, n <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>):
+</span></span><span style="display:flex;"><span>    ans <span style="color:#f92672">+=</span> delta
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> i <span style="color:#f92672">%</span> <span style="color:#ae81ff">8</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">or</span> num_eights(i) <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>        delta <span style="color:#f92672">*=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ans
+</span></span></code></pre></div><h3 id="q3-missing-digits">Q3: Missing Digits</h3>
+<p>实现<code>missing_digits(n)</code>函数，<code>n</code>是一个整数，所有位从左到右不降，返回<code>n</code>的位中缺失的数（<code>1~9</code>）的个数。</p>
+<p>不允许使用循环语句。</p>
+<p>实现代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">missing_digits</span>(n):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Given a number a that is in sorted, increasing order,
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    return the number of missing digits in n. A missing digit is
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    a number between the first and last digit of a that is not in n.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; missing_digits(1248) # 3, 5, 6, 7
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    4
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; missing_digits(19) # 2, 3, 4, 5, 6, 7, 8
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    7
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; missing_digits(1122) # No missing numbers
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    0
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; missing_digits(123456) # No missing numbers
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    0
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; missing_digits(3558) # 4, 6, 7
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    3
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; missing_digits(35578) # 4, 6
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    2
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; missing_digits(12456) # 3
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    1
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; missing_digits(16789) # 2, 3, 4, 5
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    4
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; missing_digits(4) # No missing numbers between 4 and 4
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    0
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; from construct_check import check
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; # ban while or for loops
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; check(HW_SOURCE_FILE, &#39;missing_digits&#39;, [&#39;While&#39;, &#39;For&#39;])
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    True
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;*** YOUR CODE HERE ***&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> n <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">10</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> missing_digits(n <span style="color:#f92672">//</span> <span style="color:#ae81ff">10</span>) <span style="color:#f92672">+</span> (max(<span style="color:#ae81ff">0</span>, n <span style="color:#f92672">%</span> <span style="color:#ae81ff">10</span> <span style="color:#f92672">-</span> n <span style="color:#f92672">//</span> <span style="color:#ae81ff">10</span> <span style="color:#f92672">%</span> <span style="color:#ae81ff">10</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>))
+</span></span></code></pre></div><h3 id="q4-count-coins">Q4: Count coins</h3>
+<p>实现<code>count_coins(change)</code>函数，<code>change</code>是一个正整数（零钱数），返回用<code>1</code>、<code>5</code>、<code>10</code>、<code>25</code>四种硬币组合成零钱的方法个数。</p>
+<p>不允许使用循环语句。</p>
+<p>实现代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">count_coins</span>(change):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Return the number of ways to make change using coins of value of 1, 5, 10, 25.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; count_coins(15)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    6
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; count_coins(10)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    4
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; count_coins(20)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    9
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; count_coins(100) # How many ways to make change for a dollar?
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    242
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; from construct_check import check
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; # ban iteration
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; check(HW_SOURCE_FILE, &#39;count_coins&#39;, [&#39;While&#39;, &#39;For&#39;])                                          
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    True
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;*** YOUR CODE HERE ***&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">func</span>(n, k):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> n <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">elif</span> k <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> func(n <span style="color:#f92672">-</span> k, k) <span style="color:#f92672">+</span> func(n, get_last_coin(k))
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> func(change, <span style="color:#ae81ff">25</span>)
+</span></span></code></pre></div><p>使用如下命令可以进行测试：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>python3 ok --local
+</span></span></code></pre></div><p>结果如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>Assignment: Homework <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>OK, version v1.18.1
+</span></span><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+</span></span><span style="display:flex;"><span>Running tests
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Test summary
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">4</span> test cases passed! No cases failed.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Cannot backup when running ok with --local.
+</span></span></code></pre></div><h2 id="just-for-fun-questions">Just for Fun Questions</h2>
+<h3 id="q5-anonymous-factorial">Q5: Anonymous factorial</h3>
+<p>实现一个递归函数<code>make_anonymous_factorial()</code>，返回一个匿名函数，该匿名函数接收一个参数<code>n</code>，计算<code>n</code>的阶乘。</p>
+<p>实现代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">make_anonymous_factorial</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Return the value of an expression that computes factorial.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; make_anonymous_factorial()(5)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    120
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; from construct_check import check
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; # ban any assignments or recursion
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; check(HW_SOURCE_FILE, &#39;make_anonymous_factorial&#39;, [&#39;Assign&#39;, &#39;AugAssign&#39;, &#39;FunctionDef&#39;, &#39;Recursion&#39;])
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    True
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> (<span style="color:#66d9ef">lambda</span> f: <span style="color:#66d9ef">lambda</span> n: f(f, n))(<span style="color:#66d9ef">lambda</span> f, n: <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">if</span> n <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">else</span> mul(f(f, sub(n, <span style="color:#ae81ff">1</span>)), n))
+</span></span></code></pre></div><p>使用如下命令可以进行测试：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>python3 ok -q make_anonymous_factorial --local
+</span></span></code></pre></div><p>结果如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>Assignment: Homework <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>OK, version v1.18.1
+</span></span><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+</span></span><span style="display:flex;"><span>Running tests
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Test summary
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">1</span> test cases passed! No cases failed.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Cannot backup when running ok with --local.
+</span></span></code></pre></div><h3 id="q6-towers-of-hanoi">Q6: Towers of Hanoi</h3>
+<p>实现<code>move_stack(n, start, end)</code>，<code>n</code>表示盘子个数，<code>start</code>表示初始柱子，<code>end</code>表示目标柱子，打印搬运盘子的过程，每次移动一个盘子，打印一条语句。</p>
+<p>实现代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">print_move</span>(origin, destination):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Print instructions to move a disk.&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#34;Move the top disk from rod&#34;</span>, origin, <span style="color:#e6db74">&#34;to rod&#34;</span>, destination)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">move_stack</span>(n, start, end):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Print the moves required to move n disks on the start pole to the end
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    pole without violating the rules of Towers of Hanoi.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    n -- number of disks
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    start -- a pole position, either 1, 2, or 3
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    end -- a pole position, either 1, 2, or 3
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    There are exactly three poles, and start and end must be different. Assume
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    that the start pole has at least n disks of increasing size, and the end
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    pole is either empty or has a top disk larger than the top n start disks.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; move_stack(1, 1, 3)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Move the top disk from rod 1 to rod 3
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; move_stack(2, 1, 3)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Move the top disk from rod 1 to rod 2
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Move the top disk from rod 1 to rod 3
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Move the top disk from rod 2 to rod 3
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; move_stack(3, 1, 3)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Move the top disk from rod 1 to rod 3
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Move the top disk from rod 1 to rod 2
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Move the top disk from rod 3 to rod 2
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Move the top disk from rod 1 to rod 3
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Move the top disk from rod 2 to rod 1
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Move the top disk from rod 2 to rod 3
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Move the top disk from rod 1 to rod 3
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">assert</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;=</span> start <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">and</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;=</span> end <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">and</span> start <span style="color:#f92672">!=</span> end, <span style="color:#e6db74">&#34;Bad start/end&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;*** YOUR CODE HERE ***&#34;</span>
+</span></span><span style="display:flex;"><span>    oppo <span style="color:#f92672">=</span> <span style="color:#ae81ff">6</span> <span style="color:#f92672">-</span>start <span style="color:#f92672">-</span> end
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> n <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>:
+</span></span><span style="display:flex;"><span>        print_move(start, end)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> 
+</span></span><span style="display:flex;"><span>    move_stack(n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, start, oppo)
+</span></span><span style="display:flex;"><span>    move_stack(<span style="color:#ae81ff">1</span>, start, end)
+</span></span><span style="display:flex;"><span>    move_stack(n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, oppo, end)
+</span></span></code></pre></div><p>使用如下命令可以进行测试：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>python3 ok -q move_stack --local
+</span></span></code></pre></div><p>结果如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>Assignment: Homework <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>OK, version v1.18.1
+</span></span><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+</span></span><span style="display:flex;"><span>Running tests
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Test summary
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">1</span> test cases passed! No cases failed.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Cannot backup when running ok with --local.
+</span></span></code></pre></div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-08-02</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://Maxwell2020152049.github.io/posts/cs61a_homework_hw03/" data-title="CS61A Homework hw03" data-hashtags="Python"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://Maxwell2020152049.github.io/posts/cs61a_homework_hw03/" data-hashtag="Python"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://Maxwell2020152049.github.io/posts/cs61a_homework_hw03/" data-title="CS61A Homework hw03"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://Maxwell2020152049.github.io/posts/cs61a_homework_hw03/" data-title="CS61A Homework hw03"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://Maxwell2020152049.github.io/posts/cs61a_homework_hw03/" data-title="CS61A Homework hw03"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/python/">Python</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/cs61a_lab_lab02/" class="prev" rel="prev" title="CS61A Lab lab02"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>CS61A Lab lab02</a>
+            <a href="/posts/cs61a_lab_lab03/" class="next" rel="next" title="CS61A Lab lab03">CS61A Lab lab03<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.115.4">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank"></a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

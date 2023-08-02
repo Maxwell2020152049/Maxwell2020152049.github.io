@@ -3,7 +3,46 @@
         <title>Python - Tag - Rex&#39;s Blog</title>
         <link>https://Maxwell2020152049.github.io/tags/python/</link>
         <description>Python - Tag - Rex&#39;s Blog</description>
-        <generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 01 Aug 2023 01:00:34 &#43;0800</lastBuildDate><atom:link href="https://Maxwell2020152049.github.io/tags/python/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 02 Aug 2023 15:18:03 &#43;0800</lastBuildDate><atom:link href="https://Maxwell2020152049.github.io/tags/python/" rel="self" type="application/rss+xml" /><item>
+    <title>CS61A Lab lab03</title>
+    <link>https://Maxwell2020152049.github.io/posts/cs61a_lab_lab03/</link>
+    <pubDate>Wed, 02 Aug 2023 15:18:03 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://Maxwell2020152049.github.io/posts/cs61a_lab_lab03/</guid>
+    <description><![CDATA[Lab 3: Recursion, Tree Recursion 实验链接：Lab 3: Recursion, Tree Recursion
+如何下载实验压缩包：
+wget https://inst.eecs.berkeley.edu/~cs61a/sp21/lab/lab03/lab03.zip What Would Python Display? Q1: WWPD: Recursion 使用如下命令进行测试：
+如果结果是函数，就输入Function，如果是错误就输入Error，如果没有输出就输入Nothing，如果出现无限循环或者无限递归，输出Infinite。
+python3 ok -q recursion-wwpd -u --local 结果如下：
+===================================================================== Assignment: Lab 3 OK, version v1.18.1 ===================================================================== ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Unlocking tests At each &#34;? &#34;, type what you would expect the output to be. Type exit() to quit --------------------------------------------------------------------- Recursion &gt; Suite 1 &gt; Case 1 (cases remaining: 1) What would Python display?]]></description>
+</item>
+<item>
+    <title>CS61A Homework hw03</title>
+    <link>https://Maxwell2020152049.github.io/posts/cs61a_homework_hw03/</link>
+    <pubDate>Wed, 02 Aug 2023 01:02:48 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://Maxwell2020152049.github.io/posts/cs61a_homework_hw03/</guid>
+    <description><![CDATA[Homework 2: Higher Order Functions 作业链接：Homework 3: Recursion
+使用以下命令可以下载作业：
+wget https://inst.eecs.berkeley.edu/~cs61a/sp21/hw/hw03/hw03.zip Required questions Q1: Num eights 实现一个递归函数num_eights(x)，返回x的位等于8的个数。
+不允许使用=、+=等赋值运算符。
+实现代码如下：
+def num_eights(x): &#34;&#34;&#34;Returns the number of times 8 appears as a digit of x. &gt;&gt;&gt; num_eights(3) 0 &gt;&gt;&gt; num_eights(8) 1 &gt;&gt;&gt; num_eights(88888888) 8 &gt;&gt;&gt; num_eights(2638) 1 &gt;&gt;&gt; num_eights(86380) 2 &gt;&gt;&gt; num_eights(12345) 0 &gt;&gt;&gt; from construct_check import check &gt;&gt;&gt; # ban all assignment statements &gt;&gt;&gt; check(HW_SOURCE_FILE, &#39;num_eights&#39;, ... [&#39;Assign&#39;, &#39;AugAssign&#39;]) True &#34;&#34;&#34; &#34;*** YOUR CODE HERE ***&#34; if x &lt; 10: return 1 if x == 8 else 0 return (1 if x % 10 == 8 else 0) + num_eights(x // 10) 使用python中布尔值和整数相加返回整数的特性，也可以实现如下：]]></description>
+</item>
+<item>
+    <title>CS61A Lab lab02</title>
+    <link>https://Maxwell2020152049.github.io/posts/cs61a_lab_lab02/</link>
+    <pubDate>Tue, 01 Aug 2023 16:55:23 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://Maxwell2020152049.github.io/posts/cs61a_lab_lab02/</guid>
+    <description><![CDATA[Lab 2: Higher-Order Functions, Lambda Expressions 实验链接：Lab 2: Higher-Order Functions, Lambda Expressions
+如何下载实验压缩包：
+wget https://inst.eecs.berkeley.edu/~cs61a/sp21/lab/lab02/lab02.zip What Would Python Display? Q1: WWPD: Lambda the Free 输入以下命令进行测试：
+如果结果是函数，就输入Function，如果是错误就输入Error，如果没有输出就输入Nothing。
+python3 ok -q lambda -u --local 过程如下：
+===================================================================== Assignment: Lab 2 OK, version v1.18.1 ===================================================================== ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Unlocking tests At each &#34;? &#34;, type what you would expect the output to be. Type exit() to quit --------------------------------------------------------------------- Lambda the Free &gt; Suite 1 &gt; Case 1 (cases remaining: 7) Q: Which of the following statements describes a difference between a def statement and a lambda expression?]]></description>
+</item>
+<item>
     <title>CS61A week5 study note</title>
     <link>https://Maxwell2020152049.github.io/posts/cs61a_notes_week5/</link>
     <pubDate>Tue, 01 Aug 2023 01:00:34 &#43;0800</pubDate>
@@ -104,68 +143,6 @@ Text Editor（代码编辑器）
 ls cd mkdir unzip mv Python Basic Primitive Expressions（原始表达式） **原始表达式**只进行一步计算：
 &gt;&gt;&gt; 3 3 &gt;&gt;&gt; 12.5 12.5 &gt;&gt;&gt; True True Arithmetic Expressions（算术表达式） 算术表达式由以下运算符组成：
 加法：+ 减法：- 乘法：* 乘方：** 浮点数除法：/ 下取整除法：// 取余：% &gt;&gt;&gt; 7 / 4 1.75 &gt;&gt;&gt; (2 + 6) / 4	# Floating point division 2.0 &gt;&gt;&gt; 7 // 4 # Floor division (rounding down) 1 &gt;&gt;&gt; 7 % 4 # Modulus (remainder of 7 // 4) 3 Assignment statements（赋值语句） &gt;&gt;&gt; a = (100 + 50) // 2 &gt;&gt;&gt; a 75 Doing the assignment（实验任务） Unlocking tests（解锁测试） 完成正式实验前要进行一次测试，检测学生对python的基础知识的掌握程度，使用如下命令（--local参数使得测评在本地运行）：]]></description>
-</item>
-<item>
-    <title>CS61A Project Hog</title>
-    <link>https://Maxwell2020152049.github.io/posts/cs61a_project_hog/</link>
-    <pubDate>Sat, 29 Jul 2023 01:57:41 &#43;0800</pubDate>
-    <author>Author</author>
-    <guid>https://Maxwell2020152049.github.io/posts/cs61a_project_hog/</guid>
-    <description><![CDATA[Project 1: The Game of Hog Project地址：Project 1: The Game of Hog
-Rules 有两个玩家，轮流进行回合，玩家选择骰子的数量（最多10个），得到每个骰子的点数，将点数之和加入总分中，总分先达到100即获胜。
-Sow Sad：如果有一个骰子点数为1，本回合得分为1
-Piggy Points：如果选择0个骰子，本回合获得k + 3分，k为对手分数的平方的位数中值最小的一位。
-More Boar：回合结束后，如果玩家的最高位小于对手的最高位，玩家的次高位小于对手的次高位，继续进行一回合。
-若对规则有疑问，请仔细阅读项目网站。
-Final Product 最终效果可以参考：Final Product
-文件结构 项目目录如下：
-. ├── calc.py ├── default_graphics.py ├── dice.py ├── gui_files ├── hog_gui.py ├── hog.py ├── ok ├── proj01.ok ├── __pycache__ ├── tests └── ucb.py 其中比较重要的有：
-hog.py：项目的初始代码 dice.py：关于骰子的函数 hog_gui.py：项目的用户图形化界面（graphical user interface） ucb.py：本课程的实用函数 gui_files：Web GUI 使用的各种内容的目录 执行如下代码可以运行项目：
-python3 hog_gui.py Phase 1: Simulator Problem 0 (0 pt) dice.]]></description>
-</item>
-<item>
-    <title>CS61A week2 study note</title>
-    <link>https://Maxwell2020152049.github.io/posts/cs61a_notes_week2/</link>
-    <pubDate>Sat, 29 Jul 2023 01:40:58 &#43;0800</pubDate>
-    <author>Author</author>
-    <guid>https://Maxwell2020152049.github.io/posts/cs61a_notes_week2/</guid>
-    <description><![CDATA[Week2 CS 61A 2021 Fall官网：CS 61A: Structure and Interpretation of Computer Programs
-翻译视频：【计算机程序的构造和解释】精译【UC Berkeley 公开课-CS61A (Spring 2021)】-中英双语字幕
-github:Maxwell2020152049/CS61A
-Lecture #3: Recap of Function Evaluation; Control Lab：Lab 1: Variables &amp; Functions, Control
-Slide：03-Control_full.pdf
-​	一个名字(name)总是被绑定(bound)到一个值(value)上。
-​	表达式和子表达式都会在同一个环境中求值，现在本地环境帧(local environment frame)中寻找，若找不到，再递归地在父环境
-(parent environment frame)中寻找。
-eg1.：
-# Create nested environment x = 1 y = 12 def g1(x): def g2(x): # Stop here print(x) g2(x + 1) g1(2) 输出：
-3 在pythontutor中运行结果如下：
-eg2.：
-# Illustrate chain of calls.]]></description>
-</item>
-<item>
-    <title>CS61A week1 study note</title>
-    <link>https://Maxwell2020152049.github.io/posts/cs61a_notes_week1/</link>
-    <pubDate>Sat, 29 Jul 2023 01:37:07 &#43;0800</pubDate>
-    <author>Author</author>
-    <guid>https://Maxwell2020152049.github.io/posts/cs61a_notes_week1/</guid>
-    <description><![CDATA[Week1 CS 61A 2021 Fall官网：CS 61A: Structure and Interpretation of Computer Programs
-翻译视频：【计算机程序的构造和解释】精译【UC Berkeley 公开课-CS61A (Spring 2021)】-中英双语字幕
-github:Maxwell2020152049/CS61A
-Lecture #1: Introduction Lab： Lab 00: Getting Started
-Slide： 01-Introduction_full.pdf
-Computer Science 简单介绍了计算机科学的分支：
-Programming
-Theory
-Programming Languages
-Graphics
-Artificial Intelligence
-Systems
-CS 61A是关于Programming(编程)的课程，需要使用一门编程语言Python。
-CS10 如果感觉本课程太困难，可以考虑CS10，关于CS10：https://cs10.org/su23/
-Course Organization Readings Lectures Labs Discussion Tutorials Homework Projects Lecture #2: Functions, Expressions, Environments Homework：Homework 1: Variables &amp; Functions, Control
-Slide：02-Functions_full.pdf
-Functions as Values 在Python中，functions(函数)可以作为fisrt class values（第一类实体）]]></description>
 </item>
 </channel>
 </rss>
