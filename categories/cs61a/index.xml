@@ -3,7 +3,21 @@
         <title>CS61A - Category - Rex&#39;s Blog</title>
         <link>https://Maxwell2020152049.github.io/categories/cs61a/</link>
         <description>CS61A - Category - Rex&#39;s Blog</description>
-        <generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 02 Aug 2023 15:18:03 &#43;0800</lastBuildDate><atom:link href="https://Maxwell2020152049.github.io/categories/cs61a/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 03 Aug 2023 14:55:49 &#43;0800</lastBuildDate><atom:link href="https://Maxwell2020152049.github.io/categories/cs61a/" rel="self" type="application/rss+xml" /><item>
+    <title>CS61A Project Cats</title>
+    <link>https://Maxwell2020152049.github.io/posts/cs61a_project_cats/</link>
+    <pubDate>Thu, 03 Aug 2023 14:55:49 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://Maxwell2020152049.github.io/posts/cs61a_project_cats/</guid>
+    <description><![CDATA[Project 2: CS 61A Autocorrected Typing Software Project地址：Project 2: CS 61A Autocorrected Typing Software
+使用如下命令可以下载项目：
+wget https://inst.eecs.berkeley.edu/~cs61a/sp21/proj/cats/cats.zip 项目的最终效果类似：Final Product
+Phase 1: Typing Problem 1 (1 pt) 实现choose(paragraphs, select, k)函数：
+paragraphs：一个字符串列表 select：选择函数，参数为字符串，若符合要求，返回True，否则返回False k：函数返回第k个符合要求的字符串 使用如下命令进行解锁测试：
+python3 ok -q 01 -u --local 过程如下：
+===================================================================== Assignment: Project 2: Cats OK, version v1.18.1 ===================================================================== ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Unlocking tests At each &#34;? &#34;, type what you would expect the output to be. Type exit() to quit --------------------------------------------------------------------- Problem 1 &gt; Suite 1 &gt; Case 1 (cases remaining: 102) &gt;&gt;&gt; from cats import choose &gt;&gt;&gt; ps = [&#39;short&#39;, &#39;really long&#39;, &#39;tiny&#39;] &gt;&gt;&gt; s = lambda p: len(p) &lt;= 5 &gt;&gt;&gt; choose(ps, s, 0) ?]]></description>
+</item>
+<item>
     <title>CS61A Lab lab03</title>
     <link>https://Maxwell2020152049.github.io/posts/cs61a_lab_lab03/</link>
     <pubDate>Wed, 02 Aug 2023 15:18:03 &#43;0800</pubDate>
@@ -125,24 +139,6 @@ wget https://inst.eecs.berkeley.edu/~cs61a/sp21/lab/lab01/lab01.zip What Would P
 python3 ok -q control -u --local 需要注意：
 若用整型或浮点型做控制语句的判断条件，0会被当作False，非0会被当作True 测试过程如下：
 ===================================================================== Assignment: Lab 1 OK, version v1.18.1 ===================================================================== ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Unlocking tests At each &#34;? &#34;, type what you would expect the output to be. Type exit() to quit --------------------------------------------------------------------- Control &gt; Suite 1 &gt; Case 1 (cases remaining: 5) What would Python display?]]></description>
-</item>
-<item>
-    <title>CS61A Lab lab00</title>
-    <link>https://Maxwell2020152049.github.io/posts/cs61a_lab_lab00/</link>
-    <pubDate>Sat, 29 Jul 2023 02:03:09 &#43;0800</pubDate>
-    <author>Author</author>
-    <guid>https://Maxwell2020152049.github.io/posts/cs61a_lab_lab00/</guid>
-    <description><![CDATA[关于.gitignore **/*.zip **/__pycache__ git不需要维护**压缩包** 和 缓存文件
-Lab 0: Getting Started 实验链接：Lab 0: Getting Started
-关于实验测评：Using Ok
-实验环境配置 CS 61A的实验需要：
-Terminal（终端）
-Python3
-Text Editor（代码编辑器）
-命令行工具的使用 实验会可能用到的命令：
-ls cd mkdir unzip mv Python Basic Primitive Expressions（原始表达式） **原始表达式**只进行一步计算：
-&gt;&gt;&gt; 3 3 &gt;&gt;&gt; 12.5 12.5 &gt;&gt;&gt; True True Arithmetic Expressions（算术表达式） 算术表达式由以下运算符组成：
-加法：+ 减法：- 乘法：* 乘方：** 浮点数除法：/ 下取整除法：// 取余：% &gt;&gt;&gt; 7 / 4 1.75 &gt;&gt;&gt; (2 + 6) / 4	# Floating point division 2.0 &gt;&gt;&gt; 7 // 4 # Floor division (rounding down) 1 &gt;&gt;&gt; 7 % 4 # Modulus (remainder of 7 // 4) 3 Assignment statements（赋值语句） &gt;&gt;&gt; a = (100 + 50) // 2 &gt;&gt;&gt; a 75 Doing the assignment（实验任务） Unlocking tests（解锁测试） 完成正式实验前要进行一次测试，检测学生对python的基础知识的掌握程度，使用如下命令（--local参数使得测评在本地运行）：]]></description>
 </item>
 </channel>
 </rss>

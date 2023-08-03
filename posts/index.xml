@@ -3,7 +3,21 @@
         <title>All Posts - Rex&#39;s Blog</title>
         <link>https://Maxwell2020152049.github.io/posts/</link>
         <description>All Posts | Rex&#39;s Blog</description>
-        <generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 02 Aug 2023 15:18:03 &#43;0800</lastBuildDate><atom:link href="https://Maxwell2020152049.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 03 Aug 2023 14:55:49 &#43;0800</lastBuildDate><atom:link href="https://Maxwell2020152049.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>CS61A Project Cats</title>
+    <link>https://Maxwell2020152049.github.io/posts/cs61a_project_cats/</link>
+    <pubDate>Thu, 03 Aug 2023 14:55:49 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://Maxwell2020152049.github.io/posts/cs61a_project_cats/</guid>
+    <description><![CDATA[Project 2: CS 61A Autocorrected Typing Software Project地址：Project 2: CS 61A Autocorrected Typing Software
+使用如下命令可以下载项目：
+wget https://inst.eecs.berkeley.edu/~cs61a/sp21/proj/cats/cats.zip 项目的最终效果类似：Final Product
+Phase 1: Typing Problem 1 (1 pt) 实现choose(paragraphs, select, k)函数：
+paragraphs：一个字符串列表 select：选择函数，参数为字符串，若符合要求，返回True，否则返回False k：函数返回第k个符合要求的字符串 使用如下命令进行解锁测试：
+python3 ok -q 01 -u --local 过程如下：
+===================================================================== Assignment: Project 2: Cats OK, version v1.18.1 ===================================================================== ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Unlocking tests At each &#34;? &#34;, type what you would expect the output to be. Type exit() to quit --------------------------------------------------------------------- Problem 1 &gt; Suite 1 &gt; Case 1 (cases remaining: 102) &gt;&gt;&gt; from cats import choose &gt;&gt;&gt; ps = [&#39;short&#39;, &#39;really long&#39;, &#39;tiny&#39;] &gt;&gt;&gt; s = lambda p: len(p) &lt;= 5 &gt;&gt;&gt; choose(ps, s, 0) ?]]></description>
+</item>
+<item>
     <title>CS61A Lab lab03</title>
     <link>https://Maxwell2020152049.github.io/posts/cs61a_lab_lab03/</link>
     <pubDate>Wed, 02 Aug 2023 15:18:03 &#43;0800</pubDate>
@@ -145,17 +159,6 @@ from operator import add, mul, sub square = lambda x: x * x identity = lambda x:
 思路：注意range函数的区间是左闭右开的。
 实现代码如下：
 def product(n, term): &#34;&#34;&#34;Return the product of the first n terms in a sequence.]]></description>
-</item>
-<item>
-    <title>CS61A Homework hw01</title>
-    <link>https://Maxwell2020152049.github.io/posts/cs61a_homework_hw01/</link>
-    <pubDate>Sat, 29 Jul 2023 02:05:49 &#43;0800</pubDate>
-    <author>Author</author>
-    <guid>https://Maxwell2020152049.github.io/posts/cs61a_homework_hw01/</guid>
-    <description><![CDATA[Homework 1: Variables &amp; Functions, Control 作业链接：Homework 1: Variables &amp; Functions, Control
-Q1: Syllabus Quiz 教学大纲和课程政策，详见Syllabus Quiz和Syllabus &amp; Course Policies。
-Q2: A Plus Abs B Fill in the blanks in the following function for adding a to the absolute value of b, without calling abs. You may not modify any of the provided code other than the two blanks.
-题意就是实现如下函数f： $$ f(a, b) = a + \lvert b \rvert $$]]></description>
 </item>
 </channel>
 </rss>
