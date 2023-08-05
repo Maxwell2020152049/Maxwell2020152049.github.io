@@ -76,6 +76,40 @@
         alt="https://th.bing.com/th/id/OIP.bs9ePxW88yyxsxRKmQt_MQHaHa?w=193&amp;h=193&amp;c=7&amp;r=0&amp;o=5&amp;pid=1.7"
         title="https://th.bing.com/th/id/OIP.bs9ePxW88yyxsxRKmQt_MQHaHa?w=193&amp;h=193&amp;c=7&amp;r=0&amp;o=5&amp;pid=1.7" /></div><div class="home-subtitle"><div id="id-1" class="typeit"></div></div><div class="links"><a href="https://github.com/Maxwell2020152049" title="GitHub" target="_blank" rel="noopener noreffer me"><i class="fab fa-github fa-fw" aria-hidden="true"></i></a></div></div>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/cs61a_lab_lab02/">CS61A Lab lab02</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-08-01">2023-08-01</time></span>&nbsp;<span class="post-category">included in <a href="/categories/cs61a/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>CS61A</a></span></div><div class="content">Lab 2: Higher-Order Functions, Lambda Expressions 实验链接：Lab 2: Higher-Order Functions, Lambda Expressions
+如何下载实验压缩包：
+wget https://inst.eecs.berkeley.edu/~cs61a/sp21/lab/lab02/lab02.zip What Would Python Display? Q1: WWPD: Lambda the Free 输入以下命令进行测试：
+如果结果是函数，就输入Function，如果是错误就输入Error，如果没有输出就输入Nothing。
+python3 ok -q lambda -u --local 过程如下：
+===================================================================== Assignment: Lab 2 OK, version v1.18.1 ===================================================================== ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Unlocking tests At each &#34;? &#34;, type what you would expect the output to be. Type exit() to quit --------------------------------------------------------------------- Lambda the Free &gt; Suite 1 &gt; Case 1 (cases remaining: 7) Q: Which of the following statements describes a difference between a def statement and a lambda expression?</div><div class="post-footer">
+        <a href="/posts/cs61a_lab_lab02/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/python/">Python</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/cs61a_notes_week5/">CS61A week5 study note</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-08-01">2023-08-01</time></span>&nbsp;<span class="post-category">included in <a href="/categories/cs61a/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>CS61A</a></span></div><div class="content">Week5 CS 61A 2021 Fall官网：CS 61A: Structure and Interpretation of Computer Programs
+翻译视频：【计算机程序的构造和解释】精译【UC Berkeley 公开课-CS61A (Spring 2021)】-中英双语字幕
+github:Maxwell2020152049/CS61A
+Lecture #12: Dictionaries, Matrices, and Trees： Project：Project 2: CS 61A Autocorrected Typing Software
+Slide：12-Trees_full.pdf or 12-Trees.html
+抽象层次的复习（Review: Layers of abstraction） Python类型的复习（Review: Python types） 字典（Dictionary） 字典是一种可修改的键-值对映射（key-value pair）。
+可以使用Key in Dict检查某个Key是否是字典的键，若是，返回True；若不是，返回False。
+eg：
+# Dictionaries states = { &#34;CA&#34;: &#34;California&#34;, &#34;DE&#34;: &#34;Delaware&#34;, &#34;NY&#34;: &#34;New York&#34;, &#34;TX&#34;: &#34;Texas&#34;, &#34;WY&#34;: &#34;Wyoming&#34; } print(len(states)) print(&#34;CA&#34; in states) print(&#34;ZZ&#34; in states) 输出：</div><div class="post-footer">
+        <a href="/posts/cs61a_notes_week5/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/python/">Python</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/cs61a_notes_week4/">CS61A week4 study note</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-07-31">2023-07-31</time></span>&nbsp;<span class="post-category">included in <a href="/categories/cs61a/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>CS61A</a></span></div><div class="content">Week4 CS 61A 2021 Fall官网：CS 61A: Structure and Interpretation of Computer Programs
+翻译视频：【计算机程序的构造和解释】精译【UC Berkeley 公开课-CS61A (Spring 2021)】-中英双语字幕
+github:Maxwell2020152049/CS61A
+Lecture #9: Still More on Functions Lab：Lab 3: Recursion, Tree Recursion
+Slide：09-Function_Examples_full.pdf
+练习：翻转数字（Exercise: Reversing Digits） 实现一个reverse digits(n)函数，返回翻转的n：
+def reverse_digits(n): &#34;&#34;&#34;Assuming N &gt;= 0 is an integer. Return the number whose base-10 representation is the reverse of that of N. &gt;&gt;&gt; reverse_digits(0) 0 &gt;&gt;&gt; reverse_digits(1) 1 &gt;&gt;&gt; reverse_digits(123) 321 &gt;&gt;&gt; reverse_digits(10) 1 &gt;&gt;&gt; reverse_digits(12321) 12321 &gt;&gt;&gt; reverse_digits(2222222) 2222222 &gt;&gt;&gt; reverse_digits(102) 201 &#34;&#34;&#34; assert type(n) is int and n &gt;= 0 if n &lt; 10: return n return reverse_digits(n // 10) + (n % 10) * 10 ** (num_digits(n) - 1) def num_digits(x): &#34;&#34;&#34;Return the number of decimal digits in the positive integer X.</div><div class="post-footer">
+        <a href="/posts/cs61a_notes_week4/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/python/">Python</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
         <a href="/posts/cs61a_notes_week3/">CS61A week3 study note</a>
     </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-07-29">2023-07-29</time></span>&nbsp;<span class="post-category">included in <a href="/categories/cs61a/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>CS61A</a></span></div><div class="content">Week3 CS 61A 2021 Fall官网：CS 61A: Structure and Interpretation of Computer Programs
 翻译视频：【计算机程序的构造和解释】精译【UC Berkeley 公开课-CS61A (Spring 2021)】-中英双语字幕
@@ -127,34 +161,6 @@ from operator import add def curry2(f): return lambda x: \ lambda y: \ f(x, y) p
 #include &lt;stdio.h&gt; #include &lt;stdlib.h&gt; #include &lt;string.h&gt; #include &lt;unistd.h&gt; #include &lt;arpa/inet.</div><div class="post-footer">
         <a href="/posts/tcpip_notes_ch01/">Read More</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">网络编程</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/cs61a_homework_hw02/">CS61A Homework hw02</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-07-29">2023-07-29</time></span>&nbsp;<span class="post-category">included in <a href="/categories/cs61a/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>CS61A</a></span></div><div class="content">Homework 2: Higher Order Functions 作业链接：Homework 2: Higher Order Functions
-Important Functions 一些文档测试可能基于以下函数：
-from operator import add, mul, sub square = lambda x: x * x identity = lambda x: x triple = lambda x: 3 * x increment = lambda x: x + 1 Q1: Product 仿照能够计算term(1) + ... + term(n)的summation(n, term)函数，编写一个能够计算term(1) * ... * term(n)的product(n, term)函数。
-思路：注意range函数的区间是左闭右开的。
-实现代码如下：
-def product(n, term): &#34;&#34;&#34;Return the product of the first n terms in a sequence.</div><div class="post-footer">
-        <a href="/posts/cs61a_homework_hw02/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/python/">Python</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/cs61a_homework_hw01/">CS61A Homework hw01</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-07-29">2023-07-29</time></span>&nbsp;<span class="post-category">included in <a href="/categories/cs61a/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>CS61A</a></span></div><div class="content">Homework 1: Variables &amp; Functions, Control 作业链接：Homework 1: Variables &amp; Functions, Control
-Q1: Syllabus Quiz 教学大纲和课程政策，详见Syllabus Quiz和Syllabus &amp; Course Policies。
-Q2: A Plus Abs B Fill in the blanks in the following function for adding a to the absolute value of b, without calling abs. You may not modify any of the provided code other than the two blanks.
-题意就是实现如下函数f： $$ f(a, b) = a + \lvert b \rvert $$</div><div class="post-footer">
-        <a href="/posts/cs61a_homework_hw01/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/python/">Python</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/cs61a_lab_lab01/">CS61A Lab lab01</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-07-29">2023-07-29</time></span>&nbsp;<span class="post-category">included in <a href="/categories/cs61a/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>CS61A</a></span></div><div class="content">Lab 1: Variables &amp; Functions, Control 实验链接：Lab 1: Variables &amp; Functions, Control
-如何下载实验压缩包：
-wget https://inst.eecs.berkeley.edu/~cs61a/sp21/lab/lab01/lab01.zip What Would Python Display(WWPD)? (Part 1) Q1: WWPD: Control 使用如下命令进行测试：
-python3 ok -q control -u --local 需要注意：
-若用整型或浮点型做控制语句的判断条件，0会被当作False，非0会被当作True 测试过程如下：
-===================================================================== Assignment: Lab 1 OK, version v1.18.1 ===================================================================== ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Unlocking tests At each &#34;? &#34;, type what you would expect the output to be. Type exit() to quit --------------------------------------------------------------------- Control &gt; Suite 1 &gt; Case 1 (cases remaining: 5) What would Python display?</div><div class="post-footer">
-        <a href="/posts/cs61a_lab_lab01/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/python/">Python</a></div></div>
 </article><ul class="pagination"><li class="page-item ">
                     <span class="page-link">
                         <a href="/">1</a>

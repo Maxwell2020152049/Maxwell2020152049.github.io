@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>CS61A week6 study note - Rex&#39;s Blog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="CS61A week6 study note" />
+<meta property="og:description" content="Week6 CS 61A 2021 Fall官网：CS 61A: Structure and Interpretation of Computer Programs
+翻译视频：【计算机程序的构造和解释】精译【UC Berkeley 公开课-CS61A (Spring 2021)】-中英双语字幕
+github:Maxwell2020152049/CS61A
+Lecture #13: Mutable Values Slide：13-Mutable_Values_full.pdf
+Lab：Lab 5: Python Lists, Data Abstraction, Trees
+树的抽象层次（Tree: Layers of abstraction） 每一个层次的抽象都由上一个层次的抽象实现。
+Each layer only uses the layer above it.
+一种树的实现（A tree() implementation） 本节课使用以元组为树，以列表为子树的方法创建树。
+创建如下的树，draw是CS 61A Coder中实现的函数，能够绘制不同类型的结构的图形：
+def tree(label, children=None): &#34;&#34;&#34; Creates a tree whose root node is labeled LABEL and optionally has CHILDREN, a list of trees." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://Maxwell2020152049.github.io/posts/cs61a_notes_week6/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-08-05T19:59:02+08:00" />
+<meta property="article:modified_time" content="2023-08-05T19:59:02+08:00" /><meta property="og:site_name" content="My cool site" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="CS61A week6 study note"/>
+<meta name="twitter:description" content="Week6 CS 61A 2021 Fall官网：CS 61A: Structure and Interpretation of Computer Programs
+翻译视频：【计算机程序的构造和解释】精译【UC Berkeley 公开课-CS61A (Spring 2021)】-中英双语字幕
+github:Maxwell2020152049/CS61A
+Lecture #13: Mutable Values Slide：13-Mutable_Values_full.pdf
+Lab：Lab 5: Python Lists, Data Abstraction, Trees
+树的抽象层次（Tree: Layers of abstraction） 每一个层次的抽象都由上一个层次的抽象实现。
+Each layer only uses the layer above it.
+一种树的实现（A tree() implementation） 本节课使用以元组为树，以列表为子树的方法创建树。
+创建如下的树，draw是CS 61A Coder中实现的函数，能够绘制不同类型的结构的图形：
+def tree(label, children=None): &#34;&#34;&#34; Creates a tree whose root node is labeled LABEL and optionally has CHILDREN, a list of trees."/>
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://Maxwell2020152049.github.io/posts/cs61a_notes_week6/" /><link rel="prev" href="https://Maxwell2020152049.github.io/posts/cs61a_lab_lab05/" /><link rel="next" href="https://Maxwell2020152049.github.io/posts/cs61a_homework_hw04/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "CS61A week6 study note",
+        "inLanguage": "en-us",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/Maxwell2020152049.github.io\/posts\/cs61a_notes_week6\/"
+        },"genre": "posts","keywords": "Python","wordcount":  2089 ,
+        "url": "https:\/\/Maxwell2020152049.github.io\/posts\/cs61a_notes_week6\/","datePublished": "2023-08-05T19:59:02+08:00","dateModified": "2023-08-05T19:59:02+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Author"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Rex&#39;s Blog"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg"
+        data-srcset="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg, https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg 1.5x, https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg 2x"
+        data-sizes="auto"
+        alt="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg"
+        title="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg" />Rex&#39;s cool site</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Rex&#39;s Blog"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg"
+        data-srcset="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg, https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg 1.5x, https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg 2x"
+        data-sizes="auto"
+        alt="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg"
+        title="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg" />Rex&#39;s cool site</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">CS61A week6 study note</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-category">included in <a href="/categories/cs61a/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>CS61A</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-08-05">2023-08-05</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2089 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;10 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#lecture-13-mutable-values">Lecture #13: Mutable Values</a>
+      <ul>
+        <li><a href="#树的抽象层次tree-layers-of-abstraction">树的抽象层次（<code>Tree: Layers of abstraction</code>）</a></li>
+        <li><a href="#一种树的实现a-tree-implementation">一种树的实现（<code>A tree() implementation</code>）</a></li>
+        <li><a href="#树节点翻倍">树节点翻倍</a></li>
+        <li><a href="#非破坏性操作与破坏性操作non-destructive-and-destructive">非破坏性操作与破坏性操作（<code>Non-destructive and Destructive</code>）</a></li>
+        <li><a href="#不可变性和可变性immutability-and-mutability">不可变性和可变性（<code>Immutability and Mutability</code>）</a></li>
+        <li><a href="#可被修改的树a-mutable-tree">可被修改的树（<code>A mutable tree()</code>）</a></li>
+        <li><a href="#复制列表copying-lists">复制列表（<code>Copying lists</code>）</a></li>
+        <li><a href="#对象的同一性与内容的相等性">对象的同一性与内容的相等性</a></li>
+      </ul>
+    </li>
+    <li><a href="#lecture-14-list-mutation-identity-and-nonlocal">Lecture #14: List Mutation, Identity, and Nonlocal</a>
+      <ul>
+        <li><a href="#列表的创建list-creation">列表的创建（<code>List creation</code>）</a></li>
+        <li><a href="#通过切片修改列表mutating-lists-with-slicing">通过<code>切片</code>修改列表（<code>Mutating lists with slicing</code>）</a></li>
+        <li><a href="#使用列表的方法修改列表mutating-lists-with-methods">使用列表的方法修改列表（<code>Mutating lists with methods</code>）</a></li>
+        <li><a href="#对象的同一性与内容的相等性-1">对象的同一性与内容的相等性</a></li>
+        <li><a href="#本地空间的命名names-inside-local-scopes">本地空间的命名（<code>Names inside local scopes</code>）</a></li>
+        <li><a href="#嵌套空间内的名称names-inside-nested-scopes">嵌套空间内的名称（<code>Names inside nested scopes</code>）</a></li>
+      </ul>
+    </li>
+    <li><a href="#lecture-15-iterators--generators">Lecture #15: Iterators + Generators</a>
+      <ul>
+        <li><a href="#可迭代对象iterables">可迭代对象（<code>Iterables</code>）</a></li>
+        <li><a href="#迭代器iterators">迭代器（<code>Iterators</code>）</a></li>
+        <li><a href="#迭代器与for循环iterators-vs-for-loops">迭代器与<code>For</code>循环（<code>Iterators vs. For loops</code>）</a></li>
+        <li><a href="#for循环的执行for-loop-execution"><code>For</code>循环的执行（<code>For loop execution</code>）</a></li>
+        <li><a href="#__next__-and-__iter__"><code>__next__() and __iter__()</code></a></li>
+        <li><a href="#返回迭代器的函数functions-that-return-iterators">返回迭代器的函数（<code>Functions that return iterators</code>）</a></li>
+        <li><a href="#返回可迭代对象的函数functions-that-return-iterables">返回可迭代对象的函数（<code>Functions that return iterables</code>）</a></li>
+        <li><a href="#生成器generators">生成器（<code>Generators</code>）</a></li>
+        <li><a href="#生成器是如何工作的how-generators-work">生成器是如何工作的（<code>How generators work</code>）</a></li>
+        <li><a href="#基于生成器的循环looping-over-generators">基于生成器的循环（<code>Looping over generators</code>）</a></li>
+        <li><a href="#为什么使用生成器why-use-generators">为什么使用生成器（<code>Why use generators?</code>）</a></li>
+        <li><a href="#yield-from从迭代器生成元素yielding-from-iterables"><code>yield from</code>：从迭代器生成元素（<code>Yielding from iterables</code>）</a></li>
+        <li><a href="#树的递归生成器recursive-generators-for-trees">树的递归生成器（<code>Recursive generators for trees</code>）</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="week6">Week6</h1>
+<p><code>CS 61A 2021 Fall</code>官网：<a href="https://inst.eecs.berkeley.edu/~cs61a/sp21/" target="_blank" rel="noopener noreffer ">CS 61A: Structure and Interpretation of Computer Programs</a></p>
+<p><code>翻译视频</code>：<a href="https://www.bilibili.com/video/BV1v64y1Q78o/?spm_id_from=444.41.top_right_bar_window_default_collection.content.click&amp;vd_source=249a8ad55bb26717dd55ec3dd295f644" target="_blank" rel="noopener noreffer ">【计算机程序的构造和解释】精译【UC Berkeley 公开课-CS61A (Spring 2021)】-中英双语字幕</a></p>
+<p><code>github</code>:<a href="https://github.com/Maxwell2020152049/CS61A" target="_blank" rel="noopener noreffer ">Maxwell2020152049/CS61A</a></p>
+<h2 id="lecture-13-mutable-values">Lecture #13: Mutable Values</h2>
+<p><code>Slide</code>：<a href="https://inst.eecs.berkeley.edu/~cs61a/sp21/assets/slides/13-Mutable_Values_full.pdf" target="_blank" rel="noopener noreffer ">13-Mutable_Values_full.pdf</a></p>
+<p><code>Lab</code>：<a href="https://inst.eecs.berkeley.edu/~cs61a/sp21/lab/lab05/" target="_blank" rel="noopener noreffer ">Lab 5: Python Lists, Data Abstraction, Trees</a></p>
+<h3 id="树的抽象层次tree-layers-of-abstraction">树的抽象层次（<code>Tree: Layers of abstraction</code>）</h3>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/img/image_cs61a_notes/image18.png"
+        data-srcset="/img/image_cs61a_notes/image18.png, /img/image_cs61a_notes/image18.png 1.5x, /img/image_cs61a_notes/image18.png 2x"
+        data-sizes="auto"
+        alt="/img/image_cs61a_notes/image18.png"
+        title="/img/image_cs61a_notes/image18.png" /></p>
+<p>每一个层次的抽象都由上一个层次的抽象实现。</p>
+<blockquote>
+<p>Each layer only uses the layer above it.</p>
+</blockquote>
+<h3 id="一种树的实现a-tree-implementation">一种树的实现（<code>A tree() implementation</code>）</h3>
+<p>本节课使用以元组为树，以列表为子树的方法创建树。</p>
+<p>创建如下的树，<code>draw</code>是<a href="https://code.cs61a.org/" target="_blank" rel="noopener noreffer ">CS 61A Coder</a>中实现的函数，能够绘制不同类型的结构的图形：</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/img/image_cs61a_notes/image19.png"
+        data-srcset="/img/image_cs61a_notes/image19.png, /img/image_cs61a_notes/image19.png 1.5x, /img/image_cs61a_notes/image19.png 2x"
+        data-sizes="auto"
+        alt="/img/image_cs61a_notes/image19.png"
+        title="/img/image_cs61a_notes/image19.png" /></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">tree</span>(label, children<span style="color:#f92672">=</span><span style="color:#66d9ef">None</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34; Creates a tree whose root node is labeled LABEL and
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        optionally has CHILDREN, a list of trees.&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> (label, list(children <span style="color:#f92672">or</span> []))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">label</span>(tree):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34; Returns the label of the root node of TREE. &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> tree[<span style="color:#ae81ff">0</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">children</span>(tree):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34; Returns a list of children of TREE. &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> tree[<span style="color:#ae81ff">1</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>t <span style="color:#f92672">=</span> tree(<span style="color:#ae81ff">20</span>, [tree(<span style="color:#ae81ff">12</span>, [tree(<span style="color:#ae81ff">9</span>, [tree(<span style="color:#ae81ff">7</span>), tree(<span style="color:#ae81ff">2</span>)])]), tree(<span style="color:#ae81ff">8</span>, [tree(<span style="color:#ae81ff">4</span>), tree(<span style="color:#ae81ff">4</span>)])])
+</span></span></code></pre></div><p>输出如下：</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/img/image_cs61a_notes/image20.png"
+        data-srcset="/img/image_cs61a_notes/image20.png, /img/image_cs61a_notes/image20.png 1.5x, /img/image_cs61a_notes/image20.png 2x"
+        data-sizes="auto"
+        alt="/img/image_cs61a_notes/image20.png"
+        title="/img/image_cs61a_notes/image20.png" /></p>
+<p><a href="https://code.cs61a.org/" target="_blank" rel="noopener noreffer ">CS 61A Coder</a>中也实现了<code>tree</code>函数，但具体方式与上述方法有区别，使用以列表为树，也以列表为子树的方法创建树。如果不自行定义树的相关抽象类型，直接使用内置的<code>tree</code>函数：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>t <span style="color:#f92672">=</span> tree(<span style="color:#ae81ff">20</span>, [tree(<span style="color:#ae81ff">12</span>, [tree(<span style="color:#ae81ff">9</span>, [tree(<span style="color:#ae81ff">7</span>), tree(<span style="color:#ae81ff">2</span>)])]), tree(<span style="color:#ae81ff">8</span>, [tree(<span style="color:#ae81ff">4</span>), tree(<span style="color:#ae81ff">4</span>)])])
+</span></span></code></pre></div><p>输入如下：</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/img/image_cs61a_notes/image21.png"
+        data-srcset="/img/image_cs61a_notes/image21.png, /img/image_cs61a_notes/image21.png 1.5x, /img/image_cs61a_notes/image21.png 2x"
+        data-sizes="auto"
+        alt="/img/image_cs61a_notes/image21.png"
+        title="/img/image_cs61a_notes/image21.png" /></p>
+<h3 id="树节点翻倍">树节点翻倍</h3>
+<p>实现<code>double(t)</code>函数，<code>t</code>是一棵树，返回一个新的树，树上的节点都是<code>t</code>的两倍：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">double</span>(t):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Returns a tree identical to T, but with all labels doubled.&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    child <span style="color:#f92672">=</span> children(t)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> child:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> tree(label(t) <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> tree(label(t) <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span>, 
+</span></span><span style="display:flex;"><span>                [double(t) <span style="color:#66d9ef">for</span> t <span style="color:#f92672">in</span> child])
+</span></span></code></pre></div><p>输出如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>&gt;&gt;&gt; t
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>20, <span style="color:#f92672">[(</span>12, <span style="color:#f92672">[(</span>9, <span style="color:#f92672">[(</span>7, <span style="color:#f92672">[])</span>, <span style="color:#f92672">(</span>2, <span style="color:#f92672">[])])])</span>, <span style="color:#f92672">(</span>8, <span style="color:#f92672">[(</span>4, <span style="color:#f92672">[])</span>, <span style="color:#f92672">(</span>4, <span style="color:#f92672">[])])])</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; double<span style="color:#f92672">(</span>t<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>40, <span style="color:#f92672">[(</span>24, <span style="color:#f92672">[(</span>18, <span style="color:#f92672">[(</span>14, <span style="color:#f92672">[])</span>, <span style="color:#f92672">(</span>4, <span style="color:#f92672">[])])])</span>, <span style="color:#f92672">(</span>16, <span style="color:#f92672">[(</span>8, <span style="color:#f92672">[])</span>, <span style="color:#f92672">(</span>8, <span style="color:#f92672">[])])])</span>
+</span></span></code></pre></div><p><code>double(t)</code>函数可以更加精简，子树为空就传空列表：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">double</span>(t):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Returns a tree identical to T, but with all labels doubled.&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    child <span style="color:#f92672">=</span> children(t)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> tree(label(t) <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span>, 
+</span></span><span style="display:flex;"><span>            [double(t) <span style="color:#66d9ef">for</span> t <span style="color:#f92672">in</span> child])
+</span></span></code></pre></div><p>输出与之前相同。</p>
+<h3 id="非破坏性操作与破坏性操作non-destructive-and-destructive">非破坏性操作与破坏性操作（<code>Non-destructive and Destructive</code>）</h3>
+<p>非破坏性操作：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> aThing
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;</span>output A<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> <span style="color:#f92672">&lt;</span>operation on aThing (that obey abstraction boundaries)<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> aThing
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;</span>output A<span style="color:#f92672">&gt;</span>
+</span></span></code></pre></div><p><code>A</code>并没有被修改。</p>
+<p>破坏性操作：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> aThing
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;</span>output A<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> <span style="color:#f92672">&lt;</span>operation on aThing (that obey abstraction boundaries)<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> aThing
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;</span>output B<span style="color:#f92672">&gt;</span>
+</span></span></code></pre></div><p><code>A</code>被修改了。</p>
+<p>之前实现的<code>double(t)</code>是非破坏性的，因为没有修改<code>t</code>。</p>
+<h3 id="不可变性和可变性immutability-and-mutability">不可变性和可变性（<code>Immutability and Mutability</code>）</h3>
+<p>一个不可变值一但被创建就不可修改。</p>
+<blockquote>
+<p>An <code>immutable</code> value is unchanging once created.</p>
+<p>Immutable types (that we&rsquo;ve covered): int, float, string, tuple</p>
+</blockquote>
+<p><code>eg</code>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>a_tuple <span style="color:#f92672">=</span> (<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>a_tuple[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>                  <span style="color:#75715e"># 🚫 Error! Tuple items cannot be set.</span>
+</span></span><span style="display:flex;"><span>a_string <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Hi y&#39;all&#34;</span>
+</span></span><span style="display:flex;"><span>a_string[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;I&#34;</span>               <span style="color:#75715e"># 🚫 Error! String elements cannot be set.</span>
+</span></span><span style="display:flex;"><span>a_string <span style="color:#f92672">+=</span> <span style="color:#e6db74">&#34;, how you doing?&#34;</span>  <span style="color:#75715e"># 🤔 How does this work?</span>
+</span></span><span style="display:flex;"><span>an_int <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>
+</span></span><span style="display:flex;"><span>an_int <span style="color:#f92672">+=</span> <span style="color:#ae81ff">2</span>                     <span style="color:#75715e"># 🤔 And this?</span>
+</span></span></code></pre></div><p>可变值在计算过程中可以被修改，所有绑定了同一对象的值都会收到修改的影响。</p>
+<blockquote>
+<p>A <code>mutable</code> value can change in value throughout the course of computation. All names that refer to the same object are afected by a mutation.</p>
+<p>Mutable types (that we&rsquo;ve covered): list, dict</p>
+</blockquote>
+<p><code>eg</code>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>grades <span style="color:#f92672">=</span> [<span style="color:#ae81ff">90</span>, <span style="color:#ae81ff">70</span>, <span style="color:#ae81ff">85</span>]
+</span></span><span style="display:flex;"><span>grades_copy <span style="color:#f92672">=</span> grades
+</span></span><span style="display:flex;"><span>grades[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>
+</span></span><span style="display:flex;"><span>words <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;agua&#34;</span>: <span style="color:#e6db74">&#34;water&#34;</span>}
+</span></span><span style="display:flex;"><span>words[<span style="color:#e6db74">&#34;pavo&#34;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;turkey&#34;</span>
+</span></span></code></pre></div><p><code>id()</code>函数返回一个对象的<code>id</code>值，如果两个对象是同一个，<code>id</code>值应当相同，反之不一定。</p>
+<p>在函数调用中可以进行修改，也可以修改父环境框架中的值。</p>
+<p>若不可变序列包含可变值，可变值可以被修改。</p>
+<p>之前实现的<code>tree()</code>函数创建的树是不可变的。</p>
+<h3 id="可被修改的树a-mutable-tree">可被修改的树（<code>A mutable tree()</code>）</h3>
+<p>可被修改的树可以使用以下方法实现：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">tree</span>(label, children<span style="color:#f92672">=</span><span style="color:#66d9ef">None</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> [label] <span style="color:#f92672">+</span> list(children <span style="color:#f92672">or</span> [])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">label</span>(tree):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> tree[<span style="color:#ae81ff">0</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">children</span>(tree):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> tree[<span style="color:#ae81ff">1</span>:]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">set_label</span>(tree, label):
+</span></span><span style="display:flex;"><span>    tree[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> label
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">set_children</span>(tree, children):
+</span></span><span style="display:flex;"><span>    tree[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> children
+</span></span></code></pre></div><p>破坏性的翻倍操作如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">double</span>(t):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Doubles every label in T, mutating T.&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    set_label(t, label(t) <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> is_leaf(t):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> c <span style="color:#f92672">in</span> children(t):
+</span></span><span style="display:flex;"><span>            double(c)
+</span></span></code></pre></div><h3 id="复制列表copying-lists">复制列表（<code>Copying lists</code>）</h3>
+<p>可以使用<code>切片</code>来创建新列表：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>listA <span style="color:#f92672">=</span> [<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>]
+</span></span><span style="display:flex;"><span>listB <span style="color:#f92672">=</span> listA
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>listC <span style="color:#f92672">=</span> listA[:]
+</span></span><span style="display:flex;"><span>listA[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>
+</span></span><span style="display:flex;"><span>listB[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>
+</span></span></code></pre></div><p>或者使用<code>list()</code>函数，<code>list()</code>函数能接受任意类型的可迭代对象（<code>list()</code>是非破坏性的，列表是可修改的）：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>listA <span style="color:#f92672">=</span> [<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>]
+</span></span><span style="display:flex;"><span>listB <span style="color:#f92672">=</span> listA
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>listC <span style="color:#f92672">=</span> list(listA)
+</span></span><span style="display:flex;"><span>listA[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>
+</span></span><span style="display:flex;"><span>listB[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>
+</span></span></code></pre></div><h3 id="对象的同一性与内容的相等性">对象的同一性与内容的相等性</h3>
+<p><code>is</code>可以验证对象的同一性，若是同一个对象，返回<code>True</code>，否则返回<code>False</code>。</p>
+<p><code>==</code>可以验证内容的相等性，若两个对象的内容相同，返回<code>True</code>，否则返回<code>False</code>。</p>
+<p><code>eg</code>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>list1 <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>]
+</span></span><span style="display:flex;"><span>list2 <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>]
+</span></span><span style="display:flex;"><span>identical <span style="color:#f92672">=</span> list1 <span style="color:#f92672">is</span> list2
+</span></span><span style="display:flex;"><span>are_equal <span style="color:#f92672">=</span> list1 <span style="color:#f92672">==</span> list2
+</span></span></code></pre></div><h2 id="lecture-14-list-mutation-identity-and-nonlocal">Lecture #14: List Mutation, Identity, and Nonlocal</h2>
+<p><code>Slide</code>：<a href="https://inst.eecs.berkeley.edu/~cs61a/sp21/assets/slides/14-List_mutation_&#43;_Identity_&#43;_Nonlocal_full.pdf" target="_blank" rel="noopener noreffer ">14-List_mutation_+<em>Identity</em>+_Nonlocal_full.pdf</a></p>
+<h3 id="列表的创建list-creation">列表的创建（<code>List creation</code>）</h3>
+<p>使用方括号可以创建列表：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Creating a list from scratch:</span>
+</span></span><span style="display:flex;"><span>a <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>b <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>]
+</span></span></code></pre></div><p>从已经存在的列表可以创建列表：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Creating a list from existing lists:</span>
+</span></span><span style="display:flex;"><span>c <span style="color:#f92672">=</span> b <span style="color:#f92672">+</span> [<span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">30</span>]
+</span></span><span style="display:flex;"><span>d <span style="color:#f92672">=</span> c[:]
+</span></span><span style="display:flex;"><span>e <span style="color:#f92672">=</span> list(c)
+</span></span></code></pre></div><p>以上方法都是非破坏性的（<code>Non-destructive</code>）。</p>
+<h3 id="通过切片修改列表mutating-lists-with-slicing">通过<code>切片</code>修改列表（<code>Mutating lists with slicing</code>）</h3>
+<p>通过<code>切片</code>可以修改列表：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># List Mutation</span>
+</span></span><span style="display:flex;"><span>L <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>L[<span style="color:#ae81ff">2</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">6</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>L[<span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">3</span>] <span style="color:#f92672">=</span> [<span style="color:#ae81ff">9</span>, <span style="color:#ae81ff">8</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>L[<span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">4</span>] <span style="color:#f92672">=</span> []            <span style="color:#75715e"># Deleting elements</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>L[<span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> [<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>]  <span style="color:#75715e"># Inserting elements</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>L[len(L):] <span style="color:#f92672">=</span> [<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">11</span>]  <span style="color:#75715e"># Appending</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>L <span style="color:#f92672">=</span> L <span style="color:#f92672">+</span> [<span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">30</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>L[<span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> range(<span style="color:#f92672">-</span><span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">0</span>)  <span style="color:#75715e"># Prepending</span>
+</span></span></code></pre></div><p>注意列表的<code>+</code>和<code>+=</code>运算符，前者会为右值创建一个新的列表绑定到左值的名称上（非破坏性操作）；后者不会创建新的列表（破坏性操作）。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Test List&#39;s &#39;+&#39; and &#39;+=&#39;</span>
+</span></span><span style="display:flex;"><span>a <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>]
+</span></span><span style="display:flex;"><span>print(a, id(a))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>b <span style="color:#f92672">=</span> a <span style="color:#f92672">+</span> [<span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>]
+</span></span><span style="display:flex;"><span>print(b, id(b))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>a <span style="color:#f92672">+=</span> [<span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">7</span>]
+</span></span><span style="display:flex;"><span>print(a, id(a))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>a <span style="color:#f92672">=</span> a <span style="color:#f92672">+</span> [<span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">9</span>]
+</span></span><span style="display:flex;"><span>print(a, id(a))
+</span></span></code></pre></div><h3 id="使用列表的方法修改列表mutating-lists-with-methods">使用列表的方法修改列表（<code>Mutating lists with methods</code>）</h3>
+<p><code>append()</code>函数可以把一个元素添加到列表尾部：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># append() adds a single element to a list:</span>
+</span></span><span style="display:flex;"><span>s <span style="color:#f92672">=</span> [<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>]
+</span></span><span style="display:flex;"><span>t <span style="color:#f92672">=</span> [<span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">6</span>]
+</span></span><span style="display:flex;"><span>s<span style="color:#f92672">.</span>append(<span style="color:#ae81ff">4</span>)
+</span></span><span style="display:flex;"><span>s<span style="color:#f92672">.</span>append(t)
+</span></span><span style="display:flex;"><span>t <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span></code></pre></div><p><code>extend()</code>函数可以把一个列表的所有元素添加到指定列表的尾部：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># extend() adds all the elements in one list to a list:</span>
+</span></span><span style="display:flex;"><span>s <span style="color:#f92672">=</span> [<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>]
+</span></span><span style="display:flex;"><span>t <span style="color:#f92672">=</span> [<span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">6</span>]
+</span></span><span style="display:flex;"><span>s<span style="color:#f92672">.</span>extend(<span style="color:#ae81ff">4</span>) <span style="color:#75715e"># 🚫 Error: 4 is not an iterable!</span>
+</span></span><span style="display:flex;"><span>s<span style="color:#f92672">.</span>extend(t)
+</span></span><span style="display:flex;"><span>t <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span></code></pre></div><p><code>pop()</code>函数可以移除并返回列表的最后一个元素：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># pop() removes and returns the last element:</span>
+</span></span><span style="display:flex;"><span>s <span style="color:#f92672">=</span> [<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>]
+</span></span><span style="display:flex;"><span>t <span style="color:#f92672">=</span> [<span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">6</span>]
+</span></span><span style="display:flex;"><span>t <span style="color:#f92672">=</span> s<span style="color:#f92672">.</span>pop()
+</span></span></code></pre></div><p><code>reomve(val)</code>会移除列表中第一个等于<code>val</code>的值：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># remove() removes the first element equal to the argument:</span>
+</span></span><span style="display:flex;"><span>s <span style="color:#f92672">=</span> [<span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">4</span>]
+</span></span><span style="display:flex;"><span>s<span style="color:#f92672">.</span>remove(<span style="color:#ae81ff">4</span>)
+</span></span><span style="display:flex;"><span>s<span style="color:#f92672">.</span>remove(<span style="color:#ae81ff">9</span>)
+</span></span></code></pre></div><p>以上方法都会修改列表，都是破坏性操作（<code>Destructive</code>）。</p>
+<h3 id="对象的同一性与内容的相等性-1">对象的同一性与内容的相等性</h3>
+<p><code>is</code>可以验证对象的同一性，若是同一个对象，返回<code>True</code>，否则返回<code>False</code>。</p>
+<p><code>==</code>可以验证内容的相等性，若两个对象的内容相同，返回<code>True</code>，否则返回<code>False</code>。</p>
+<p><code>eg</code>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>list1 <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>]
+</span></span><span style="display:flex;"><span>list2 <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>]
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># evaluates to True if both exp0 and exp1 evaluate to objects containing equal values</span>
+</span></span><span style="display:flex;"><span>are_equal <span style="color:#f92672">=</span> list1 <span style="color:#f92672">==</span> list2
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># evaluates to True if both exp0 and exp1 evaluate to the same object</span>
+</span></span><span style="display:flex;"><span>identical <span style="color:#f92672">=</span> list1 <span style="color:#f92672">is</span> list2
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Try this in your local friendly Python interpreter:</span>
+</span></span><span style="display:flex;"><span>a <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;orange&#34;</span>
+</span></span><span style="display:flex;"><span>b <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;orange&#34;</span>
+</span></span><span style="display:flex;"><span>c <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;o&#34;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;range&#34;</span>
+</span></span><span style="display:flex;"><span>print(a <span style="color:#f92672">is</span> b)
+</span></span><span style="display:flex;"><span>print(a <span style="color:#f92672">is</span> c)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>a <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>
+</span></span><span style="display:flex;"><span>b <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>
+</span></span><span style="display:flex;"><span>print(a <span style="color:#f92672">is</span> b)
+</span></span><span style="display:flex;"><span>print(a <span style="color:#f92672">is</span> <span style="color:#ae81ff">10</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">10</span>)
+</span></span><span style="display:flex;"><span>print(a <span style="color:#f92672">==</span> <span style="color:#ae81ff">10</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">10</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>a <span style="color:#f92672">=</span> <span style="color:#ae81ff">100000000000000000</span>
+</span></span><span style="display:flex;"><span>b <span style="color:#f92672">=</span> <span style="color:#ae81ff">100000000000000000</span>
+</span></span><span style="display:flex;"><span>print(a <span style="color:#f92672">is</span> b)
+</span></span><span style="display:flex;"><span>print(<span style="color:#ae81ff">100000000000000000</span> <span style="color:#f92672">is</span> <span style="color:#ae81ff">100000000000000000</span>)
+</span></span></code></pre></div><h3 id="本地空间的命名names-inside-local-scopes">本地空间的命名（<code>Names inside local scopes</code>）</h3>
+<p>命名的规则如下：</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/img/image_cs61a_notes/image22.png"
+        data-srcset="/img/image_cs61a_notes/image22.png, /img/image_cs61a_notes/image22.png 1.5x, /img/image_cs61a_notes/image22.png 2x"
+        data-sizes="auto"
+        alt="/img/image_cs61a_notes/image22.png"
+        title="/img/image_cs61a_notes/image22.png" /></p>
+<p><code>eg</code>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># access is allowed</span>
+</span></span><span style="display:flex;"><span>attendees <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">mark_attendance</span>(name):
+</span></span><span style="display:flex;"><span>    attendees<span style="color:#f92672">.</span>append(name)
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#34;In attendance:&#34;</span>, attendees)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>mark_attendance(<span style="color:#e6db74">&#34;Emily&#34;</span>)
+</span></span><span style="display:flex;"><span>mark_attendance(<span style="color:#e6db74">&#34;Cristiano&#34;</span>)
+</span></span><span style="display:flex;"><span>mark_attendance(<span style="color:#e6db74">&#34;Samantha&#34;</span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># re-assign is not allowed</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># UnboundLocalError: local variable &#39;current&#39; referenced before assignment</span>
+</span></span><span style="display:flex;"><span>current <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">count</span>():
+</span></span><span style="display:flex;"><span>    current <span style="color:#f92672">=</span> current <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>     <span style="color:#75715e"># 🚫  Error!</span>
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#34;Count:&#34;</span>, current)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>count()
+</span></span><span style="display:flex;"><span>count()
+</span></span></code></pre></div><p>可以使用<code>global</code>描述符引入全局环境的变量（但应尽量避免使用<code>global</code>）：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Re-assigning globals</span>
+</span></span><span style="display:flex;"><span>current <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">count</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">global</span> current
+</span></span><span style="display:flex;"><span>    current <span style="color:#f92672">=</span> current <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#34;Count:&#34;</span>, current)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>count()
+</span></span><span style="display:flex;"><span>count()
+</span></span></code></pre></div><h3 id="嵌套空间内的名称names-inside-nested-scopes">嵌套空间内的名称（<code>Names inside nested scopes</code>）</h3>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/img/image_cs61a_notes/image25.png"
+        data-srcset="/img/image_cs61a_notes/image25.png, /img/image_cs61a_notes/image25.png 1.5x, /img/image_cs61a_notes/image25.png 2x"
+        data-sizes="auto"
+        alt="/img/image_cs61a_notes/image25.png"
+        title="/img/image_cs61a_notes/image25.png" /></p>
+<p>不允许在嵌套函数中重命名变量，因为根据计算顺序，左值会先创建<code>current</code>，右值访问<code>current</code>时，又会发现<code>current</code>没有绑定任何对象，就直接访问。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># UnboundLocalError: local variable &#39;current&#39; referenced before assignment</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">make_counter</span>(start):
+</span></span><span style="display:flex;"><span>    current <span style="color:#f92672">=</span> start
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">count</span>():
+</span></span><span style="display:flex;"><span>        current <span style="color:#f92672">=</span> current <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#34;Count:&#34;</span>, current)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> count
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>counter <span style="color:#f92672">=</span> make_counter(<span style="color:#ae81ff">30</span>)
+</span></span><span style="display:flex;"><span>counter()
+</span></span><span style="display:flex;"><span>counter()
+</span></span><span style="display:flex;"><span>counter()
+</span></span></code></pre></div><p>可以使用<code>nonlocal</code>修饰符（<code>Python3</code>的新特性），在嵌套函数中引入父函数的变量（但应尽量避免使用<code>nonlocal</code>）：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># The nonlocal declaration tells Python to look in the parent frame for the name lookup.</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">make_counter</span>(start):
+</span></span><span style="display:flex;"><span>    current <span style="color:#f92672">=</span> start
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">count</span>():
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">nonlocal</span> current
+</span></span><span style="display:flex;"><span>        current <span style="color:#f92672">=</span> current <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#34;Count:&#34;</span>, current)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> count
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>counter <span style="color:#f92672">=</span> make_counter(<span style="color:#ae81ff">30</span>)
+</span></span><span style="display:flex;"><span>counter()
+</span></span><span style="display:flex;"><span>counter()
+</span></span><span style="display:flex;"><span>counter()
+</span></span></code></pre></div><h2 id="lecture-15-iterators--generators">Lecture #15: Iterators + Generators</h2>
+<p><code>Slide</code>：<a href="https://inst.eecs.berkeley.edu/~cs61a/sp21/assets/slides/15-Iterators_&#43;_Generators_full.pdf" target="_blank" rel="noopener noreffer ">15-Iterators_+_Generators_full.pdf</a></p>
+<p><code>Homework</code>：<a href="https://inst.eecs.berkeley.edu/~cs61a/sp21/hw/hw04/" target="_blank" rel="noopener noreffer ">Homework 4: Trees, Data Abstraction</a></p>
+<h3 id="可迭代对象iterables">可迭代对象（<code>Iterables</code>）</h3>
+<p>列表、元组、字典、字符串都是<code>可迭代对象</code>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Lists, tuples, dictionaries, and strings are all iterable objects.</span>
+</span></span><span style="display:flex;"><span>my_order <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#34;Yuca Shepherds Pie&#34;</span>, <span style="color:#e6db74">&#34;Pão de queijo&#34;</span>, <span style="color:#e6db74">&#34;Guaraná&#34;</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>ranked_chocolates <span style="color:#f92672">=</span> (<span style="color:#e6db74">&#34;Dark&#34;</span>, <span style="color:#e6db74">&#34;Milk&#34;</span>, <span style="color:#e6db74">&#34;White&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>prices <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;pineapple&#34;</span>: <span style="color:#ae81ff">9.99</span>, <span style="color:#e6db74">&#34;pen&#34;</span>: <span style="color:#ae81ff">2.99</span>, <span style="color:#e6db74">&#34;pineapple-pen&#34;</span>: <span style="color:#ae81ff">19.99</span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>best_topping <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;pineapple&#34;</span>
+</span></span></code></pre></div><p>这些类型都支持循环迭代：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># We can iterate over iterable objects:</span>
+</span></span><span style="display:flex;"><span>my_order <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#34;Yuca Shepherds Pie&#34;</span>, <span style="color:#e6db74">&#34;Pão de queijo&#34;</span>, <span style="color:#e6db74">&#34;Guaraná&#34;</span>]
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> item <span style="color:#f92672">in</span> my_order:
+</span></span><span style="display:flex;"><span>    print(item)
+</span></span><span style="display:flex;"><span>lowered <span style="color:#f92672">=</span> [item<span style="color:#f92672">.</span>lower() <span style="color:#66d9ef">for</span> item <span style="color:#f92672">in</span> my_order]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>ranked_chocolates <span style="color:#f92672">=</span> (<span style="color:#e6db74">&#34;Dark&#34;</span>, <span style="color:#e6db74">&#34;Milk&#34;</span>, <span style="color:#e6db74">&#34;White&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> chocolate <span style="color:#f92672">in</span> ranked_chocolates:
+</span></span><span style="display:flex;"><span>    print(chocolate)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>prices <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;pineapple&#34;</span>: <span style="color:#ae81ff">9.99</span>, <span style="color:#e6db74">&#34;pen&#34;</span>: <span style="color:#ae81ff">2.99</span>, <span style="color:#e6db74">&#34;pineapple-pen&#34;</span>: <span style="color:#ae81ff">19.99</span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> product <span style="color:#f92672">in</span> prices:
+</span></span><span style="display:flex;"><span>    print(product, <span style="color:#e6db74">&#34; costs &#34;</span>, prices[product])
+</span></span><span style="display:flex;"><span>discounted <span style="color:#f92672">=</span> { item: prices[item] <span style="color:#f92672">*</span> <span style="color:#ae81ff">0.75</span> <span style="color:#66d9ef">for</span> item <span style="color:#f92672">in</span> prices }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>best_topping <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;pineapple&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> letter <span style="color:#f92672">in</span> best_topping:
+</span></span><span style="display:flex;"><span>    print(letter)
+</span></span></code></pre></div><h3 id="迭代器iterators">迭代器（<code>Iterators</code>）</h3>
+<p>迭代器可以提供对可迭代序列的元素的访问，一次访问一个元素：</p>
+<p><code>iter(iterable)</code>函数返回可迭代对象<code>iterable</code>的迭代器。</p>
+<p><code>next(iterator)</code>函数返回迭代器<code>iterator</code>的下一个元素。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># An iterator is an object that provides sequential access to values, one by one.</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># iter(iterable) returns an iterator over the elements of an iterable.</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># next(iterator) returns the next element in an iterator.</span>
+</span></span><span style="display:flex;"><span>toppings <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#34;pineapple&#34;</span>, <span style="color:#e6db74">&#34;pepper&#34;</span>, <span style="color:#e6db74">&#34;mushroom&#34;</span>, <span style="color:#e6db74">&#34;roasted red pepper&#34;</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>topperator <span style="color:#f92672">=</span> iter(toppings)
+</span></span><span style="display:flex;"><span>next(topperator) <span style="color:#75715e"># &#39;pineapple&#39;</span>
+</span></span><span style="display:flex;"><span>next(topperator) <span style="color:#75715e"># &#39;pepper&#39;</span>
+</span></span><span style="display:flex;"><span>next(topperator) <span style="color:#75715e"># &#39;mushroom&#39;</span>
+</span></span><span style="display:flex;"><span>next(topperator) <span style="color:#75715e"># &#39;roasted red pepper&#39;</span>
+</span></span><span style="display:flex;"><span>next(topperator) <span style="color:#75715e"># ❌ StopIteration exception</span>
+</span></span></code></pre></div><p>迭代器中不含元素时调用<code>next</code>，会返回一个<code>StopIteration: StopIteration</code>对象，停止迭代。</p>
+<p>可以使用<code>try/except</code>捕获异常：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># An unhandled exception will immediately stop a program.</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Use try/except to handle an exception:</span>
+</span></span><span style="display:flex;"><span>ranked_chocolates <span style="color:#f92672">=</span> (<span style="color:#e6db74">&#34;Dark&#34;</span>, <span style="color:#e6db74">&#34;Milk&#34;</span>, <span style="color:#e6db74">&#34;White&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>chocolaterator <span style="color:#f92672">=</span> iter(ranked_chocolates)
+</span></span><span style="display:flex;"><span>print(next(chocolaterator))
+</span></span><span style="display:flex;"><span>print(next(chocolaterator))
+</span></span><span style="display:flex;"><span>print(next(chocolaterator))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>    print(next(chocolaterator))
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">except</span> <span style="color:#a6e22e">StopIteration</span>:
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#34;No more left!&#34;</span>)
+</span></span></code></pre></div><p>但这样我们就需要知道迭代器的元素个数，可以使用<code>while</code>循环：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># We can use a while loop to process iterators of arbitrary length:</span>
+</span></span><span style="display:flex;"><span>ranked_chocolates <span style="color:#f92672">=</span> (<span style="color:#e6db74">&#34;Dark&#34;</span>, <span style="color:#e6db74">&#34;Milk&#34;</span>, <span style="color:#e6db74">&#34;White&#34;</span>)
+</span></span><span style="display:flex;"><span>chocolaterator <span style="color:#f92672">=</span> iter(ranked_chocolates)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> <span style="color:#66d9ef">True</span>:
+</span></span><span style="display:flex;"><span>        choco <span style="color:#f92672">=</span> next(chocolaterator)
+</span></span><span style="display:flex;"><span>        print(choco)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">except</span> <span style="color:#a6e22e">StopIteration</span>:
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#34;No more left!&#34;</span>)
+</span></span></code></pre></div><h3 id="迭代器与for循环iterators-vs-for-loops">迭代器与<code>For</code>循环（<code>Iterators vs. For loops</code>）</h3>
+<p>上述使用<code>while</code>的迭代器可以用<code>for</code>循环替代：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># use for loops</span>
+</span></span><span style="display:flex;"><span>ranked_chocolates <span style="color:#f92672">=</span> (<span style="color:#e6db74">&#34;Dark&#34;</span>, <span style="color:#e6db74">&#34;Milk&#34;</span>, <span style="color:#e6db74">&#34;White&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> chocolate <span style="color:#f92672">in</span> ranked_chocolates:
+</span></span><span style="display:flex;"><span>    print(chocolate)
+</span></span></code></pre></div><p><code>for</code>循环可以视为对迭代器的封装（语法糖）。</p>
+<h3 id="for循环的执行for-loop-execution"><code>For</code>循环的执行（<code>For loop execution</code>）</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> <span style="color:#f92672">&lt;</span>name<span style="color:#f92672">&gt;</span> <span style="color:#f92672">in</span> <span style="color:#f92672">&lt;</span>expression<span style="color:#f92672">&gt;</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;</span>suite<span style="color:#f92672">&gt;</span>
+</span></span></code></pre></div><p>上述语句执行过程如下：</p>
+<blockquote>
+<ol>
+<li>
+<p>Python evaluates <code>&lt;expression&gt;</code> to make sure it&rsquo;s an iterable.</p>
+</li>
+<li>
+<p>Python gets an iterator for the iterable.</p>
+</li>
+<li>
+<p>Python gets the next value from the iterator and assigns to <code>&lt;name&gt;</code>.</p>
+</li>
+<li>
+<p>Python executes <code>&lt;suite&gt;</code>.</p>
+</li>
+<li>
+<p>Python repeats until it sees a StopIteration error.</p>
+</li>
+</ol>
+</blockquote>
+<p>与以下代码等价：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>iterator <span style="color:#f92672">=</span> iter(<span style="color:#f92672">&lt;</span>expression<span style="color:#f92672">&gt;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> <span style="color:#66d9ef">True</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;</span>name<span style="color:#f92672">&gt;</span> <span style="color:#f92672">=</span> next(iterator)
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;</span>suite<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">except</span> <span style="color:#a6e22e">StopIteration</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">pass</span>
+</span></span></code></pre></div><p><code>for</code>循环迭代是更好的选择，无论从语法的简洁性还是从程序的性能开销考虑。</p>
+<h3 id="__next__-and-__iter__"><code>__next__() and __iter__()</code></h3>
+<p>调用<code>next()</code>函数时，会调用迭代器内置的<code>__next__()</code>函数：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># When the iter() function is passed an iterable object, it calls the __iter__() method on it:</span>
+</span></span><span style="display:flex;"><span>ranked_chocolates <span style="color:#f92672">=</span> (<span style="color:#e6db74">&#34;Dark&#34;</span>, <span style="color:#e6db74">&#34;Milk&#34;</span>, <span style="color:#e6db74">&#34;White&#34;</span>)
+</span></span><span style="display:flex;"><span>chocorator1 <span style="color:#f92672">=</span> iter(ranked_chocolates)
+</span></span><span style="display:flex;"><span>chocorator2 <span style="color:#f92672">=</span> ranked_chocolates<span style="color:#f92672">.</span>__iter__()
+</span></span></code></pre></div><p>调用<code>iter()</code>函数时，会调用迭代器内置的<code>__iter__()</code>函数：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># When the next() function is passed an iterator, it calls the __next__() method on it:</span>
+</span></span><span style="display:flex;"><span>ranked_chocolates <span style="color:#f92672">=</span> (<span style="color:#e6db74">&#34;Dark&#34;</span>, <span style="color:#e6db74">&#34;Milk&#34;</span>, <span style="color:#e6db74">&#34;White&#34;</span>)
+</span></span><span style="display:flex;"><span>chocolate1 <span style="color:#f92672">=</span> next(chocorator1)
+</span></span><span style="display:flex;"><span>chocolate2 <span style="color:#f92672">=</span> chocorator2<span style="color:#f92672">.</span>__next__()
+</span></span></code></pre></div><h3 id="返回迭代器的函数functions-that-return-iterators">返回迭代器的函数（<code>Functions that return iterators</code>）</h3>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/img/image_cs61a_notes/image24.png"
+        data-srcset="/img/image_cs61a_notes/image24.png, /img/image_cs61a_notes/image24.png 1.5x, /img/image_cs61a_notes/image24.png 2x"
+        data-sizes="auto"
+        alt="/img/image_cs61a_notes/image24.png"
+        title="/img/image_cs61a_notes/image24.png" /></p>
+<p><code>reversed(sequence)</code>函数会返回<code>sequence</code>的逆序的迭代器：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Iterate over item in sequence in reverse order</span>
+</span></span><span style="display:flex;"><span>chocolate_bars <span style="color:#f92672">=</span> (<span style="color:#e6db74">&#34;90%&#34;</span>, <span style="color:#e6db74">&#34;70%&#34;</span>, <span style="color:#e6db74">&#34;55%&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>worst_first <span style="color:#f92672">=</span> reversed(chocolate_bars)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> chocolate <span style="color:#f92672">in</span> worst_first:
+</span></span><span style="display:flex;"><span>    print(chocolate)
+</span></span></code></pre></div><p><code>zip(*iterables)</code>函数返回若干可迭代对象的合并，第<code>i</code>个元素是<code>(a1[i]， a2[i], ..., an[i])</code>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Iterate over co-indexed tuples with elements from each of the iterables</span>
+</span></span><span style="display:flex;"><span>eng_nums <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#34;one&#34;</span>, <span style="color:#e6db74">&#34;two&#34;</span>, <span style="color:#e6db74">&#34;three&#34;</span>]
+</span></span><span style="display:flex;"><span>esp_nums <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#34;uno&#34;</span>, <span style="color:#e6db74">&#34;dos&#34;</span>, <span style="color:#e6db74">&#34;tres&#34;</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>zip_iter <span style="color:#f92672">=</span> zip(eng_nums, esp_nums)
+</span></span><span style="display:flex;"><span>eng, esp <span style="color:#f92672">=</span> next(zip_iter)
+</span></span><span style="display:flex;"><span>print(eng, esp)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> eng, esp <span style="color:#f92672">in</span> zip(eng_nums, esp_nums):
+</span></span><span style="display:flex;"><span>    print(eng, esp)
+</span></span></code></pre></div><p><code>map(func, iterable, ...)</code>函数，返回一个迭代器，元素是<code>func(x)</code>，<code>x</code>是可迭代对象<code>iterable</code>的元素：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Iterate over func(x) for x in iterable</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Same as [func(x) for x in iterable]</span>
+</span></span><span style="display:flex;"><span>nums <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Map returns an iterator</span>
+</span></span><span style="display:flex;"><span>squares1 <span style="color:#f92672">=</span> map(<span style="color:#66d9ef">lambda</span> num: num <span style="color:#f92672">**</span> <span style="color:#ae81ff">2</span>, nums)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Create a list of all the elements from the iterator</span>
+</span></span><span style="display:flex;"><span>squares1 <span style="color:#f92672">=</span> list(squares1)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Compare to...</span>
+</span></span><span style="display:flex;"><span>squares2 <span style="color:#f92672">=</span> [num<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span> <span style="color:#66d9ef">for</span> num <span style="color:#f92672">in</span> nums]
+</span></span></code></pre></div><p><code>filter(func, iterable)</code>函数，返回一个迭代器，元素是可迭代对象<code>iterable</code>中满足<code>func(x)</code>的元素：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Iterate over x in iterable if func(x)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Same as [x for x in iterable if func(x)]</span>
+</span></span><span style="display:flex;"><span>nums <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Filter returns an iterator</span>
+</span></span><span style="display:flex;"><span>even1 <span style="color:#f92672">=</span> filter(<span style="color:#66d9ef">lambda</span> num: num <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>, nums)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Create a list of all the elements from the iterator</span>
+</span></span><span style="display:flex;"><span>even1 <span style="color:#f92672">=</span> list(even1)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Compare to...</span>
+</span></span><span style="display:flex;"><span>even2 <span style="color:#f92672">=</span> [num <span style="color:#66d9ef">for</span> num <span style="color:#f92672">in</span> nums <span style="color:#66d9ef">if</span> num <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>]
+</span></span></code></pre></div><h3 id="返回可迭代对象的函数functions-that-return-iterables">返回可迭代对象的函数（<code>Functions that return iterables</code>）</h3>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/img/image_cs61a_notes/image25.png"
+        data-srcset="/img/image_cs61a_notes/image25.png, /img/image_cs61a_notes/image25.png 1.5x, /img/image_cs61a_notes/image25.png 2x"
+        data-sizes="auto"
+        alt="/img/image_cs61a_notes/image25.png"
+        title="/img/image_cs61a_notes/image25.png" /></p>
+<h3 id="生成器generators">生成器（<code>Generators</code>）</h3>
+<p><code>生成器</code>是一种特殊的迭代器，从一个生成器函数中产生值：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># A generator is a type of iterator that yields results from a generator function.</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># A generator function uses yield instead of return:</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">evens</span>():
+</span></span><span style="display:flex;"><span>    num <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> num <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">10</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">yield</span> num
+</span></span><span style="display:flex;"><span>        num <span style="color:#f92672">+=</span> <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>evengen <span style="color:#f92672">=</span> evens()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>next(evengen)  <span style="color:#75715e"># 0</span>
+</span></span><span style="display:flex;"><span>next(evengen)  <span style="color:#75715e"># 2</span>
+</span></span><span style="display:flex;"><span>next(evengen)  <span style="color:#75715e"># 4</span>
+</span></span><span style="display:flex;"><span>next(evengen)  <span style="color:#75715e"># 6</span>
+</span></span><span style="display:flex;"><span>next(evengen)  <span style="color:#75715e"># 8</span>
+</span></span><span style="display:flex;"><span>next(evengen)  <span style="color:#75715e"># ❌ StopIteration exception</span>
+</span></span></code></pre></div><h3 id="生成器是如何工作的how-generators-work">生成器是如何工作的（<code>How generators work</code>）</h3>
+<p>生成器中运作原理如下：</p>
+<blockquote>
+<ul>
+<li>When the function is called, Python immediately returns an iterator without entering the function.</li>
+<li>When <code>next()</code>is called on the iterator, it executes the body of the generator from the last stopping point up to the next <code>yield</code> statement.</li>
+<li>If it finds a <code>yield</code> statement, it pauses on the next statement and returns the value of the yielded expression.</li>
+<li>If it doesn&rsquo;t reach a yield statement, it stops at the end of the function and raises a <code>StopIteration</code> exception.</li>
+</ul>
+</blockquote>
+<h3 id="基于生成器的循环looping-over-generators">基于生成器的循环（<code>Looping over generators</code>）</h3>
+<p>可以在<code>for</code>循环中使用生成器，因为生成器是特殊的迭代器：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># We can use for loops on generators, since generators are just special types of iterators.</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">evens</span>(start, end):
+</span></span><span style="display:flex;"><span>    num <span style="color:#f92672">=</span> start <span style="color:#f92672">+</span> (start <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> num <span style="color:#f92672">&lt;</span> end:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">yield</span> num
+</span></span><span style="display:flex;"><span>        num <span style="color:#f92672">+=</span> <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> num <span style="color:#f92672">in</span> evens(<span style="color:#ae81ff">12</span>, <span style="color:#ae81ff">60</span>):
+</span></span><span style="display:flex;"><span>   print(num)
+</span></span></code></pre></div><p>与下面代码等价：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Looks a lot like...</span>
+</span></span><span style="display:flex;"><span>evens <span style="color:#f92672">=</span> [num <span style="color:#66d9ef">for</span> num <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">12</span>, <span style="color:#ae81ff">60</span>) <span style="color:#66d9ef">if</span> num <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>]
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Or  = filter(lambda x: x % 2 == 0, range(12, 60))</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> num <span style="color:#f92672">in</span> evens:
+</span></span><span style="display:flex;"><span>    print(num)
+</span></span></code></pre></div><h3 id="为什么使用生成器why-use-generators">为什么使用生成器（<code>Why use generators?</code>）</h3>
+<p>生成器只有在需要下一个元素时才会调用生成器函数，如果迭代的对象很大，那么使用生成器是个比较好的选择。</p>
+<p>下面的代码会计算整个序列：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Generators are lazy: they only generate the next item when needed.</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Why generate the whole sequence...</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">find_matches</span>(filename, <span style="color:#66d9ef">match</span>):
+</span></span><span style="display:flex;"><span>    matched <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> line <span style="color:#f92672">in</span> open(filename):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> line<span style="color:#f92672">.</span>find(<span style="color:#66d9ef">match</span>) <span style="color:#f92672">&gt;</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>:
+</span></span><span style="display:flex;"><span>            matched<span style="color:#f92672">.</span>append(line)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> matched
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>matched_lines <span style="color:#f92672">=</span> find_matches(<span style="color:#e6db74">&#39;frankenstein.txt&#39;</span>, <span style="color:#e6db74">&#34;!&#34;</span>)
+</span></span><span style="display:flex;"><span>matched_lines[<span style="color:#ae81ff">0</span>]
+</span></span><span style="display:flex;"><span>matched_lines[<span style="color:#ae81ff">1</span>]
+</span></span></code></pre></div><p>使用生成器只生成部分元素：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># ...if you only want some elements?</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">find_matches</span>(filename, <span style="color:#66d9ef">match</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> line <span style="color:#f92672">in</span> open(filename):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> line<span style="color:#f92672">.</span>find(<span style="color:#66d9ef">match</span>) <span style="color:#f92672">&gt;</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">yield</span> line
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>line_iter <span style="color:#f92672">=</span> find_matches(<span style="color:#e6db74">&#39;frankenstein.txt&#39;</span>, <span style="color:#e6db74">&#34;!&#34;</span>)
+</span></span><span style="display:flex;"><span>next(line_iter)
+</span></span><span style="display:flex;"><span>next(line_iter)
+</span></span></code></pre></div><h3 id="yield-from从迭代器生成元素yielding-from-iterables"><code>yield from</code>：从迭代器生成元素（<code>Yielding from iterables</code>）</h3>
+<p><code>yield from iterable</code>可以从一个迭代器生成元素，一次生成一个元素。</p>
+<p>先从迭代器<code>a</code>中生成，再从迭代器<code>b</code>中生成：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># A yield from statement yields the values from an iterator one at a time. 🍬</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Instead of...</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">a_then_b</span>(a, b):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> item <span style="color:#f92672">in</span> a:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">yield</span> item
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> item <span style="color:#f92672">in</span> b:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">yield</span> item
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>list(a_then_b([<span style="color:#e6db74">&#34;Apples&#34;</span>, <span style="color:#e6db74">&#34;Aardvarks&#34;</span>], [<span style="color:#e6db74">&#34;Bananas&#34;</span>, <span style="color:#e6db74">&#34;BEARS&#34;</span>]))
+</span></span></code></pre></div><p>使用<code>yield from</code>的等价版本：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># We can write...</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">a_then_b</span>(a, b):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">yield from</span> a
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">yield from</span> b
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>list(a_then_b([<span style="color:#e6db74">&#34;Apples&#34;</span>, <span style="color:#e6db74">&#34;Aardvarks&#34;</span>], [<span style="color:#e6db74">&#34;Bananas&#34;</span>, <span style="color:#e6db74">&#34;BEARS&#34;</span>]))
+</span></span></code></pre></div><p><code>yield from</code>也可以从生成器函数的结果中生成值：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># A yield from can also yield the results of a generator function.</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Instead of...</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">factorial</span>(n, accum):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> n <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">yield</span> accum
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> result <span style="color:#f92672">in</span> factorial(n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, n <span style="color:#f92672">*</span> accum):
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">yield</span> result
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> num <span style="color:#f92672">in</span> factorial(<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">1</span>):
+</span></span><span style="display:flex;"><span>    print(num)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># We can write...</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">factorial</span>(n, accum):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> n <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">yield</span> accum
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">yield from</span> factorial(n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, n <span style="color:#f92672">*</span> accum)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> num <span style="color:#f92672">in</span> factorial(<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">1</span>):
+</span></span><span style="display:flex;"><span>    print(num)
+</span></span></code></pre></div><h3 id="树的递归生成器recursive-generators-for-trees">树的递归生成器（<code>Recursive generators for trees</code>）</h3>
+<p>生成器支持递归，那么树也可以有生成器：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># A pre-order traversal of the tree leaves:</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">leaves</span>(t):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">yield</span> label(t)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> c <span style="color:#f92672">in</span> branches(t):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">yield from</span> leaves(c)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>t <span style="color:#f92672">=</span> tree(<span style="color:#ae81ff">20</span>, [tree(<span style="color:#ae81ff">12</span>,
+</span></span><span style="display:flex;"><span>               [tree(<span style="color:#ae81ff">9</span>,
+</span></span><span style="display:flex;"><span>                  [tree(<span style="color:#ae81ff">7</span>), tree(<span style="color:#ae81ff">2</span>)]),
+</span></span><span style="display:flex;"><span>                tree(<span style="color:#ae81ff">3</span>)]),
+</span></span><span style="display:flex;"><span>              tree(<span style="color:#ae81ff">8</span>,
+</span></span><span style="display:flex;"><span>               [tree(<span style="color:#ae81ff">4</span>), tree(<span style="color:#ae81ff">4</span>)])])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>leave_gen <span style="color:#f92672">=</span> leaves(t)
+</span></span><span style="display:flex;"><span>next(leave_gen)
+</span></span></code></pre></div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-08-05</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://Maxwell2020152049.github.io/posts/cs61a_notes_week6/" data-title="CS61A week6 study note" data-hashtags="Python"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://Maxwell2020152049.github.io/posts/cs61a_notes_week6/" data-hashtag="Python"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://Maxwell2020152049.github.io/posts/cs61a_notes_week6/" data-title="CS61A week6 study note"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://Maxwell2020152049.github.io/posts/cs61a_notes_week6/" data-title="CS61A week6 study note"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://Maxwell2020152049.github.io/posts/cs61a_notes_week6/" data-title="CS61A week6 study note"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/python/">Python</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/cs61a_lab_lab05/" class="prev" rel="prev" title="CS61A Lab lab05"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>CS61A Lab lab05</a>
+            <a href="/posts/cs61a_homework_hw04/" class="next" rel="next" title="CS61A Homework hw04">CS61A Homework hw04<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.115.4">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank"></a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

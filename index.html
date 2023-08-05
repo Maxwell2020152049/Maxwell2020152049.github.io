@@ -76,6 +76,40 @@
         alt="https://th.bing.com/th/id/OIP.bs9ePxW88yyxsxRKmQt_MQHaHa?w=193&amp;h=193&amp;c=7&amp;r=0&amp;o=5&amp;pid=1.7"
         title="https://th.bing.com/th/id/OIP.bs9ePxW88yyxsxRKmQt_MQHaHa?w=193&amp;h=193&amp;c=7&amp;r=0&amp;o=5&amp;pid=1.7" /></div><div class="home-subtitle"><div id="id-1" class="typeit"></div></div><div class="links"><a href="https://github.com/Maxwell2020152049" title="GitHub" target="_blank" rel="noopener noreffer me"><i class="fab fa-github fa-fw" aria-hidden="true"></i></a></div></div>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/cs61a_homework_hw04/">CS61A Homework hw04</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-08-06">2023-08-06</time></span>&nbsp;<span class="post-category">included in <a href="/categories/cs61a/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>CS61A</a></span></div><div class="content">Homework 4: Trees, Data Abstraction 作业链接：Homework 4: Trees, Data Abstraction
+使用以下命令可以下载作业：
+wget https://inst.eecs.berkeley.edu/~cs61a/sp21/hw/hw04/hw04.zip 本次作业的内容主要涉及抽象数据类型的编程，题目背景一般较为冗长，故不多加赘述，详见作业链接。
+做完实验，恍如隔世，不禁感叹 最是人间留不住，朱颜辞镜花辞树。
+Abstraction Q1: Weights 实现代码如下：
+def planet(size): &#34;&#34;&#34;Construct a planet of some size.&#34;&#34;&#34; assert size &gt; 0 &#34;*** YOUR CODE HERE ***&#34; return [&#39;planet&#39;, size] def size(w): &#34;&#34;&#34;Select the size of a planet.&#34;&#34;&#34; assert is_planet(w), &#39;must call size on a planet&#39; &#34;*** YOUR CODE HERE ***&#34; return w[1] Q2: Balanced 实现代码如下：
+def balanced(m): &#34;&#34;&#34;Return whether m is balanced.</div><div class="post-footer">
+        <a href="/posts/cs61a_homework_hw04/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/python/">Python</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/cs61a_notes_week6/">CS61A week6 study note</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-08-05">2023-08-05</time></span>&nbsp;<span class="post-category">included in <a href="/categories/cs61a/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>CS61A</a></span></div><div class="content">Week6 CS 61A 2021 Fall官网：CS 61A: Structure and Interpretation of Computer Programs
+翻译视频：【计算机程序的构造和解释】精译【UC Berkeley 公开课-CS61A (Spring 2021)】-中英双语字幕
+github:Maxwell2020152049/CS61A
+Lecture #13: Mutable Values Slide：13-Mutable_Values_full.pdf
+Lab：Lab 5: Python Lists, Data Abstraction, Trees
+树的抽象层次（Tree: Layers of abstraction） 每一个层次的抽象都由上一个层次的抽象实现。
+Each layer only uses the layer above it.
+一种树的实现（A tree() implementation） 本节课使用以元组为树，以列表为子树的方法创建树。
+创建如下的树，draw是CS 61A Coder中实现的函数，能够绘制不同类型的结构的图形：
+def tree(label, children=None): &#34;&#34;&#34; Creates a tree whose root node is labeled LABEL and optionally has CHILDREN, a list of trees.</div><div class="post-footer">
+        <a href="/posts/cs61a_notes_week6/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/python/">Python</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/cs61a_lab_lab05/">CS61A Lab lab05</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-08-05">2023-08-05</time></span>&nbsp;<span class="post-category">included in <a href="/categories/cs61a/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>CS61A</a></span></div><div class="content">Lab 5: Python Lists, Data Abstraction, Trees 实验链接：Lab 5: Python Lists, Data Abstraction, Trees
+如何下载实验压缩包：
+wget https://inst.eecs.berkeley.edu/~cs61a/sp21/lab/lab05/lab05.zip Required Questions List Comprehensions Q1: Couple 实现函数couple(s, t)，s和t是两个长度相同的列表，返回一个列表，第i个元素是[s[i], t[i]]。
+实现代码如下：
+def couple(s, t): &#34;&#34;&#34;Return a list of two-element lists in which the i-th element is [s[i], t[i]]. &gt;&gt;&gt; a = [1, 2, 3] &gt;&gt;&gt; b = [4, 5, 6] &gt;&gt;&gt; couple(a, b) [[1, 4], [2, 5], [3, 6]] &gt;&gt;&gt; c = [&#39;c&#39;, 6] &gt;&gt;&gt; d = [&#39;s&#39;, &#39;1&#39;] &gt;&gt;&gt; couple(c, d) [[&#39;c&#39;, &#39;s&#39;], [6, &#39;1&#39;]] &#34;&#34;&#34; assert len(s) == len(t) &#34;*** YOUR CODE HERE ***&#34; return [[x, y] for x, y in zip(s, t)] Data Abstraction 本实验提供了一个城市的抽象数据类型（ADT），用法如下：</div><div class="post-footer">
+        <a href="/posts/cs61a_lab_lab05/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/python/">Python</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
         <a href="/posts/cs61a_project_cats/">CS61A Project Cats</a>
     </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-08-03">2023-08-03</time></span>&nbsp;<span class="post-category">included in <a href="/categories/cs61a/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>CS61A</a></span></div><div class="content">Project 2: CS 61A Autocorrected Typing Software Project地址：Project 2: CS 61A Autocorrected Typing Software
 使用如下命令可以下载项目：
@@ -98,47 +132,13 @@ python3 ok -q recursion-wwpd -u --local 结果如下：
                 <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/python/">Python</a></div></div>
 </article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
         <a href="/posts/cs61a_homework_hw03/">CS61A Homework hw03</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-08-02">2023-08-02</time></span>&nbsp;<span class="post-category">included in <a href="/categories/cs61a/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>CS61A</a></span></div><div class="content">Homework 2: Higher Order Functions 作业链接：Homework 3: Recursion
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-08-02">2023-08-02</time></span>&nbsp;<span class="post-category">included in <a href="/categories/cs61a/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>CS61A</a></span></div><div class="content">Homework 3: Recursion 作业链接：Homework 3: Recursion
 使用以下命令可以下载作业：
 wget https://inst.eecs.berkeley.edu/~cs61a/sp21/hw/hw03/hw03.zip Required questions Q1: Num eights 实现一个递归函数num_eights(x)，返回x的位等于8的个数。
 不允许使用=、+=等赋值运算符。
 实现代码如下：
 def num_eights(x): &#34;&#34;&#34;Returns the number of times 8 appears as a digit of x. &gt;&gt;&gt; num_eights(3) 0 &gt;&gt;&gt; num_eights(8) 1 &gt;&gt;&gt; num_eights(88888888) 8 &gt;&gt;&gt; num_eights(2638) 1 &gt;&gt;&gt; num_eights(86380) 2 &gt;&gt;&gt; num_eights(12345) 0 &gt;&gt;&gt; from construct_check import check &gt;&gt;&gt; # ban all assignment statements &gt;&gt;&gt; check(HW_SOURCE_FILE, &#39;num_eights&#39;, ... [&#39;Assign&#39;, &#39;AugAssign&#39;]) True &#34;&#34;&#34; &#34;*** YOUR CODE HERE ***&#34; if x &lt; 10: return 1 if x == 8 else 0 return (1 if x % 10 == 8 else 0) + num_eights(x // 10) 使用python中布尔值和整数相加返回整数的特性，也可以实现如下：</div><div class="post-footer">
         <a href="/posts/cs61a_homework_hw03/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/python/">Python</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/cs61a_lab_lab02/">CS61A Lab lab02</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-08-01">2023-08-01</time></span>&nbsp;<span class="post-category">included in <a href="/categories/cs61a/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>CS61A</a></span></div><div class="content">Lab 2: Higher-Order Functions, Lambda Expressions 实验链接：Lab 2: Higher-Order Functions, Lambda Expressions
-如何下载实验压缩包：
-wget https://inst.eecs.berkeley.edu/~cs61a/sp21/lab/lab02/lab02.zip What Would Python Display? Q1: WWPD: Lambda the Free 输入以下命令进行测试：
-如果结果是函数，就输入Function，如果是错误就输入Error，如果没有输出就输入Nothing。
-python3 ok -q lambda -u --local 过程如下：
-===================================================================== Assignment: Lab 2 OK, version v1.18.1 ===================================================================== ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Unlocking tests At each &#34;? &#34;, type what you would expect the output to be. Type exit() to quit --------------------------------------------------------------------- Lambda the Free &gt; Suite 1 &gt; Case 1 (cases remaining: 7) Q: Which of the following statements describes a difference between a def statement and a lambda expression?</div><div class="post-footer">
-        <a href="/posts/cs61a_lab_lab02/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/python/">Python</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/cs61a_notes_week5/">CS61A week5 study note</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-08-01">2023-08-01</time></span>&nbsp;<span class="post-category">included in <a href="/categories/cs61a/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>CS61A</a></span></div><div class="content">Week5 CS 61A 2021 Fall官网：CS 61A: Structure and Interpretation of Computer Programs
-翻译视频：【计算机程序的构造和解释】精译【UC Berkeley 公开课-CS61A (Spring 2021)】-中英双语字幕
-github:Maxwell2020152049/CS61A
-Lecture #12: Dictionaries, Matrices, and Trees： Project：Project 2: CS 61A Autocorrected Typing Software
-Slide：12-Trees_full.pdf or 12-Trees.html
-抽象层次的复习（Review: Layers of abstraction） Python类型的复习（Review: Python types） 字典（Dictionary） 字典是一种可修改的键-值对映射（key-value pair）。
-可以使用Key in Dict检查某个Key是否是字典的键，若是，返回True；若不是，返回False。
-eg：
-# Dictionaries states = { &#34;CA&#34;: &#34;California&#34;, &#34;DE&#34;: &#34;Delaware&#34;, &#34;NY&#34;: &#34;New York&#34;, &#34;TX&#34;: &#34;Texas&#34;, &#34;WY&#34;: &#34;Wyoming&#34; } print(len(states)) print(&#34;CA&#34; in states) print(&#34;ZZ&#34; in states) 输出：</div><div class="post-footer">
-        <a href="/posts/cs61a_notes_week5/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/python/">Python</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/cs61a_notes_week4/">CS61A week4 study note</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-07-31">2023-07-31</time></span>&nbsp;<span class="post-category">included in <a href="/categories/cs61a/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>CS61A</a></span></div><div class="content">Week4 CS 61A 2021 Fall官网：CS 61A: Structure and Interpretation of Computer Programs
-翻译视频：【计算机程序的构造和解释】精译【UC Berkeley 公开课-CS61A (Spring 2021)】-中英双语字幕
-github:Maxwell2020152049/CS61A
-Lecture #9: Still More on Functions Lab：Lab 3: Recursion, Tree Recursion
-Slide：09-Function_Examples_full.pdf
-练习：翻转数字（Exercise: Reversing Digits） 实现一个reverse digits(n)函数，返回翻转的n：
-def reverse_digits(n): &#34;&#34;&#34;Assuming N &gt;= 0 is an integer. Return the number whose base-10 representation is the reverse of that of N. &gt;&gt;&gt; reverse_digits(0) 0 &gt;&gt;&gt; reverse_digits(1) 1 &gt;&gt;&gt; reverse_digits(123) 321 &gt;&gt;&gt; reverse_digits(10) 1 &gt;&gt;&gt; reverse_digits(12321) 12321 &gt;&gt;&gt; reverse_digits(2222222) 2222222 &gt;&gt;&gt; reverse_digits(102) 201 &#34;&#34;&#34; assert type(n) is int and n &gt;= 0 if n &lt; 10: return n return reverse_digits(n // 10) + (n % 10) * 10 ** (num_digits(n) - 1) def num_digits(x): &#34;&#34;&#34;Return the number of decimal digits in the positive integer X.</div><div class="post-footer">
-        <a href="/posts/cs61a_notes_week4/">Read More</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/python/">Python</a></div></div>
 </article><ul class="pagination"><li class="page-item active">
                     <span class="page-link">

@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>CS61A Lab lab05 - Rex&#39;s Blog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="CS61A Lab lab05" />
+<meta property="og:description" content="Lab 5: Python Lists, Data Abstraction, Trees 实验链接：Lab 5: Python Lists, Data Abstraction, Trees
+如何下载实验压缩包：
+wget https://inst.eecs.berkeley.edu/~cs61a/sp21/lab/lab05/lab05.zip Required Questions List Comprehensions Q1: Couple 实现函数couple(s, t)，s和t是两个长度相同的列表，返回一个列表，第i个元素是[s[i], t[i]]。
+实现代码如下：
+def couple(s, t): &#34;&#34;&#34;Return a list of two-element lists in which the i-th element is [s[i], t[i]]. &gt;&gt;&gt; a = [1, 2, 3] &gt;&gt;&gt; b = [4, 5, 6] &gt;&gt;&gt; couple(a, b) [[1, 4], [2, 5], [3, 6]] &gt;&gt;&gt; c = [&#39;c&#39;, 6] &gt;&gt;&gt; d = [&#39;s&#39;, &#39;1&#39;] &gt;&gt;&gt; couple(c, d) [[&#39;c&#39;, &#39;s&#39;], [6, &#39;1&#39;]] &#34;&#34;&#34; assert len(s) == len(t) &#34;*** YOUR CODE HERE ***&#34; return [[x, y] for x, y in zip(s, t)] Data Abstraction 本实验提供了一个城市的抽象数据类型（ADT），用法如下：" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://Maxwell2020152049.github.io/posts/cs61a_lab_lab05/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-08-05T17:02:12+08:00" />
+<meta property="article:modified_time" content="2023-08-05T17:02:12+08:00" /><meta property="og:site_name" content="My cool site" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="CS61A Lab lab05"/>
+<meta name="twitter:description" content="Lab 5: Python Lists, Data Abstraction, Trees 实验链接：Lab 5: Python Lists, Data Abstraction, Trees
+如何下载实验压缩包：
+wget https://inst.eecs.berkeley.edu/~cs61a/sp21/lab/lab05/lab05.zip Required Questions List Comprehensions Q1: Couple 实现函数couple(s, t)，s和t是两个长度相同的列表，返回一个列表，第i个元素是[s[i], t[i]]。
+实现代码如下：
+def couple(s, t): &#34;&#34;&#34;Return a list of two-element lists in which the i-th element is [s[i], t[i]]. &gt;&gt;&gt; a = [1, 2, 3] &gt;&gt;&gt; b = [4, 5, 6] &gt;&gt;&gt; couple(a, b) [[1, 4], [2, 5], [3, 6]] &gt;&gt;&gt; c = [&#39;c&#39;, 6] &gt;&gt;&gt; d = [&#39;s&#39;, &#39;1&#39;] &gt;&gt;&gt; couple(c, d) [[&#39;c&#39;, &#39;s&#39;], [6, &#39;1&#39;]] &#34;&#34;&#34; assert len(s) == len(t) &#34;*** YOUR CODE HERE ***&#34; return [[x, y] for x, y in zip(s, t)] Data Abstraction 本实验提供了一个城市的抽象数据类型（ADT），用法如下："/>
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://Maxwell2020152049.github.io/posts/cs61a_lab_lab05/" /><link rel="prev" href="https://Maxwell2020152049.github.io/posts/cs61a_project_cats/" /><link rel="next" href="https://Maxwell2020152049.github.io/posts/cs61a_notes_week6/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "CS61A Lab lab05",
+        "inLanguage": "en-us",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/Maxwell2020152049.github.io\/posts\/cs61a_lab_lab05\/"
+        },"genre": "posts","keywords": "Python","wordcount":  1507 ,
+        "url": "https:\/\/Maxwell2020152049.github.io\/posts\/cs61a_lab_lab05\/","datePublished": "2023-08-05T17:02:12+08:00","dateModified": "2023-08-05T17:02:12+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Author"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Rex&#39;s Blog"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg"
+        data-srcset="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg, https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg 1.5x, https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg 2x"
+        data-sizes="auto"
+        alt="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg"
+        title="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg" />Rex&#39;s cool site</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Rex&#39;s Blog"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg"
+        data-srcset="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg, https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg 1.5x, https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg 2x"
+        data-sizes="auto"
+        alt="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg"
+        title="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg" />Rex&#39;s cool site</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">CS61A Lab lab05</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-category">included in <a href="/categories/cs61a/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>CS61A</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-08-05">2023-08-05</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1507 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;8 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#required-questions">Required Questions</a>
+      <ul>
+        <li><a href="#list-comprehensions">List Comprehensions</a></li>
+        <li><a href="#data-abstraction">Data Abstraction</a></li>
+        <li><a href="#trees">Trees</a></li>
+      </ul>
+    </li>
+    <li><a href="#optional-questions">Optional Questions</a>
+      <ul>
+        <li><a href="#q8-coordinates">Q8: Coordinates</a></li>
+        <li><a href="#q9-riffle-shuffle">Q9: Riffle Shuffle</a></li>
+        <li><a href="#q10-add-trees">Q10: Add trees</a></li>
+        <li><a href="#fun-question">Fun Question!</a></li>
+        <li><a href="#shakespeare-and-dictionaries">Shakespeare and Dictionaries</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="lab-5-python-lists-data-abstraction-trees">Lab 5: Python Lists, Data Abstraction, Trees</h1>
+<p>实验链接：<a href="https://inst.eecs.berkeley.edu/~cs61a/sp21/lab/lab05/" target="_blank" rel="noopener noreffer ">Lab 5: Python Lists, Data Abstraction, Trees</a></p>
+<p>如何下载实验压缩包：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>wget https://inst.eecs.berkeley.edu/~cs61a/sp21/lab/lab05/lab05.zip
+</span></span></code></pre></div><h2 id="required-questions">Required Questions</h2>
+<h3 id="list-comprehensions">List Comprehensions</h3>
+<h4 id="q1-couple">Q1: Couple</h4>
+<p>实现函数<code>couple(s, t)</code>，<code>s</code>和<code>t</code>是两个长度相同的列表，返回一个列表，第<code>i</code>个元素是<code>[s[i], t[i]]</code>。</p>
+<p>实现代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">couple</span>(s, t):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Return a list of two-element lists in which the i-th element is [s[i], t[i]].
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; a = [1, 2, 3]
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; b = [4, 5, 6]
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; couple(a, b)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    [[1, 4], [2, 5], [3, 6]]
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; c = [&#39;c&#39;, 6]
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; d = [&#39;s&#39;, &#39;1&#39;]
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; couple(c, d)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    [[&#39;c&#39;, &#39;s&#39;], [6, &#39;1&#39;]]
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">assert</span> len(s) <span style="color:#f92672">==</span> len(t)
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;*** YOUR CODE HERE ***&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> [[x, y] <span style="color:#66d9ef">for</span> x, y <span style="color:#f92672">in</span> zip(s, t)]
+</span></span></code></pre></div><h3 id="data-abstraction">Data Abstraction</h3>
+<p>本实验提供了一个<code>城市</code>的抽象数据类型（<code>ADT</code>），用法如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> berkeley <span style="color:#f92672">=</span> make_city(<span style="color:#e6db74">&#39;Berkeley&#39;</span>, <span style="color:#ae81ff">122</span>, <span style="color:#ae81ff">37</span>)
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> get_name(berkeley)
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#39;Berkeley&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> get_lat(berkeley)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">122</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> new_york <span style="color:#f92672">=</span> make_city(<span style="color:#e6db74">&#39;New York City&#39;</span>, <span style="color:#ae81ff">74</span>, <span style="color:#ae81ff">40</span>)
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> get_lon(new_york)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">40</span>
+</span></span></code></pre></div><p>实现方式如下（理论上，用户不该知道这些信息）：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Treat all the following code as being behind an abstraction layer, you shouldn&#39;t need to look at it!</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">make_city</span>(name, lat, lon):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; city = make_city(&#39;Berkeley&#39;, 0, 1)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; get_name(city)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#39;Berkeley&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; get_lat(city)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    0
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; get_lon(city)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    1
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> change_abstraction<span style="color:#f92672">.</span>changed:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#34;name&#34;</span>: name, <span style="color:#e6db74">&#34;lat&#34;</span>: lat, <span style="color:#e6db74">&#34;lon&#34;</span>: lon}
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> [name, lat, lon]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_name</span>(city):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; city = make_city(&#39;Berkeley&#39;, 0, 1)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; get_name(city)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#39;Berkeley&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> change_abstraction<span style="color:#f92672">.</span>changed:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> city[<span style="color:#e6db74">&#34;name&#34;</span>]
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> city[<span style="color:#ae81ff">0</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_lat</span>(city):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; city = make_city(&#39;Berkeley&#39;, 0, 1)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; get_lat(city)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    0
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> change_abstraction<span style="color:#f92672">.</span>changed:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> city[<span style="color:#e6db74">&#34;lat&#34;</span>]
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> city[<span style="color:#ae81ff">1</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_lon</span>(city):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; city = make_city(&#39;Berkeley&#39;, 0, 1)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; get_lon(city)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    1
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> change_abstraction<span style="color:#f92672">.</span>changed:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> city[<span style="color:#e6db74">&#34;lon&#34;</span>]
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> city[<span style="color:#ae81ff">2</span>]
+</span></span></code></pre></div><h4 id="q2-distance">Q2: Distance</h4>
+<p>实现<code>distance(city_a, city_b)</code>函数，<code>city_a</code>和<code>city_b</code>是两个城市对象，返回它们之间的距离，用<code>(latitude， longitude)</code>表示坐标，距离为<a href="https://zh.wikipedia.org/zh-hans/%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E8%B7%9D%E7%A6%BB" target="_blank" rel="noopener noreffer ">欧几里得距离</a>。</p>
+<p>实现代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">distance</span>(city_a, city_b):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; city_a = make_city(&#39;city_a&#39;, 0, 1)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; city_b = make_city(&#39;city_b&#39;, 0, 2)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; distance(city_a, city_b)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    1.0
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; city_c = make_city(&#39;city_c&#39;, 6.5, 12)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; city_d = make_city(&#39;city_d&#39;, 2.5, 15)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; distance(city_c, city_d)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    5.0
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;*** YOUR CODE HERE ***&#34;</span>
+</span></span><span style="display:flex;"><span>    x1 <span style="color:#f92672">=</span> get_lat(city_a)
+</span></span><span style="display:flex;"><span>    y1 <span style="color:#f92672">=</span> get_lon(city_a)
+</span></span><span style="display:flex;"><span>    x2 <span style="color:#f92672">=</span> get_lat(city_b)
+</span></span><span style="display:flex;"><span>    y2 <span style="color:#f92672">=</span> get_lon(city_b)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> sqrt((x1 <span style="color:#f92672">-</span> x2) <span style="color:#f92672">**</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> (y1 <span style="color:#f92672">-</span> y2) <span style="color:#f92672">**</span> <span style="color:#ae81ff">2</span>)
+</span></span></code></pre></div><h4 id="q3-closer-city">Q3: Closer city</h4>
+<p>实现<code>closer_city(lat, lon, city_a, city_b)</code>函数：</p>
+<ul>
+<li><code>lat</code>、<code>lon</code>：目标城市的纬度、经度</li>
+<li><code>city_a</code>、<code>city_b</code>：两个城市对象</li>
+</ul>
+<p>返回两个城市中距离<code>(lat, lon)</code>较近的一个，若一样近，返回<code>city_b</code>。</p>
+<p>实现代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">closer_city</span>(lat, lon, city_a, city_b):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Returns the name of either city_a or city_b, whichever is closest to
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    coordinate (lat, lon). If the two cities are the same distance away
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    from the coordinate, consider city_b to be the closer city.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; berkeley = make_city(&#39;Berkeley&#39;, 37.87, 112.26)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; stanford = make_city(&#39;Stanford&#39;, 34.05, 118.25)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; closer_city(38.33, 121.44, berkeley, stanford)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#39;Stanford&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; bucharest = make_city(&#39;Bucharest&#39;, 44.43, 26.10)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; vienna = make_city(&#39;Vienna&#39;, 48.20, 16.37)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; closer_city(41.29, 174.78, bucharest, vienna)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#39;Bucharest&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;*** YOUR CODE HERE ***&#34;</span>
+</span></span><span style="display:flex;"><span>    city_c <span style="color:#f92672">=</span> make_city(<span style="color:#e6db74">&#34;Target&#34;</span>, lat, lon)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> get_name(city_a)\
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> distance(city_a, city_c) <span style="color:#f92672">&lt;</span> distance(city_b, city_c)\
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">else</span> get_name(city_b)
+</span></span></code></pre></div><h4 id="q4-dont-violate-the-abstraction-barrier">Q4: Don&rsquo;t violate the abstraction barrier!</h4>
+<p>没有代码的实现，本题是让你检查在之前两题的实现中，是否违反了抽象的隔离，没有使用<code>ADT</code>的构造器和选择器，而是之间访问其数据，直接用列表构造<code>城市</code>，这些行为会导致无法通过本题测试。</p>
+<h3 id="trees">Trees</h3>
+<p>本实验的<code>树</code>的<code>ADT</code>如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Tree ADT</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">tree</span>(label, branches<span style="color:#f92672">=</span>[]):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Construct a tree with the given label value and a list of branches.&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> change_abstraction<span style="color:#f92672">.</span>changed:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> branch <span style="color:#f92672">in</span> branches:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">assert</span> is_tree(branch), <span style="color:#e6db74">&#39;branches must be trees&#39;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#39;label&#39;</span>: label, <span style="color:#e6db74">&#39;branches&#39;</span>: list(branches)}
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> branch <span style="color:#f92672">in</span> branches:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">assert</span> is_tree(branch), <span style="color:#e6db74">&#39;branches must be trees&#39;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> [label] <span style="color:#f92672">+</span> list(branches)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">label</span>(tree):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Return the label value of a tree.&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> change_abstraction<span style="color:#f92672">.</span>changed:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> tree[<span style="color:#e6db74">&#39;label&#39;</span>]
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> tree[<span style="color:#ae81ff">0</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">branches</span>(tree):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Return the list of branches of the given tree.&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> change_abstraction<span style="color:#f92672">.</span>changed:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> tree[<span style="color:#e6db74">&#39;branches&#39;</span>]
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> tree[<span style="color:#ae81ff">1</span>:]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">is_tree</span>(tree):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Returns True if the given tree is a tree, and False otherwise.&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> change_abstraction<span style="color:#f92672">.</span>changed:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> type(tree) <span style="color:#f92672">!=</span> dict <span style="color:#f92672">or</span> len(tree) <span style="color:#f92672">!=</span> <span style="color:#ae81ff">2</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">False</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> branch <span style="color:#f92672">in</span> branches(tree):
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> is_tree(branch):
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">False</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">True</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> type(tree) <span style="color:#f92672">!=</span> list <span style="color:#f92672">or</span> len(tree) <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">1</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">False</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> branch <span style="color:#f92672">in</span> branches(tree):
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> is_tree(branch):
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">False</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">True</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">is_leaf</span>(tree):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Returns True if the given tree&#39;s list of branches is empty, and False
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    otherwise.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#f92672">not</span> branches(tree)
+</span></span></code></pre></div><h4 id="q5-finding-berries">Q5: Finding Berries!</h4>
+<p>实现一个<code>berry_finder(t)</code>，<code>t</code>是一棵树，如果树中某个节点包含<code>'berry'</code>，返回<code>True</code>，否则返回<code>False</code>。</p>
+<p>实现代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">berry_finder</span>(t):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Returns True if t contains a node with the value &#39;berry&#39; and 
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    False otherwise.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; scrat = tree(&#39;berry&#39;)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; berry_finder(scrat)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    True
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; sproul = tree(&#39;roots&#39;, [tree(&#39;branch1&#39;, [tree(&#39;leaf&#39;), tree(&#39;berry&#39;)]), tree(&#39;branch2&#39;)])
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; berry_finder(sproul)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    True
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; numbers = tree(1, [tree(2), tree(3, [tree(4), tree(5)]), tree(6, [tree(7)])])
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; berry_finder(numbers)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    False
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; t = tree(1, [tree(&#39;berry&#39;,[tree(&#39;not berry&#39;)])])
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; berry_finder(t)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    True
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;*** YOUR CODE HERE ***&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> is_leaf(t):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> label(t) <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;berry&#39;</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> label(t) <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;berry&#39;</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">True</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    child <span style="color:#f92672">=</span> branches(t)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> b <span style="color:#f92672">in</span> child:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> berry_finder(b):
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">True</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">False</span>
+</span></span></code></pre></div><h4 id="q6-sprout-leaves">Q6: Sprout leaves</h4>
+<p>实现<code>sprout_leaves(t, leaves)</code>函数：</p>
+<ul>
+<li><code>t</code>：一棵树</li>
+<li><code>leaves</code>：值的列表</li>
+</ul>
+<p>返回一棵新的树，是在<code>t</code>的叶子上加上<code>leaves</code>得到的。</p>
+<p><code>eg</code>：</p>
+<p>有这样一棵树<code>t = tree(1, [tree(2), tree(3, [tree(4)])])</code>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>  <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span> <span style="color:#f92672">/</span> \
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>   <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">4</span>
+</span></span></code></pre></div><p>调用<code>sprout_leaves(t, [5, 6])</code>之后：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>       <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#f92672">/</span>   \
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">2</span>     <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#f92672">/</span> \    <span style="color:#f92672">|</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#ae81ff">5</span>   <span style="color:#ae81ff">6</span>   <span style="color:#ae81ff">4</span>
+</span></span><span style="display:flex;"><span>         <span style="color:#f92672">/</span> \
+</span></span><span style="display:flex;"><span>        <span style="color:#ae81ff">5</span>   <span style="color:#ae81ff">6</span>
+</span></span></code></pre></div><p>实现代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">sprout_leaves</span>(t, leaves):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Sprout new leaves containing the data in leaves at each leaf in
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    the original tree t and return the resulting tree.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; t1 = tree(1, [tree(2), tree(3)])
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; print_tree(t1)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    1
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      2
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      3
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; new1 = sprout_leaves(t1, [4, 5])
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; print_tree(new1)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    1
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      2
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        4
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        5
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      3
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        4
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        5
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; t2 = tree(1, [tree(2, [tree(3)])])
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; print_tree(t2)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    1
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      2
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        3
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; new2 = sprout_leaves(t2, [6, 1, 2])
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; print_tree(new2)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    1
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      2
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        3
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          6
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          1
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          2
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;*** YOUR CODE HERE ***&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> is_leaf(t):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> tree(label(t), [tree(leave) <span style="color:#66d9ef">for</span> leave <span style="color:#f92672">in</span> leaves])
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    child <span style="color:#f92672">=</span> branches(t)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> tree(label(t), [sprout_leaves(b, leaves) <span style="color:#66d9ef">for</span> b <span style="color:#f92672">in</span> child])
+</span></span></code></pre></div><h4 id="q7-dont-violate-the-abstraction-barrier">Q7: Don&rsquo;t violate the abstraction barrier!</h4>
+<p>和<code>Q4</code>一样，不再多加赘述。</p>
+<p>使用如下命令测试上述题目：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>python3 ok --local
+</span></span></code></pre></div><p>结果如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>Assignment: Lab <span style="color:#ae81ff">5</span>
+</span></span><span style="display:flex;"><span>OK, version v1.18.1
+</span></span><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+</span></span><span style="display:flex;"><span>Running tests
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Test summary
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">7</span> test cases passed! No cases failed.
+</span></span></code></pre></div><h2 id="optional-questions">Optional Questions</h2>
+<h3 id="q8-coordinates">Q8: Coordinates</h3>
+<p>实现<code>coords(fn, seq, lower, upper)</code>函数：</p>
+<ul>
+<li><code>fn</code>：计算函数</li>
+<li><code>seq</code>：自变量的序列</li>
+<li><code>lower</code>、<code>upper</code>：因变量<code>fn(x)</code>的最小值和最大值</li>
+</ul>
+<p>实现代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">coords</span>(fn, seq, lower, upper):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; seq = [-4, -2, 0, 1, 3]
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; fn = lambda x: x**2
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; coords(fn, seq, 1, 9)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    [[-2, 4], [1, 1], [3, 9]]
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;*** YOUR CODE HERE ***&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> [[x, fn(x)] <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> seq <span style="color:#66d9ef">if</span> lower <span style="color:#f92672">&lt;=</span> fn(x) <span style="color:#f92672">&lt;=</span> upper]
+</span></span></code></pre></div><h3 id="q9-riffle-shuffle">Q9: Riffle Shuffle</h3>
+<p>实现<code>riffle(deck)</code>函数：</p>
+<ul>
+<li><code>deck</code>：值的序列</li>
+</ul>
+<p>返回一个列表，值是序列的第一个元素，中间一个元素，循环往复。</p>
+<p>实现代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">riffle</span>(deck):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Produces a single, perfect riffle shuffle of DECK, consisting of
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    DECK[0], DECK[M], DECK[1], DECK[M+1], ... where M is position of the
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    second half of the deck.  Assume that len(DECK) is even.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; riffle([3, 4, 5, 6])
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    [3, 5, 4, 6]
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; riffle(range(20))
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    [0, 10, 1, 11, 2, 12, 3, 13, 4, 14, 5, 15, 6, 16, 7, 17, 8, 18, 9, 19]
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;*** YOUR CODE HERE ***&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    deck <span style="color:#f92672">=</span> list(deck)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> deck <span style="color:#66d9ef">if</span> len(deck) <span style="color:#f92672">==</span> <span style="color:#ae81ff">2</span> <span style="color:#66d9ef">else</span>\
+</span></span><span style="display:flex;"><span>        [deck[<span style="color:#ae81ff">0</span>], deck[len(deck) <span style="color:#f92672">//</span> <span style="color:#ae81ff">2</span>]] <span style="color:#f92672">+</span>\
+</span></span><span style="display:flex;"><span>            riffle(deck[<span style="color:#ae81ff">1</span> : len(deck) <span style="color:#f92672">//</span> <span style="color:#ae81ff">2</span>] <span style="color:#f92672">+</span> deck[len(deck) <span style="color:#f92672">//</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span> : ])
+</span></span></code></pre></div><h3 id="q10-add-trees">Q10: Add trees</h3>
+<p>实现<code>add_trees(t1, t2)</code>函数，返回两棵树相加的结果树，如果有的节点只有一棵树有，就创建新的节点。</p>
+<p>实现代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">add_trees</span>(t1, t2):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; numbers = tree(1,
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    ...                [tree(2,
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    ...                      [tree(3),
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    ...                       tree(4)]),
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    ...                 tree(5,
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    ...                      [tree(6,
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    ...                            [tree(7)]),
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    ...                       tree(8)])])
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; print_tree(add_trees(numbers, numbers))
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    2
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      4
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        6
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        8
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      10
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        12
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          14
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        16
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; print_tree(add_trees(tree(2), tree(3, [tree(4), tree(5)])))
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    5
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      4
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      5
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; print_tree(add_trees(tree(2, [tree(3)]), tree(2, [tree(3), tree(4)])))
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    4
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      6
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      4
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; print_tree(add_trees(tree(2, [tree(3, [tree(4), tree(5)])]), </span><span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span><span style="color:#e6db74">    tree(2, [tree(3, [tree(4)]), tree(5)])))
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    4
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      6
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        8
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        5
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      5
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;*** YOUR CODE HERE ***&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> t1:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> t2
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> t2:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> t1
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    child1 <span style="color:#f92672">=</span> branches(t1)
+</span></span><span style="display:flex;"><span>    child2 <span style="color:#f92672">=</span> branches(t2)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> tree(label(t1) <span style="color:#f92672">+</span> label(t2),\
+</span></span><span style="display:flex;"><span>            [ add_trees(child1[i] <span style="color:#66d9ef">if</span> i <span style="color:#f92672">&lt;</span> len(child1) <span style="color:#66d9ef">else</span> [],\
+</span></span><span style="display:flex;"><span>                child2[i] <span style="color:#66d9ef">if</span> i <span style="color:#f92672">&lt;</span> len(child2) <span style="color:#66d9ef">else</span> []) \
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(max(len(child1), len(child2)))])
+</span></span></code></pre></div><h3 id="fun-question">Fun Question!</h3>
+<h3 id="shakespeare-and-dictionaries">Shakespeare and Dictionaries</h3>
+<blockquote>
+<p>We will use dictionaries to approximate the entire works of Shakespeare! We&rsquo;re going to use a bigram language model. Here&rsquo;s the idea: We start with some word &ndash; we&rsquo;ll use &ldquo;The&rdquo; as an example. Then we look through all of the texts of Shakespeare and for every instance of &ldquo;The&rdquo; we record the word that follows &ldquo;The&rdquo; and add it to a list, known as the <em>successors</em> of &ldquo;The&rdquo;. Now suppose we&rsquo;ve done this for every word Shakespeare has used, ever.</p>
+<p>Let&rsquo;s go back to &ldquo;The&rdquo;. Now, we randomly choose a word from this list, say &ldquo;cat&rdquo;. Then we look up the successors of &ldquo;cat&rdquo; and randomly choose a word from that list, and we continue this process. This eventually will terminate in a period (&quot;.&quot;) and we will have generated a Shakespearean sentence!</p>
+<p>The object that we&rsquo;ll be looking things up in is called a &ldquo;successor table&rdquo;, although really it&rsquo;s just a dictionary. The keys in this dictionary are words, and the values are lists of successors to those words.</p>
+</blockquote>
+<h4 id="q11-successor-tables">Q11: Successor Tables</h4>
+<p>实现<code>build_successors_table(tokens)</code>函数，返回<code>tokens</code>中的单词的后续字典。</p>
+<p>实现代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">build_successors_table</span>(tokens):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Return a dictionary: keys are words; values are lists of successors.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; text = [&#39;We&#39;, &#39;came&#39;, &#39;to&#39;, &#39;investigate&#39;, &#39;,&#39;, &#39;catch&#39;, &#39;bad&#39;, &#39;guys&#39;, &#39;and&#39;, &#39;to&#39;, &#39;eat&#39;, &#39;pie&#39;, &#39;.&#39;]
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; table = build_successors_table(text)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; sorted(table)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    [&#39;,&#39;, &#39;.&#39;, &#39;We&#39;, &#39;and&#39;, &#39;bad&#39;, &#39;came&#39;, &#39;catch&#39;, &#39;eat&#39;, &#39;guys&#39;, &#39;investigate&#39;, &#39;pie&#39;, &#39;to&#39;]
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; table[&#39;to&#39;]
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    [&#39;investigate&#39;, &#39;eat&#39;]
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; table[&#39;pie&#39;]
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    [&#39;.&#39;]
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; table[&#39;.&#39;]
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    [&#39;We&#39;]
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    table <span style="color:#f92672">=</span> {}
+</span></span><span style="display:flex;"><span>    prev <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;.&#39;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> word <span style="color:#f92672">in</span> tokens:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> prev <span style="color:#f92672">not</span> <span style="color:#f92672">in</span> table:
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;*** YOUR CODE HERE ***&#34;</span>
+</span></span><span style="display:flex;"><span>            table[prev] <span style="color:#f92672">=</span> [word]
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>            table[prev] <span style="color:#f92672">+=</span> [word]
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;*** YOUR CODE HERE ***&#34;</span>
+</span></span><span style="display:flex;"><span>        prev <span style="color:#f92672">=</span> word
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> table
+</span></span></code></pre></div><h4 id="q12-construct-the-sentence">Q12: Construct the Sentence</h4>
+<p>实现<code>construct_sent(word, table)</code>，根据<code>table</code>字典，返回一个以<code>word</code>开头的句子。</p>
+<p>实现代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">construct_sent</span>(word, table):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Prints a random sentence starting with word, sampling from
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    table.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; table = {&#39;Wow&#39;: [&#39;!&#39;], &#39;Sentences&#39;: [&#39;are&#39;], &#39;are&#39;: [&#39;cool&#39;], &#39;cool&#39;: [&#39;.&#39;]}
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; construct_sent(&#39;Wow&#39;, table)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#39;Wow!&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; construct_sent(&#39;Sentences&#39;, table)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#39;Sentences are cool.&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">import</span> random
+</span></span><span style="display:flex;"><span>    result <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> word <span style="color:#f92672">not</span> <span style="color:#f92672">in</span> [<span style="color:#e6db74">&#39;.&#39;</span>, <span style="color:#e6db74">&#39;!&#39;</span>, <span style="color:#e6db74">&#39;?&#39;</span>]:
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;*** YOUR CODE HERE ***&#34;</span>
+</span></span><span style="display:flex;"><span>        result <span style="color:#f92672">+=</span> word <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39; &#39;</span>
+</span></span><span style="display:flex;"><span>        word <span style="color:#f92672">=</span> random<span style="color:#f92672">.</span>choice(table[word])
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> result<span style="color:#f92672">.</span>strip() <span style="color:#f92672">+</span> word
+</span></span></code></pre></div><h4 id="putting-it-all-together">Putting it all together</h4>
+<p>给予<code>Q11</code>和<code>Q12</code>更多真实的数据，我跑的时候一直报<code>urllib.error.HTTPError: HTTP Error 502: Bad Gateway</code>，就不做了。</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-08-05</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://Maxwell2020152049.github.io/posts/cs61a_lab_lab05/" data-title="CS61A Lab lab05" data-hashtags="Python"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://Maxwell2020152049.github.io/posts/cs61a_lab_lab05/" data-hashtag="Python"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://Maxwell2020152049.github.io/posts/cs61a_lab_lab05/" data-title="CS61A Lab lab05"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://Maxwell2020152049.github.io/posts/cs61a_lab_lab05/" data-title="CS61A Lab lab05"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://Maxwell2020152049.github.io/posts/cs61a_lab_lab05/" data-title="CS61A Lab lab05"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/python/">Python</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/cs61a_project_cats/" class="prev" rel="prev" title="CS61A Project Cats"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>CS61A Project Cats</a>
+            <a href="/posts/cs61a_notes_week6/" class="next" rel="next" title="CS61A week6 study note">CS61A week6 study note<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.115.4">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank"></a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
