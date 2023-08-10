@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>《TCP IP网络编程》学习笔记 ch02 - Rex&#39;s Blog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="《TCP IP网络编程》学习笔记 ch02" />
+<meta property="og:description" content="ch02 套接字类型与协议设置 2.1 套接字协议及其数据传输特性 协议（Protocol） 协议是计算机之间对话必备的通信规则。
+创建套接字 #include &lt;sys/socket.h&gt; int socket(int domain, i nt type, int protocol); C语言中，创建套接字要使用socket()函数，下面介绍其参数以及具体使用：
+协议族（Protocol Family） PF_INET：IPv4互联网协议族 PF_INET6：IPv6互联网协议族 PF_LOCAL：本地通信的UNIX协议族 PF_PACKET：底层套接字的协议族 PF__IPX：IPX Novell协议族 本书重点讲解PF_INET，即IPv4互联网协议族。
+套接字类型（Type）
+面向连接的套接字（SOCK_STREAM）
+传输过程中数据不会丢失
+数据有序到达
+传输的数据不存在数据边界
+在面向连接的套接字中， read函数和write函数的调用次数并无太大意义
+可靠的、按序传递的、基于宇节的面向连接的数据传输方式的套接字
+面向消息的套接字（SOCK_DGRAM）
+强调快速传输而非传输顺序
+传输的数据可能丢失也可能损毁
+传输的数据存在数据边界
+限制每次传输的数据大小
+不可靠的、不按序传递的、以数据的高速传输为目的的套接字
+协议的最终选择
+同个协议族中可能存在多个数据传输方式相同的协议，所以还需指定最终选择的协议
+参数PF_INET指IPv4网络协议族，SOCK_STREAM是面向连接的数据传输。 满足这2个条件的协议只有IPPROTO_TCP
+参数PF_INET指IPv4网络协议族，SOCK_DGRAM指的是面向消息的数据传输方式，满足上述条件的协议只有IPPROTO_UDP
+验证 面向连接的套接字 的 传输数据无边界性 修改ch01中的hello_clint.c中read()函数的调用方式：
+// read() while (1) { str_len = read(sock, &amp;message[idx &#43;&#43;], 1); if (str_len == -1) error_handling(&#34;read() error!&#34;); else if (str_len == 0) break; cnt &#43;= str_len; } printf(&#34;Message from server : %s \n&#34;, message); printf(&#34;function read() call count is %d\n&#34;, cnt); 客户端运行效果如下：" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://Maxwell2020152049.github.io/posts/tcpip/notes/ch02/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-07-29T02:10:49+08:00" />
+<meta property="article:modified_time" content="2023-07-29T02:10:49+08:00" /><meta property="og:site_name" content="My cool site" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="《TCP IP网络编程》学习笔记 ch02"/>
+<meta name="twitter:description" content="ch02 套接字类型与协议设置 2.1 套接字协议及其数据传输特性 协议（Protocol） 协议是计算机之间对话必备的通信规则。
+创建套接字 #include &lt;sys/socket.h&gt; int socket(int domain, i nt type, int protocol); C语言中，创建套接字要使用socket()函数，下面介绍其参数以及具体使用：
+协议族（Protocol Family） PF_INET：IPv4互联网协议族 PF_INET6：IPv6互联网协议族 PF_LOCAL：本地通信的UNIX协议族 PF_PACKET：底层套接字的协议族 PF__IPX：IPX Novell协议族 本书重点讲解PF_INET，即IPv4互联网协议族。
+套接字类型（Type）
+面向连接的套接字（SOCK_STREAM）
+传输过程中数据不会丢失
+数据有序到达
+传输的数据不存在数据边界
+在面向连接的套接字中， read函数和write函数的调用次数并无太大意义
+可靠的、按序传递的、基于宇节的面向连接的数据传输方式的套接字
+面向消息的套接字（SOCK_DGRAM）
+强调快速传输而非传输顺序
+传输的数据可能丢失也可能损毁
+传输的数据存在数据边界
+限制每次传输的数据大小
+不可靠的、不按序传递的、以数据的高速传输为目的的套接字
+协议的最终选择
+同个协议族中可能存在多个数据传输方式相同的协议，所以还需指定最终选择的协议
+参数PF_INET指IPv4网络协议族，SOCK_STREAM是面向连接的数据传输。 满足这2个条件的协议只有IPPROTO_TCP
+参数PF_INET指IPv4网络协议族，SOCK_DGRAM指的是面向消息的数据传输方式，满足上述条件的协议只有IPPROTO_UDP
+验证 面向连接的套接字 的 传输数据无边界性 修改ch01中的hello_clint.c中read()函数的调用方式：
+// read() while (1) { str_len = read(sock, &amp;message[idx &#43;&#43;], 1); if (str_len == -1) error_handling(&#34;read() error!&#34;); else if (str_len == 0) break; cnt &#43;= str_len; } printf(&#34;Message from server : %s \n&#34;, message); printf(&#34;function read() call count is %d\n&#34;, cnt); 客户端运行效果如下："/>
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://Maxwell2020152049.github.io/posts/tcpip/notes/ch02/" /><link rel="prev" href="https://Maxwell2020152049.github.io/posts/tcpip/notes/ch01/" /><link rel="next" href="https://Maxwell2020152049.github.io/posts/cs61a/notes/week3/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "《TCP IP网络编程》学习笔记 ch02",
+        "inLanguage": "en-us",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/Maxwell2020152049.github.io\/posts\/tcpip\/notes\/ch02\/"
+        },"genre": "posts","keywords": "网络编程","wordcount":  529 ,
+        "url": "https:\/\/Maxwell2020152049.github.io\/posts\/tcpip\/notes\/ch02\/","datePublished": "2023-07-29T02:10:49+08:00","dateModified": "2023-07-29T02:10:49+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Author"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Rex&#39;s Blog"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg"
+        data-srcset="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg, https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg 1.5x, https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg 2x"
+        data-sizes="auto"
+        alt="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg"
+        title="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg" />Rex&#39;s cool site</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Rex&#39;s Blog"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg"
+        data-srcset="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg, https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg 1.5x, https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg 2x"
+        data-sizes="auto"
+        alt="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg"
+        title="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg" />Rex&#39;s cool site</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">《TCP IP网络编程》学习笔记 ch02</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-category">included in <a href="/categories/tcp-ip%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>《TCP IP网络编程》学习笔记</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-07-29">2023-07-29</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;529 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;3 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#ch02-套接字类型与协议设置">ch02 套接字类型与协议设置</a>
+      <ul>
+        <li><a href="#21-套接字协议及其数据传输特性">2.1 套接字协议及其数据传输特性</a></li>
+        <li><a href="#25-习题">2.5 习题</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="ch02-套接字类型与协议设置">ch02 套接字类型与协议设置</h2>
+<h3 id="21-套接字协议及其数据传输特性">2.1 套接字协议及其数据传输特性</h3>
+<h4 id="协议protocol">协议（Protocol）</h4>
+<blockquote>
+<p>协议是计算机之间对话必备的通信规则。</p>
+</blockquote>
+<h4 id="创建套接字">创建套接字</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;sys/socket.h&gt; </span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">socket</span>(<span style="color:#66d9ef">int</span> domain, i nt type, <span style="color:#66d9ef">int</span> protocol);
+</span></span></code></pre></div><p>C语言中，创建套接字要使用<code>socket()</code>函数，下面介绍其参数以及具体使用：</p>
+<ul>
+<li>协议族（Protocol Family）
+<ul>
+<li><code>PF_INET</code>：<code>IPv4</code>互联网协议族</li>
+<li><code>PF_INET6</code>：<code>IPv6</code>互联网协议族</li>
+<li><code>PF_LOCAL</code>：本地通信的<code>UNIX</code>协议族</li>
+<li><code>PF_PACKET</code>：底层套接字的协议族</li>
+<li><code>PF__IPX</code>：<code>IPX Novell</code>协议族</li>
+</ul>
+</li>
+</ul>
+<p>本书重点讲解<code>PF_INET</code>，即<code>IPv4</code>互联网协议族。</p>
+<ul>
+<li>
+<p>套接字类型（Type）</p>
+<ul>
+<li>
+<p>面向连接的套接字（<code>SOCK_STREAM</code>）</p>
+<ul>
+<li>
+<p>传输过程中数据不会丢失</p>
+</li>
+<li>
+<p>数据有序到达</p>
+</li>
+<li>
+<p>传输的数据不存在数据边界</p>
+</li>
+<li>
+<blockquote>
+<p>在面向连接的套接字中， <code>read</code>函数和<code>write</code>函数的调用次数并无太大意义</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>可靠的、按序传递的、基于宇节的面向连接的数据传输方式的套接字</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>
+<p>面向消息的套接字（SOCK_DGRAM）</p>
+<ul>
+<li>
+<p>强调快速传输而非传输顺序</p>
+</li>
+<li>
+<p>传输的数据可能丢失也可能损毁</p>
+</li>
+<li>
+<p>传输的数据存在数据边界</p>
+</li>
+<li>
+<p>限制每次传输的数据大小</p>
+</li>
+<li>
+<blockquote>
+<p>不可靠的、不按序传递的、以数据的高速传输为目的的套接字</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>协议的最终选择</p>
+<ul>
+<li>
+<p>同个协议族中可能存在多个数据传输方式相同的协议，所以还需指定最终选择的协议</p>
+</li>
+<li>
+<blockquote>
+<p>参数<code>PF_INET</code>指<code>IPv4</code>网络协议族，<code>SOCK_STREAM</code>是面向连接的数据传输。 满足这2个条件的协议只有<code>IPPROTO_TCP</code></p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>参数<code>PF_INET</code>指<code>IPv4</code>网络协议族，<code>SOCK_DGRAM</code>指的是面向消息的数据传输方式，满足上述条件的协议只有<code>IPPROTO_UDP</code></p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="验证-面向连接的套接字-的-传输数据无边界性">验证 <strong><code>面向连接的套接字</code></strong> 的 <strong><code>传输数据无边界性</code></strong></h4>
+<p>修改<code>ch01</code>中的<code>hello_clint.c</code>中<code>read()</code>函数的调用方式：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">// read()
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">while</span> (<span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    str_len <span style="color:#f92672">=</span> <span style="color:#a6e22e">read</span>(sock, <span style="color:#f92672">&amp;</span>message[idx <span style="color:#f92672">++</span>], <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (str_len <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">error_handling</span>(<span style="color:#e6db74">&#34;read() error!&#34;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span> (str_len <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    cnt <span style="color:#f92672">+=</span> str_len;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;Message from server : %s </span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, message);
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;function read() call count is %d</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, cnt);
+</span></span></code></pre></div><p>客户端运行效果如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>rex@rex-virtual-machine:~/tcpip/ch02$ ./hclient.out 127.0.0.1 <span style="color:#ae81ff">7891</span>
+</span></span><span style="display:flex;"><span>Message from server : Hello World! 
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> read<span style="color:#f92672">()</span> call count is <span style="color:#ae81ff">13</span>
+</span></span></code></pre></div><h3 id="25-习题">2.5 习题</h3>
+<ul>
+<li>
+<p>(1) 什么是协议？在收发数据中定义协议有何意义？</p>
+<ul>
+<li>
+<p>答：协议是计算机之间对话的通信规则，定义协议，可以明确收发数据是否有序，是否需要建立连接，是否可能丢失，是否存在数据边界等问题。</p>
+</li>
+<li>
+<blockquote>
+<p>协议是指在通信中定义双方交流的规则和约定。它规定了通信的数据格式、消息的组织方式、传输的方式、错误处理机制等。通信双方必须遵守协议中定义的规则，才能正常进行数据的收发和解析。</p>
+<p>在收发数据中定义协议的意义在于：</p>
+<ol>
+<li>规范化通信：协议定义了一套规范，使通信双方能够理解和解释彼此发送的信息。协议确保了数据的一致性和完整性，避免了混乱和错误的解释。</li>
+<li>提高互操作性：通过使用共同的协议，不同的系统、平台和应用程序可以进行交互。协议的定义使得在不同的环境中进行数据传输和交换更加容易和可靠。</li>
+<li>安全性和可靠性：协议可以定义安全和加密机制，确保数据的私密性和保密性。协议中还可以包含错误检测和纠正机制，以提高数据传输的可靠性和健壮性。</li>
+<li>可扩展性和兼容性：协议的设计允许系统在不破坏现有规则的情况下进行扩展和演化。通过适当的协议设计，可以实现向后兼容和向前兼容，确保系统在进行升级和更改时能够平稳过渡。</li>
+</ol>
+<p>总而言之，定义协议对数据收发非常重要，它确保了通信的可靠性、一致性、互操作性和安全性，同时为系统提供了可扩展性和兼容性。协议是构建稳定和可靠通信的基础。</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>
+<p>(2) 面向连接的TCP套接字传输特性有3点，请分别说明 。</p>
+<ul>
+<li>答：
+<ul>
+<li>传输过程中数据不会丢失</li>
+<li>传输的数据有序</li>
+<li>传输的数据不存在数据边界</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>(3) 下列哪些是面向消息的套接字的特性？</p>
+<ul>
+<li>a 传输数据可能丢失</li>
+<li>b．没有数据边界 ( Boundary)</li>
+<li>C. 以快速传递为目标</li>
+<li>d． 不限制每次传递数据的大小</li>
+<li>e．与面向连接的套接字不同，不存在连接的概念</li>
+<li>答：a、c、e</li>
+</ul>
+</li>
+<li>
+<p>(4) 下列数据适合用哪类套接字传输？并给出原因。</p>
+<ul>
+<li>a. 演唱会现场直播的多媒体数据（ )</li>
+<li>b. 某人压缩过的文本文件（ )</li>
+<li>c. 网上银行用户与银行之间的数据传递（ ）</li>
+<li>答：a适合面向消息的套接字，b和c适合面向连接的套接字</li>
+</ul>
+</li>
+<li>
+<p>(5) 何种类型的套接字不存在数据边界？这类套接字接收数据时需要注意什么？</p>
+<ul>
+<li>
+<p>面向连接的套接字不存在数据边界；接受数据超出缓存大小时，要让发送方停止发送数据，直到接收方把缓存中的数据读取出来。</p>
+</li>
+<li>
+<blockquote>
+<p>流式套接字（Stream Socket）是一种不存在数据边界的套接字类型。在流式套接字中，发送的数据被视为一个连续的字节流，没有固定的消息边界。</p>
+<p>当接收数据时，需要注意以下几点：</p>
+<ol>
+<li>数据分片（Data Fragmentation）：由于流式套接字没有明确的消息边界，接收到的数据可能会被分成多个片段。因此，接收端必须能够处理接收到的数据可能被拆分的情况，并组合正确的消息。</li>
+<li>数据完整性（Data Integrity）：由于数据被分片传输，接收端需要确保接收到的数据完整且正确。可以使用检验和、哈希函数或者消息认证码等技术来验证数据的完整性，以确保数据没有被篡改或丢失。</li>
+<li>数据缓冲（Data Buffering）：由于流式套接字是基于缓冲区的，接收端需要准备足够的缓冲区来存储接收到的数据。如果缓冲区不够大，可能会出现数据溢出的情况。</li>
+<li>数据处理（Data Processing）：接收端需要解析接收到的数据，并根据应用程序的需要进行相应的处理。这可能涉及数据解密、解压缩、解析结构等操作。</li>
+<li>数据拆分（Data Splitting）：由于接收到的数据可能被分片传输，接收端需要确定如何将接收到的数据重新组装为有意义的消息。这可能需要考虑消息的分割和组合技术，如使用特殊字符、长度字段或协议头部来标识消息的开始和结束。</li>
+</ol>
+<p>总之，对于流式套接字，接收数据时需要注意处理数据分片、数据完整性验证、适当的数据缓冲和数据处理。这有助于正确地解析和处理接收到的连续字节流，并确保数据的完整性和正确性。</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>
+<p>(6) <code>tcp_server.c</code>和<code>tcp_client.c</code>中需多次调用read函数读取服务器端调用 1 次write函数传递的字符串。更改程序，使服务器端多次调用（次数自拟）<code>write</code>函数传输数据，客户端调用 1 次<code>read</code>函数进行读取。为达到这一目的，客户端需延迟调用read函数，因为客户端要等待服务器端传输所有数据。 Windows和Linux都通过下列代码延迟read或recv函数的调用。</p>
+</li>
+<li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>; i<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">3000</span>; i<span style="color:#f92672">++</span>) 
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;Wait time %d </span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, i);
+</span></span></code></pre></div></li>
+<li>
+<p>让CPU执行多余任务以延迟代码运行的方式称为 <code>&quot;Busy Waiting&quot;</code> 。 使用得当即可推迟函数调用。</p>
+</li>
+<li>
+<p>服务器端<code>tcp_server.c</code>代码如下：</p>
+</li>
+<li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdlib.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;string.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;unistd.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;arpa/inet.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;sys/socket.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">error_handling</span>(<span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>message);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">int</span> argc, <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>argv[])
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> serv_sock;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> clnt_sock;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">struct</span> sockaddr_in serv_addr;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">struct</span> sockaddr_in clnt_addr;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">socklen_t</span> clnt_addr_size;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> idx <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">char</span> message[] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Hello World!&#34;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (argc <span style="color:#f92672">!=</span> <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;Usage : %s &lt;port&gt;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, argv[<span style="color:#ae81ff">0</span>]);
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">exit</span>(<span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// socket()
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    serv_sock <span style="color:#f92672">=</span> <span style="color:#a6e22e">socket</span>(PF_INET, SOCK_STREAM, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (serv_sock <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">error_handling</span>(<span style="color:#e6db74">&#34;socket() error&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">memset</span>(<span style="color:#f92672">&amp;</span>serv_addr, <span style="color:#ae81ff">0</span>, <span style="color:#66d9ef">sizeof</span>(serv_addr));
+</span></span><span style="display:flex;"><span>    serv_addr.sin_family <span style="color:#f92672">=</span> AF_INET;
+</span></span><span style="display:flex;"><span>    serv_addr.sin_addr.s_addr <span style="color:#f92672">=</span> <span style="color:#a6e22e">htonl</span>(INADDR_ANY);
+</span></span><span style="display:flex;"><span>    serv_addr.sin_port <span style="color:#f92672">=</span> <span style="color:#a6e22e">htons</span>(<span style="color:#a6e22e">atoi</span>(argv[<span style="color:#ae81ff">1</span>]));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// bind()
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">bind</span>(serv_sock, (<span style="color:#66d9ef">struct</span> sockaddr <span style="color:#f92672">*</span>)<span style="color:#f92672">&amp;</span>serv_addr, <span style="color:#66d9ef">sizeof</span>(serv_addr)) <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">error_handling</span>(<span style="color:#e6db74">&#34;bind() error&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// listen()
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">listen</span>(serv_sock, <span style="color:#ae81ff">5</span>) <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">error_handling</span>(<span style="color:#e6db74">&#34;listen() error&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    clnt_addr_size <span style="color:#f92672">=</span> <span style="color:#66d9ef">sizeof</span>(clnt_addr);
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// accept()
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    clnt_sock <span style="color:#f92672">=</span> <span style="color:#a6e22e">accept</span>(serv_sock, (<span style="color:#66d9ef">struct</span> sockaddr <span style="color:#f92672">*</span>)<span style="color:#f92672">&amp;</span>clnt_addr, <span style="color:#f92672">&amp;</span>clnt_addr_size);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (clnt_sock <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">error_handling</span>(<span style="color:#e6db74">&#34;accept() error&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// write()
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> num_wr;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> (<span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        num_wr <span style="color:#f92672">=</span> <span style="color:#a6e22e">write</span>(clnt_sock, <span style="color:#f92672">&amp;</span>message[idx <span style="color:#f92672">++</span>], <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (num_wr <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">error_handling</span>(<span style="color:#e6db74">&#34;write() error&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        cnt <span style="color:#f92672">+=</span> num_wr;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (message[idx <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;\0&#39;</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;function write() call count is %d</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, cnt);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">close</span>(clnt_sock);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">close</span>(serv_sock);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">error_handling</span>(<span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>message)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">fputs</span>(message, stderr);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">fputc</span>(<span style="color:#e6db74">&#39;\n&#39;</span>, stderr);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">exit</span>(<span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+<li>
+<p>客户端<code>tcp_client.c</code>代码如下：</p>
+</li>
+<li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdlib.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;string.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;unistd.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;arpa/inet.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;sys/socket.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">error_handling</span>(<span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>message);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">int</span> argc, <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>argv[])
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> sock;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">struct</span> sockaddr_in serv_addr;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">char</span> message[<span style="color:#ae81ff">30</span>];
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> str_len;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (argc <span style="color:#f92672">!=</span> <span style="color:#ae81ff">3</span>)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;Usage : %s &lt;IP&gt; &lt;port&gt;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, argv[<span style="color:#ae81ff">0</span>]);
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">exit</span>(<span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// socket()
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    sock <span style="color:#f92672">=</span> <span style="color:#a6e22e">socket</span>(PF_INET, SOCK_STREAM, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (sock <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">error_handling</span>(<span style="color:#e6db74">&#34;socket() error&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">memset</span>(<span style="color:#f92672">&amp;</span>serv_addr, <span style="color:#ae81ff">0</span>, <span style="color:#66d9ef">sizeof</span>(serv_addr));
+</span></span><span style="display:flex;"><span>    serv_addr.sin_family <span style="color:#f92672">=</span> AF_INET;
+</span></span><span style="display:flex;"><span>    serv_addr.sin_addr.s_addr <span style="color:#f92672">=</span> <span style="color:#a6e22e">inet_addr</span>(argv[<span style="color:#ae81ff">1</span>]);
+</span></span><span style="display:flex;"><span>    serv_addr.sin_port <span style="color:#f92672">=</span> <span style="color:#a6e22e">htons</span>(<span style="color:#a6e22e">atoi</span>(argv[<span style="color:#ae81ff">2</span>]));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// connect
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">connect</span>(sock, (<span style="color:#66d9ef">struct</span> sockaddr <span style="color:#f92672">*</span>)<span style="color:#f92672">&amp;</span>serv_addr, <span style="color:#66d9ef">sizeof</span>(serv_addr)) <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">error_handling</span>(<span style="color:#e6db74">&#34;connect() error!&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// busy waiting
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">10000</span>; i<span style="color:#f92672">++</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// read()
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    str_len <span style="color:#f92672">=</span> <span style="color:#a6e22e">read</span>(sock, message, <span style="color:#66d9ef">sizeof</span>(message) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (str_len <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">error_handling</span>(<span style="color:#e6db74">&#34;read() error!&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;Message from server : %s </span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, message);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">close</span>(sock);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">error_handling</span>(<span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>message)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">fputs</span>(message, stderr);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">fputc</span>(<span style="color:#e6db74">&#39;\n&#39;</span>, stderr);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">exit</span>(<span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+<li>
+<p>运行效果如下：</p>
+</li>
+<li>
+<p>服务器端先启动，等待客户端连接：</p>
+</li>
+<li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>rex@rex-virtual-machine:~/tcpip/ch02$ gcc tcp_server.c -o tserver
+</span></span><span style="display:flex;"><span>rex@rex-virtual-machine:~/tcpip/ch02$ ./tserver <span style="color:#ae81ff">7891</span>
+</span></span></code></pre></div></li>
+<li>
+<p>客户端启动，并接收服务器端发送的数据：</p>
+</li>
+<li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>rex@rex-virtual-machine:~/tcpip/ch02$ gcc tcp_client.c -o tclient
+</span></span><span style="display:flex;"><span>rex@rex-virtual-machine:~/tcpip/ch02$ ./tclient 127.0.0.1 <span style="color:#ae81ff">7891</span>
+</span></span><span style="display:flex;"><span>Message from server : Hello World!
+</span></span></code></pre></div></li>
+<li>
+<p>服务器端发送完数据后，结束运行：</p>
+</li>
+<li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>rex@rex-virtual-machine:~/tcpip/ch02$ ./tserver <span style="color:#ae81ff">7891</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> write<span style="color:#f92672">()</span> call count is <span style="color:#ae81ff">13</span>
+</span></span></code></pre></div></li>
+</ul>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-07-29</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://Maxwell2020152049.github.io/posts/tcpip/notes/ch02/" data-title="《TCP IP网络编程》学习笔记 ch02" data-hashtags="网络编程"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://Maxwell2020152049.github.io/posts/tcpip/notes/ch02/" data-hashtag="网络编程"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://Maxwell2020152049.github.io/posts/tcpip/notes/ch02/" data-title="《TCP IP网络编程》学习笔记 ch02"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://Maxwell2020152049.github.io/posts/tcpip/notes/ch02/" data-title="《TCP IP网络编程》学习笔记 ch02"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://Maxwell2020152049.github.io/posts/tcpip/notes/ch02/" data-title="《TCP IP网络编程》学习笔记 ch02"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">网络编程</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/tcpip/notes/ch01/" class="prev" rel="prev" title="《TCP IP网络编程》学习笔记 ch01"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>《TCP IP网络编程》学习笔记 ch01</a>
+            <a href="/posts/cs61a/notes/week3/" class="next" rel="next" title="CS61A week3 study note">CS61A week3 study note<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.115.4">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank"></a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

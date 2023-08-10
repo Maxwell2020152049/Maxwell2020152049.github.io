@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>CS61A week7 study note - Rex&#39;s Blog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="CS61A week7 study note" />
+<meta property="og:description" content="Week7 CS 61A 2021 Fall官网：CS 61A: Structure and Interpretation of Computer Programs
+翻译视频：【计算机程序的构造和解释】精译【UC Berkeley 公开课-CS61A (Spring 2021)】-中英双语字幕
+github:Maxwell2020152049/CS61A
+Lecture #16: Objects &#43; Classes Slide：16-Objects_&#43;_Classes_full.pdf
+Lab：Lab 6: Nonlocal, Mutability, Iterators and Generators
+如何建造一间巧克力商店（Building a chocolate shop） 使用我们之前学习过的抽象数据类型（Abstract Data Type）的知识，用函数可以实现巧克力商店的所有行为，但这节课我们会引入类和对象（Class and Objects）。
+# Inventory tracking add_product(name, price, nutrition) get_label(product) get_nutrition_info(product) increase_inventory(product, amount) reduce_inventory(product, amount) # Customer tracking signup_customer(name, address) get_greeting(customer) get_formatted_address(customer) # Purchase tracking order(customer, product, quantity, cc_info) track(order_number) refund(order_number, reason) 从函数到对象（From functions to objects） 使用对象来组织数据结构：" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://Maxwell2020152049.github.io/posts/cs61a/notes/week7/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-08-10T17:01:10+08:00" />
+<meta property="article:modified_time" content="2023-08-10T17:01:10+08:00" /><meta property="og:site_name" content="My cool site" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="CS61A week7 study note"/>
+<meta name="twitter:description" content="Week7 CS 61A 2021 Fall官网：CS 61A: Structure and Interpretation of Computer Programs
+翻译视频：【计算机程序的构造和解释】精译【UC Berkeley 公开课-CS61A (Spring 2021)】-中英双语字幕
+github:Maxwell2020152049/CS61A
+Lecture #16: Objects &#43; Classes Slide：16-Objects_&#43;_Classes_full.pdf
+Lab：Lab 6: Nonlocal, Mutability, Iterators and Generators
+如何建造一间巧克力商店（Building a chocolate shop） 使用我们之前学习过的抽象数据类型（Abstract Data Type）的知识，用函数可以实现巧克力商店的所有行为，但这节课我们会引入类和对象（Class and Objects）。
+# Inventory tracking add_product(name, price, nutrition) get_label(product) get_nutrition_info(product) increase_inventory(product, amount) reduce_inventory(product, amount) # Customer tracking signup_customer(name, address) get_greeting(customer) get_formatted_address(customer) # Purchase tracking order(customer, product, quantity, cc_info) track(order_number) refund(order_number, reason) 从函数到对象（From functions to objects） 使用对象来组织数据结构："/>
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://Maxwell2020152049.github.io/posts/cs61a/notes/week7/" /><link rel="prev" href="https://Maxwell2020152049.github.io/posts/cs61a/lab/lab06/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "CS61A week7 study note",
+        "inLanguage": "en-us",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/Maxwell2020152049.github.io\/posts\/cs61a\/notes\/week7\/"
+        },"genre": "posts","keywords": "Python","wordcount":  1989 ,
+        "url": "https:\/\/Maxwell2020152049.github.io\/posts\/cs61a\/notes\/week7\/","datePublished": "2023-08-10T17:01:10+08:00","dateModified": "2023-08-10T17:01:10+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Author"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Rex&#39;s Blog"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg"
+        data-srcset="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg, https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg 1.5x, https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg 2x"
+        data-sizes="auto"
+        alt="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg"
+        title="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg" />Rex&#39;s cool site</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Rex&#39;s Blog"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg"
+        data-srcset="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg, https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg 1.5x, https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg 2x"
+        data-sizes="auto"
+        alt="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg"
+        title="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg" />Rex&#39;s cool site</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">CS61A week7 study note</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-category">included in <a href="/categories/cs61a/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>CS61A</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-08-10">2023-08-10</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1989 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;10 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#lecture-16-objects--classes">Lecture #16: Objects + Classes</a>
+      <ul>
+        <li><a href="#如何建造一间巧克力商店building-a-chocolate-shop">如何建造一间巧克力商店（<code>Building a chocolate shop</code>）</a></li>
+        <li><a href="#从函数到对象from-functions-to-objects">从函数到对象（<code>From functions to objects</code>）</a></li>
+        <li><a href="#类classes">类（<code>Classes</code>）</a></li>
+        <li><a href="#类定义class-definition">类定义（<code>Class definition</code>）</a></li>
+        <li><a href="#类的实例化对象的构造class-instantiation-object-construction">类的实例化（对象的构造）（<code>Class instantiation (Object construction)</code>）</a></li>
+        <li><a href="#点运算符dot-notation">点运算符<code>.</code>（<code>Dot notation</code>）</a></li>
+        <li><a href="#实例的变量instance-variables">实例的变量（<code>Instance variables</code>）</a></li>
+        <li><a href="#方法的调用method-invocation">方法的调用（<code>Method invocation</code>）</a></li>
+        <li><a href="#动态实例变量dynamic-instance-variables">动态实例变量（<code>Dynamic instance variables</code>）</a></li>
+        <li><a href="#类变量class-variables">类变量（<code>Class variables</code>）</a></li>
+        <li><a href="#属性都是公共的attributes-are-all-public">属性都是公共的（<code>Attributes are all public</code>）</a></li>
+        <li><a href="#私有属性private-attributes">“私有”属性（<code>&quot;Private&quot; attributes</code>）</a></li>
+      </ul>
+    </li>
+    <li><a href="#lecture-17-inheritance--composition">Lecture #17: Inheritance + Composition</a>
+      <ul>
+        <li><a href="#创建一个动物园building-animal-conserving">创建一个“动物园”（<code>Building &quot;Animal Conserving&quot;</code>）</a></li>
+        <li><a href="#食物类a-food-class">食物类（<code>A Food class</code>）</a></li>
+        <li><a href="#大象类an-elephant-class">大象类（<code>An Elephant class</code>）</a></li>
+        <li><a href="#兔子类an-rabbit-class">兔子类（<code>An Rabbit class</code>）</a></li>
+        <li><a href="#继承基类与子类inheritance--base-classes-and-subclasses">继承——基类与子类（<code>Inheritance--Base classes and subclasses</code>）</a></li>
+        <li><a href="#基类the-base-class">基类（<code>The base class</code>）</a></li>
+      </ul>
+    </li>
+    <li><a href="#子类the-subclasses">子类（<code>The subclasses</code>）</a>
+      <ul>
+        <li><a href="#重载类变量overriding-class-variables">重载类变量（<code>Overriding class variables</code>）</a></li>
+        <li><a href="#重载方法overriding-methods">重载方法（<code>Overriding methods</code>）</a></li>
+        <li><a href="#使用基类的方法using-methods-from-the-base-class">使用基类的方法（<code>Using methods from the base class</code>）</a></li>
+        <li><a href="#重载__init__overriding-__init__">重载<code>__init__</code>（<code>Overriding __init__</code>）</a></li>
+        <li><a href="#继承的层次layers-of-inheritance">继承的层次（<code>Layers of inheritance</code>）</a></li>
+        <li><a href="#多继承multiple-inhteritance">多继承（<code>Multiple inhteritance</code>）</a></li>
+        <li><a href="#组合composition">组合（<code>Composition</code>）</a></li>
+      </ul>
+    </li>
+    <li><a href="#lecture-18-special-object-methods">Lecture #18: Special Object Methods</a>
+      <ul>
+        <li><a href="#关于对象so-many-objects">关于对象（<code>So many objects</code>）</a></li>
+        <li><a href="#对象内置的属性built-in-object-attributes">对象内置的属性（<code>Built-in object attributes</code>）</a></li>
+        <li><a href="#__str__方法__str__"><code>__str__</code>方法（<code>__str__</code>）</a></li>
+        <li><a href="#自定义__str__方法custom-__str__-behavior">自定义<code>__str__</code>方法（<code>Custom __str__ behavior</code>）</a></li>
+        <li><a href="#__repr__方法__repr__"><code>__repr__</code>方法（<code>__repr__</code>）</a></li>
+        <li><a href="#自定义__repr__方法custom-__repr__-behavior">自定义<code>__repr__</code>方法（<code>Custom __repr__ behavior</code>）</a></li>
+        <li><a href="#使用getattr方法获取对象属性get-attribute-with-getattr">使用<code>getattr</code>方法获取对象属性（<code>Get attribute with getattr()</code>）</a></li>
+        <li><a href="#使用hasattr方法检测属性是否存在check-attribute-exists-with-hasattr">使用<code>hasattr</code>方法检测属性是否存在（<code>Check attribute exists with hasattr()</code>）</a></li>
+        <li><a href="#特别的方法special-methods">特别的方法（<code>Special methods</code>）</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="week7">Week7</h1>
+<p><code>CS 61A 2021 Fall</code>官网：<a href="https://inst.eecs.berkeley.edu/~cs61a/sp21/" target="_blank" rel="noopener noreffer ">CS 61A: Structure and Interpretation of Computer Programs</a></p>
+<p><code>翻译视频</code>：<a href="https://www.bilibili.com/video/BV1v64y1Q78o/?spm_id_from=444.41.top_right_bar_window_default_collection.content.click&amp;vd_source=249a8ad55bb26717dd55ec3dd295f644" target="_blank" rel="noopener noreffer ">【计算机程序的构造和解释】精译【UC Berkeley 公开课-CS61A (Spring 2021)】-中英双语字幕</a></p>
+<p><code>github</code>:<a href="https://github.com/Maxwell2020152049/CS61A" target="_blank" rel="noopener noreffer ">Maxwell2020152049/CS61A</a></p>
+<h2 id="lecture-16-objects--classes">Lecture #16: Objects + Classes</h2>
+<p><code>Slide</code>：<a href="https://inst.eecs.berkeley.edu/~cs61a/sp21/assets/slides/16-Objects_&#43;_Classes_full.pdf" target="_blank" rel="noopener noreffer ">16-Objects_+_Classes_full.pdf</a></p>
+<p><code>Lab</code>：<a href="https://inst.eecs.berkeley.edu/~cs61a/sp21/lab/lab06/" target="_blank" rel="noopener noreffer ">Lab 6: Nonlocal, Mutability, Iterators and Generators</a></p>
+<h3 id="如何建造一间巧克力商店building-a-chocolate-shop">如何建造一间巧克力商店（<code>Building a chocolate shop</code>）</h3>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="./Resources/image26.png"
+        data-srcset="./Resources/image26.png, ./Resources/image26.png 1.5x, ./Resources/image26.png 2x"
+        data-sizes="auto"
+        alt="./Resources/image26.png"
+        title="./Resources/image26.png" /></p>
+<p>使用我们之前学习过的抽象数据类型（<code>Abstract Data Type</code>）的知识，用函数可以实现巧克力商店的所有行为，但这节课我们会引入类和对象（<code>Class and Objects</code>）。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Inventory tracking</span>
+</span></span><span style="display:flex;"><span>add_product(name, price, nutrition)
+</span></span><span style="display:flex;"><span>get_label(product)
+</span></span><span style="display:flex;"><span>get_nutrition_info(product)
+</span></span><span style="display:flex;"><span>increase_inventory(product, amount)
+</span></span><span style="display:flex;"><span>reduce_inventory(product, amount)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Customer tracking</span>
+</span></span><span style="display:flex;"><span>signup_customer(name, address)
+</span></span><span style="display:flex;"><span>get_greeting(customer)
+</span></span><span style="display:flex;"><span>get_formatted_address(customer)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Purchase tracking</span>
+</span></span><span style="display:flex;"><span>order(customer, product, quantity, cc_info)
+</span></span><span style="display:flex;"><span>track(order_number)
+</span></span><span style="display:flex;"><span>refund(order_number, reason)
+</span></span></code></pre></div><h3 id="从函数到对象from-functions-to-objects">从函数到对象（<code>From functions to objects</code>）</h3>
+<p>使用<code>对象</code>来组织数据结构：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Inventory tracking</span>
+</span></span><span style="display:flex;"><span>Product(name, price, nutrition)
+</span></span><span style="display:flex;"><span>Product<span style="color:#f92672">.</span>get_label()
+</span></span><span style="display:flex;"><span>Product<span style="color:#f92672">.</span>get_nutrition_info()
+</span></span><span style="display:flex;"><span>Product<span style="color:#f92672">.</span>increase_inventory(amount)
+</span></span><span style="display:flex;"><span>Product<span style="color:#f92672">.</span>reduce_inventory(amount)
+</span></span><span style="display:flex;"><span>Product<span style="color:#f92672">.</span>get_inventory_report()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Customer tracking</span>
+</span></span><span style="display:flex;"><span>Customer(name, address)
+</span></span><span style="display:flex;"><span>Customer<span style="color:#f92672">.</span>get_greeting()
+</span></span><span style="display:flex;"><span>Customer<span style="color:#f92672">.</span>get_formatted_address()
+</span></span><span style="display:flex;"><span>Customer<span style="color:#f92672">.</span>buy(product, quantity, cc_info)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Purchase tracking</span>
+</span></span><span style="display:flex;"><span>Order(customer, product, quantity, cc_info)
+</span></span><span style="display:flex;"><span>Order<span style="color:#f92672">.</span>ship()
+</span></span><span style="display:flex;"><span>Order<span style="color:#f92672">.</span>refund(reason)
+</span></span></code></pre></div><p>一些关于<code>类和对象</code>的概念：</p>
+<blockquote>
+<ul>
+<li>
+<p>A <strong>class</strong> is a template for defining new data types.</p>
+</li>
+<li>
+<p>An instance of a class is called an <strong>object</strong>.</p>
+</li>
+<li>
+<p>Each object has data attributes called <strong>instance variables</strong> that describe its state.</p>
+</li>
+<li>
+<p>Each object also has function attributes called <strong>methods</strong>.</p>
+</li>
+</ul>
+</blockquote>
+<h3 id="类classes">类（<code>Classes</code>）</h3>
+<p>类能够实现：</p>
+<ul>
+<li>初始化实例对象</li>
+<li>定义方法，这些方法能够修改或者报告实例对象的值</li>
+</ul>
+<blockquote>
+<ul>
+<li>
+<p>Set the <strong>initial values</strong> for instance variables.</p>
+</li>
+<li>
+<p>Define <strong>methods</strong> specific to the object, often used to change or report the values of instance variables.</p>
+</li>
+</ul>
+</blockquote>
+<p>本课程给出了一种<code>产品</code>类的实现：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Define a new type of data</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Product</span>:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Set the initial values</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> __init__(self, name, price, nutrition_info):
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>_name <span style="color:#f92672">=</span> name
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>_price <span style="color:#f92672">=</span> price
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>_nutrition_info <span style="color:#f92672">=</span> nutrition_info
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>_inventory <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Define methods</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">increase_inventory</span>(self, amount):
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>_inventory <span style="color:#f92672">+=</span> amount
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">reduce_inventory</span>(self, amount):
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>_inventory <span style="color:#f92672">-=</span> amount
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_label</span>(self):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;Foxolate Shop: &#34;</span> <span style="color:#f92672">+</span> self<span style="color:#f92672">.</span>_name
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_inventory_report</span>(self):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> self<span style="color:#f92672">.</span>_inventory <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;There are no bars!&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;There are </span><span style="color:#e6db74">{</span>self<span style="color:#f92672">.</span>_inventory<span style="color:#e6db74">}</span><span style="color:#e6db74"> bars.&#34;</span>
+</span></span></code></pre></div><p>使用方法如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>pina_bar <span style="color:#f92672">=</span> Product(<span style="color:#e6db74">&#34;Piña Chocolotta&#34;</span>, <span style="color:#ae81ff">7.99</span>,
+</span></span><span style="display:flex;"><span>    [<span style="color:#e6db74">&#34;200 calories&#34;</span>, <span style="color:#e6db74">&#34;24 g sugar&#34;</span>])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>pina_bar<span style="color:#f92672">.</span>increase_inventory(<span style="color:#ae81ff">2</span>)
+</span></span></code></pre></div><h3 id="类定义class-definition">类定义（<code>Class definition</code>）</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Product</span>:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> __init__(self, name, price, nutrition_info):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">increase_inventory</span>(self, amount):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">reduce_inventory</span>(self, amount):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_label</span>(self):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_inventory_report</span>(self):
+</span></span></code></pre></div><p>一个类语句可以创建一个新的类，并再当前环境的第一个帧中，把该类绑定到类名上。</p>
+<blockquote>
+<ul>
+<li>
+<p>A class statement creates a new class and binds that class to the class name in the first frame of the current environment.</p>
+</li>
+<li>
+<p>Inner <code>def</code> statements create attributes of the class (<em>not</em> names in frames).</p>
+</li>
+</ul>
+</blockquote>
+<h3 id="类的实例化对象的构造class-instantiation-object-construction">类的实例化（对象的构造）（<code>Class instantiation (Object construction)</code>）</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>pina_bar <span style="color:#f92672">=</span> Product(<span style="color:#e6db74">&#34;Piña Chocolotta&#34;</span>, <span style="color:#ae81ff">7.99</span>,
+</span></span><span style="display:flex;"><span>    [<span style="color:#e6db74">&#34;200 calories&#34;</span>, <span style="color:#e6db74">&#34;24 g sugar&#34;</span>])
+</span></span></code></pre></div><p><code>Product(args)</code>一般被称为<code>构造器</code>。</p>
+<p>当<code>构造器</code>被调用时：</p>
+<ul>
+<li>该类的一个实例被创建</li>
+<li>该类的<code>__init__</code>函数被调用，新的对象作为<code>__init__</code>的第一个参数<code>self</code>。</li>
+</ul>
+<blockquote>
+<p><code>Product(args)</code> is often called the <strong>constructor</strong>.</p>
+<p>When the constructor is called:</p>
+<ul>
+<li>A new instance of that class is created</li>
+<li>The <code>__init__</code> method of the class is called with the new object as its first argument (named <code>self</code>), along with any additional arguments provided in the call expression</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Product</span>:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> __init__(self, name, price, nutrition_info):
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>_name <span style="color:#f92672">=</span> name
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>_price <span style="color:#f92672">=</span> price
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>_nutrition_info <span style="color:#f92672">=</span> nutrition_info
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>_inventory <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span></code></pre></div><h3 id="点运算符dot-notation">点运算符<code>.</code>（<code>Dot notation</code>）</h3>
+<p>一个对象的所有属性都可以被<code>.</code>运算符访问:</p>
+<blockquote>
+<p>All object attributes (which includes variables <em>and</em> methods) can be accessed with <strong>dot notation</strong>:</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>pina_bar<span style="color:#f92672">.</span>increase_inventory(<span style="color:#ae81ff">2</span>)
+</span></span></code></pre></div><p>上述表达式会在<code>pina_bar</code>类中查找名为<code>increase_inventory</code>的方法。</p>
+<blockquote>
+<p>That evaluates to the value of the attribute looked up by <code>increase_inventory</code> in the object referenced by <code>pina_bar</code>.</p>
+</blockquote>
+<p><code>.</code>运算符的左边也可以是任意的表达式：</p>
+<blockquote>
+<p>The left-hand side of the dot notation can also be any expression that evaluates to an object reference:</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>bars <span style="color:#f92672">=</span> [pina_bar, truffle_bar]
+</span></span><span style="display:flex;"><span>bars[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>increase_inventory(<span style="color:#ae81ff">2</span>)
+</span></span></code></pre></div><h3 id="实例的变量instance-variables">实例的变量（<code>Instance variables</code>）</h3>
+<blockquote>
+<p><strong>Instance variables</strong> are data attributes that describe the state of an object.</p>
+<p>This <code>__init__</code> initializes 4 instance variables:</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Product</span>:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> __init__(self, name, price, nutrition_info):
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>_name <span style="color:#f92672">=</span> name
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>_price <span style="color:#f92672">=</span> price
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>_nutrition_info <span style="color:#f92672">=</span> nutrition_info
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>_inventory <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span></code></pre></div><blockquote>
+<p>The object&rsquo;s methods can then change the values of those variables or assign new variables.</p>
+</blockquote>
+<h3 id="方法的调用method-invocation">方法的调用（<code>Method invocation</code>）</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>pina_bar<span style="color:#f92672">.</span>increase_inventory(<span style="color:#ae81ff">2</span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Product</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">increase_inventory</span>(self, amount):
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>_inventory <span style="color:#f92672">+=</span> amount
+</span></span></code></pre></div><blockquote>
+<p><code>pina_bar.increase_inventory</code> is a <strong>bound method</strong>: a function which has its first parameter pre-bound to a particular value.</p>
+<p>In this case, <code>self</code> is pre-bound to <code>pina_bar</code> and <code>amount</code> is set to 2.</p>
+</blockquote>
+<blockquote>
+<p>It&rsquo;s equivalent to:</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>Product<span style="color:#f92672">.</span>increase_inventory(pina_bar, <span style="color:#ae81ff">2</span>)
+</span></span></code></pre></div><h3 id="动态实例变量dynamic-instance-variables">动态实例变量（<code>Dynamic instance variables</code>）</h3>
+<blockquote>
+<p>An object can create a new instance variable whenever it&rsquo;d like.</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Product</span>:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">reduce_inventory</span>(self, amount):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (self<span style="color:#f92672">.</span>_inventory <span style="color:#f92672">-</span> amount) <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>            self<span style="color:#f92672">.</span>_needs_restocking <span style="color:#f92672">=</span> <span style="color:#66d9ef">True</span>
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>_inventory <span style="color:#f92672">-=</span> amount
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>pina_bar <span style="color:#f92672">=</span> Product(<span style="color:#e6db74">&#34;Piña Chocolotta&#34;</span>, <span style="color:#ae81ff">7.99</span>,
+</span></span><span style="display:flex;"><span>    [<span style="color:#e6db74">&#34;200 calories&#34;</span>, <span style="color:#e6db74">&#34;24 g sugar&#34;</span>])
+</span></span><span style="display:flex;"><span>pina_bar<span style="color:#f92672">.</span>reduce_inventory(<span style="color:#ae81ff">1</span>)
+</span></span></code></pre></div><blockquote>
+<p>Now <code>pina_bar</code> has an updated binding for <code>_inventory</code> and a new binding for <code>_needs_restocking</code> (which was not in <code>__init__</code>).</p>
+</blockquote>
+<h3 id="类变量class-variables">类变量（<code>Class variables</code>）</h3>
+<blockquote>
+<p>A <strong>class variable</strong> is an assignment inside the class that isn&rsquo;t inside a method body.</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Product</span>:
+</span></span><span style="display:flex;"><span>    sales_tax <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.07</span>
+</span></span></code></pre></div><blockquote>
+<p>Class variables are &ldquo;shared&rdquo; across all instances of a class because they are attributes of the class, not the instance.</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Product</span>:
+</span></span><span style="display:flex;"><span>    _sales_tax <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.07</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_total_price</span>(self, quantity):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> (self<span style="color:#f92672">.</span>_price <span style="color:#f92672">*</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> self<span style="color:#f92672">.</span>_sales_tax)) <span style="color:#f92672">*</span> quantity
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>pina_bar <span style="color:#f92672">=</span> Product(<span style="color:#e6db74">&#34;Piña Chocolotta&#34;</span>, <span style="color:#ae81ff">7.99</span>,
+</span></span><span style="display:flex;"><span>    [<span style="color:#e6db74">&#34;200 calories&#34;</span>, <span style="color:#e6db74">&#34;24 g sugar&#34;</span>])
+</span></span><span style="display:flex;"><span>truffle_bar <span style="color:#f92672">=</span> Product(<span style="color:#e6db74">&#34;Truffalapagus&#34;</span>, <span style="color:#ae81ff">9.99</span>,
+</span></span><span style="display:flex;"><span>    [<span style="color:#e6db74">&#34;170 calories&#34;</span>, <span style="color:#e6db74">&#34;19 g sugar&#34;</span>])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>pina_bar<span style="color:#f92672">.</span>_sales_tax
+</span></span><span style="display:flex;"><span>truffle_bar<span style="color:#f92672">.</span>_sales_tax
+</span></span><span style="display:flex;"><span>pina_bar<span style="color:#f92672">.</span>get_total_price(<span style="color:#ae81ff">4</span>)
+</span></span><span style="display:flex;"><span>truffle_bar<span style="color:#f92672">.</span>get_total_price(<span style="color:#ae81ff">4</span>)
+</span></span></code></pre></div><h3 id="属性都是公共的attributes-are-all-public">属性都是公共的（<code>Attributes are all public</code>）</h3>
+<blockquote>
+<p>As long as you have a reference to an object, you can set or mutate any attributes.</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>pina_bar <span style="color:#f92672">=</span> Product(<span style="color:#e6db74">&#34;Piña Chocolotta&#34;</span>, <span style="color:#ae81ff">7.99</span>,
+</span></span><span style="display:flex;"><span>    [<span style="color:#e6db74">&#34;200 calories&#34;</span>, <span style="color:#e6db74">&#34;24 g sugar&#34;</span>])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>pina_bar<span style="color:#f92672">.</span>_inventory
+</span></span><span style="display:flex;"><span>pina_bar<span style="color:#f92672">.</span>_inventory <span style="color:#f92672">=</span> <span style="color:#ae81ff">5000000</span>
+</span></span><span style="display:flex;"><span>pina_bar<span style="color:#f92672">.</span>_inventory <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">5000</span>
+</span></span></code></pre></div><blockquote>
+<p>You can even assign new instance variables:</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>pina_bar<span style="color:#f92672">.</span>brand_new_attribute_haha <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;instanception&#34;</span>
+</span></span></code></pre></div><h3 id="私有属性private-attributes">“私有”属性（<code>&quot;Private&quot; attributes</code>）</h3>
+<blockquote>
+<p>To communicate the desired access level of attributes, Python programmers generally use this convention:</p>
+<ul>
+<li><code>__</code> (double underscore) before very private attribute names</li>
+<li><code>_</code> (single underscore) before semi-private attribute names</li>
+<li>no underscore before public attribute names</li>
+</ul>
+<p>That allows classes to hide implementation details and add additional error checking.</p>
+<p>We will discuss <code>__</code> vs <code>_</code> next time.</p>
+<p>For now, if you see no underscore, HAVE FUN! 🎉 🎉</p>
+</blockquote>
+<h2 id="lecture-17-inheritance--composition">Lecture #17: Inheritance + Composition</h2>
+<p><code>Slide</code>：<a href="https://inst.eecs.berkeley.edu/~cs61a/sp21/assets/slides/17-Inheritance_&#43;_Composition_full.pdf" target="_blank" rel="noopener noreffer ">17-Inheritance_+_Composition_full.pdf</a></p>
+<p><code>Project</code>：<a href="https://inst.eecs.berkeley.edu/~cs61a/sp21/proj/ants/" target="_blank" rel="noopener noreffer ">Project 3: Ants Vs. SomeBees</a></p>
+<h3 id="创建一个动物园building-animal-conserving">创建一个“动物园”（<code>Building &quot;Animal Conserving&quot;</code>）</h3>
+<p>要实现一个包含下图的动物的动物园，我们至少需要实现以下类：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>Panda()
+</span></span><span style="display:flex;"><span>Lion()
+</span></span><span style="display:flex;"><span>Rabbit()
+</span></span><span style="display:flex;"><span>Vulture()
+</span></span><span style="display:flex;"><span>Elephant()
+</span></span><span style="display:flex;"><span>Food()
+</span></span></code></pre></div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/img/image_cs61a_notes/image27.png"
+        data-srcset="/img/image_cs61a_notes/image27.png, /img/image_cs61a_notes/image27.png 1.5x, /img/image_cs61a_notes/image27.png 2x"
+        data-sizes="auto"
+        alt="/img/image_cs61a_notes/image27.png"
+        title="/img/image_cs61a_notes/image27.png" /></p>
+<h3 id="食物类a-food-class">食物类（<code>A Food class</code>）</h3>
+<p>一个简单的食物类的实现：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Let&#39;s start simple:</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Food</span>:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> __init__(self, name, type, calories):
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>name <span style="color:#f92672">=</span> name
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>type <span style="color:#f92672">=</span> type
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>calories <span style="color:#f92672">=</span> calories
+</span></span></code></pre></div><p>使用方式：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># How would we use that class?</span>
+</span></span><span style="display:flex;"><span>broccoli <span style="color:#f92672">=</span> Food(<span style="color:#e6db74">&#34;Broccoli Rabe&#34;</span>, <span style="color:#e6db74">&#34;veggies&#34;</span>, <span style="color:#ae81ff">20</span>)
+</span></span><span style="display:flex;"><span>bone_marrow <span style="color:#f92672">=</span> Food(<span style="color:#e6db74">&#34;Bone Marrow&#34;</span>, <span style="color:#e6db74">&#34;meat&#34;</span>, <span style="color:#ae81ff">100</span>)
+</span></span></code></pre></div><h3 id="大象类an-elephant-class">大象类（<code>An Elephant class</code>）</h3>
+<p>一个简单的大象类的实现：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Elephant</span>:
+</span></span><span style="display:flex;"><span>    species_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;African Savanna Elephant&#34;</span>
+</span></span><span style="display:flex;"><span>    scientific_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Loxodonta africana&#34;</span>
+</span></span><span style="display:flex;"><span>    calories_needed <span style="color:#f92672">=</span> <span style="color:#ae81ff">8000</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> __init__(self, name, age<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>):
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>name <span style="color:#f92672">=</span> name
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>age <span style="color:#f92672">=</span> age
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>calories_eaten  <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>happiness <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">play</span>(self, num_hours):
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>happiness <span style="color:#f92672">+=</span> (num_hours <span style="color:#f92672">*</span> <span style="color:#ae81ff">4</span>)
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#34;WHEEE PLAY TIME!&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">eat</span>(self, food):
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>calories_eaten <span style="color:#f92672">+=</span> food<span style="color:#f92672">.</span>calories
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Om nom nom yummy </span><span style="color:#e6db74">{</span>food<span style="color:#f92672">.</span>name<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> self<span style="color:#f92672">.</span>calories_eaten <span style="color:#f92672">&gt;</span> self<span style="color:#f92672">.</span>calories_needed:
+</span></span><span style="display:flex;"><span>            self<span style="color:#f92672">.</span>happiness <span style="color:#f92672">-=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>            print(<span style="color:#e6db74">&#34;Ugh so full&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">interact_with</span>(self, animal2):
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>happiness <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Yay happy fun time with </span><span style="color:#e6db74">{</span>animal2<span style="color:#f92672">.</span>name<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span></code></pre></div><p>使用方式：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>el1 <span style="color:#f92672">=</span> Elephant(<span style="color:#e6db74">&#34;Willaby&#34;</span>, <span style="color:#ae81ff">5</span>)
+</span></span><span style="display:flex;"><span>el2 <span style="color:#f92672">=</span> Elephant(<span style="color:#e6db74">&#34;Wallaby&#34;</span>, <span style="color:#ae81ff">3</span>)
+</span></span><span style="display:flex;"><span>el1<span style="color:#f92672">.</span>play(<span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>el1<span style="color:#f92672">.</span>interact_with(el2)
+</span></span></code></pre></div><h3 id="兔子类an-rabbit-class">兔子类（<code>An Rabbit class</code>）</h3>
+<p>一个简单的兔子类的实现：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Rabbit</span>:
+</span></span><span style="display:flex;"><span>    species_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;European rabbit&#34;</span>
+</span></span><span style="display:flex;"><span>    scientific_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Oryctolagus cuniculus&#34;</span>
+</span></span><span style="display:flex;"><span>    calories_needed <span style="color:#f92672">=</span> <span style="color:#ae81ff">200</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> __init__(self, name, age<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>):
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>name <span style="color:#f92672">=</span> name
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>age <span style="color:#f92672">=</span> age
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>calories_eaten <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>happiness <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">play</span>(self, num_hours):
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>happiness <span style="color:#f92672">+=</span> (num_hours <span style="color:#f92672">*</span> <span style="color:#ae81ff">10</span>)
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#34;WHEEE PLAY TIME!&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">eat</span>(self, food):
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>calories_eaten <span style="color:#f92672">+=</span> food<span style="color:#f92672">.</span>calories
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Om nom nom yummy </span><span style="color:#e6db74">{</span>food<span style="color:#f92672">.</span>name<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> self<span style="color:#f92672">.</span>calories_eaten <span style="color:#f92672">&gt;</span> self<span style="color:#f92672">.</span>calories_needed:
+</span></span><span style="display:flex;"><span>            self<span style="color:#f92672">.</span>happiness <span style="color:#f92672">-=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>            print(<span style="color:#e6db74">&#34;Ugh so full&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">interact_with</span>(self, animal2):
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>happiness <span style="color:#f92672">+=</span> <span style="color:#ae81ff">4</span>
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Yay happy fun time with </span><span style="color:#e6db74">{</span>animal2<span style="color:#f92672">.</span>name<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span></code></pre></div><p>使用方式：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>rabbit1 <span style="color:#f92672">=</span> Rabbit(<span style="color:#e6db74">&#34;Mister Wabbit&#34;</span>, <span style="color:#ae81ff">3</span>)
+</span></span><span style="display:flex;"><span>rabbit2 <span style="color:#f92672">=</span> Rabbit(<span style="color:#e6db74">&#34;Bugs Bunny&#34;</span>, <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>rabbit1<span style="color:#f92672">.</span>eat(broccoli)
+</span></span><span style="display:flex;"><span>rabbit2<span style="color:#f92672">.</span>interact_with(rabbit1)
+</span></span></code></pre></div><h3 id="继承基类与子类inheritance--base-classes-and-subclasses">继承——基类与子类（<code>Inheritance--Base classes and subclasses</code>）</h3>
+<p>如果多个类有相似的属性，可以实现一个基类（<code>Base class</code>），让这些类继承基类。</p>
+<p>基类也被成为超类（<code>superclass</code>）。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/img/image_cs61a_notes/image28.png"
+        data-srcset="/img/image_cs61a_notes/image28.png, /img/image_cs61a_notes/image28.png 1.5x, /img/image_cs61a_notes/image28.png 2x"
+        data-sizes="auto"
+        alt="/img/image_cs61a_notes/image28.png"
+        title="/img/image_cs61a_notes/image28.png" /></p>
+<h3 id="基类the-base-class">基类（<code>The base class</code>）</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># The base class contains method headers common to the subclasses, and code that is used by multiple subclasses.</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Animal</span>:
+</span></span><span style="display:flex;"><span>    species_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Animal&#34;</span>
+</span></span><span style="display:flex;"><span>    scientific_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Animalia&#34;</span>
+</span></span><span style="display:flex;"><span>    play_multiplier <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>    interact_increment <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> __init__(self, name, age<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>):
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>name <span style="color:#f92672">=</span> name
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>age <span style="color:#f92672">=</span> age
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>calories_eaten  <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>happiness <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">play</span>(self, num_hours):
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>happiness <span style="color:#f92672">+=</span> (num_hours <span style="color:#f92672">*</span> self<span style="color:#f92672">.</span>play_multiplier)
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#34;WHEEE PLAY TIME!&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">eat</span>(self, food):
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>calories_eaten <span style="color:#f92672">+=</span> food<span style="color:#f92672">.</span>calories
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Om nom nom yummy </span><span style="color:#e6db74">{</span>food<span style="color:#f92672">.</span>name<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> self<span style="color:#f92672">.</span>calories_eaten <span style="color:#f92672">&gt;</span> self<span style="color:#f92672">.</span>calories_needed:
+</span></span><span style="display:flex;"><span>            self<span style="color:#f92672">.</span>happiness <span style="color:#f92672">-=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>            print(<span style="color:#e6db74">&#34;Ugh so full&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">interact_with</span>(self, animal2):
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>happiness <span style="color:#f92672">+=</span> self<span style="color:#f92672">.</span>interact_increment
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Yay happy fun time with </span><span style="color:#e6db74">{</span>animal2<span style="color:#f92672">.</span>name<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span></code></pre></div><h2 id="子类the-subclasses">子类（<code>The subclasses</code>）</h2>
+<p>可用如下方式定义一个<code>Animal</code>类的子类<code>Panda</code>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># To declare a subclass, put parentheses after the class name and specify the base class in the parentheses:</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Panda</span>(Animal):
+</span></span></code></pre></div><p>子类只需要不同于基类的代码部分。子类可以重新定义基类的任何部分，如类变量，方法定义，构造器等。</p>
+<p>重新定义（<code>redefinition</code>）也称重载（<code>overriding</code>）。</p>
+<p>如果子类不需要重载任何代码，可以这样实现（<code>pass</code>语句是为了防止报错）：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># The simplest subclass overrides nothing:</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AmorphousBlob</span>(Animal):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">pass</span>
+</span></span></code></pre></div><h3 id="重载类变量overriding-class-variables">重载类变量（<code>Overriding class variables</code>）</h3>
+<p>上述的兔子类和大象类可以重载动物类如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Subclasses can override existing class variables and assign new class variables:</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Rabbit</span>(Animal):
+</span></span><span style="display:flex;"><span>    species_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;European rabbit&#34;</span>
+</span></span><span style="display:flex;"><span>    scientific_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Oryctolagus cuniculus&#34;</span>
+</span></span><span style="display:flex;"><span>    calories_needed <span style="color:#f92672">=</span> <span style="color:#ae81ff">200</span>
+</span></span><span style="display:flex;"><span>    play_multiplier <span style="color:#f92672">=</span> <span style="color:#ae81ff">8</span>
+</span></span><span style="display:flex;"><span>    interact_increment <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>
+</span></span><span style="display:flex;"><span>    num_in_litter <span style="color:#f92672">=</span> <span style="color:#ae81ff">12</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Elephant</span>(Animal):
+</span></span><span style="display:flex;"><span>    species_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;African Savanna Elephant&#34;</span>
+</span></span><span style="display:flex;"><span>    scientific_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Loxodonta africana&#34;</span>
+</span></span><span style="display:flex;"><span>    calories_needed <span style="color:#f92672">=</span> <span style="color:#ae81ff">8000</span>
+</span></span><span style="display:flex;"><span>    play_multiplier <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>
+</span></span><span style="display:flex;"><span>    interact_increment <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>    num_tusks <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>
+</span></span></code></pre></div><h3 id="重载方法overriding-methods">重载方法（<code>Overriding methods</code>）</h3>
+<p>子类可以重载基类的方法(调用基类时，使用的是重载的方法)：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># If a subclass overrides a method, Python will use that definition instead of the superclass definition.</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Panda</span>(Animal):
+</span></span><span style="display:flex;"><span>    species_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Giant Panda&#34;</span>
+</span></span><span style="display:flex;"><span>    scientific_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Ailuropoda melanoleuca&#34;</span>
+</span></span><span style="display:flex;"><span>    calories_needed <span style="color:#f92672">=</span> <span style="color:#ae81ff">6000</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">interact_with</span>(self, other):
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;I&#39;m a Panda, I&#39;m solitary, go away </span><span style="color:#e6db74">{</span>other<span style="color:#f92672">.</span>name<span style="color:#e6db74">}</span><span style="color:#e6db74">!&#34;</span>)
+</span></span></code></pre></div><p>使用方式如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># How would we call that method?</span>
+</span></span><span style="display:flex;"><span>panda1 <span style="color:#f92672">=</span> Panda(<span style="color:#e6db74">&#34;Pandeybear&#34;</span>, <span style="color:#ae81ff">6</span>)
+</span></span><span style="display:flex;"><span>panda2 <span style="color:#f92672">=</span> Panda(<span style="color:#e6db74">&#34;Spot&#34;</span>, <span style="color:#ae81ff">3</span>)
+</span></span><span style="display:flex;"><span>panda1<span style="color:#f92672">.</span>interact_with(panda2)
+</span></span></code></pre></div><h3 id="使用基类的方法using-methods-from-the-base-class">使用基类的方法（<code>Using methods from the base class</code>）</h3>
+<p>可以使用<code>super()</code>表示当前类对象的基类，并调用基类方法：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># To refer to a superclass method, we can use super():</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Lion</span>(Animal):
+</span></span><span style="display:flex;"><span>    species_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Lion&#34;</span>
+</span></span><span style="display:flex;"><span>    scientific_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Panthera&#34;</span>
+</span></span><span style="display:flex;"><span>    calories_needed <span style="color:#f92672">=</span> <span style="color:#ae81ff">3000</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">eat</span>(self, food):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> food<span style="color:#f92672">.</span>type <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;meat&#34;</span>:
+</span></span><span style="display:flex;"><span>            super()<span style="color:#f92672">.</span>eat(food)
+</span></span></code></pre></div><p>使用方法如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># How would we call that method?</span>
+</span></span><span style="display:flex;"><span>bones <span style="color:#f92672">=</span> Food(<span style="color:#e6db74">&#34;Bones&#34;</span>, <span style="color:#e6db74">&#34;meat&#34;</span>)
+</span></span><span style="display:flex;"><span>mufasa <span style="color:#f92672">=</span> Lion(<span style="color:#e6db74">&#34;Mufasa&#34;</span>, <span style="color:#ae81ff">10</span>)
+</span></span><span style="display:flex;"><span>mufasa<span style="color:#f92672">.</span>eat(bones)
+</span></span></code></pre></div><p>以下两种调用是等价的：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># super().attribute refers to the definition of attribute in the superclass of the first parameter to the method.</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">eat</span>(self, food):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> food<span style="color:#f92672">.</span>type <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;meat&#34;</span>:
+</span></span><span style="display:flex;"><span>        super()<span style="color:#f92672">.</span>eat(food)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># ...is the same as:</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># super() is better style than BaseClassName, though slightly slower.</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">eat</span>(self, food):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> food<span style="color:#f92672">.</span>type <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;meat&#34;</span>:
+</span></span><span style="display:flex;"><span>        Animal<span style="color:#f92672">.</span>eat(self, food)
+</span></span></code></pre></div><h3 id="重载__init__overriding-__init__">重载<code>__init__</code>（<code>Overriding __init__</code>）</h3>
+<p>使用<code>super().__init__()会实例化基类</code>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Similarly, we need to explicitly call super().__init__() if we want to call the __init__ functionality of the base class.</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Elephant</span>(Animal):
+</span></span><span style="display:flex;"><span>    species_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Elephant&#34;</span>
+</span></span><span style="display:flex;"><span>    scientific_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Loxodonta&#34;</span>
+</span></span><span style="display:flex;"><span>    calories_needed <span style="color:#f92672">=</span> <span style="color:#ae81ff">8000</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> __init__(self, name, age<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>):
+</span></span><span style="display:flex;"><span>        super()<span style="color:#f92672">.</span>__init__(name, age)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> age <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">1</span>:
+</span></span><span style="display:flex;"><span>            self<span style="color:#f92672">.</span>calories_needed <span style="color:#f92672">=</span> <span style="color:#ae81ff">1000</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">elif</span> age <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">5</span>:
+</span></span><span style="display:flex;"><span>            self<span style="color:#f92672">.</span>calories_needed <span style="color:#f92672">=</span> <span style="color:#ae81ff">3000</span>
+</span></span></code></pre></div><p>使用方式如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># What would this display?</span>
+</span></span><span style="display:flex;"><span>elly <span style="color:#f92672">=</span> Elephant(<span style="color:#e6db74">&#34;Ellie&#34;</span>, <span style="color:#ae81ff">3</span>)
+</span></span><span style="display:flex;"><span>elly<span style="color:#f92672">.</span>calories_needed        <span style="color:#75715e"># 3000</span>
+</span></span></code></pre></div><h3 id="继承的层次layers-of-inheritance">继承的层次（<code>Layers of inheritance</code>）</h3>
+<p>每一个<code>Python3</code>的类都隐式地继承了<code>object</code>类：</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/img/image_cs61a_notes/image29.png"
+        data-srcset="/img/image_cs61a_notes/image29.png, /img/image_cs61a_notes/image29.png 1.5x, /img/image_cs61a_notes/image29.png 2x"
+        data-sizes="auto"
+        alt="/img/image_cs61a_notes/image29.png"
+        title="/img/image_cs61a_notes/image29.png" /></p>
+<h3 id="多继承multiple-inhteritance">多继承（<code>Multiple inhteritance</code>）</h3>
+<p><code>Python</code>也支持多继承，一个类可以继承多个基类：</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/img/image_cs61a_notes/image30.png"
+        data-srcset="/img/image_cs61a_notes/image30.png, /img/image_cs61a_notes/image30.png 1.5x, /img/image_cs61a_notes/image30.png 2x"
+        data-sizes="auto"
+        alt="/img/image_cs61a_notes/image30.png"
+        title="/img/image_cs61a_notes/image30.png" /></p>
+<h3 id="组合composition">组合（<code>Composition</code>）</h3>
+<p>一个对象可能包含其他类的对象的引用。</p>
+<blockquote>
+<p>An object can contain references to objects of other classes.</p>
+</blockquote>
+<p>下面的<code>Animal</code>类的实例变量<code>mate</code>就指向了另一个<code>Animal</code>类的对象。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Animal</span>:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">mate_with</span>(self, other):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> other <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> self <span style="color:#f92672">and</span> other<span style="color:#f92672">.</span>species_name <span style="color:#f92672">==</span> self<span style="color:#f92672">.</span>species_name:
+</span></span><span style="display:flex;"><span>            self<span style="color:#f92672">.</span>mate <span style="color:#f92672">=</span> other
+</span></span><span style="display:flex;"><span>            other<span style="color:#f92672">.</span>mate <span style="color:#f92672">=</span> self
+</span></span></code></pre></div><p>使用方式如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>mr_wabbit <span style="color:#f92672">=</span> Rabbit(<span style="color:#e6db74">&#34;Mister Wabbit&#34;</span>, <span style="color:#ae81ff">3</span>)
+</span></span><span style="display:flex;"><span>jane_doe <span style="color:#f92672">=</span> Rabbit(<span style="color:#e6db74">&#34;Jane Doe&#34;</span>, <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>mr_wabbit<span style="color:#f92672">.</span>mate_with(jane_doe)
+</span></span></code></pre></div><p><code>eg</code>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Rabbit</span>(Animal):
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">reproduce_like_rabbits</span>(self):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> self<span style="color:#f92672">.</span>mate <span style="color:#f92672">is</span> <span style="color:#66d9ef">None</span>:
+</span></span><span style="display:flex;"><span>            print(<span style="color:#e6db74">&#34;oh no! better go on ZoOkCupid&#34;</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span>
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>babies <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, self<span style="color:#f92672">.</span>num_in_litter):
+</span></span><span style="display:flex;"><span>            self<span style="color:#f92672">.</span>babies<span style="color:#f92672">.</span>append(Rabbit(<span style="color:#e6db74">&#34;bunny&#34;</span>, <span style="color:#ae81ff">0</span>))
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>mr_wabbit <span style="color:#f92672">=</span> Rabbit(<span style="color:#e6db74">&#34;Mister Wabbit&#34;</span>, <span style="color:#ae81ff">3</span>)
+</span></span><span style="display:flex;"><span>jane_doe <span style="color:#f92672">=</span> Rabbit(<span style="color:#e6db74">&#34;Jane Doe&#34;</span>, <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>mr_wabbit<span style="color:#f92672">.</span>mate_with(jane_doe)
+</span></span><span style="display:flex;"><span>jane_doe<span style="color:#f92672">.</span>reproduce_like_rabbits()
+</span></span></code></pre></div><p><code>eg.</code>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">partytime</span>(animals):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Assuming ANIMALS is a list of Animals, cause each
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    to interact with all the others exactly once.&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(len(animals)):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> j <span style="color:#f92672">in</span> range(i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, len(animals)):
+</span></span><span style="display:flex;"><span>            animals[i]<span style="color:#f92672">.</span>interact_with(animals[j])
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>jane_doe <span style="color:#f92672">=</span> Rabbit(<span style="color:#e6db74">&#34;Jane Doe&#34;</span>, <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>scar <span style="color:#f92672">=</span> Lion(<span style="color:#e6db74">&#34;Scar&#34;</span>, <span style="color:#ae81ff">12</span>)
+</span></span><span style="display:flex;"><span>elly <span style="color:#f92672">=</span> Elephant(<span style="color:#e6db74">&#34;Elly&#34;</span>, <span style="color:#ae81ff">5</span>)
+</span></span><span style="display:flex;"><span>pandy <span style="color:#f92672">=</span> Panda(<span style="color:#e6db74">&#34;PandeyBear&#34;</span>, <span style="color:#ae81ff">4</span>)
+</span></span><span style="display:flex;"><span>partytime([jane_doe, scar, elly, pandy])
+</span></span></code></pre></div><h2 id="lecture-18-special-object-methods">Lecture #18: Special Object Methods</h2>
+<p><code>Slide</code>：<a href="https://inst.eecs.berkeley.edu/~cs61a/sp21/assets/slides/18-Special_Object_Methods_full.pdf" target="_blank" rel="noopener noreffer ">18-Special_Object_Methods_full.pdf</a></p>
+<p><code>Homework</code>：<a href="https://inst.eecs.berkeley.edu/~cs61a/sp21/hw/hw05/" target="_blank" rel="noopener noreffer ">Homework 5: Object-Oriented Programming, Linked Lists, Iterators and Generators</a></p>
+<h3 id="关于对象so-many-objects">关于对象（<code>So many objects</code>）</h3>
+<p>在<code>Python</code>中，所有的类型和自定义类都隐式地直接或间接继承了<code>object</code>类，以下的变量名称都是对象的引用：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Lamb</span>:
+</span></span><span style="display:flex;"><span>    species_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Lamb&#34;</span>
+</span></span><span style="display:flex;"><span>    scientific_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Ovis aries&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> __init__(self, name):
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>name <span style="color:#f92672">=</span> name
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">play</span>(self):
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>happy <span style="color:#f92672">=</span> <span style="color:#66d9ef">True</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>lamb <span style="color:#f92672">=</span> Lamb(<span style="color:#e6db74">&#34;Lil&#34;</span>)
+</span></span><span style="display:flex;"><span>owner <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Mary&#34;</span>
+</span></span><span style="display:flex;"><span>had_a_lamb <span style="color:#f92672">=</span> <span style="color:#66d9ef">True</span>
+</span></span><span style="display:flex;"><span>fleece <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;color&#34;</span>: <span style="color:#e6db74">&#34;white&#34;</span>, <span style="color:#e6db74">&#34;fluffiness&#34;</span>: <span style="color:#ae81ff">100</span>}
+</span></span><span style="display:flex;"><span>kids_at_school <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#34;Billy&#34;</span>, <span style="color:#e6db74">&#34;Tilly&#34;</span>, <span style="color:#e6db74">&#34;Jilly&#34;</span>]
+</span></span><span style="display:flex;"><span>day <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+</span></span></code></pre></div><p>使用某个对象的<code>__class__</code>属性可以查看其类名，查看其类名的<code>__bases__</code>属性，可以得到基类（返回一个元组，基类可能不止一个）：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>&gt;&gt;&gt; lamb.__class__
+</span></span><span style="display:flex;"><span>&lt;class <span style="color:#e6db74">&#39;__main__.Lamb&#39;</span>&gt;
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; lamb.__class__.__bases__
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>&lt;class <span style="color:#e6db74">&#39;object&#39;</span>&gt;,<span style="color:#f92672">)</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>&gt;&gt;&gt; owner.__class__
+</span></span><span style="display:flex;"><span>&lt;class <span style="color:#e6db74">&#39;str&#39;</span>&gt;
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; owner.__class__.__bases__
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>&lt;class <span style="color:#e6db74">&#39;object&#39;</span>&gt;,<span style="color:#f92672">)</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>&gt;&gt;&gt; had_a_lamb.__class__
+</span></span><span style="display:flex;"><span>&lt;class <span style="color:#e6db74">&#39;bool&#39;</span>&gt;
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; had_a_lamb.__class__.__bases__
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>&lt;class <span style="color:#e6db74">&#39;int&#39;</span>&gt;,<span style="color:#f92672">)</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>&gt;&gt;&gt; fleece.__class__
+</span></span><span style="display:flex;"><span>&lt;class <span style="color:#e6db74">&#39;dict&#39;</span>&gt;
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; fleece.__class__.__bases__
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>&lt;class <span style="color:#e6db74">&#39;object&#39;</span>&gt;,<span style="color:#f92672">)</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>&gt;&gt;&gt; kids_at_school.__class__
+</span></span><span style="display:flex;"><span>&lt;class <span style="color:#e6db74">&#39;list&#39;</span>&gt;
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; kids_at_school.__class__.__bases__
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>&lt;class <span style="color:#e6db74">&#39;object&#39;</span>&gt;,<span style="color:#f92672">)</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>&gt;&gt;&gt; day.__class__
+</span></span><span style="display:flex;"><span>&lt;class <span style="color:#e6db74">&#39;int&#39;</span>&gt;
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; day.__class__.__bases__
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>&lt;class <span style="color:#e6db74">&#39;object&#39;</span>&gt;,<span style="color:#f92672">)</span>
+</span></span></code></pre></div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/img/image_cs61a_notes/image31.png"
+        data-srcset="/img/image_cs61a_notes/image31.png, /img/image_cs61a_notes/image31.png 1.5x, /img/image_cs61a_notes/image31.png 2x"
+        data-sizes="auto"
+        alt="/img/image_cs61a_notes/image31.png"
+        title="/img/image_cs61a_notes/image31.png" /></p>
+<h3 id="对象内置的属性built-in-object-attributes">对象内置的属性（<code>Built-in object attributes</code>）</h3>
+<p>因为所有类都继承自<code>object</code>类，所以自然继承了该类的属性，用<code>dir()</code>函数可以查看一个类的属性：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>dir(object)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>&gt;&gt;&gt; dir<span style="color:#f92672">(</span>object<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span><span style="color:#e6db74">&#39;__bases__&#39;</span>, <span style="color:#e6db74">&#39;__class__&#39;</span>, <span style="color:#e6db74">&#39;__delattr__&#39;</span>, <span style="color:#e6db74">&#39;__dir__&#39;</span>, <span style="color:#e6db74">&#39;__eq__&#39;</span>, <span style="color:#e6db74">&#39;__format__&#39;</span>, <span style="color:#e6db74">&#39;__ge__&#39;</span>, <span style="color:#e6db74">&#39;__getattribute__&#39;</span>, <span style="color:#e6db74">&#39;__gt__&#39;</span>, <span style="color:#e6db74">&#39;__hash__&#39;</span>, <span style="color:#e6db74">&#39;__init__&#39;</span>, <span style="color:#e6db74">&#39;__init_subclass__&#39;</span>, <span style="color:#e6db74">&#39;__le__&#39;</span>, <span style="color:#e6db74">&#39;__lt__&#39;</span>, <span style="color:#e6db74">&#39;__module__&#39;</span>, <span style="color:#e6db74">&#39;__ne__&#39;</span>, <span style="color:#e6db74">&#39;__new__&#39;</span>, <span style="color:#e6db74">&#39;__reduce__&#39;</span>, <span style="color:#e6db74">&#39;__reduce_ex__&#39;</span>, <span style="color:#e6db74">&#39;__repr__&#39;</span>, <span style="color:#e6db74">&#39;__setattr__&#39;</span>, <span style="color:#e6db74">&#39;__str__&#39;</span>, <span style="color:#e6db74">&#39;__subclasshook__&#39;</span><span style="color:#f92672">]</span>
+</span></span></code></pre></div><blockquote>
+<ul>
+<li>For string representation: <code>__repr__</code>, <code>__str__</code>, <code>__format__</code></li>
+<li>For comparisons: <code>__eq__</code>, <code>__ge__</code>, <code>__gt__</code>, <code>__le__</code>, <code>__lt__</code>, <code>__ne__</code></li>
+<li>Related to classes: <code>__bases__</code>, <code>__class__</code>, <code>__new__</code>, <code>__init__</code>, <code>__init_subclass__</code>, <code>__subclasshook__</code>, <code>__setattr__</code>, <code>__delattr__</code>, <code>__getattribute__</code></li>
+<li>Others: <code>__dir__</code>, <code>__hash__</code>, <code>__module__</code>, <code>__reduce__</code>, <code>__reduce_ex__</code></li>
+</ul>
+</blockquote>
+<h3 id="__str__方法__str__"><code>__str__</code>方法（<code>__str__</code>）</h3>
+<p><code>__str__</code>方法会返回一个可被人类阅读的字符串表示，在字符串构造，<code>print</code>函数，f-字符串（<code>f-string</code>）等地方都被调用了。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> fractions <span style="color:#f92672">import</span> Fraction
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>one_third <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">/</span><span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>one_half <span style="color:#f92672">=</span> Fraction(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>&gt;&gt;&gt; one_third
+</span></span><span style="display:flex;"><span>0.3333333333333333
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; print<span style="color:#f92672">(</span>one_third<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>0.3333333333333333
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>&gt;&gt;&gt; one_half
+</span></span><span style="display:flex;"><span>Fraction<span style="color:#f92672">(</span>1, 2<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; print<span style="color:#f92672">(</span>one_half<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>1/2
+</span></span></code></pre></div><p>f-字符串可以把<code>{}</code>中的变量名进行替换，运算结果是一个字符串，<code>eval</code>函数可以接受一个字符串，对其进行计算，就和输入该字符串到终端一样。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>&gt;&gt;&gt; f<span style="color:#e6db74">&#34;{one_half} &gt; {one_third}&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#39;1/2 &gt; 0.3333333333333333&#39;</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; eval<span style="color:#f92672">(</span>f<span style="color:#e6db74">&#34;{one_half} &gt; {one_third}&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>True
+</span></span></code></pre></div><h3 id="自定义__str__方法custom-__str__-behavior">自定义<code>__str__</code>方法（<code>Custom __str__ behavior</code>）</h3>
+<p>内置的<code>__str__</code>函数一般返回一个描述对象类名的字符串。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>&gt;&gt;&gt; lamb
+</span></span><span style="display:flex;"><span>&lt;__main__.Lamb object&gt;
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>&gt;&gt;&gt; str<span style="color:#f92672">(</span>lamb<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#39;&lt;__main__.Lamb object&gt;&#39;</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>&gt;&gt;&gt; lamb.__str__<span style="color:#f92672">()</span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#39;&lt;__main__.Lamb object&gt;&#39;</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>&gt;&gt;&gt; print<span style="color:#f92672">(</span>lamb<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>&lt;__main__.Lamb object&gt;
+</span></span></code></pre></div><p>重载<code>Lamb</code>类中的<code>__str__</code>函数：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> __str__(self):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;🐑 : &#34;</span> <span style="color:#f92672">+</span> self<span style="color:#f92672">.</span>name
+</span></span></code></pre></div><p>重载之后，注意到，输入<code>lamb</code>返回的是对象，并没有使用<code>__str__</code>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>&gt;&gt;&gt; lamb
+</span></span><span style="display:flex;"><span>&lt;__main__.Lamb object&gt;
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>&gt;&gt;&gt; lamb.__str__<span style="color:#f92672">()</span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#39;🐑 : Lil&#39;</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>&gt;&gt;&gt; print<span style="color:#f92672">(</span>lamb<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>🐑 : Lil
+</span></span></code></pre></div><h3 id="__repr__方法__repr__"><code>__repr__</code>方法（<code>__repr__</code>）</h3>
+<p>对象调用<code>__repr__</code>方法会返回一个字符串，该字符串可以被计算，得到该对象。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>&gt;&gt;&gt; one_half.__repr__<span style="color:#f92672">()</span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#39;Fraction(1, 2)&#39;</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>&gt;&gt;&gt; eval<span style="color:#f92672">(</span>one_half.__repr__<span style="color:#f92672">())</span>
+</span></span><span style="display:flex;"><span>Fraction<span style="color:#f92672">(</span>1, 2<span style="color:#f92672">)</span>
+</span></span></code></pre></div><p><code>__repr__</code>主要用于展示如何得到某个对象：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>&gt;&gt;&gt; 
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; one_third
+</span></span><span style="display:flex;"><span>0.3333333333333333
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; repr<span style="color:#f92672">(</span>one_third<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#39;0.3333333333333333&#39;</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>&gt;&gt;&gt; one_half
+</span></span><span style="display:flex;"><span>Fraction<span style="color:#f92672">(</span>1, 2<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; repr<span style="color:#f92672">(</span>one_half<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#39;Fraction(1, 2)&#39;</span>
+</span></span></code></pre></div><h3 id="自定义__repr__方法custom-__repr__-behavior">自定义<code>__repr__</code>方法（<code>Custom __repr__ behavior</code>）</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>&gt;&gt;&gt; lamb
+</span></span><span style="display:flex;"><span>&lt;__main__.Lamb object&gt;
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; repr<span style="color:#f92672">(</span>lamb<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#39;&lt;__main__.Lamb object&gt;&#39;</span>
+</span></span></code></pre></div><p>重载<code>Lamb</code>类中的<code>__repr__</code>方法：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> __repr__(self):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Lamb(</span><span style="color:#e6db74">{</span>repr(self<span style="color:#f92672">.</span>name)<span style="color:#e6db74">}</span><span style="color:#e6db74">)&#34;</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>&gt;&gt;&gt; lamb
+</span></span><span style="display:flex;"><span>Lamb<span style="color:#f92672">(</span><span style="color:#e6db74">&#39;Lil&#39;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; repr<span style="color:#f92672">(</span>lamb<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;Lamb(&#39;Lil&#39;)&#34;</span>
+</span></span></code></pre></div><h3 id="使用getattr方法获取对象属性get-attribute-with-getattr">使用<code>getattr</code>方法获取对象属性（<code>Get attribute with getattr()</code>）</h3>
+<p>使用<code>getattr(object, name[, default])</code>可以在<code>object</code>对象中查找<code>name</code>属性，若存在，返回该对象的类名的字符串，若不存在，返回<code>default</code>（若有该参数），否则返回<code>AttributeError</code>。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>&gt;&gt;&gt; getattr<span style="color:#f92672">(</span>lamb, <span style="color:#e6db74">&#34;species_name&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#39;Lamb&#39;</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>&gt;&gt;&gt; getattr<span style="color:#f92672">(</span>lamb, <span style="color:#e6db74">&#34;not_exist_name&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>Traceback <span style="color:#f92672">(</span>most recent call last<span style="color:#f92672">)</span>:
+</span></span><span style="display:flex;"><span>  File &lt;string&gt;, line 1, in &lt;module&gt;
+</span></span><span style="display:flex;"><span>AttributeError: not_exist_name
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>&gt;&gt;&gt; getattr<span style="color:#f92672">(</span>lamb, <span style="color:#e6db74">&#34;not_exist_name&#34;</span>, <span style="color:#e6db74">&#39;not this attribute&#39;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#39;not this attribute&#39;</span>
+</span></span></code></pre></div><h3 id="使用hasattr方法检测属性是否存在check-attribute-exists-with-hasattr">使用<code>hasattr</code>方法检测属性是否存在（<code>Check attribute exists with hasattr()</code>）</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>&gt;&gt;&gt; hasattr<span style="color:#f92672">(</span>lamb, <span style="color:#e6db74">&#34;scientific_name&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>True
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; hasattr<span style="color:#f92672">(</span>lamb, <span style="color:#e6db74">&#34;not_exist_name&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>False
+</span></span></code></pre></div><h3 id="特别的方法special-methods">特别的方法（<code>Special methods</code>）</h3>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/img/image_cs61a_notes/image32.png"
+        data-srcset="/img/image_cs61a_notes/image32.png, /img/image_cs61a_notes/image32.png 1.5x, /img/image_cs61a_notes/image32.png 2x"
+        data-sizes="auto"
+        alt="/img/image_cs61a_notes/image32.png"
+        title="/img/image_cs61a_notes/image32.png" /></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-08-10</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://Maxwell2020152049.github.io/posts/cs61a/notes/week7/" data-title="CS61A week7 study note" data-hashtags="Python"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://Maxwell2020152049.github.io/posts/cs61a/notes/week7/" data-hashtag="Python"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://Maxwell2020152049.github.io/posts/cs61a/notes/week7/" data-title="CS61A week7 study note"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://Maxwell2020152049.github.io/posts/cs61a/notes/week7/" data-title="CS61A week7 study note"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://Maxwell2020152049.github.io/posts/cs61a/notes/week7/" data-title="CS61A week7 study note"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/python/">Python</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/cs61a/lab/lab06/" class="prev" rel="prev" title="CS61A Lab lab06"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>CS61A Lab lab06</a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.115.4">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank"></a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

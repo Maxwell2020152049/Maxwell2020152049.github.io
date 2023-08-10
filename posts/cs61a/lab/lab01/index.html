@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>CS61A Lab lab01 - Rex&#39;s Blog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="CS61A Lab lab01" />
+<meta property="og:description" content="Lab 1: Variables &amp; Functions, Control 实验链接：Lab 1: Variables &amp; Functions, Control
+如何下载实验压缩包：
+wget https://inst.eecs.berkeley.edu/~cs61a/sp21/lab/lab01/lab01.zip What Would Python Display(WWPD)? (Part 1) Q1: WWPD: Control 使用如下命令进行测试：
+python3 ok -q control -u --local 需要注意：
+若用整型或浮点型做控制语句的判断条件，0会被当作False，非0会被当作True 测试过程如下：
+===================================================================== Assignment: Lab 1 OK, version v1.18.1 ===================================================================== ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Unlocking tests At each &#34;? &#34;, type what you would expect the output to be. Type exit() to quit --------------------------------------------------------------------- Control &gt; Suite 1 &gt; Case 1 (cases remaining: 5) What would Python display?" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://Maxwell2020152049.github.io/posts/cs61a/lab/lab01/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-07-29T02:03:12+08:00" />
+<meta property="article:modified_time" content="2023-07-29T02:03:12+08:00" /><meta property="og:site_name" content="My cool site" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="CS61A Lab lab01"/>
+<meta name="twitter:description" content="Lab 1: Variables &amp; Functions, Control 实验链接：Lab 1: Variables &amp; Functions, Control
+如何下载实验压缩包：
+wget https://inst.eecs.berkeley.edu/~cs61a/sp21/lab/lab01/lab01.zip What Would Python Display(WWPD)? (Part 1) Q1: WWPD: Control 使用如下命令进行测试：
+python3 ok -q control -u --local 需要注意：
+若用整型或浮点型做控制语句的判断条件，0会被当作False，非0会被当作True 测试过程如下：
+===================================================================== Assignment: Lab 1 OK, version v1.18.1 ===================================================================== ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Unlocking tests At each &#34;? &#34;, type what you would expect the output to be. Type exit() to quit --------------------------------------------------------------------- Control &gt; Suite 1 &gt; Case 1 (cases remaining: 5) What would Python display?"/>
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://Maxwell2020152049.github.io/posts/cs61a/lab/lab01/" /><link rel="prev" href="https://Maxwell2020152049.github.io/posts/cs61a/lab/lab00/" /><link rel="next" href="https://Maxwell2020152049.github.io/posts/cs61a/homework/hw01/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "CS61A Lab lab01",
+        "inLanguage": "en-us",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/Maxwell2020152049.github.io\/posts\/cs61a\/lab\/lab01\/"
+        },"genre": "posts","keywords": "Python","wordcount":  2664 ,
+        "url": "https:\/\/Maxwell2020152049.github.io\/posts\/cs61a\/lab\/lab01\/","datePublished": "2023-07-29T02:03:12+08:00","dateModified": "2023-07-29T02:03:12+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Author"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Rex&#39;s Blog"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg"
+        data-srcset="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg, https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg 1.5x, https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg 2x"
+        data-sizes="auto"
+        alt="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg"
+        title="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg" />Rex&#39;s cool site</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Rex&#39;s Blog"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg"
+        data-srcset="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg, https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg 1.5x, https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg 2x"
+        data-sizes="auto"
+        alt="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg"
+        title="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg" />Rex&#39;s cool site</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">CS61A Lab lab01</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-category">included in <a href="/categories/cs61a/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>CS61A</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-07-29">2023-07-29</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;2664 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;13 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#lab-1-variables--functions-control">Lab 1: Variables &amp; Functions, Control</a>
+      <ul>
+        <li><a href="#what-would-python-displaywwpd-part-1">What Would Python Display(WWPD)? (Part 1)</a></li>
+        <li><a href="#coding-practice">Coding Practice</a></li>
+        <li><a href="#extra-practice">Extra Practice</a></li>
+        <li><a href="#最终测试不包括extra-practice">最终测试（不包括<code>Extra Practice</code>）</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="lab-1-variables--functions-control">Lab 1: Variables &amp; Functions, Control</h2>
+<p>实验链接：<a href="https://inst.eecs.berkeley.edu/~cs61a/sp21/lab/lab01/" target="_blank" rel="noopener noreffer ">Lab 1: Variables &amp; Functions, Control</a></p>
+<p>如何下载实验压缩包：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>wget https://inst.eecs.berkeley.edu/~cs61a/sp21/lab/lab01/lab01.zip
+</span></span></code></pre></div><h3 id="what-would-python-displaywwpd-part-1">What Would Python Display(WWPD)? (Part 1)</h3>
+<h4 id="q1-wwpd-control">Q1: WWPD: Control</h4>
+<p>使用如下命令进行测试：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>python3 ok -q control -u --local
+</span></span></code></pre></div><p>需要注意：</p>
+<ul>
+<li>若用整型或浮点型做控制语句的判断条件，<code>0</code>会被当作<code>False</code>，<code>非0</code>会被当作<code>True</code></li>
+</ul>
+<p>测试过程如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>Assignment: Lab <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>OK, version v1.18.1
+</span></span><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+</span></span><span style="display:flex;"><span>Unlocking tests
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>At each <span style="color:#e6db74">&#34;? &#34;</span>, type what you would expect the output to be.
+</span></span><span style="display:flex;"><span>Type exit<span style="color:#f92672">()</span> to quit
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Control &gt; Suite <span style="color:#ae81ff">1</span> &gt; Case <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 5<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>What would Python display? If you get stuck, try it out in the Python
+</span></span><span style="display:flex;"><span>interpreter!
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; def xk<span style="color:#f92672">(</span>c, d<span style="color:#f92672">)</span>:
+</span></span><span style="display:flex;"><span>...     <span style="color:#66d9ef">if</span> c <span style="color:#f92672">==</span> 4:
+</span></span><span style="display:flex;"><span>...         <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">6</span>
+</span></span><span style="display:flex;"><span>...     <span style="color:#66d9ef">elif</span> d &gt;<span style="color:#f92672">=</span> 4:
+</span></span><span style="display:flex;"><span>...         <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">6</span> + <span style="color:#ae81ff">7</span> + c
+</span></span><span style="display:flex;"><span>...     <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>...         <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">25</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; xk<span style="color:#f92672">(</span>10, 10<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">23</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; xk<span style="color:#f92672">(</span>10, 6<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">19</span>
+</span></span><span style="display:flex;"><span>-- Not quite. Try again! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">23</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; xk<span style="color:#f92672">(</span>4, 6<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">6</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; xk<span style="color:#f92672">(</span>0, 0<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">25</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Control &gt; Suite <span style="color:#ae81ff">1</span> &gt; Case <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 4<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>What would Python display? If you get stuck, try it out in the Python
+</span></span><span style="display:flex;"><span>interpreter!
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; def how_big<span style="color:#f92672">(</span>x<span style="color:#f92672">)</span>:
+</span></span><span style="display:flex;"><span>...     <span style="color:#66d9ef">if</span> x &gt; 10:
+</span></span><span style="display:flex;"><span>...         print<span style="color:#f92672">(</span><span style="color:#e6db74">&#39;huge&#39;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>...     <span style="color:#66d9ef">elif</span> x &gt; 5:
+</span></span><span style="display:flex;"><span>...         <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;big&#39;</span>
+</span></span><span style="display:flex;"><span>...     <span style="color:#66d9ef">elif</span> x &gt; 0:
+</span></span><span style="display:flex;"><span>...         print<span style="color:#f92672">(</span><span style="color:#e6db74">&#39;small&#39;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>...     <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>...         print<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;nothin&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; how_big<span style="color:#f92672">(</span>7<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>? big
+</span></span><span style="display:flex;"><span>-- Not quite. Try again! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>? <span style="color:#e6db74">&#39;big&#39;</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; how_big<span style="color:#f92672">(</span>12<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#e6db74">&#39;huge&#39;</span>
+</span></span><span style="display:flex;"><span>-- Not quite. Try again! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>? huge
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; how_big<span style="color:#f92672">(</span>1<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>? small
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; how_big<span style="color:#f92672">(</span>-1<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>? nothin
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Control &gt; Suite <span style="color:#ae81ff">2</span> &gt; Case <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 3<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>What would Python display? If you get stuck, try it out in the Python
+</span></span><span style="display:flex;"><span>interpreter!
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; n <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; <span style="color:#66d9ef">while</span> n &gt;<span style="color:#f92672">=</span> 0:  <span style="color:#75715e"># If this loops forever, just type Infinite Loop</span>
+</span></span><span style="display:flex;"><span>...     n -<span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>...     print<span style="color:#f92672">(</span>n<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>line 1<span style="color:#f92672">)</span>? <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>line 2<span style="color:#f92672">)</span>? <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>line 3<span style="color:#f92672">)</span>? <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>line 4<span style="color:#f92672">)</span>? -1
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Control &gt; Suite <span style="color:#ae81ff">2</span> &gt; Case <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 2<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>What would Python display? If you get stuck, try it out in the Python
+</span></span><span style="display:flex;"><span>interpreter!
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; positive <span style="color:#f92672">=</span> <span style="color:#ae81ff">28</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; <span style="color:#66d9ef">while</span> positive: <span style="color:#75715e"># If this loops forever, just type Infinite Loop</span>
+</span></span><span style="display:flex;"><span>...    print<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;positive?&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>...    positive -<span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>? positive
+</span></span><span style="display:flex;"><span>-- Not quite. Try again! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>? positive?
+</span></span><span style="display:flex;"><span>-- Not quite. Try again! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>? Infinite Loop
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Control &gt; Suite <span style="color:#ae81ff">2</span> &gt; Case <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 1<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>What would Python display? If you get stuck, try it out in the Python
+</span></span><span style="display:flex;"><span>interpreter!
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; positive <span style="color:#f92672">=</span> -9
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; negative <span style="color:#f92672">=</span> -12
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; <span style="color:#66d9ef">while</span> negative: <span style="color:#75715e"># If this loops forever, just type Infinite Loop</span>
+</span></span><span style="display:flex;"><span>...    <span style="color:#66d9ef">if</span> positive:
+</span></span><span style="display:flex;"><span>...        print<span style="color:#f92672">(</span>negative<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>...    positive <span style="color:#f92672">+=</span> <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>...    negative <span style="color:#f92672">+=</span> <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>line 1<span style="color:#f92672">)</span>? Infinite Loop
+</span></span><span style="display:flex;"><span>-- Not quite. Try again! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>line 1<span style="color:#f92672">)</span>? -12
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>line 2<span style="color:#f92672">)</span>? -9
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>line 3<span style="color:#f92672">)</span>? -6
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>OK! All cases <span style="color:#66d9ef">for</span> Control unlocked.
+</span></span></code></pre></div><h4 id="q2-wwpd-veritasiness">Q2: WWPD: Veritasiness</h4>
+<p>使用如下命令进行测试：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>python3 ok -q short-circuit -u --local
+</span></span></code></pre></div><p>需要注意：</p>
+<ul>
+<li><code>and</code>和<code>or</code>运算符有<code>短路性</code></li>
+</ul>
+<p>测试过程如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>Assignment: Lab <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>OK, version v1.18.1
+</span></span><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+</span></span><span style="display:flex;"><span>Unlocking tests
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>At each <span style="color:#e6db74">&#34;? &#34;</span>, type what you would expect the output to be.
+</span></span><span style="display:flex;"><span>Type exit<span style="color:#f92672">()</span> to quit
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Veritasiness &gt; Suite <span style="color:#ae81ff">1</span> &gt; Case <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 3<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>What would Python display? If you get stuck, try it out in the Python
+</span></span><span style="display:flex;"><span>interpreter!
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; True and <span style="color:#ae81ff">13</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">13</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; False or <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; not <span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span>? False
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; not None
+</span></span><span style="display:flex;"><span>? True
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Veritasiness &gt; Suite <span style="color:#ae81ff">1</span> &gt; Case <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 2<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>What would Python display? If you get stuck, try it out in the Python
+</span></span><span style="display:flex;"><span>interpreter!
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; True and <span style="color:#ae81ff">1</span> / <span style="color:#ae81ff">0</span> and False  <span style="color:#75715e"># If this errors, just type Error.</span>
+</span></span><span style="display:flex;"><span>? Error
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; True or <span style="color:#ae81ff">1</span> / <span style="color:#ae81ff">0</span> or False  <span style="color:#75715e"># If this errors, just type Error.</span>
+</span></span><span style="display:flex;"><span>? True
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; True and <span style="color:#ae81ff">0</span>  <span style="color:#75715e"># If this errors, just type Error.</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; False or <span style="color:#ae81ff">1</span>  <span style="color:#75715e"># If this errors, just type Error.</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; <span style="color:#ae81ff">1</span> and <span style="color:#ae81ff">3</span> and <span style="color:#ae81ff">6</span> and <span style="color:#ae81ff">10</span> and <span style="color:#ae81ff">15</span>  <span style="color:#75715e"># If this errors, just type Error.</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">15</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; -1 and <span style="color:#ae81ff">1</span> &gt; <span style="color:#ae81ff">0</span> <span style="color:#75715e"># If this errors, just type Error.</span>
+</span></span><span style="display:flex;"><span>? True
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; <span style="color:#ae81ff">0</span> or False or <span style="color:#ae81ff">2</span> or <span style="color:#ae81ff">1</span> / <span style="color:#ae81ff">0</span>  <span style="color:#75715e"># If this errors, just type Error.</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Veritasiness &gt; Suite <span style="color:#ae81ff">2</span> &gt; Case <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 1<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>What would Python display? If you get stuck, try it out in the Python
+</span></span><span style="display:flex;"><span>interpreter!
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; not <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>? True
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; <span style="color:#f92672">(</span><span style="color:#ae81ff">1</span> + 1<span style="color:#f92672">)</span> and <span style="color:#ae81ff">1</span>  <span style="color:#75715e"># If this errors, just type Error. If this is blank, just type Nothing.</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; 1/0 or True  <span style="color:#75715e"># If this errors, just type Error. If this is blank, just type Nothing.</span>
+</span></span><span style="display:flex;"><span>? Error
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; <span style="color:#f92672">(</span>True or False<span style="color:#f92672">)</span> and False  <span style="color:#75715e"># If this errors, just type Error. If this is blank, just type Nothing.</span>
+</span></span><span style="display:flex;"><span>? False
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>OK! All cases <span style="color:#66d9ef">for</span> Veritasiness unlocked.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Cannot backup when running ok with --local.
+</span></span></code></pre></div><h4 id="q3-debugging-quiz">Q3: Debugging Quiz!</h4>
+<p>报错信息汇总与调试方法：<a href="https://inst.eecs.berkeley.edu/~cs61a/sp21/articles/debugging/" target="_blank" rel="noopener noreffer ">Debugging</a></p>
+<p>使用如下命令进行测试：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>python3 ok -q debugging-quiz -u --local
+</span></span></code></pre></div><p>需要注意：</p>
+<ul>
+<li><code>Traceback</code>中，越后打印的函数就是越晚调用的</li>
+<li>在输出的内容前加上<code>&quot;DEBUG: &quot;</code>，<code>ok</code>测评器会忽略改行输出</li>
+<li>在程序运行出错时，中止程序，抛出异常，好过打印错误信息</li>
+</ul>
+<p>测试过程如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>Assignment: Lab <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>OK, version v1.18.1
+</span></span><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+</span></span><span style="display:flex;"><span>Unlocking tests
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>At each <span style="color:#e6db74">&#34;? &#34;</span>, type what you would expect the output to be.
+</span></span><span style="display:flex;"><span>Type exit<span style="color:#f92672">()</span> to quit
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>debugging-quiz &gt; Suite <span style="color:#ae81ff">1</span> &gt; Case <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 12<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Q: In the following traceback, what is the most recent <span style="color:#66d9ef">function</span> call?
+</span></span><span style="display:flex;"><span>Traceback <span style="color:#f92672">(</span>most recent call last<span style="color:#f92672">)</span>:
+</span></span><span style="display:flex;"><span>    File <span style="color:#e6db74">&#34;temp.py&#34;</span>, line 10, in &lt;module&gt;
+</span></span><span style="display:flex;"><span>      f<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;hi&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    File <span style="color:#e6db74">&#34;temp.py&#34;</span>, line 2, in f
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span> g<span style="color:#f92672">(</span>x + x, x<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    File <span style="color:#e6db74">&#34;temp.py&#34;</span>, line 5, in g
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span> h<span style="color:#f92672">(</span>x + y * 5<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    File <span style="color:#e6db74">&#34;temp.py&#34;</span>, line 8, in h
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span> x + <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>  TypeError: must be str, not int
+</span></span><span style="display:flex;"><span>Choose the number of the correct choice:
+</span></span><span style="display:flex;"><span>0<span style="color:#f92672">)</span> g<span style="color:#f92672">(</span>x + x, x<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>1<span style="color:#f92672">)</span> h<span style="color:#f92672">(</span>x + y * 5<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>2<span style="color:#f92672">)</span> f<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;hi&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>debugging-quiz &gt; Suite <span style="color:#ae81ff">1</span> &gt; Case <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 11<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Q: In the following traceback, what is the cause of this error?
+</span></span><span style="display:flex;"><span>Traceback <span style="color:#f92672">(</span>most recent call last<span style="color:#f92672">)</span>:
+</span></span><span style="display:flex;"><span>    File <span style="color:#e6db74">&#34;temp.py&#34;</span>, line 10, in &lt;module&gt;
+</span></span><span style="display:flex;"><span>      f<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;hi&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    File <span style="color:#e6db74">&#34;temp.py&#34;</span>, line 2, in f
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span> g<span style="color:#f92672">(</span>x + x, x<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    File <span style="color:#e6db74">&#34;temp.py&#34;</span>, line 5, in g
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span> h<span style="color:#f92672">(</span>x + y * 5<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    File <span style="color:#e6db74">&#34;temp.py&#34;</span>, line 8, in h
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span> x + <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>  TypeError: must be str, not int
+</span></span><span style="display:flex;"><span>Choose the number of the correct choice:
+</span></span><span style="display:flex;"><span>0<span style="color:#f92672">)</span> the code looped infinitely
+</span></span><span style="display:flex;"><span>1<span style="color:#f92672">)</span> there was a missing <span style="color:#66d9ef">return</span> statement
+</span></span><span style="display:flex;"><span>2<span style="color:#f92672">)</span> the code attempted to add a string to an integer
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>debugging-quiz &gt; Suite <span style="color:#ae81ff">1</span> &gt; Case <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 10<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Q: How <span style="color:#66d9ef">do</span> you write a doctest asserting that square<span style="color:#f92672">(</span>2<span style="color:#f92672">)</span> <span style="color:#f92672">==</span> 4?
+</span></span><span style="display:flex;"><span>Choose the number of the correct choice:
+</span></span><span style="display:flex;"><span>0<span style="color:#f92672">)</span> def square<span style="color:#f92672">(</span>x<span style="color:#f92672">)</span>:
+</span></span><span style="display:flex;"><span>       <span style="color:#e6db74">&#39;&#39;&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">       square(2)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">       4
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">       &#39;&#39;&#39;</span>
+</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">return</span> x * x
+</span></span><span style="display:flex;"><span>1<span style="color:#f92672">)</span> def square<span style="color:#f92672">(</span>x<span style="color:#f92672">)</span>:
+</span></span><span style="display:flex;"><span>       <span style="color:#e6db74">&#39;&#39;&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">       input: 2
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">       output: 4
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">       &#39;&#39;&#39;</span>
+</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">return</span> x * x
+</span></span><span style="display:flex;"><span>2<span style="color:#f92672">)</span> def square<span style="color:#f92672">(</span>x<span style="color:#f92672">)</span>:
+</span></span><span style="display:flex;"><span>       <span style="color:#e6db74">&#39;&#39;&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">       &gt;&gt;&gt; square(2)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">       4
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">       &#39;&#39;&#39;</span>
+</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">return</span> x * x
+</span></span><span style="display:flex;"><span>3<span style="color:#f92672">)</span> def square<span style="color:#f92672">(</span>x<span style="color:#f92672">)</span>:
+</span></span><span style="display:flex;"><span>       <span style="color:#e6db74">&#39;&#39;&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">       doctest: (2, 4)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">       &#39;&#39;&#39;</span>
+</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">return</span> x * x
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>debugging-quiz &gt; Suite <span style="color:#ae81ff">1</span> &gt; Case <span style="color:#ae81ff">4</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 9<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Q: When should you use print statements?
+</span></span><span style="display:flex;"><span>Choose the number of the correct choice:
+</span></span><span style="display:flex;"><span>0<span style="color:#f92672">)</span> To investigate the values of variables at certain points in your code
+</span></span><span style="display:flex;"><span>1<span style="color:#f92672">)</span> For permanant debugging so you can have long term confidence in your code
+</span></span><span style="display:flex;"><span>2<span style="color:#f92672">)</span> To ensure that certain conditions are true at certain points in your code
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>debugging-quiz &gt; Suite <span style="color:#ae81ff">1</span> &gt; Case <span style="color:#ae81ff">5</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 8<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Q: How <span style="color:#66d9ef">do</span> you prevent the ok autograder from interpreting print statements as output?
+</span></span><span style="display:flex;"><span>Choose the number of the correct choice:
+</span></span><span style="display:flex;"><span>0<span style="color:#f92672">)</span> You don<span style="color:#e6db74">&#39;t need to do anything, ok only looks at returned values, not printed values
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">1) Print with # at the front of the outputted line
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">2) Print with &#39;</span>DEBUG:<span style="color:#e6db74">&#39; at the front of the outputted line
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">? 0
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">-- Not quite. Try again! --
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">Choose the number of the correct choice:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">0) You don&#39;</span>t need to <span style="color:#66d9ef">do</span> anything, ok only looks at returned values, not printed values
+</span></span><span style="display:flex;"><span>1<span style="color:#f92672">)</span> Print with <span style="color:#75715e"># at the front of the outputted line</span>
+</span></span><span style="display:flex;"><span>2<span style="color:#f92672">)</span> Print with <span style="color:#e6db74">&#39;DEBUG:&#39;</span> at the front of the outputted line
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>-- Not quite. Try again! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Choose the number of the correct choice:
+</span></span><span style="display:flex;"><span>0<span style="color:#f92672">)</span> You don<span style="color:#e6db74">&#39;t need to do anything, ok only looks at returned values, not printed values
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">1) Print with # at the front of the outputted line
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">2) Print with &#39;</span>DEBUG:<span style="color:#e6db74">&#39; at the front of the outputted line
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">? 2
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">-- OK! --
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">---------------------------------------------------------------------
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">debugging-quiz &gt; Suite 1 &gt; Case 6
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">(cases remaining: 7)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">Q: What is the best way to open an interactive terminal to investigate a failing test for question sum_digits in assignment lab01?
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">Choose the number of the correct choice:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">0) python3 ok -q sum_digits --trace
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">1) python3 -i lab01.py
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">2) python3 ok -q sum_digits -i
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">3) python3 ok -q sum_digits
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">? 1
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">-- Not quite. Try again! --
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">Choose the number of the correct choice:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">0) python3 ok -q sum_digits --trace
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">1) python3 -i lab01.py
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">2) python3 ok -q sum_digits -i
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">3) python3 ok -q sum_digits
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">? 2
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">-- OK! --
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">---------------------------------------------------------------------
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">debugging-quiz &gt; Suite 1 &gt; Case 7
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">(cases remaining: 6)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">Q: What is the best way to look at an environment diagram to investigate a failing test for question sum_digits in assignment lab01?
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">Choose the number of the correct choice:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">0) python3 ok -q sum_digits
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">1) python3 ok -q sum_digits --trace
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">2) python3 ok -q sum_digits -i
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">3) python3 -i lab01.py
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">? 1
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">-- OK! --
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">---------------------------------------------------------------------
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">debugging-quiz &gt; Suite 1 &gt; Case 8
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">(cases remaining: 5)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">Q: Which of the following is NOT true?
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">Choose the number of the correct choice:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">0) It is generally bad practice to release code with debugging print statements left in
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">1) Debugging is not a substitute for testing
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">2) It is generally good practice to release code with assertion statements left in
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">3) Code that returns a wrong answer instead of crashing is generally better as it at least works fine
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">4) Testing is very important to ensure robust code
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">? 0
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">-- Not quite. Try again! --
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">Choose the number of the correct choice:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">0) It is generally bad practice to release code with debugging print statements left in
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">1) Debugging is not a substitute for testing
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">2) It is generally good practice to release code with assertion statements left in
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">3) Code that returns a wrong answer instead of crashing is generally better as it at least works fine
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">4) Testing is very important to ensure robust code
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">? 3
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">-- OK! --
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">---------------------------------------------------------------------
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">debugging-quiz &gt; Suite 1 &gt; Case 9
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">(cases remaining: 4)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">Q: You get a SyntaxError. What is most likely to have happened?
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">Choose the number of the correct choice:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">0) You typed a variable name incorrectly
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">1) You forgot a return statement
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">2) Your indentation mixed tabs and spaces
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">3) You had an unmatched parenthesis
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">? 3
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">-- OK! --
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">---------------------------------------------------------------------
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">debugging-quiz &gt; Suite 1 &gt; Case 10
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">(cases remaining: 3)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">Q: You get a IndentationError. What is most likely to have happened?
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">Choose the number of the correct choice:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">0) You had an unmatched parenthesis
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">1) You typed a variable name incorrectly
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">2) Your indentation mixed tabs and spaces
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">3) You forgot a return statement
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">? 2
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">-- OK! --
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">---------------------------------------------------------------------
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">debugging-quiz &gt; Suite 1 &gt; Case 11
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">(cases remaining: 2)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">Q: You get a TypeError: ... &#39;</span>NoneType<span style="color:#960050;background-color:#1e0010">&#39;</span> object is not ... . What is most likely to have happened?
+</span></span><span style="display:flex;"><span>Choose the number of the correct choice:
+</span></span><span style="display:flex;"><span>0<span style="color:#f92672">)</span> You typed a variable name incorrectly
+</span></span><span style="display:flex;"><span>1<span style="color:#f92672">)</span> Your indentation mixed tabs and spaces
+</span></span><span style="display:flex;"><span>2<span style="color:#f92672">)</span> You had an unmatched parenthesis
+</span></span><span style="display:flex;"><span>3<span style="color:#f92672">)</span> You forgot a <span style="color:#66d9ef">return</span> statement
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>debugging-quiz &gt; Suite <span style="color:#ae81ff">1</span> &gt; Case <span style="color:#ae81ff">12</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 1<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Q: You get a NameError. What is most likely to have happened?
+</span></span><span style="display:flex;"><span>Choose the number of the correct choice:
+</span></span><span style="display:flex;"><span>0<span style="color:#f92672">)</span> You had an unmatched parenthesis
+</span></span><span style="display:flex;"><span>1<span style="color:#f92672">)</span> You typed a variable name incorrectly
+</span></span><span style="display:flex;"><span>2<span style="color:#f92672">)</span> You forgot a <span style="color:#66d9ef">return</span> statement
+</span></span><span style="display:flex;"><span>3<span style="color:#f92672">)</span> Your indentation mixed tabs and spaces
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>OK! All cases <span style="color:#66d9ef">for</span> debugging-quiz unlocked.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Cannot backup when running ok with --local.
+</span></span></code></pre></div><h3 id="coding-practice">Coding Practice</h3>
+<h4 id="q4-falling-factorial">Q4: Falling Factorial</h4>
+<blockquote>
+<p>Let&rsquo;s write a function <code>falling</code>, which is a &ldquo;falling&rdquo; factorial that takes two arguments, <code>n</code> and <code>k</code>, and returns the product of <code>k</code> consecutive numbers, starting from <code>n</code> and working downwards. When <code>k</code> is 0, the function should return 1.</p>
+</blockquote>
+<p>思路：简单的循环语法题，记得给<code>ans</code>赋初值</p>
+<p>实现代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">falling</span>(n, k):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Compute the falling factorial of n to depth k.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; falling(6, 3)  # 6 * 5 * 4
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    120
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; falling(4, 3)  # 4 * 3 * 2
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    24
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; falling(4, 1)  # 4
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    4
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; falling(4, 0)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    1
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;*** YOUR CODE HERE ***&#34;</span>
+</span></span><span style="display:flex;"><span>    ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> k <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>        ans <span style="color:#f92672">*=</span> n
+</span></span><span style="display:flex;"><span>        n <span style="color:#f92672">-=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>        k <span style="color:#f92672">-=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> ans
+</span></span></code></pre></div><h4 id="q5-sum-digits">Q5: Sum Digits</h4>
+<blockquote>
+<p>Write a function that takes in a nonnegative integer and sums its digits. (Using floor division and modulo might be helpful here!)</p>
+</blockquote>
+<p>思路：简单的循环语法题，把每位的数加在一起，得到答案</p>
+<p>实现代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">sum_digits</span>(y):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Sum all the digits of y.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; sum_digits(10) # 1 + 0 = 1
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    1
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; sum_digits(4224) # 4 + 2 + 2 + 4 = 12
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    12
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; sum_digits(1234567890)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    45
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; a = sum_digits(123) # make sure that you are using return rather than print
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; a
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    6
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;*** YOUR CODE HERE ***&#34;</span>
+</span></span><span style="display:flex;"><span>    sum <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> y <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>        sum <span style="color:#f92672">+=</span> y <span style="color:#f92672">%</span> <span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span>        y <span style="color:#f92672">//=</span> <span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> sum
+</span></span></code></pre></div><h3 id="extra-practice">Extra Practice</h3>
+<blockquote>
+<p>These questions are optional and will not affect your score on this assignment. However, they are <strong>great practice</strong> for future assignments, projects, and exams. Attempting these questions is valuable in helping cement your knowledge of course concepts, and it&rsquo;s fun!</p>
+</blockquote>
+<h4 id="q6-wwpd-what-if">Q6: WWPD: What If?</h4>
+<p>使用如下命令进行测试：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>python3 ok -q <span style="color:#66d9ef">if</span>-statements -u --local
+</span></span></code></pre></div><p>需要注意：</p>
+<p><code>print()</code>打印字符串不会有<code>&quot;</code>或<code>'</code>，但字符串做返回值会有<code>&quot;</code>或<code>'</code>。</p>
+<p>测试过程如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>Assignment: Lab <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>OK, version v1.18.1
+</span></span><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+</span></span><span style="display:flex;"><span>Unlocking tests
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>At each <span style="color:#e6db74">&#34;? &#34;</span>, type what you would expect the output to be.
+</span></span><span style="display:flex;"><span>Type exit<span style="color:#f92672">()</span> to quit
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>What If? &gt; Suite <span style="color:#ae81ff">1</span> &gt; Case <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 2<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>What would Python display? If you get stuck, try it out in the Python
+</span></span><span style="display:flex;"><span>interpreter!
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; def ab<span style="color:#f92672">(</span>c, d<span style="color:#f92672">)</span>:
+</span></span><span style="display:flex;"><span>...     <span style="color:#66d9ef">if</span> c &gt; 5:
+</span></span><span style="display:flex;"><span>...         print<span style="color:#f92672">(</span>c<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>...     <span style="color:#66d9ef">elif</span> c &gt; 7:
+</span></span><span style="display:flex;"><span>...         print<span style="color:#f92672">(</span>d<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>...     print<span style="color:#f92672">(</span><span style="color:#e6db74">&#39;foo&#39;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; ab<span style="color:#f92672">(</span>10, 20<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>line 1<span style="color:#f92672">)</span>? <span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>line 2<span style="color:#f92672">)</span>? foo
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>What If? &gt; Suite <span style="color:#ae81ff">1</span> &gt; Case <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 1<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>What would Python display? If you get stuck, try it out in the Python
+</span></span><span style="display:flex;"><span>interpreter!
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; def bake<span style="color:#f92672">(</span>cake, make<span style="color:#f92672">)</span>:
+</span></span><span style="display:flex;"><span>...    <span style="color:#66d9ef">if</span> cake <span style="color:#f92672">==</span> 0:
+</span></span><span style="display:flex;"><span>...        cake <span style="color:#f92672">=</span> cake + <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>...        print<span style="color:#f92672">(</span>cake<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>...    <span style="color:#66d9ef">if</span> cake <span style="color:#f92672">==</span> 1:
+</span></span><span style="display:flex;"><span>...        print<span style="color:#f92672">(</span>make<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>...    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>...        <span style="color:#66d9ef">return</span> cake
+</span></span><span style="display:flex;"><span>...    <span style="color:#66d9ef">return</span> make
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; bake<span style="color:#f92672">(</span>0, 29<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>line 1<span style="color:#f92672">)</span>? <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>line 2<span style="color:#f92672">)</span>? <span style="color:#ae81ff">29</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>line 3<span style="color:#f92672">)</span>? <span style="color:#ae81ff">29</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; bake<span style="color:#f92672">(</span>1, <span style="color:#e6db74">&#34;mashed potatoes&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>line 1<span style="color:#f92672">)</span>? mashed potatoes
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>line 2<span style="color:#f92672">)</span>? <span style="color:#e6db74">&#34;mashed potatoes&#34;</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>OK! All cases <span style="color:#66d9ef">for</span> What If? unlocked.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Cannot backup when running ok with --local.
+</span></span></code></pre></div><h4 id="q7-double-eights">Q7: Double Eights</h4>
+<blockquote>
+<p>Write a function that takes in a number and determines if the digits contain two adjacent 8s.</p>
+</blockquote>
+<p>思路：检查<code>n</code>的低2位是否是<code>88</code>，然后除<code>10</code>，直到<code>n</code>变成个位数。</p>
+<p>实现代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>def double_eights<span style="color:#f92672">(</span>n<span style="color:#f92672">)</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Return true if n has two eights in a row.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; double_eights(8)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    False
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; double_eights(88)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    True
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; double_eights(2882)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    True
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; double_eights(880088)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    True
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; double_eights(12345)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    False
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; double_eights(80808080)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    False
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;*** YOUR CODE HERE ***&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> n &gt;<span style="color:#f92672">=</span> 10:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> n % 100 <span style="color:#f92672">==</span> 88:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> True
+</span></span><span style="display:flex;"><span>        n //<span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> False
+</span></span></code></pre></div><p>使用如下命令测试：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>python3 ok -q double_eights --local
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>Assignment: Lab <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>OK, version v1.18.1
+</span></span><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+</span></span><span style="display:flex;"><span>Running tests
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Test summary
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">1</span> test cases passed! No cases failed.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Cannot backup when running ok with --local.
+</span></span></code></pre></div><h3 id="最终测试不包括extra-practice">最终测试（不包括<code>Extra Practice</code>）</h3>
+<p>使用如下命令测试：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>python ok --local
+</span></span></code></pre></div><p>测试结果如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>Assignment: Lab <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>OK, version v1<span style="color:#ae81ff">.18.1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>
+</span></span><span style="display:flex;"><span>Running tests
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">---------------------------------------------------------------------</span>
+</span></span><span style="display:flex;"><span>Test summary
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">22</span> test cases passed<span style="color:#960050;background-color:#1e0010">!</span> No cases failed<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Cannot backup when running ok <span style="color:#66d9ef">with</span> <span style="color:#f92672">--</span>local<span style="color:#f92672">.</span>
+</span></span></code></pre></div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-07-29</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://Maxwell2020152049.github.io/posts/cs61a/lab/lab01/" data-title="CS61A Lab lab01" data-hashtags="Python"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://Maxwell2020152049.github.io/posts/cs61a/lab/lab01/" data-hashtag="Python"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://Maxwell2020152049.github.io/posts/cs61a/lab/lab01/" data-title="CS61A Lab lab01"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://Maxwell2020152049.github.io/posts/cs61a/lab/lab01/" data-title="CS61A Lab lab01"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://Maxwell2020152049.github.io/posts/cs61a/lab/lab01/" data-title="CS61A Lab lab01"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/python/">Python</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/cs61a/lab/lab00/" class="prev" rel="prev" title="CS61A Lab lab00"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>CS61A Lab lab00</a>
+            <a href="/posts/cs61a/homework/hw01/" class="next" rel="next" title="CS61A Homework hw01">CS61A Homework hw01<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.115.4">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank"></a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

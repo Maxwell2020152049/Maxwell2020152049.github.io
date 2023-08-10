@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>CS61A Project Cats - Rex&#39;s Blog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="CS61A Project Cats" />
+<meta property="og:description" content="Project 2: CS 61A Autocorrected Typing Software Project地址：Project 2: CS 61A Autocorrected Typing Software
+使用如下命令可以下载项目：
+wget https://inst.eecs.berkeley.edu/~cs61a/sp21/proj/cats/cats.zip 项目的最终效果类似：Final Product
+Phase 1: Typing Problem 1 (1 pt) 实现choose(paragraphs, select, k)函数：
+paragraphs：一个字符串列表 select：选择函数，参数为字符串，若符合要求，返回True，否则返回False k：函数返回第k个符合要求的字符串 使用如下命令进行解锁测试：
+python3 ok -q 01 -u --local 过程如下：
+===================================================================== Assignment: Project 2: Cats OK, version v1.18.1 ===================================================================== ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Unlocking tests At each &#34;? &#34;, type what you would expect the output to be. Type exit() to quit --------------------------------------------------------------------- Problem 1 &gt; Suite 1 &gt; Case 1 (cases remaining: 102) &gt;&gt;&gt; from cats import choose &gt;&gt;&gt; ps = [&#39;short&#39;, &#39;really long&#39;, &#39;tiny&#39;] &gt;&gt;&gt; s = lambda p: len(p) &lt;= 5 &gt;&gt;&gt; choose(ps, s, 0) ?" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://Maxwell2020152049.github.io/posts/cs61a/project/cats/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-08-03T14:55:49+08:00" />
+<meta property="article:modified_time" content="2023-08-03T14:55:49+08:00" /><meta property="og:site_name" content="My cool site" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="CS61A Project Cats"/>
+<meta name="twitter:description" content="Project 2: CS 61A Autocorrected Typing Software Project地址：Project 2: CS 61A Autocorrected Typing Software
+使用如下命令可以下载项目：
+wget https://inst.eecs.berkeley.edu/~cs61a/sp21/proj/cats/cats.zip 项目的最终效果类似：Final Product
+Phase 1: Typing Problem 1 (1 pt) 实现choose(paragraphs, select, k)函数：
+paragraphs：一个字符串列表 select：选择函数，参数为字符串，若符合要求，返回True，否则返回False k：函数返回第k个符合要求的字符串 使用如下命令进行解锁测试：
+python3 ok -q 01 -u --local 过程如下：
+===================================================================== Assignment: Project 2: Cats OK, version v1.18.1 ===================================================================== ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Unlocking tests At each &#34;? &#34;, type what you would expect the output to be. Type exit() to quit --------------------------------------------------------------------- Problem 1 &gt; Suite 1 &gt; Case 1 (cases remaining: 102) &gt;&gt;&gt; from cats import choose &gt;&gt;&gt; ps = [&#39;short&#39;, &#39;really long&#39;, &#39;tiny&#39;] &gt;&gt;&gt; s = lambda p: len(p) &lt;= 5 &gt;&gt;&gt; choose(ps, s, 0) ?"/>
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://Maxwell2020152049.github.io/posts/cs61a/project/cats/" /><link rel="prev" href="https://Maxwell2020152049.github.io/posts/cs61a/lab/lab03/" /><link rel="next" href="https://Maxwell2020152049.github.io/posts/cs61a/lab/lab05/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "CS61A Project Cats",
+        "inLanguage": "en-us",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/Maxwell2020152049.github.io\/posts\/cs61a\/project\/cats\/"
+        },"genre": "posts","keywords": "Python","wordcount":  3391 ,
+        "url": "https:\/\/Maxwell2020152049.github.io\/posts\/cs61a\/project\/cats\/","datePublished": "2023-08-03T14:55:49+08:00","dateModified": "2023-08-03T14:55:49+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Author"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Rex&#39;s Blog"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg"
+        data-srcset="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg, https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg 1.5x, https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg 2x"
+        data-sizes="auto"
+        alt="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg"
+        title="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg" />Rex&#39;s cool site</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Rex&#39;s Blog"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg"
+        data-srcset="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg, https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg 1.5x, https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg 2x"
+        data-sizes="auto"
+        alt="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg"
+        title="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg" />Rex&#39;s cool site</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">CS61A Project Cats</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-category">included in <a href="/categories/cs61a/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>CS61A</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-08-03">2023-08-03</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;3391 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;16 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#phase-1-typing">Phase 1: Typing</a>
+      <ul>
+        <li><a href="#problem-1-1-pt">Problem 1 (1 pt)</a></li>
+        <li><a href="#problem-2-2-pt">Problem 2 (2 pt)</a></li>
+        <li><a href="#problem-3-1-pt">Problem 3 (1 pt)</a></li>
+        <li><a href="#problem-4-1-pt">Problem 4 (1 pt)</a></li>
+      </ul>
+    </li>
+    <li><a href="#phase-2-autocorrect">Phase 2: Autocorrect</a>
+      <ul>
+        <li><a href="#problem-5-2-pt">Problem 5 (2 pt)</a></li>
+        <li><a href="#problem-6-2-pts">Problem 6 (2 pts)</a></li>
+        <li><a href="#problem-7-3-pt">Problem 7 (3 pt)</a></li>
+        <li><a href="#optional-extension-final-diff-0pt">(Optional) Extension: final diff (0pt)</a></li>
+      </ul>
+    </li>
+    <li><a href="#phase-3-multiplayer">Phase 3: Multiplayer</a>
+      <ul>
+        <li><a href="#problem-8-2-pt">Problem 8 (2 pt)</a></li>
+        <li><a href="#problem-9-1-pt">Problem 9 (1 pt)</a></li>
+        <li><a href="#problem-10-2-pt">Problem 10 (2 pt)</a></li>
+      </ul>
+    </li>
+    <li><a href="#最终测试">最终测试</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="project-2-cs-61a-autocorrected-typing-software">Project 2: CS 61A Autocorrected Typing Software</h1>
+<p><code>Project</code>地址：<a href="https://inst.eecs.berkeley.edu/~cs61a/sp21/proj/cats/" target="_blank" rel="noopener noreffer ">Project 2: CS 61A Autocorrected Typing Software</a></p>
+<p>使用如下命令可以下载项目：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>wget https://inst.eecs.berkeley.edu/~cs61a/sp21/proj/cats/cats.zip
+</span></span></code></pre></div><p>项目的最终效果类似：<a href="https://cats.cs61a.org/" target="_blank" rel="noopener noreffer ">Final Product</a></p>
+<h2 id="phase-1-typing">Phase 1: Typing</h2>
+<h3 id="problem-1-1-pt">Problem 1 (1 pt)</h3>
+<p>实现<code>choose(paragraphs, select, k)</code>函数：</p>
+<ul>
+<li><code>paragraphs</code>：一个字符串列表</li>
+<li><code>select</code>：选择函数，参数为字符串，若符合要求，返回<code>True</code>，否则返回<code>False</code></li>
+<li><code>k</code>：函数返回第<code>k</code>个符合要求的字符串</li>
+</ul>
+<p>使用如下命令进行解锁测试：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>python3 ok -q <span style="color:#ae81ff">01</span> -u --local
+</span></span></code></pre></div><p>过程如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>Assignment: Project 2: Cats
+</span></span><span style="display:flex;"><span>OK, version v1.18.1
+</span></span><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+</span></span><span style="display:flex;"><span>Unlocking tests
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>At each <span style="color:#e6db74">&#34;? &#34;</span>, type what you would expect the output to be.
+</span></span><span style="display:flex;"><span>Type exit<span style="color:#f92672">()</span> to quit
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Problem <span style="color:#ae81ff">1</span> &gt; Suite <span style="color:#ae81ff">1</span> &gt; Case <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 102<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; from cats import choose
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; ps <span style="color:#f92672">=</span> <span style="color:#f92672">[</span><span style="color:#e6db74">&#39;short&#39;</span>, <span style="color:#e6db74">&#39;really long&#39;</span>, <span style="color:#e6db74">&#39;tiny&#39;</span><span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; s <span style="color:#f92672">=</span> lambda p: len<span style="color:#f92672">(</span>p<span style="color:#f92672">)</span> &lt;<span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; choose<span style="color:#f92672">(</span>ps, s, 0<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#e6db74">&#39;short&#39;</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; choose<span style="color:#f92672">(</span>ps, s, 1<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#e6db74">&#39;tiny&#39;</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; choose<span style="color:#f92672">(</span>ps, s, 2<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#e6db74">&#39;&#39;</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>OK! All cases <span style="color:#66d9ef">for</span> Problem <span style="color:#ae81ff">1</span> unlocked.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Cannot backup when running ok with --local.
+</span></span></code></pre></div><p>实现代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">choose</span>(paragraphs, select, k):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Return the Kth paragraph from PARAGRAPHS for which SELECT called on the
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    paragraph returns True. If there are fewer than K such paragraphs, return
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    the empty string.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Arguments:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        paragraphs: a list of strings
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        select: a function that returns True for paragraphs that can be selected
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        k: an integer
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; ps = [&#39;hi&#39;, &#39;how are you&#39;, &#39;fine&#39;]
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; s = lambda p: len(p) &lt;= 4
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; choose(ps, s, 0)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#39;hi&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; choose(ps, s, 1)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#39;fine&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; choose(ps, s, 2)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#39;&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># BEGIN PROBLEM 1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;*** YOUR CODE HERE ***&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> str <span style="color:#f92672">in</span> paragraphs:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> select(str):
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> k <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> str
+</span></span><span style="display:flex;"><span>            k <span style="color:#f92672">-=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;&#39;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># END PROBLEM 1</span>
+</span></span></code></pre></div><h3 id="problem-2-2-pt">Problem 2 (2 pt)</h3>
+<p>实现<code>about(topic)</code>函数：</p>
+<ul>
+<li><code>topic</code>：一个字符串列表，字符串都是小写单词</li>
+</ul>
+<p>返回一个<code>select(str)</code>函数，若<code>str</code>包含<code>topic</code>中的某个单词，返回<code>True</code>，否则返回<code>False</code>。</p>
+<p>注意：判断是否包含某个单词的时候，不区分大小写。</p>
+<p>使用如下命令进行解锁测试：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>python3 ok -q <span style="color:#ae81ff">02</span> -u --local
+</span></span></code></pre></div><p>过程如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>Assignment: Project 2: Cats
+</span></span><span style="display:flex;"><span>OK, version v1.18.1
+</span></span><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+</span></span><span style="display:flex;"><span>Unlocking tests
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>At each <span style="color:#e6db74">&#34;? &#34;</span>, type what you would expect the output to be.
+</span></span><span style="display:flex;"><span>Type exit<span style="color:#f92672">()</span> to quit
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Problem <span style="color:#ae81ff">2</span> &gt; Suite <span style="color:#ae81ff">1</span> &gt; Case <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 102<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; from cats import about
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; from cats import choose
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; dogs <span style="color:#f92672">=</span> about<span style="color:#f92672">([</span><span style="color:#e6db74">&#39;dogs&#39;</span>, <span style="color:#e6db74">&#39;hounds&#39;</span><span style="color:#f92672">])</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; dogs<span style="color:#f92672">(</span><span style="color:#e6db74">&#39;A paragraph about cats.&#39;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>? False
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; dogs<span style="color:#f92672">(</span><span style="color:#e6db74">&#39;A paragraph about dogs.&#39;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>? True
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; dogs<span style="color:#f92672">(</span><span style="color:#e6db74">&#39;Release the Hounds!&#39;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>? True
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; dogs<span style="color:#f92672">(</span><span style="color:#e6db74">&#39;&#34;DOGS&#34; stands for Department Of Geophysical Science.&#39;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>? True
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; dogs<span style="color:#f92672">(</span><span style="color:#e6db74">&#39;Do gs and ho unds don\&#39;</span>t count<span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>? False
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; dogs<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;AdogsParagraph&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>? False
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>OK! All cases <span style="color:#66d9ef">for</span> Problem <span style="color:#ae81ff">2</span> unlocked.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Cannot backup when running ok with --local.
+</span></span></code></pre></div><p>实现思路：先使用<code>remove_punctuation</code>函数去掉<code>str</code>的标点符号，再使用<code>lower</code>函数把所有字母变成小写，再使用<code>split</code>将字符串分割成单词列表（分隔符为空格）。</p>
+<p>实现代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">about</span>(topic):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Return a select function that returns whether
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    a paragraph contains one of the words in TOPIC.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Arguments:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        topic: a list of words related to a subject
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; about_dogs = about([&#39;dog&#39;, &#39;dogs&#39;, &#39;pup&#39;, &#39;puppy&#39;])
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; choose([&#39;Cute Dog!&#39;, &#39;That is a cat.&#39;, &#39;Nice pup!&#39;], about_dogs, 0)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#39;Cute Dog!&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; choose([&#39;Cute Dog!&#39;, &#39;That is a cat.&#39;, &#39;Nice pup.&#39;], about_dogs, 1)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#39;Nice pup.&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">assert</span> all([lower(x) <span style="color:#f92672">==</span> x <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> topic]), <span style="color:#e6db74">&#39;topics should be lowercase.&#39;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># BEGIN PROBLEM 2</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;*** YOUR CODE HERE ***&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">select</span>(str):
+</span></span><span style="display:flex;"><span>        str_rm_punc <span style="color:#f92672">=</span> remove_punctuation(str)
+</span></span><span style="display:flex;"><span>        str_lower <span style="color:#f92672">=</span> lower(str_rm_punc)
+</span></span><span style="display:flex;"><span>        str_split <span style="color:#f92672">=</span> split(str_lower)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> word <span style="color:#f92672">in</span> str_split:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> word <span style="color:#f92672">in</span> topic:
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">True</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">False</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> select
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># END PROBLEM 2</span>
+</span></span></code></pre></div><h3 id="problem-3-1-pt">Problem 3 (1 pt)</h3>
+<p>实现一个<code>accuracy(typed, reference)</code>：</p>
+<ul>
+<li><code>typed</code>：正在输入的字符串</li>
+<li><code>reference</code>：打字软件给出的字符串</li>
+</ul>
+<p>返回打字的正确率，即两个字符串中相同位置的单词相同的比例。</p>
+<p>注意：要求返回值是浮点数，比例的分母是<code>typed</code>中单词的个数。</p>
+<p>使用如下命令进行解锁测试：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>python3 ok -q <span style="color:#ae81ff">03</span> -u --local
+</span></span></code></pre></div><p>过程如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>Assignment: Project 2: Cats
+</span></span><span style="display:flex;"><span>OK, version v1.18.1
+</span></span><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+</span></span><span style="display:flex;"><span>Unlocking tests
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>At each <span style="color:#e6db74">&#34;? &#34;</span>, type what you would expect the output to be.
+</span></span><span style="display:flex;"><span>Type exit<span style="color:#f92672">()</span> to quit
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Problem <span style="color:#ae81ff">3</span> &gt; Suite <span style="color:#ae81ff">1</span> &gt; Case <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 103<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; from cats import accuracy
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; accuracy<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;12345&#34;</span>, <span style="color:#e6db74">&#34;12345&#34;</span><span style="color:#f92672">)</span> <span style="color:#75715e"># This should return 100.0 (not the integer 100!)</span>
+</span></span><span style="display:flex;"><span>? 100.0
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; accuracy<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;a b c&#34;</span>, <span style="color:#e6db74">&#34;a b c&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>? 100.0
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; accuracy<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;a  b  c  d&#34;</span>, <span style="color:#e6db74">&#34;b  a  c  d&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>? 50.0
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; accuracy<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;a b&#34;</span>, <span style="color:#e6db74">&#34;c d e&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>? 0.0
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; accuracy<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Cat&#34;</span>, <span style="color:#e6db74">&#34;cat&#34;</span><span style="color:#f92672">)</span> <span style="color:#75715e"># the function is case-sensitive</span>
+</span></span><span style="display:flex;"><span>? 0.0
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; accuracy<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;a b c d&#34;</span>, <span style="color:#e6db74">&#34; a d &#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>? 25.0
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; accuracy<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;abc&#34;</span>, <span style="color:#e6db74">&#34; &#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>? 0.0
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; accuracy<span style="color:#f92672">(</span><span style="color:#e6db74">&#34; a b \tc&#34;</span> , <span style="color:#e6db74">&#34;a b c&#34;</span><span style="color:#f92672">)</span> <span style="color:#75715e"># Tabs don&#39;t count as words</span>
+</span></span><span style="display:flex;"><span>? 100.0
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; accuracy<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;abc&#34;</span>, <span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>? 0.0
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; accuracy<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;&#34;</span>, <span style="color:#e6db74">&#34;abc&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>? 0.0
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; accuracy<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;cats.&#34;</span>, <span style="color:#e6db74">&#34;cats&#34;</span><span style="color:#f92672">)</span> <span style="color:#75715e"># punctuation counts</span>
+</span></span><span style="display:flex;"><span>? 0.0
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; accuracy<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;&#34;</span>, <span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">)</span> <span style="color:#75715e"># Returns 100.0</span>
+</span></span><span style="display:flex;"><span>? 100.0
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>OK! All cases <span style="color:#66d9ef">for</span> Problem <span style="color:#ae81ff">3</span> unlocked.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Cannot backup when running ok with --local.
+</span></span></code></pre></div><p>实现代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">accuracy</span>(typed, reference):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Return the accuracy (percentage of words typed correctly) of TYPED
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    when compared to the prefix of REFERENCE that was typed.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Arguments:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        typed: a string that may contain typos
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        reference: a string without errors
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; accuracy(&#39;Cute Dog!&#39;, &#39;Cute Dog.&#39;)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    50.0
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; accuracy(&#39;A Cute Dog!&#39;, &#39;Cute Dog.&#39;)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    0.0
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; accuracy(&#39;cute Dog.&#39;, &#39;Cute Dog.&#39;)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    50.0
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; accuracy(&#39;Cute Dog. I say!&#39;, &#39;Cute Dog.&#39;)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    50.0
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; accuracy(&#39;Cute&#39;, &#39;Cute Dog.&#39;)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    100.0
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; accuracy(&#39;&#39;, &#39;Cute Dog.&#39;)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    0.0
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; accuracy(&#39;&#39;, &#39;&#39;)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    100.0
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    typed_words <span style="color:#f92672">=</span> split(typed)
+</span></span><span style="display:flex;"><span>    reference_words <span style="color:#f92672">=</span> split(reference)
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># BEGIN PROBLEM 3</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;*** YOUR CODE HERE ***&#34;</span>
+</span></span><span style="display:flex;"><span>    len_typed <span style="color:#f92672">=</span> len(typed_words)
+</span></span><span style="display:flex;"><span>    len_ref <span style="color:#f92672">=</span> len(reference_words)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> len_typed <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">and</span> len_ref <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">100.0</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">elif</span> len_typed <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">or</span> len_ref <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0.0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    ans <span style="color:#f92672">=</span> sum([<span style="color:#ae81ff">1</span> <span style="color:#66d9ef">for</span> x, y <span style="color:#f92672">in</span> zip(typed_words, reference_words) <span style="color:#66d9ef">if</span> x <span style="color:#f92672">==</span> y])
+</span></span><span style="display:flex;"><span>    ans <span style="color:#f92672">/=</span> len_typed
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> ans <span style="color:#f92672">*</span> <span style="color:#ae81ff">100.0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># END PROBLEM 3</span>
+</span></span></code></pre></div><h3 id="problem-4-1-pt">Problem 4 (1 pt)</h3>
+<p>实现一个<code>wpm(typed, elapsed)</code>函数：</p>
+<ul>
+<li><code>typed</code>：已经输入的字符串</li>
+<li><code>elapsed</code>：已经经过的时间，单位是秒（<code>s</code>）</li>
+</ul>
+<p><code>wpm</code>即<code>words per minute</code>，不过单词的计数是5个字母算一个单词。</p>
+<p>注意：返回结果是浮点数。</p>
+<p>使用如下命令进行解锁测试：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>python3 ok -q <span style="color:#ae81ff">04</span> -u --local
+</span></span></code></pre></div><p>过程如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>Assignment: Project 2: Cats
+</span></span><span style="display:flex;"><span>OK, version v1.18.1
+</span></span><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+</span></span><span style="display:flex;"><span>Unlocking tests
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>At each <span style="color:#e6db74">&#34;? &#34;</span>, type what you would expect the output to be.
+</span></span><span style="display:flex;"><span>Type exit<span style="color:#f92672">()</span> to quit
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Problem <span style="color:#ae81ff">4</span> &gt; Suite <span style="color:#ae81ff">1</span> &gt; Case <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 104<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; from cats import wpm
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; wpm<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;12345&#34;</span>, 3<span style="color:#f92672">)</span> <span style="color:#75715e"># Note: wpm returns a float (with a decimal point)</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">20</span>
+</span></span><span style="display:flex;"><span>-- Not quite. Try again! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>? 20.0
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; wpm<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;a b c&#34;</span>, 20<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>? 3.0
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; wpm<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;&#34;</span>, 10<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>? 0.0
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>OK! All cases <span style="color:#66d9ef">for</span> Problem <span style="color:#ae81ff">4</span> unlocked.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Cannot backup when running ok with --local.
+</span></span></code></pre></div><p>实现代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">wpm</span>(typed, elapsed):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Return the words-per-minute (WPM) of the TYPED string.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Arguments:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        typed: an entered string
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        elapsed: an amount of time in seconds
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; wpm(&#39;hello friend hello buddy hello&#39;, 15)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    24.0
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; wpm(&#39;0123456789&#39;,60)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    2.0
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">assert</span> elapsed <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>, <span style="color:#e6db74">&#39;Elapsed time must be positive&#39;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># BEGIN PROBLEM 4</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;*** YOUR CODE HERE ***&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> (len(typed) <span style="color:#f92672">/</span> <span style="color:#ae81ff">5.0</span>) <span style="color:#f92672">/</span> (elapsed <span style="color:#f92672">/</span> <span style="color:#ae81ff">60.0</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># END PROBLEM 4</span>
+</span></span></code></pre></div><p>使用以下命令可以进行打字测试（测试的字符串的主题与<code>cats</code>和<code>kittens</code>有关）：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>python3 cats.py -t cats kittens
+</span></span></code></pre></div><p>使用以下命令可以运行项目的<code>GUI</code>界面：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>python3 gui.py
+</span></span></code></pre></div><h2 id="phase-2-autocorrect">Phase 2: Autocorrect</h2>
+<p>实现一个自动纠错功能（<code>Autocorrect</code>），在网页<code>GUI</code>中，按空格可以把错误的单词换成词典中最接近的正确的单词。</p>
+<h3 id="problem-5-2-pt">Problem 5 (2 pt)</h3>
+<p>实现<code>autocorrect(typed_word, valid_words, diff_function, limit)</code>函数：</p>
+<ul>
+<li><code>typed_word</code>：正在输入的单词</li>
+<li><code>valid_words</code>：合法的单词的列表</li>
+<li><code>diff_function</code>：差别函数</li>
+<li><code>limit</code>：最大限制</li>
+</ul>
+<p>使用<code>diff_function</code>函数，返回<code>typed_word</code>和<code>valid_words</code>中的单词的差别值，返回差别最小的那个；如果最小的差别值都比<code>limit</code>大，就返回<code>typed_word</code>本身。</p>
+<p>注意：如果<code>typed_word</code>已经在<code>valid_words</code>中，那么就返回<code>typed_word</code>；如果有不止一个差别最小的单词，返回最早进行检测的。</p>
+<p>使用如下命令进行解锁测试：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>python3 ok -q <span style="color:#ae81ff">05</span> -u --local
+</span></span></code></pre></div><p>过程如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>Assignment: Project 2: Cats
+</span></span><span style="display:flex;"><span>OK, version v1.18.1
+</span></span><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+</span></span><span style="display:flex;"><span>Unlocking tests
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>At each <span style="color:#e6db74">&#34;? &#34;</span>, type what you would expect the output to be.
+</span></span><span style="display:flex;"><span>Type exit<span style="color:#f92672">()</span> to quit
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Problem <span style="color:#ae81ff">5</span> &gt; Suite <span style="color:#ae81ff">1</span> &gt; Case <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 104<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; from cats import autocorrect, lines_from_file
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; abs_diff <span style="color:#f92672">=</span> lambda w1, w2, limit: abs<span style="color:#f92672">(</span>len<span style="color:#f92672">(</span>w2<span style="color:#f92672">)</span> - len<span style="color:#f92672">(</span>w1<span style="color:#f92672">))</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; autocorrect<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;cul&#34;</span>, <span style="color:#f92672">[</span><span style="color:#e6db74">&#34;culture&#34;</span>, <span style="color:#e6db74">&#34;cult&#34;</span>, <span style="color:#e6db74">&#34;cultivate&#34;</span><span style="color:#f92672">]</span>, abs_diff, 10<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#e6db74">&#39;cult&#39;</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; autocorrect<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;cul&#34;</span>, <span style="color:#f92672">[</span><span style="color:#e6db74">&#34;culture&#34;</span>, <span style="color:#e6db74">&#34;cult&#34;</span>, <span style="color:#e6db74">&#34;cultivate&#34;</span><span style="color:#f92672">]</span>, abs_diff, 0<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>? cul
+</span></span><span style="display:flex;"><span>-- Not quite. Try again! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>? <span style="color:#e6db74">&#39;cul&#39;</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; autocorrect<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;wor&#34;</span>, <span style="color:#f92672">[</span><span style="color:#e6db74">&#34;worry&#34;</span>, <span style="color:#e6db74">&#34;car&#34;</span>, <span style="color:#e6db74">&#34;part&#34;</span><span style="color:#f92672">]</span>, abs_diff, 10<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#e6db74">&#39;car&#39;</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; first_diff <span style="color:#f92672">=</span> lambda w1, w2, limit: <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">if</span> w1<span style="color:#f92672">[</span>0<span style="color:#f92672">]</span> !<span style="color:#f92672">=</span> w2<span style="color:#f92672">[</span>0<span style="color:#f92672">]</span> <span style="color:#66d9ef">else</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; autocorrect<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;wrod&#34;</span>, <span style="color:#f92672">[</span><span style="color:#e6db74">&#34;word&#34;</span>, <span style="color:#e6db74">&#34;rod&#34;</span><span style="color:#f92672">]</span>, first_diff, 1<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#e6db74">&#39;wrod&#39;</span>
+</span></span><span style="display:flex;"><span>-- Not quite. Try again! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>? <span style="color:#e6db74">&#39;rod&#39;</span>
+</span></span><span style="display:flex;"><span>-- Not quite. Try again! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>? <span style="color:#e6db74">&#39;word&#39;</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; autocorrect<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;inside&#34;</span>, <span style="color:#f92672">[</span><span style="color:#e6db74">&#34;idea&#34;</span>, <span style="color:#e6db74">&#34;inside&#34;</span><span style="color:#f92672">]</span>, first_diff, 0.5<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#e6db74">&#39;idea&#39;</span>
+</span></span><span style="display:flex;"><span>-- Not quite. Try again! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>? <span style="color:#e6db74">&#39;inside&#39;</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; autocorrect<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;inside&#34;</span>, <span style="color:#f92672">[</span><span style="color:#e6db74">&#34;idea&#34;</span>, <span style="color:#e6db74">&#34;insider&#34;</span><span style="color:#f92672">]</span>, first_diff, 0.5<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#e6db74">&#39;insider&#39;</span>
+</span></span><span style="display:flex;"><span>-- Not quite. Try again! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>? <span style="color:#e6db74">&#39;idea&#39;</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; autocorrect<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;outside&#34;</span>, <span style="color:#f92672">[</span><span style="color:#e6db74">&#34;idea&#34;</span>, <span style="color:#e6db74">&#34;insider&#34;</span><span style="color:#f92672">]</span>, first_diff, 0.5<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#e6db74">&#39;outside&#39;</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>OK! All cases <span style="color:#66d9ef">for</span> Problem <span style="color:#ae81ff">5</span> unlocked.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Cannot backup when running ok with --local.
+</span></span></code></pre></div><p>实现代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">autocorrect</span>(typed_word, valid_words, diff_function, limit):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Returns the element of VALID_WORDS that has the smallest difference
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    from TYPED_WORD. Instead returns TYPED_WORD if that difference is greater
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    than LIMIT.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Arguments:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        typed_word: a string representing a word that may contain typos
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        valid_words: a list of strings representing valid words
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        diff_function: a function quantifying the difference between two words
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        limit: a number
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; ten_diff = lambda w1, w2, limit: 10 # Always returns 10
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; autocorrect(&#34;hwllo&#34;, [&#34;butter&#34;, &#34;hello&#34;, &#34;potato&#34;], ten_diff, 20)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#39;butter&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; first_diff = lambda w1, w2, limit: (1 if w1[0] != w2[0] else 0) # Checks for matching first char
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; autocorrect(&#34;tosting&#34;, [&#34;testing&#34;, &#34;asking&#34;, &#34;fasting&#34;], first_diff, 10)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#39;testing&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># BEGIN PROBLEM 5</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;*** YOUR CODE HERE ***&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> typed_word <span style="color:#f92672">in</span> valid_words:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> typed_word
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    diff <span style="color:#f92672">=</span> limit
+</span></span><span style="display:flex;"><span>    return_word <span style="color:#f92672">=</span> typed_word
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> word_valid <span style="color:#f92672">in</span> valid_words:
+</span></span><span style="display:flex;"><span>        tmp <span style="color:#f92672">=</span> diff_function(typed_word, word_valid, limit)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> tmp <span style="color:#f92672">&lt;</span> diff:
+</span></span><span style="display:flex;"><span>            diff <span style="color:#f92672">=</span> tmp
+</span></span><span style="display:flex;"><span>            return_word <span style="color:#f92672">=</span> word_valid
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">elif</span> tmp <span style="color:#f92672">==</span> diff <span style="color:#f92672">and</span> return_word <span style="color:#f92672">==</span> typed_word:
+</span></span><span style="display:flex;"><span>            return_word <span style="color:#f92672">=</span> word_valid
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> return_word
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># END PROBLEM 5</span>
+</span></span></code></pre></div><h3 id="problem-6-2-pts">Problem 6 (2 pts)</h3>
+<p>实现<code>sphinx_switches(start, goal, limit)</code>函数：</p>
+<ul>
+<li><code>start</code>：起始单词</li>
+<li><code>goal</code>：目标单词</li>
+<li><code>limit</code>：最多允许修改的字母数</li>
+</ul>
+<p>返回从<code>start</code>变成<code>goal</code>最少需要修改的字母数（逐位匹配）。</p>
+<p>注意：不允许使用循环语句，要求使用递归实现，若发现需要修改的字面数大于<code>limit</code>，立即返回。</p>
+<p>使用如下命令进行解锁测试：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>python3 ok -q <span style="color:#ae81ff">06</span> -u --local
+</span></span></code></pre></div><p>过程如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>Assignment: Project 2: Cats
+</span></span><span style="display:flex;"><span>OK, version v1.18.1
+</span></span><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+</span></span><span style="display:flex;"><span>Unlocking tests
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>At each <span style="color:#e6db74">&#34;? &#34;</span>, type what you would expect the output to be.
+</span></span><span style="display:flex;"><span>Type exit<span style="color:#f92672">()</span> to quit
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Problem <span style="color:#ae81ff">6</span> &gt; Suite <span style="color:#ae81ff">1</span> &gt; Case <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 105<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; from cats import sphinx_switches, autocorrect
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; import tests.construct_check as test
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; big_limit <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; sphinx_switches<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;car&#34;</span>, <span style="color:#e6db74">&#34;cad&#34;</span>, big_limit<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; sphinx_switches<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;this&#34;</span>, <span style="color:#e6db74">&#34;that&#34;</span>, big_limit<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; sphinx_switches<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;one&#34;</span>, <span style="color:#e6db74">&#34;two&#34;</span>, big_limit<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; sphinx_switches<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;from&#34;</span>, <span style="color:#e6db74">&#34;form&#34;</span>, big_limit<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; sphinx_switches<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;awe&#34;</span>, <span style="color:#e6db74">&#34;awesome&#34;</span>, big_limit<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">4</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; sphinx_switches<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;someawe&#34;</span>, <span style="color:#e6db74">&#34;awesome&#34;</span>, big_limit<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">6</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; sphinx_switches<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;awful&#34;</span>, <span style="color:#e6db74">&#34;awesome&#34;</span>, big_limit<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">4</span>
+</span></span><span style="display:flex;"><span>-- Not quite. Try again! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">5</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; sphinx_switches<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;awful&#34;</span>, <span style="color:#e6db74">&#34;awesome&#34;</span>, 3<span style="color:#f92672">)</span> &gt; <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>? False
+</span></span><span style="display:flex;"><span>-- Not quite. Try again! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>? True
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; sphinx_switches<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;awful&#34;</span>, <span style="color:#e6db74">&#34;awesome&#34;</span>, 4<span style="color:#f92672">)</span> &gt; <span style="color:#ae81ff">4</span>
+</span></span><span style="display:flex;"><span>? True
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; sphinx_switches<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;awful&#34;</span>, <span style="color:#e6db74">&#34;awesome&#34;</span>, 5<span style="color:#f92672">)</span> &gt; <span style="color:#ae81ff">5</span>
+</span></span><span style="display:flex;"><span>? False
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>OK! All cases <span style="color:#66d9ef">for</span> Problem <span style="color:#ae81ff">6</span> unlocked.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Cannot backup when running ok with --local.
+</span></span></code></pre></div><p>实现代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">sphinx_switches</span>(start, goal, limit):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;A diff function for autocorrect that determines how many letters
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    in START need to be substituted to create GOAL, then adds the difference in
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    their lengths and returns the result.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Arguments:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        start: a starting word
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        goal: a string representing a desired goal word
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        limit: a number representing an upper bound on the number of chars that must change
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; big_limit = 10
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; sphinx_switches(&#34;nice&#34;, &#34;rice&#34;, big_limit)    # Substitute: n -&gt; r
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    1
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; sphinx_switches(&#34;range&#34;, &#34;rungs&#34;, big_limit)  # Substitute: a -&gt; u, e -&gt; s
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    2
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; sphinx_switches(&#34;pill&#34;, &#34;pillage&#34;, big_limit) # Don&#39;t substitute anything, length difference of 3.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    3
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; sphinx_switches(&#34;roses&#34;, &#34;arose&#34;, big_limit)  # Substitute: r -&gt; a, o -&gt; r, s -&gt; o, e -&gt; s, s -&gt; e
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    5
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; sphinx_switches(&#34;rose&#34;, &#34;hello&#34;, big_limit)   # Substitute: r-&gt;h, o-&gt;e, s-&gt;l, e-&gt;l, length difference of 1.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    5
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># BEGIN PROBLEM 6</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">switch</span>(start, goal, limit, change_cnt):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> change_cnt <span style="color:#f92672">&gt;</span> limit <span style="color:#f92672">or</span> len(start) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">or</span> len(goal) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> change_cnt
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> switch(start[<span style="color:#ae81ff">1</span>:], goal[<span style="color:#ae81ff">1</span>:], limit, 
+</span></span><span style="display:flex;"><span>            (<span style="color:#ae81ff">1</span> <span style="color:#66d9ef">if</span> start[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">!=</span> goal[<span style="color:#ae81ff">0</span>] <span style="color:#66d9ef">else</span> <span style="color:#ae81ff">0</span>) <span style="color:#f92672">+</span> change_cnt)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> switch(start, goal, limit, abs(len(start) <span style="color:#f92672">-</span> len(goal)))
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># END PROBLEM 6</span>
+</span></span></code></pre></div><p>另一种解法，写完<code>Problem 7</code>才想到的，本题可以看作只支持替换操作（添加和删除操作只有不能替换时才考虑）：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> limit <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">elif</span> <span style="color:#f92672">not</span> start <span style="color:#f92672">or</span> <span style="color:#f92672">not</span> goal:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> abs(len(start) <span style="color:#f92672">-</span> len(goal))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        tmp <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span> <span style="color:#66d9ef">if</span> start[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">==</span> goal[<span style="color:#ae81ff">0</span>] <span style="color:#66d9ef">else</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> sphinx_switches(start[<span style="color:#ae81ff">1</span>:], goal[<span style="color:#ae81ff">1</span>:], limit <span style="color:#f92672">-</span> tmp) <span style="color:#f92672">+</span> tmp
+</span></span></code></pre></div><h3 id="problem-7-3-pt">Problem 7 (3 pt)</h3>
+<p>实现<code>pawssible_patches(start, goal, limit)</code>函数：</p>
+<ul>
+<li><code>start</code>：起始单词</li>
+<li><code>goal</code>：目标单词</li>
+<li><code>limit</code>：最多允许修改的字母数</li>
+</ul>
+<p>允许以下操作：</p>
+<ul>
+<li>删除<code>start</code>的一个字母</li>
+<li>给<code>start</code>添加一个字母</li>
+<li>替换<code>start</code>的一个字母</li>
+</ul>
+<p>实现代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">pawssible_patches</span>(start, goal, limit):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;A diff function that computes the edit distance from START to GOAL.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    This function takes in a string START, a string GOAL, and a number LIMIT.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Arguments:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        start: a starting word
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        goal: a goal word
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        limit: a number representing an upper bound on the number of edits
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; big_limit = 10
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; pawssible_patches(&#34;cats&#34;, &#34;scat&#34;, big_limit)       # cats -&gt; scats -&gt; scat
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    2
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; pawssible_patches(&#34;purng&#34;, &#34;purring&#34;, big_limit)   # purng -&gt; purrng -&gt; purring
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    2
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; pawssible_patches(&#34;ckiteus&#34;, &#34;kittens&#34;, big_limit) # ckiteus -&gt; kiteus -&gt; kitteus -&gt; kittens
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    3
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> limit <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>:  <span style="color:#75715e"># Fill in the condition</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># BEGIN</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;*** YOUR CODE HERE ***&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># END</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">elif</span> <span style="color:#f92672">not</span> start <span style="color:#f92672">or</span> <span style="color:#f92672">not</span> goal:  <span style="color:#75715e"># Feel free to remove or add additional cases</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># BEGIN</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;*** YOUR CODE HERE ***&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> abs(len(start) <span style="color:#f92672">-</span> len(goal))
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># END</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        add <span style="color:#f92672">=</span> pawssible_patches(start, goal[<span style="color:#ae81ff">1</span>:], limit <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>  <span style="color:#75715e"># Fill in these lines</span>
+</span></span><span style="display:flex;"><span>        remove <span style="color:#f92672">=</span> pawssible_patches(start[<span style="color:#ae81ff">1</span>:], goal, limit <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        tmp <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span> <span style="color:#66d9ef">if</span> start[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">==</span> goal[<span style="color:#ae81ff">0</span>] <span style="color:#66d9ef">else</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        substitute <span style="color:#f92672">=</span> pawssible_patches(start[<span style="color:#ae81ff">1</span>:], goal[<span style="color:#ae81ff">1</span>:], limit <span style="color:#f92672">-</span> tmp) <span style="color:#f92672">+</span> tmp
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># BEGIN</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;*** YOUR CODE HERE ***&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> min(add, remove, substitute)
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># END</span>
+</span></span></code></pre></div><h3 id="optional-extension-final-diff-0pt">(Optional) Extension: final diff (0pt)</h3>
+<p>本题是自行设计一个<code>diff</code>函数，返回尽可能小的差别值。</p>
+<p>先挖个坑，以后再填。</p>
+<p>使用以下命令可以测试<code>diff</code>函数的效率和准确率：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>python3 score.py
+</span></span></code></pre></div><p>测试<code>sphinx_switches</code>结果如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>Correction Speed: 74436.21742690227 wpm
+</span></span><span style="display:flex;"><span>Correctly Corrected: <span style="color:#ae81ff">422</span> words
+</span></span><span style="display:flex;"><span>Incorrectly Corrected: <span style="color:#ae81ff">406</span> words
+</span></span><span style="display:flex;"><span>Uncorrected: <span style="color:#ae81ff">112</span> words
+</span></span></code></pre></div><p>测试<code>pawssible_patches</code>结果如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>Correction Speed: 198.3337695674132 wpm
+</span></span><span style="display:flex;"><span>Correctly Corrected: <span style="color:#ae81ff">124</span> words
+</span></span><span style="display:flex;"><span>Incorrectly Corrected: <span style="color:#ae81ff">15</span> words
+</span></span><span style="display:flex;"><span>Uncorrected: <span style="color:#ae81ff">12</span> words
+</span></span></code></pre></div><h2 id="phase-3-multiplayer">Phase 3: Multiplayer</h2>
+<h3 id="problem-8-2-pt">Problem 8 (2 pt)</h3>
+<p>实现<code>report_progress(typed, prompt, user_id, send)</code>函数：</p>
+<ul>
+<li><code>typed</code>：已输入的单词列表</li>
+<li><code>prompt</code>：需要完成的单词列表</li>
+<li><code>user_id</code>：用户<code>id</code></li>
+<li><code>send</code>：发送函数，可以发送一个字典{&lsquo;id&rsquo;: 1, &lsquo;progress&rsquo;: 0.6}给服务器，<code>id</code>键对应用户<code>id</code>，<code>progress</code>键对应当前进度。</li>
+</ul>
+<p>使用如下命令进行解锁测试：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>python3 ok -q <span style="color:#ae81ff">08</span> -u --local
+</span></span></code></pre></div><p>过程如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>Assignment: Project 2: Cats
+</span></span><span style="display:flex;"><span>OK, version v1.18.1
+</span></span><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+</span></span><span style="display:flex;"><span>Unlocking tests
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>At each <span style="color:#e6db74">&#34;? &#34;</span>, type what you would expect the output to be.
+</span></span><span style="display:flex;"><span>Type exit<span style="color:#f92672">()</span> to quit
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Problem <span style="color:#ae81ff">8</span> &gt; Suite <span style="color:#ae81ff">1</span> &gt; Case <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 102<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; from cats import report_progress
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; print_progress <span style="color:#f92672">=</span> lambda d: print<span style="color:#f92672">(</span><span style="color:#e6db74">&#39;ID:&#39;</span>, d<span style="color:#f92672">[</span><span style="color:#e6db74">&#39;id&#39;</span><span style="color:#f92672">]</span>, <span style="color:#e6db74">&#39;Progress:&#39;</span>, d<span style="color:#f92672">[</span><span style="color:#e6db74">&#39;progress&#39;</span><span style="color:#f92672">])</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; typed <span style="color:#f92672">=</span> <span style="color:#f92672">[</span><span style="color:#e6db74">&#39;I&#39;</span>, <span style="color:#e6db74">&#39;have&#39;</span>, <span style="color:#e6db74">&#39;begun&#39;</span><span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; prompt <span style="color:#f92672">=</span> <span style="color:#f92672">[</span><span style="color:#e6db74">&#39;I&#39;</span>, <span style="color:#e6db74">&#39;have&#39;</span>, <span style="color:#e6db74">&#39;begun&#39;</span>, <span style="color:#e6db74">&#39;to&#39;</span>, <span style="color:#e6db74">&#39;type&#39;</span><span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; print_progress<span style="color:#f92672">({</span><span style="color:#e6db74">&#39;id&#39;</span>: 1, <span style="color:#e6db74">&#39;progress&#39;</span>: 0.6<span style="color:#f92672">})</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#f92672">{</span><span style="color:#e6db74">&#39;id&#39;</span>: 1, <span style="color:#e6db74">&#39;progress&#39;</span>: 0.6<span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>-- Not quite. Try again! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>? <span style="color:#e6db74">&#39;id&#39;</span>: 1, <span style="color:#e6db74">&#39;progress&#39;</span>: 0.6
+</span></span><span style="display:flex;"><span>-- Not quite. Try again! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>? ID: <span style="color:#ae81ff">1</span> Progress: 0.6
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; report_progress<span style="color:#f92672">(</span>typed, prompt, 1, print_progress<span style="color:#f92672">)</span> <span style="color:#75715e"># print_progress is called on the report</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>line 1<span style="color:#f92672">)</span>? ID: <span style="color:#ae81ff">1</span> Progress: 0.6
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>line 2<span style="color:#f92672">)</span>? 0.6
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; report_progress<span style="color:#f92672">([</span><span style="color:#e6db74">&#39;I&#39;</span>, <span style="color:#e6db74">&#39;begun&#39;</span><span style="color:#f92672">]</span>, prompt, 2, print_progress<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>line 1<span style="color:#f92672">)</span>? ID: <span style="color:#ae81ff">2</span> Progress: 0.2
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>line 2<span style="color:#f92672">)</span>? 0.2
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; report_progress<span style="color:#f92672">([</span><span style="color:#e6db74">&#39;I&#39;</span>, <span style="color:#e6db74">&#39;hve&#39;</span>, <span style="color:#e6db74">&#39;begun&#39;</span>, <span style="color:#e6db74">&#39;to&#39;</span>, <span style="color:#e6db74">&#39;type&#39;</span><span style="color:#f92672">]</span>, prompt, 3, print_progress<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>line 1<span style="color:#f92672">)</span>? ID: <span style="color:#ae81ff">3</span> Progress: 0.2
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>line 2<span style="color:#f92672">)</span>? 0.2
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>OK! All cases <span style="color:#66d9ef">for</span> Problem <span style="color:#ae81ff">8</span> unlocked.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Cannot backup when running ok with --local.
+</span></span></code></pre></div><p>实现代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">report_progress</span>(typed, prompt, user_id, send):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Send a report of your id and progress so far to the multiplayer server.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Returns the progress so far.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Arguments:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        typed: a list of the words typed so far
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        prompt: a list of the words in the typing prompt
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        user_id: a number representing the id of the current user
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        send: a function used to send progress to the multiplayer server
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; print_progress = lambda d: print(&#39;ID:&#39;, d[&#39;id&#39;], &#39;Progress:&#39;, d[&#39;progress&#39;])
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; # The above function displays progress in the format ID: __, Progress: __
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; print_progress({&#39;id&#39;: 1, &#39;progress&#39;: 0.6})
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    ID: 1 Progress: 0.6
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; typed = [&#39;how&#39;, &#39;are&#39;, &#39;you&#39;]
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; prompt = [&#39;how&#39;, &#39;are&#39;, &#39;you&#39;, &#39;doing&#39;, &#39;today&#39;]
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; report_progress(typed, prompt, 2, print_progress)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    ID: 2 Progress: 0.6
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    0.6
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; report_progress([&#39;how&#39;, &#39;aree&#39;], prompt, 3, print_progress)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    ID: 3 Progress: 0.2
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    0.2
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># BEGIN PROBLEM 8</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;*** YOUR CODE HERE ***&#34;</span>
+</span></span><span style="display:flex;"><span>    ratio <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> x, y <span style="color:#f92672">in</span> zip(typed, prompt):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> x <span style="color:#f92672">==</span> y:
+</span></span><span style="display:flex;"><span>            ratio <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1.0</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">break</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    ratio <span style="color:#f92672">/=</span> len(prompt)
+</span></span><span style="display:flex;"><span>    send({<span style="color:#e6db74">&#39;id&#39;</span>: user_id, <span style="color:#e6db74">&#39;progress&#39;</span>: ratio})
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> ratio 
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># END PROBLEM 8</span>
+</span></span></code></pre></div><h3 id="problem-9-1-pt">Problem 9 (1 pt)</h3>
+<p>实现<code>time_per_word(times_per_player, words)</code>函数：</p>
+<ul>
+<li><code>time_per_player</code>：每个用户的完成每个单词的时刻，数据类型是以列表为元素的列表</li>
+<li><code>words</code>：单词列表</li>
+</ul>
+<p>返回抽象数据类型<code>game</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">game</span>(words, times):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;A data abstraction containing all words typed and their times.&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">assert</span> all([type(w) <span style="color:#f92672">==</span> str <span style="color:#66d9ef">for</span> w <span style="color:#f92672">in</span> words]), <span style="color:#e6db74">&#39;words should be a list of strings&#39;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">assert</span> all([type(t) <span style="color:#f92672">==</span> list <span style="color:#66d9ef">for</span> t <span style="color:#f92672">in</span> times]), <span style="color:#e6db74">&#39;times should be a list of lists&#39;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">assert</span> all([isinstance(i, (int, float)) <span style="color:#66d9ef">for</span> t <span style="color:#f92672">in</span> times <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> t]), <span style="color:#e6db74">&#39;times lists should contain numbers&#39;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">assert</span> all([len(t) <span style="color:#f92672">==</span> len(words) <span style="color:#66d9ef">for</span> t <span style="color:#f92672">in</span> times]), <span style="color:#e6db74">&#39;There should be one word per time.&#39;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> [words, times]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">word_at</span>(game, word_index):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;A selector function that gets the word with index word_index&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">assert</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&lt;=</span> word_index <span style="color:#f92672">&lt;</span> len(game[<span style="color:#ae81ff">0</span>]), <span style="color:#e6db74">&#34;word_index out of range of words&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> game[<span style="color:#ae81ff">0</span>][word_index]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">all_words</span>(game):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;A selector function for all the words in the game&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> game[<span style="color:#ae81ff">0</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">all_times</span>(game):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;A selector function for all typing times for all players&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> game[<span style="color:#ae81ff">1</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">time</span>(game, player_num, word_index):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;A selector function for the time it took player_num to type the word at word_index&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">assert</span> word_index <span style="color:#f92672">&lt;</span> len(game[<span style="color:#ae81ff">0</span>]), <span style="color:#e6db74">&#34;word_index out of range of words&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">assert</span> player_num <span style="color:#f92672">&lt;</span> len(game[<span style="color:#ae81ff">1</span>]), <span style="color:#e6db74">&#34;player_num out of range of players&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> game[<span style="color:#ae81ff">1</span>][player_num][word_index]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">game_string</span>(game):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;A helper function that takes in a game object and returns a string representation of it&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;game(</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">, </span><span style="color:#e6db74">%s</span><span style="color:#e6db74">)&#34;</span> <span style="color:#f92672">%</span> (game[<span style="color:#ae81ff">0</span>], game[<span style="color:#ae81ff">1</span>])
+</span></span></code></pre></div><p>使用如下命令进行解锁测试：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>python3 ok -q <span style="color:#ae81ff">09</span> -u --local
+</span></span></code></pre></div><p>过程如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>Assignment: Project 2: Cats
+</span></span><span style="display:flex;"><span>OK, version v1.18.1
+</span></span><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+</span></span><span style="display:flex;"><span>Unlocking tests
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>At each <span style="color:#e6db74">&#34;? &#34;</span>, type what you would expect the output to be.
+</span></span><span style="display:flex;"><span>Type exit<span style="color:#f92672">()</span> to quit
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Problem <span style="color:#ae81ff">9</span> &gt; Suite <span style="color:#ae81ff">1</span> &gt; Case <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 103<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; from cats import game, game_string, time_per_word, all_words, all_times, word_at, time
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; p <span style="color:#f92672">=</span> <span style="color:#f92672">[[</span>1, 4, 6, 7<span style="color:#f92672">]</span>, <span style="color:#f92672">[</span>0, 4, 6, 9<span style="color:#f92672">]]</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; words <span style="color:#f92672">=</span> <span style="color:#f92672">[</span><span style="color:#e6db74">&#39;This&#39;</span>, <span style="color:#e6db74">&#39;is&#39;</span>, <span style="color:#e6db74">&#39;fun&#39;</span><span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; game <span style="color:#f92672">=</span> time_per_word<span style="color:#f92672">(</span>p, words<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; all_words<span style="color:#f92672">(</span>game<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#f92672">[</span><span style="color:#e6db74">&#39;This&#39;</span>, <span style="color:#e6db74">&#39;is&#39;</span>, <span style="color:#e6db74">&#39;fun&#39;</span><span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; all_times<span style="color:#f92672">(</span>game<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#f92672">[[</span>1, 4, 6, 7<span style="color:#f92672">]</span>, <span style="color:#f92672">[</span>0, 4, 6, 9<span style="color:#f92672">]]</span>
+</span></span><span style="display:flex;"><span>-- Not quite. Try again! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>? <span style="color:#f92672">[[</span>1, 4, 6<span style="color:#f92672">]</span>, <span style="color:#f92672">[</span>0, 4, 6<span style="color:#f92672">]]</span>
+</span></span><span style="display:flex;"><span>-- Not quite. Try again! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>? <span style="color:#f92672">[[</span>3, 2, 1<span style="color:#f92672">]</span>, <span style="color:#f92672">[</span>4, 2, 3<span style="color:#f92672">]]</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; p <span style="color:#f92672">=</span> <span style="color:#f92672">[[</span>0, 2, 3<span style="color:#f92672">]</span>, <span style="color:#f92672">[</span>2, 4, 7<span style="color:#f92672">]]</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; game <span style="color:#f92672">=</span> time_per_word<span style="color:#f92672">(</span>p, <span style="color:#f92672">[</span><span style="color:#e6db74">&#39;hello&#39;</span>, <span style="color:#e6db74">&#39;world&#39;</span><span style="color:#f92672">])</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; word_at<span style="color:#f92672">(</span>game, word_index<span style="color:#f92672">=</span>1<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#e6db74">&#39;world&#39;</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; all_times<span style="color:#f92672">(</span>game<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#f92672">[[</span>2, 1<span style="color:#f92672">]</span>, <span style="color:#f92672">[</span>2, 3<span style="color:#f92672">]]</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; time<span style="color:#f92672">(</span>game, player_num<span style="color:#f92672">=</span>0, word_index<span style="color:#f92672">=</span>1<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>OK! All cases <span style="color:#66d9ef">for</span> Problem <span style="color:#ae81ff">9</span> unlocked.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Cannot backup when running ok with --local.
+</span></span></code></pre></div><p>实现代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">time_per_word</span>(times_per_player, words):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Given timing data, return a game data abstraction, which contains a list
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    of words and the amount of time each player took to type each word.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Arguments:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        times_per_player: A list of lists of timestamps including the time
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                          the player started typing, followed by the time
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">                          the player finished typing each word.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        words: a list of words, in the order they are typed.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; p = [[75, 81, 84, 90, 92], [19, 29, 35, 36, 38]]
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; game = time_per_word(p, [&#39;collar&#39;, &#39;plush&#39;, &#39;blush&#39;, &#39;repute&#39;])
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; all_words(game)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    [&#39;collar&#39;, &#39;plush&#39;, &#39;blush&#39;, &#39;repute&#39;]
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; all_times(game)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    [[6, 3, 6, 2], [10, 6, 1, 2]]
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># BEGIN PROBLEM 9</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;*** YOUR CODE HERE ***&#34;</span>
+</span></span><span style="display:flex;"><span>    times <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range (<span style="color:#ae81ff">0</span>, len(times_per_player)):
+</span></span><span style="display:flex;"><span>        times<span style="color:#f92672">.</span>append([])
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> j <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1</span>, len(times_per_player[<span style="color:#ae81ff">0</span>])):
+</span></span><span style="display:flex;"><span>            times[i]<span style="color:#f92672">.</span>append(times_per_player[i][j] <span style="color:#f92672">-</span> times_per_player[i][j <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> game(words, times)
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># END PROBLEM 9</span>
+</span></span></code></pre></div><h3 id="problem-10-2-pt">Problem 10 (2 pt)</h3>
+<p>实现<code>fastest_words(game)</code>函数：</p>
+<ul>
+<li><code>game</code>：抽象数据类型<code>game</code>的实例对象</li>
+</ul>
+<p>返回一个列表，列表的元素是每个玩家完成最快的单词列表。</p>
+<p>使用如下命令进行解锁测试：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>python3 ok -q <span style="color:#ae81ff">10</span> -u --local
+</span></span></code></pre></div><p>过程如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>Assignment: Project 2: Cats
+</span></span><span style="display:flex;"><span>OK, version v1.18.1
+</span></span><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+</span></span><span style="display:flex;"><span>Unlocking tests
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>At each <span style="color:#e6db74">&#34;? &#34;</span>, type what you would expect the output to be.
+</span></span><span style="display:flex;"><span>Type exit<span style="color:#f92672">()</span> to quit
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Problem <span style="color:#ae81ff">10</span> &gt; Suite <span style="color:#ae81ff">1</span> &gt; Case <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 103<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; from cats import game, fastest_words
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; p0 <span style="color:#f92672">=</span> <span style="color:#f92672">[</span>2, 2, 3<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; p1 <span style="color:#f92672">=</span> <span style="color:#f92672">[</span>6, 1, 2<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; fastest_words<span style="color:#f92672">(</span>game<span style="color:#f92672">([</span><span style="color:#e6db74">&#39;What&#39;</span>, <span style="color:#e6db74">&#39;great&#39;</span>, <span style="color:#e6db74">&#39;luck&#39;</span><span style="color:#f92672">]</span>, <span style="color:#f92672">[</span>p0, p1<span style="color:#f92672">]))</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#f92672">[[</span><span style="color:#e6db74">&#39;What&#39;</span><span style="color:#f92672">]</span>, <span style="color:#f92672">[</span><span style="color:#e6db74">&#39;great&#39;</span>, <span style="color:#e6db74">&#39;luck&#39;</span><span style="color:#f92672">]]</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; p0 <span style="color:#f92672">=</span> <span style="color:#f92672">[</span>2, 2, 3<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; p1 <span style="color:#f92672">=</span> <span style="color:#f92672">[</span>6, 1, 3<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; fastest_words<span style="color:#f92672">(</span>game<span style="color:#f92672">([</span><span style="color:#e6db74">&#39;What&#39;</span>, <span style="color:#e6db74">&#39;great&#39;</span>, <span style="color:#e6db74">&#39;luck&#39;</span><span style="color:#f92672">]</span>, <span style="color:#f92672">[</span>p0, p1<span style="color:#f92672">]))</span>  <span style="color:#75715e"># with a tie, choose the first player</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#f92672">[[</span><span style="color:#e6db74">&#39;What&#39;</span>, <span style="color:#e6db74">&#39;luck&#39;</span><span style="color:#f92672">]</span>, <span style="color:#f92672">[</span><span style="color:#e6db74">&#39;great&#39;</span><span style="color:#f92672">]]</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; p2 <span style="color:#f92672">=</span> <span style="color:#f92672">[</span>4, 3, 1<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; fastest_words<span style="color:#f92672">(</span>game<span style="color:#f92672">([</span><span style="color:#e6db74">&#39;What&#39;</span>, <span style="color:#e6db74">&#39;great&#39;</span>, <span style="color:#e6db74">&#39;luck&#39;</span><span style="color:#f92672">]</span>, <span style="color:#f92672">[</span>p0, p1, p2<span style="color:#f92672">]))</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#f92672">[[</span><span style="color:#e6db74">&#39;What&#39;</span><span style="color:#f92672">]</span>, <span style="color:#f92672">[</span><span style="color:#e6db74">&#39;great&#39;</span><span style="color:#f92672">]</span>, <span style="color:#f92672">[</span><span style="color:#e6db74">&#39;luck&#39;</span><span style="color:#f92672">]]</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>OK! All cases <span style="color:#66d9ef">for</span> Problem <span style="color:#ae81ff">10</span> unlocked.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Cannot backup when running ok with --local.
+</span></span></code></pre></div><p>实现代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">fastest_words</span>(game):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Return a list of lists of which words each player typed fastest.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Arguments:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        game: a game data abstraction as returned by time_per_word.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; p0 = [5, 1, 3]
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; p1 = [4, 1, 6]
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; fastest_words(game([&#39;Just&#39;, &#39;have&#39;, &#39;fun&#39;], [p0, p1]))
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    [[&#39;have&#39;, &#39;fun&#39;], [&#39;Just&#39;]]
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    player_indices <span style="color:#f92672">=</span> range(len(all_times(game)))  <span style="color:#75715e"># contains an *index* for each player</span>
+</span></span><span style="display:flex;"><span>    word_indices <span style="color:#f92672">=</span> range(len(all_words(game)))    <span style="color:#75715e"># contains an *index* for each word</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># BEGIN PROBLEM 10</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;*** YOUR CODE HERE ***&#34;</span>
+</span></span><span style="display:flex;"><span>    word_fastest <span style="color:#f92672">=</span> [[] <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> player_indices]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> word_indices:
+</span></span><span style="display:flex;"><span>        min_index <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span> <span style="color:#75715e"># fastest player index</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> j <span style="color:#f92672">in</span> player_indices:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> time(game, j, i) <span style="color:#f92672">&lt;</span> time(game, min_index, i):
+</span></span><span style="display:flex;"><span>                min_index <span style="color:#f92672">=</span> j
+</span></span><span style="display:flex;"><span>        word_fastest[min_index]<span style="color:#f92672">.</span>append(word_at(game, i))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> word_fastest
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># END PROBLEM 10</span>
+</span></span></code></pre></div><h2 id="最终测试">最终测试</h2>
+<p>使用以下命令可以进行测试：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>python3 ok --local
+</span></span></code></pre></div><p>结果如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>Assignment: Project 2: Cats
+</span></span><span style="display:flex;"><span>OK, version v1.18.1
+</span></span><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+</span></span><span style="display:flex;"><span>Running tests
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Test summary
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">1032</span> test cases passed! No cases failed.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Cannot backup when running ok with --local.
+</span></span></code></pre></div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-08-03</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://Maxwell2020152049.github.io/posts/cs61a/project/cats/" data-title="CS61A Project Cats" data-hashtags="Python"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://Maxwell2020152049.github.io/posts/cs61a/project/cats/" data-hashtag="Python"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://Maxwell2020152049.github.io/posts/cs61a/project/cats/" data-title="CS61A Project Cats"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://Maxwell2020152049.github.io/posts/cs61a/project/cats/" data-title="CS61A Project Cats"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://Maxwell2020152049.github.io/posts/cs61a/project/cats/" data-title="CS61A Project Cats"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/python/">Python</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/cs61a/lab/lab03/" class="prev" rel="prev" title="CS61A Lab lab03"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>CS61A Lab lab03</a>
+            <a href="/posts/cs61a/lab/lab05/" class="next" rel="next" title="CS61A Lab lab05">CS61A Lab lab05<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.115.4">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank"></a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

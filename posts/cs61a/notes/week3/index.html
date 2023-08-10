@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>CS61A week3 study note - Rex&#39;s Blog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="CS61A week3 study note" />
+<meta property="og:description" content="Week3 CS 61A 2021 Fall官网：CS 61A: Structure and Interpretation of Computer Programs
+翻译视频：【计算机程序的构造和解释】精译【UC Berkeley 公开课-CS61A (Spring 2021)】-中英双语字幕
+github:Maxwell2020152049/CS61A
+Lecture #6: Recursion Lab：Lab 2: Higher-Order Functions, Lambda Expressions
+Slide：06-Recursion_full.pdf
+一个有意思的高阶函数： def print_sums(n): print(n) def next_sum(k): return print_sums(n&#43;k) return next_sum print_sums(1)(3)(5) 输出：
+1 4 9 Currying 一种将多参数函数转化为一系列单参数函数的方法，也称部分实例化（partial instantiation）。
+eg.：
+from operator import add def curry2(f): return lambda x: \ lambda y: \ f(x, y) print(curry2(add)(30)(12)) print(curry2(add)(30)) 输出：
+42 &lt;function curry2.&lt;locals&gt;.&lt;lambda&gt;.&lt;locals&gt;.&lt;lambda&gt; at 0x7fa093dc1620&gt; 函数哲学（Philosophy of Functions） 语法规范说明了函数调用的语法（函数参数） 语义规范说明了如果工作： 前置条件说明了对调用者的要求 后置条件说明了来自函数实现者的承诺 Specifies a contract between caller and function implementer." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://Maxwell2020152049.github.io/posts/cs61a/notes/week3/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-07-29T16:51:07+08:00" />
+<meta property="article:modified_time" content="2023-07-29T16:51:07+08:00" /><meta property="og:site_name" content="My cool site" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="CS61A week3 study note"/>
+<meta name="twitter:description" content="Week3 CS 61A 2021 Fall官网：CS 61A: Structure and Interpretation of Computer Programs
+翻译视频：【计算机程序的构造和解释】精译【UC Berkeley 公开课-CS61A (Spring 2021)】-中英双语字幕
+github:Maxwell2020152049/CS61A
+Lecture #6: Recursion Lab：Lab 2: Higher-Order Functions, Lambda Expressions
+Slide：06-Recursion_full.pdf
+一个有意思的高阶函数： def print_sums(n): print(n) def next_sum(k): return print_sums(n&#43;k) return next_sum print_sums(1)(3)(5) 输出：
+1 4 9 Currying 一种将多参数函数转化为一系列单参数函数的方法，也称部分实例化（partial instantiation）。
+eg.：
+from operator import add def curry2(f): return lambda x: \ lambda y: \ f(x, y) print(curry2(add)(30)(12)) print(curry2(add)(30)) 输出：
+42 &lt;function curry2.&lt;locals&gt;.&lt;lambda&gt;.&lt;locals&gt;.&lt;lambda&gt; at 0x7fa093dc1620&gt; 函数哲学（Philosophy of Functions） 语法规范说明了函数调用的语法（函数参数） 语义规范说明了如果工作： 前置条件说明了对调用者的要求 后置条件说明了来自函数实现者的承诺 Specifies a contract between caller and function implementer."/>
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://Maxwell2020152049.github.io/posts/cs61a/notes/week3/" /><link rel="prev" href="https://Maxwell2020152049.github.io/posts/tcpip/notes/ch02/" /><link rel="next" href="https://Maxwell2020152049.github.io/posts/cs61a/notes/week4/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "CS61A week3 study note",
+        "inLanguage": "en-us",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/Maxwell2020152049.github.io\/posts\/cs61a\/notes\/week3\/"
+        },"genre": "posts","keywords": "Python","wordcount":  1927 ,
+        "url": "https:\/\/Maxwell2020152049.github.io\/posts\/cs61a\/notes\/week3\/","datePublished": "2023-07-29T16:51:07+08:00","dateModified": "2023-07-29T16:51:07+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Author"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Rex&#39;s Blog"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg"
+        data-srcset="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg, https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg 1.5x, https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg 2x"
+        data-sizes="auto"
+        alt="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg"
+        title="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg" />Rex&#39;s cool site</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Rex&#39;s Blog"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg"
+        data-srcset="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg, https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg 1.5x, https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg 2x"
+        data-sizes="auto"
+        alt="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg"
+        title="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg" />Rex&#39;s cool site</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">CS61A week3 study note</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-category">included in <a href="/categories/cs61a/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>CS61A</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-07-29">2023-07-29</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1927 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;10 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#week3">Week3</a>
+      <ul>
+        <li><a href="#lecture-6-recursion">Lecture #6: Recursion</a></li>
+        <li><a href="#lecture-7-tree-recursion">Lecture #7: Tree Recursion</a></li>
+        <li><a href="#lecture-8-more-on-functions">Lecture #8: More on Functions</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="week3">Week3</h2>
+<p><code>CS 61A 2021 Fall</code>官网：<a href="https://inst.eecs.berkeley.edu/~cs61a/sp21/" target="_blank" rel="noopener noreffer ">CS 61A: Structure and Interpretation of Computer Programs</a></p>
+<p><code>翻译视频</code>：<a href="https://www.bilibili.com/video/BV1v64y1Q78o/?spm_id_from=444.41.top_right_bar_window_default_collection.content.click&amp;vd_source=249a8ad55bb26717dd55ec3dd295f644" target="_blank" rel="noopener noreffer ">【计算机程序的构造和解释】精译【UC Berkeley 公开课-CS61A (Spring 2021)】-中英双语字幕</a></p>
+<p><code>github</code>:<a href="https://github.com/Maxwell2020152049/CS61A" target="_blank" rel="noopener noreffer ">Maxwell2020152049/CS61A</a></p>
+<h3 id="lecture-6-recursion">Lecture #6: Recursion</h3>
+<p><code>Lab</code>：<a href="https://inst.eecs.berkeley.edu/~cs61a/sp21/lab/lab02/" target="_blank" rel="noopener noreffer ">Lab 2: Higher-Order Functions, Lambda Expressions</a></p>
+<p><code>Slide</code>：<a href="https://inst.eecs.berkeley.edu/~cs61a/sp21/assets/slides/06-Recursion_full.pdf" target="_blank" rel="noopener noreffer ">06-Recursion_full.pdf</a></p>
+<h4 id="一个有意思的高阶函数">一个有意思的高阶函数：</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">print_sums</span>(n):
+</span></span><span style="display:flex;"><span>    print(n)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">next_sum</span>(k):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> print_sums(n<span style="color:#f92672">+</span>k)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> next_sum
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print_sums(<span style="color:#ae81ff">1</span>)(<span style="color:#ae81ff">3</span>)(<span style="color:#ae81ff">5</span>)
+</span></span></code></pre></div><p>输出：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">9</span>
+</span></span></code></pre></div><h4 id="currying">Currying</h4>
+<p>一种将多参数函数转化为一系列单参数函数的方法，也称部分实例化（<code>partial instantiation</code>）。</p>
+<p><code>eg.</code>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> operator <span style="color:#f92672">import</span> add
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">curry2</span>(f):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">lambda</span> x: \
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">lambda</span> y: \
+</span></span><span style="display:flex;"><span>    f(x, y)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(curry2(add)(<span style="color:#ae81ff">30</span>)(<span style="color:#ae81ff">12</span>))
+</span></span><span style="display:flex;"><span>print(curry2(add)(<span style="color:#ae81ff">30</span>))
+</span></span></code></pre></div><p>输出：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#ae81ff">42</span>
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#66d9ef">function</span> curry2.&lt;locals&gt;.&lt;lambda&gt;.&lt;locals&gt;.&lt;lambda&gt; at 0x7fa093dc1620&gt;
+</span></span></code></pre></div><h4 id="函数哲学philosophy-of-functions">函数哲学（<code>Philosophy of Functions</code>）</h4>
+<ul>
+<li>语法规范说明了函数调用的语法（函数参数）</li>
+<li>语义规范说明了如果工作：
+<ul>
+<li>前置条件说明了对调用者的要求</li>
+<li>后置条件说明了来自函数实现者的承诺</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<ul>
+<li>Specifies a <code>contract</code> between caller and function implementer.</li>
+<li><code>Syntactic specification</code> gives syntax for calling (number of arguments).</li>
+<li><code>Semantic specification</code> tells what it does:
+<ul>
+<li>Preconditions are requirements on the caller.</li>
+<li>Postconditions are promises from the function&rsquo;s implementer.</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h4 id="函数抽象">函数抽象</h4>
+<p><code>用户</code>和<code>函数实现者</code>之间有不同的关注点：</p>
+<ul>
+<li>用户只提供函数参数并使用函数的返回值作为结果，不关心计算过程</li>
+<li>函数实现者只考虑如果计算，不关心函数参数的来源和返回值如何被使用</li>
+<li>对于用户来说，<code>sqrt</code>函数（平方根函数）就是一种抽象</li>
+<li>综上，我们称其为<code>函数抽象</code></li>
+</ul>
+<blockquote>
+<ul>
+<li>Ideally, the specification (syntactic and semantic) should suffice to use the function (i.e., without seeing its body).</li>
+<li>There is a <code>separation of concerns</code> here:
+<ul>
+<li>The caller (client) is concerned with providing values of x and using the results, but <code>not</code> how the result is computed.</li>
+<li>The implementer is concerned with how the result is computed, but <code>not</code> where x comes from or how the value is used.</li>
+<li>From the client’s point of view, sqrt is an <code>abstraction</code> from the set of possible ways to compute this result.</li>
+<li>Therefore, we call this <code>functional abstraction</code>.</li>
+</ul>
+</li>
+<li>Programming is largely about choosing abstractions that lead to clear, fast, and maintainable programs.</li>
+</ul>
+</blockquote>
+<h4 id="简单线性递归simple-linear-recursions">简单线性递归（<code>Simple Linear Recursions</code>）</h4>
+<p>用<code>递归</code>实现一个求<code>1</code>到<code>N</code>的平方和的函数<code>sum_squares</code>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Simple linear recursions.</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">sum_squares1</span>(N):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Return The sum of K**2 for K from 1 to N (inclusive).
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; sum_squares1(-1)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    0
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; sum_squares1(0)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    0
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; sum_squares1(1)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    1
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; sum_squares1(4)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    30
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> N <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">1</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> sum_squares1(N <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">+</span> N<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>
+</span></span></code></pre></div><h4 id="尾递归tail-recursion">尾递归（<code>Tail Recursion</code>）</h4>
+<p><code>尾递归</code>：递归函数的调用是该递归函数最后计算的部分，或者是返回值。</p>
+<blockquote>
+<p>The right version is a <code>tail-recursive</code> function, meaning that the recursive call is either the returned value or the very last action performed.</p>
+</blockquote>
+<p>上述函数可以用<code>尾递归</code>的方式实现：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Tail-recursive sum_squares</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">sum_squares2</span>(N):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Return the sum of K**2 for 1 &lt;= K &lt;= N.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; sum_squares2(-1)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    0
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; sum_squares2(0)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    0
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; sum_squares2(1)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    1
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; sum_squares2(4)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    30
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">part_sum</span>(accum, k):
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;&#34;&#34;Return the sum of ACCUM + K**2 + (K+1)**2 + ... + N**2.&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> k <span style="color:#f92672">&gt;</span> N:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> accum
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> part_sum(accum <span style="color:#f92672">+</span> k<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>, k <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> part_sum(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>)
+</span></span></code></pre></div><p>也可以用<code>迭代</code>方式实现：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Iterattive version</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">sum_squares3</span>(N):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Return the sum of K**2 for 1 &lt;= K &lt;= N.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; sum_squares3(-1)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    0
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; sum_squares3(0)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    0
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; sum_squares3(1)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    1
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; sum_squares3(4)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    30
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    accum <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    k <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> k <span style="color:#f92672">&lt;=</span> N:
+</span></span><span style="display:flex;"><span>        accum <span style="color:#f92672">=</span> accum <span style="color:#f92672">+</span> k<span style="color:#f92672">**</span><span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>        k <span style="color:#f92672">=</span> k <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> accum
+</span></span></code></pre></div><h4 id="递归的思想recursive-thinking">递归的思想（<code>Recursive Thinking</code>）</h4>
+<p>简单来说，递归的正确性的数学证明很像<code>数学归纳法</code>，详见本节课的<code>Slide</code>的<code>P11~P14</code>，写的很详细：</p>
+<p>概括如下：</p>
+<ul>
+<li>
+<p>起始步骤</p>
+</li>
+<li>
+<p>递推步骤</p>
+</li>
+<li>
+<p>递归要使得问题越变越小，有一个能够终止的终点</p>
+</li>
+</ul>
+<h4 id="基于树递归的sierpinskis-triangle">基于树递归的<code>Sierpinski's Triangle</code></h4>
+<p><code>Sierpinski's Triangle</code>是一种典型的基于递归实现的图形结构。</p>
+<p>修改了课程给的示例代码，在<code>Linux</code>上可以跑起来了（<code>Windows</code>上跑不起来，可能是缺少对应的库），把<code>make_displayer</code>函数中的<code>-g1300x1000</code>修改为<code>-g1300x8000</code>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> sys
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> math <span style="color:#f92672">import</span> sqrt
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> subprocess <span style="color:#f92672">import</span> Popen, DEVNULL, PIPE
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sin60 <span style="color:#f92672">=</span> sqrt(<span style="color:#ae81ff">3</span>) <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># To use interactively:  Download 06.py from the cs61a.org website.</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Install gs (ghostscript) and put it in your path.  Then, run the command</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#     python3 -i 06.py</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># (or equivalent) on your local machine, at which point you can run</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># &gt;&gt;&gt; d = make_displayer()</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># &gt;&gt;&gt; draw_gasket(3, d.stdin)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># &gt;&gt;&gt; draw_gasket(6, d.stdin)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ...</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># &gt;&gt;&gt; stop_displayer(d)   # To clean up.</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">make_gasket</span>(n, x, y, s, output):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Write Postscript commands to OUTPUT that draw an Nth-order
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Sierpinski&#39;s gasket, with lower-left corner at (X,Y), and
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    size S X S (units of points: 1/72 in).&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> n <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>        draw_solid_triangle(x, y, s, output)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        make_gasket(n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, x, y, s<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>, output)
+</span></span><span style="display:flex;"><span>        make_gasket(n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, x <span style="color:#f92672">+</span> s<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>, y, s<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>, output)
+</span></span><span style="display:flex;"><span>        make_gasket(n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, x <span style="color:#f92672">+</span> s<span style="color:#f92672">/</span><span style="color:#ae81ff">4</span>, y <span style="color:#f92672">+</span> sin60<span style="color:#f92672">*</span>s<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>, s<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>, output)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">draw_solid_triangle</span>(x, y, s, output):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Draw a solid triangle lower-left corner at (X, Y)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    and side S on OUTPUT.&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{</span>x<span style="color:#e6db74">:</span><span style="color:#e6db74">.2f</span><span style="color:#e6db74">}</span><span style="color:#e6db74"> </span><span style="color:#e6db74">{</span>y<span style="color:#e6db74">:</span><span style="color:#e6db74">.2f</span><span style="color:#e6db74">}</span><span style="color:#e6db74"> moveto &#34;</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{</span>s<span style="color:#e6db74">:</span><span style="color:#e6db74">.2f</span><span style="color:#e6db74">}</span><span style="color:#e6db74"> 0 rlineto &#34;</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;-</span><span style="color:#e6db74">{</span>s<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span><span style="color:#e6db74">:</span><span style="color:#e6db74">.2f</span><span style="color:#e6db74">}</span><span style="color:#e6db74"> </span><span style="color:#e6db74">{</span>s<span style="color:#f92672">*</span>sin60<span style="color:#e6db74">:</span><span style="color:#e6db74">.2f</span><span style="color:#e6db74">}</span><span style="color:#e6db74"> rlineto &#34;</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#e6db74">&#34;closepath fill&#34;</span>, file<span style="color:#f92672">=</span>output)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">draw_gasket</span>(n, output<span style="color:#f92672">=</span>sys<span style="color:#f92672">.</span>stdout, x<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>, y<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>, s<span style="color:#f92672">=</span><span style="color:#ae81ff">400</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Create a complete Postscript file for the gasket created by
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    make_gasket(N, X, Y, S, OUTPUT).&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#34;%!&#34;</span>, file<span style="color:#f92672">=</span>output)
+</span></span><span style="display:flex;"><span>    make_gasket(n, x, y, s, output<span style="color:#f92672">=</span>output)
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#34;showpage&#34;</span>, file<span style="color:#f92672">=</span>output)
+</span></span><span style="display:flex;"><span>    output<span style="color:#f92672">.</span>flush()
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">make_displayer</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Create a Ghostscript process that displays its input (sent in through
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    .stdin).&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Adjust the -gWIDTHxHEIGHT option to change drawing area.  Units are</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># pixels.</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> Popen([<span style="color:#e6db74">&#34;gs&#34;</span>, <span style="color:#e6db74">&#34;-g1300x8000&#34;</span>],
+</span></span><span style="display:flex;"><span>                  universal_newlines<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>, stdin<span style="color:#f92672">=</span>PIPE, stdout<span style="color:#f92672">=</span>DEVNULL)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">stop_displayer</span>(d):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Terminate execution of displayer D (created by make_displayer).&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    d<span style="color:#f92672">.</span>stdin<span style="color:#f92672">.</span>close()
+</span></span><span style="display:flex;"><span>    d<span style="color:#f92672">.</span>wait()
+</span></span></code></pre></div><p>在终端中输入以下命令：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ python3 -i 06.py 
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; d <span style="color:#f92672">=</span> make_displayer<span style="color:#f92672">()</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; draw_gasket<span style="color:#f92672">(</span>4, d.stdin<span style="color:#f92672">)</span>
+</span></span></code></pre></div><p>效果如下：</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/img/image_cs61a_notes/image5.png"
+        data-srcset="/img/image_cs61a_notes/image5.png, /img/image_cs61a_notes/image5.png 1.5x, /img/image_cs61a_notes/image5.png 2x"
+        data-sizes="auto"
+        alt="/img/image_cs61a_notes/image5.png"
+        title="/img/image_cs61a_notes/image5.png" /></p>
+<h3 id="lecture-7-tree-recursion">Lecture #7: Tree Recursion</h3>
+<p><code>Slide</code>：<a href="https://inst.eecs.berkeley.edu/~cs61a/sp21/assets/slides/07-Tree_Recursion_full.pdf" target="_blank" rel="noopener noreffer ">07-Tree_Recursion_full.pdf</a></p>
+<h4 id="树递归tree-recursion">树递归（<code>Tree Recursion</code>）</h4>
+<p>上节课用到的<code>make_gasket</code>函数就是用树递归实现的。</p>
+<blockquote>
+<ul>
+<li>The <code>make gasket</code> function is an example of a tree recursion, where each call makes multiple recursive calls on itself.</li>
+<li>A <code>linear recursion</code> makes at most one recursive call per call.</li>
+<li>A <code>tail recursion</code> has at most one recursive call per call, and it is the last thing evaluated.</li>
+</ul>
+</blockquote>
+<p>一个<code>尾递归</code>的例子，<code>find_zero(lowest, highest, func)</code>函数返回<code>func</code>函数的<code>[lowest, highest]</code>区间上的零点的横坐标：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">find</span> zero(lowest, highest, func):
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;Return a value v such that LOWEST &lt;= v &lt;= HIGHEST and
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">FUNC(v) == 0, or None if there is no such value.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">Assumes that FUNC is a non-decreasing function from integers
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">to integers (that is, if a &lt; b, then FUNC(a) &lt;= FUNC(b).&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> lowest <span style="color:#f92672">&gt;</span> highest: 		<span style="color:#75715e"># Base Case</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">None</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">elif</span> func(lowest) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>: 	<span style="color:#75715e"># Base Case</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> lowest
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>: 								<span style="color:#75715e"># Inductive (Recursive) Case</span>
+</span></span><span style="display:flex;"><span>    	<span style="color:#66d9ef">return</span> find zero(lowest <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, highest, func)
+</span></span></code></pre></div><p>等价的迭代版本：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Equivalent iterative solution</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span> lowest <span style="color:#f92672">&lt;=</span> highest:
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> func(lowest) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> lowest
+</span></span><span style="display:flex;"><span>	lowest <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># If we get here, returns None</span>
+</span></span></code></pre></div><p>使用<code>二分</code>思想查找零点：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">find_zero</span>(lowest, highest, func):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Return a value v such that LOWEST &lt;= v &lt;= HIGHEST and 
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    FUNC(v) == 0, or None if there is no such value.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Assumes that FUNC is a non-descending function from integers
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    to integers (that is, if a &lt; b, then FUNC(a) &lt;= FUNC(b).
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; find_zero(0, 10, lambda x: x - 4)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    4
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; find_zero(0, 100, lambda x: x**2 - 36)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    6
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; find_zero(0, 100, lambda x: x**2 - 37)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> lowest <span style="color:#f92672">&gt;</span> highest:
+</span></span><span style="display:flex;"><span>         <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">None</span>
+</span></span><span style="display:flex;"><span>    middle <span style="color:#f92672">=</span> (lowest <span style="color:#f92672">+</span> highest) <span style="color:#f92672">//</span> <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> func(middle) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> middle
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">elif</span> func(middle) <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> find_zero(middle <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, highest, func)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>: 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> find_zero(lowest, middle <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, func)
+</span></span></code></pre></div><p>等价的迭代版本：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Equivalent iterative solution</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span> lowest <span style="color:#f92672">&lt;=</span> highest:
+</span></span><span style="display:flex;"><span>	middle <span style="color:#f92672">=</span> (lowest <span style="color:#f92672">+</span> highest) <span style="color:#f92672">//</span> <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> func(middle) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>   		<span style="color:#66d9ef">return</span> middle
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">elif</span> func(middle) <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>    	lowest <span style="color:#f92672">=</span> middle <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>    	highest <span style="color:#f92672">=</span> middle <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>
+</span></span></code></pre></div><p>不使用<code>if</code>语句，只是用<code>and/or</code>逻辑运算符也能够实现一样的功能，详见本节课的<code>Slide</code>的<code>P16~P23</code></p>
+<h4 id="寻路问题finding-a-path">寻路问题（<code>Finding a Path</code>）</h4>
+<p>树递归的另一个例子，在迷宫中自上向下寻路，搜索是否存在路径或者存在多少条路径：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Maze configuration from lecture</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 第一个迷宫，用于测试 is_path 函数</span>
+</span></span><span style="display:flex;"><span>BLOCKS1 <span style="color:#f92672">=</span> { (<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>), (<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">3</span>), (<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">4</span>), (<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">5</span>), (<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">6</span>), (<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>), (<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>), (<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">3</span>),
+</span></span><span style="display:flex;"><span>            (<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">4</span>), (<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">5</span>), (<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">0</span>), (<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">1</span>), (<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>), (<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">4</span>), (<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">6</span>), (<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">0</span>),
+</span></span><span style="display:flex;"><span>            (<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">1</span>), (<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">3</span>), (<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">5</span>), (<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">6</span>), (<span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">0</span>), (<span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">1</span>), (<span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">2</span>), (<span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">3</span>),
+</span></span><span style="display:flex;"><span>            (<span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">4</span>), (<span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">6</span>), (<span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">0</span>), (<span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">2</span>), (<span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">3</span>), (<span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">4</span>), (<span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">5</span>), (<span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">1</span>),
+</span></span><span style="display:flex;"><span>            (<span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">3</span>), (<span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">6</span>), (<span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">1</span>), (<span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">2</span>), (<span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">4</span>), (<span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">5</span>), (<span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">0</span>), (<span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">1</span>),
+</span></span><span style="display:flex;"><span>            (<span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">3</span>), (<span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">4</span>), (<span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">6</span>), (<span style="color:#ae81ff">9</span>, <span style="color:#ae81ff">0</span>), (<span style="color:#ae81ff">9</span>, <span style="color:#ae81ff">3</span>), (<span style="color:#ae81ff">9</span>, <span style="color:#ae81ff">6</span>) }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 第一个 blocked 函数</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">maze1</span>(x, y):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#f92672">not</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&lt;=</span> x <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">10</span> <span style="color:#f92672">or</span> (x, y) <span style="color:#f92672">in</span> BLOCKS1
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Missing block at (7, 1)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 第二个迷宫，用于测试 num_paths 函数</span>
+</span></span><span style="display:flex;"><span>BLOCKS2 <span style="color:#f92672">=</span> { (<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>), (<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">3</span>), (<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">4</span>), (<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">5</span>), (<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">6</span>), (<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>), (<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>), (<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">3</span>),
+</span></span><span style="display:flex;"><span>            (<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">4</span>), (<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">5</span>), (<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">0</span>), (<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">1</span>), (<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>), (<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">4</span>), (<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">6</span>), (<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">0</span>),
+</span></span><span style="display:flex;"><span>            (<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">1</span>), (<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">3</span>), (<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">5</span>), (<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">6</span>), (<span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">0</span>), (<span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">1</span>), (<span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">2</span>), (<span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">3</span>),
+</span></span><span style="display:flex;"><span>            (<span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">4</span>), (<span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">6</span>), (<span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">0</span>), (<span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">2</span>), (<span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">3</span>), (<span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">4</span>), (<span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">5</span>), (<span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">1</span>),
+</span></span><span style="display:flex;"><span>            (<span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">3</span>), (<span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">6</span>), (<span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">2</span>), (<span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">4</span>), (<span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">5</span>), (<span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">0</span>), (<span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">1</span>),
+</span></span><span style="display:flex;"><span>            (<span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">3</span>), (<span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">4</span>), (<span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">6</span>), (<span style="color:#ae81ff">9</span>, <span style="color:#ae81ff">0</span>), (<span style="color:#ae81ff">9</span>, <span style="color:#ae81ff">3</span>), (<span style="color:#ae81ff">9</span>, <span style="color:#ae81ff">6</span>) }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 第二个 blocked 函数</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">maze2</span>(x, y):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#f92672">not</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&lt;=</span> x <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">10</span> <span style="color:#f92672">or</span> (x, y) <span style="color:#f92672">in</span> BLOCKS2
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 搜索是否存在路径</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">is_path</span>(blocked, x0, y0):
+</span></span><span style="display:flex;"><span>   <span style="color:#e6db74">&#34;&#34;&#34;True iff there is a path of squares from (X0, Y0) to some 
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">   square (x1, 0) such that all squares on the path (including first and
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">   last) are unoccupied.  BLOCKED is a predicate such that BLOCKED(x, y) 
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">   is true iff the grid square at (x, y) is occupied or off the edge.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">   Each step of a path goes down one row and 1 or 0 columns left or right.&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">if</span> blocked(x0, y0):
+</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">False</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">elif</span> y0 <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">True</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">return</span> (is_path(blocked, x0<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, y0<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) 
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">or</span> is_path(blocked, x0, y0<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) 
+</span></span><span style="display:flex;"><span>              <span style="color:#f92672">or</span> is_path(blocked, x0<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>, y0<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 返回存在多少条路径</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">num_paths</span>(blocked, x0, y0):
+</span></span><span style="display:flex;"><span>   <span style="color:#e6db74">&#34;&#34;&#34;Return the number of unoccupied paths that run from (X0, Y0)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">   to some square (x1, 0). BLOCKED is a predicate such that BLOCKED(x, y) 
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">   is true iff the grid square at (x, y) is occupied or off the edge. &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">if</span> blocked(x0, y0):
+</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">elif</span> y0 <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">return</span> num_paths(blocked, x0, y0<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) \
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">+</span> num_paths(blocked, x0<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, y0<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) \
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">+</span> num_paths(blocked, x0<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>, y0<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># OR (looking ahead a bit)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#      return sum( (num_paths(blocked, x0+k, y0-1)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#                   for k in range(-1, 2))</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#                )</span>
+</span></span></code></pre></div><h4 id="分区计数counting-partitions">分区计数（<code>Counting Partitions</code>）</h4>
+<p>又一个使用<code>树递归</code>的例子：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">num_partitions</span>(n, k):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Return number of distinct ways to express N as a sum of 
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    positive integers each of which is &lt;= K, where K &gt; 0.&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> n <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">elif</span> k <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> num_partitions(n<span style="color:#f92672">-</span>k, k) <span style="color:#f92672">+</span> num_partitions(n, k<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+</span></span></code></pre></div><h3 id="lecture-8-more-on-functions">Lecture #8: More on Functions</h3>
+<p><code>Homework</code>：<a href="https://inst.eecs.berkeley.edu/~cs61a/sp21/hw/hw03/" target="_blank" rel="noopener noreffer ">Homework 3: Recursion</a></p>
+<p><code>Slide</code>：<a href="https://inst.eecs.berkeley.edu/~cs61a/sp21/assets/slides/08-Design_&#43;_Exceptions_full.pdf" target="_blank" rel="noopener noreffer ">08-Design_+_Exceptions_full.pdf</a></p>
+<h4 id="汉诺塔the-towers-of-hanoi">汉诺塔（<code>The Towers of Hanoi</code>）</h4>
+<p>经典递归问题，课程给出了其解决策略和一个可视化的程序：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Towers of Hanoi</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">move_tower</span>(n, start_peg, end_peg):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Perform moves that transfer an ordered tower of N&gt;0 disks in the
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Towers of Hanoi puzzle from peg START_PEG to peg END_PEG, where 
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    1 &lt;= START_PEG, END_PEG &lt;= 3, and START_PEG != END_PEG. Assumes
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    the disks to be moved are all smaller than those on the other pegs.&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> n <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>:
+</span></span><span style="display:flex;"><span>        move_disk(start_peg, end_peg)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        spare_peg <span style="color:#f92672">=</span> <span style="color:#ae81ff">6</span> <span style="color:#f92672">-</span> start_peg <span style="color:#f92672">-</span> end_peg
+</span></span><span style="display:flex;"><span>        move_tower(n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, start_peg, spare_peg)
+</span></span><span style="display:flex;"><span>        move_disk(start_peg, end_peg)
+</span></span><span style="display:flex;"><span>        move_tower(n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, spare_peg, end_peg)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Extra fancy stuff for showing the moves, setting up, and solving the puzzle.</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> time
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>PAUSE <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>pegs <span style="color:#f92672">=</span> [<span style="color:#ae81ff">0</span>, [], [], []]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">solve_puzzle</span>(n):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Show the moves to solve a Towers of Hanoi problem for a tower
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    of N&gt;0 disks.&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    set_up_puzzle(n)
+</span></span><span style="display:flex;"><span>    print_puzzle()
+</span></span><span style="display:flex;"><span>    time<span style="color:#f92672">.</span>sleep(PAUSE)
+</span></span><span style="display:flex;"><span>    move_tower(n, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">3</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">set_up_puzzle</span>(n):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Set up Towers of Hanoi puzzle with N disks on peg 1, and
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    other pegs empty.&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    pegs[:] <span style="color:#f92672">=</span> [n, [ k <span style="color:#66d9ef">for</span> k <span style="color:#f92672">in</span> range(n, <span style="color:#ae81ff">0</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) ], [], []]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">move_disk</span>(peg0, peg1):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Move disk from PEG0 and PEG1, printing the result.&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    pegs[peg1]<span style="color:#f92672">.</span>append(pegs[peg0]<span style="color:#f92672">.</span>pop())
+</span></span><span style="display:flex;"><span>    print_puzzle()
+</span></span><span style="display:flex;"><span>    time<span style="color:#f92672">.</span>sleep(PAUSE)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">print_puzzle</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Print current configuration of puzzle (stored in pegs).&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    n <span style="color:#f92672">=</span> pegs[<span style="color:#ae81ff">0</span>]
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> k <span style="color:#f92672">in</span> range(n, <span style="color:#ae81ff">0</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> j <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">4</span>):
+</span></span><span style="display:flex;"><span>            print(<span style="color:#e6db74">&#34; &#34;</span>, end<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> len(pegs[j]) <span style="color:#f92672">&gt;=</span> k:
+</span></span><span style="display:flex;"><span>                c <span style="color:#f92672">=</span> pegs[j][k<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]
+</span></span><span style="display:flex;"><span>                print(<span style="color:#e6db74">&#34; &#34;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; &#34;</span> <span style="color:#f92672">*</span> (n <span style="color:#f92672">-</span> c) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;##&#34;</span> <span style="color:#f92672">*</span> c <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; &#34;</span> <span style="color:#f92672">*</span> (n <span style="color:#f92672">-</span> c) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; &#34;</span>, end<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>                print(<span style="color:#e6db74">&#34; &#34;</span> <span style="color:#f92672">*</span> (<span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> n <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>), end<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>)
+</span></span><span style="display:flex;"><span>        print()
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#34;=&#34;</span> <span style="color:#f92672">*</span> (<span style="color:#ae81ff">6</span><span style="color:#f92672">*</span>n <span style="color:#f92672">+</span> <span style="color:#ae81ff">9</span>))
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#34; &#34;</span> <span style="color:#f92672">*</span> (n<span style="color:#f92672">+</span><span style="color:#ae81ff">2</span>) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;1&#34;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; &#34;</span> <span style="color:#f92672">*</span> (<span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> n <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;2&#34;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; &#34;</span> <span style="color:#f92672">*</span> (<span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> n <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;3&#34;</span>)
+</span></span><span style="display:flex;"><span>    print()
+</span></span></code></pre></div><p>在终端输入以下命令：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>$ python3 -i 08.py 
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; solve_puzzle<span style="color:#f92672">(</span>3<span style="color:#f92672">)</span>
+</span></span></code></pre></div><p>可以打印三层汉诺塔的解决过程。</p>
+<h4 id="异常exceptions">异常（<code>Exceptions</code>）</h4>
+<p><code>python</code>处理异常有两种方法：</p>
+<ul>
+<li>
+<p><code>Raise</code>：丢出一个错误，结束程序的运行：</p>
+<ul>
+<li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"></code></pre></div></li>
+</ul>
+<p>if N &lt;= 0:
+raise ValueError(&ldquo;Number of disks must be positive&rdquo;)</p>
+</li>
+<li>
+<p><code>Try</code>：接收错误，打印错误信息，但不终止程序的运行</p>
+<ul>
+<li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>	input <span style="color:#f92672">=</span> open(myfile)<span style="color:#f92672">.</span>read()
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">except</span> <span style="color:#a6e22e">FileNotFoundError</span>: <span style="color:#75715e"># Another standard exception</span>
+</span></span><span style="display:flex;"><span>	print(<span style="color:#e6db74">&#34;Warning: could not open&#34;</span>, myfile)
+</span></span><span style="display:flex;"><span>	input <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>
+</span></span></code></pre></div></li>
+</ul>
+</li>
+</ul>
+<h4 id="编程练习">编程练习</h4>
+<p>编写一个函数<code>remove_digits(n, digit)</code>，移除<code>n</code>中所有等于<code>digit</code>的位。</p>
+<p>实现如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Deleting digits (spoiler alert!)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">remove_digit</span>(n, digit):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Assuming N&gt;=0, 0 &lt;= DIGIT &lt;= 9, return a number whose
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    base-10 representation is the same as N, but with all instances of
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    DIGIT removed.  If all digits removed, return 0.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; remove_digit(123, 3)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    12
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; remove_digit(1234, 5)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    1234
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; remove_digit(1234, 1)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    234
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; remove_digit(111111, 1)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    0
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> n <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> n <span style="color:#f92672">%</span> <span style="color:#ae81ff">10</span> <span style="color:#f92672">==</span> digit:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> remove_digit(n <span style="color:#f92672">//</span> <span style="color:#ae81ff">10</span>, digit)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> n <span style="color:#f92672">%</span> <span style="color:#ae81ff">10</span> <span style="color:#f92672">+</span> remove_digit(n <span style="color:#f92672">//</span> <span style="color:#ae81ff">10</span>, digit) <span style="color:#f92672">*</span> <span style="color:#ae81ff">10</span>
+</span></span></code></pre></div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-07-29</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://Maxwell2020152049.github.io/posts/cs61a/notes/week3/" data-title="CS61A week3 study note" data-hashtags="Python"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://Maxwell2020152049.github.io/posts/cs61a/notes/week3/" data-hashtag="Python"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://Maxwell2020152049.github.io/posts/cs61a/notes/week3/" data-title="CS61A week3 study note"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://Maxwell2020152049.github.io/posts/cs61a/notes/week3/" data-title="CS61A week3 study note"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://Maxwell2020152049.github.io/posts/cs61a/notes/week3/" data-title="CS61A week3 study note"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/python/">Python</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/tcpip/notes/ch02/" class="prev" rel="prev" title="《TCP IP网络编程》学习笔记 ch02"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>《TCP IP网络编程》学习笔记 ch02</a>
+            <a href="/posts/cs61a/notes/week4/" class="next" rel="next" title="CS61A week4 study note">CS61A week4 study note<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.115.4">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank"></a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

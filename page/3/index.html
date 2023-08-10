@@ -76,35 +76,73 @@
         alt="https://th.bing.com/th/id/OIP.bs9ePxW88yyxsxRKmQt_MQHaHa?w=193&amp;h=193&amp;c=7&amp;r=0&amp;o=5&amp;pid=1.7"
         title="https://th.bing.com/th/id/OIP.bs9ePxW88yyxsxRKmQt_MQHaHa?w=193&amp;h=193&amp;c=7&amp;r=0&amp;o=5&amp;pid=1.7" /></div><div class="home-subtitle"><div id="id-1" class="typeit"></div></div><div class="links"><a href="https://github.com/Maxwell2020152049" title="GitHub" target="_blank" rel="noopener noreffer me"><i class="fab fa-github fa-fw" aria-hidden="true"></i></a></div></div>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/cs61a_homework_hw02/">CS61A Homework hw02</a>
+        <a href="/posts/tcpip/notes/ch02/">《TCP IP网络编程》学习笔记 ch02</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-07-29">2023-07-29</time></span>&nbsp;<span class="post-category">included in <a href="/categories/tcp-ip%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>《TCP IP网络编程》学习笔记</a></span></div><div class="content">ch02 套接字类型与协议设置 2.1 套接字协议及其数据传输特性 协议（Protocol） 协议是计算机之间对话必备的通信规则。
+创建套接字 #include &lt;sys/socket.h&gt; int socket(int domain, i nt type, int protocol); C语言中，创建套接字要使用socket()函数，下面介绍其参数以及具体使用：
+协议族（Protocol Family） PF_INET：IPv4互联网协议族 PF_INET6：IPv6互联网协议族 PF_LOCAL：本地通信的UNIX协议族 PF_PACKET：底层套接字的协议族 PF__IPX：IPX Novell协议族 本书重点讲解PF_INET，即IPv4互联网协议族。
+套接字类型（Type）
+面向连接的套接字（SOCK_STREAM）
+传输过程中数据不会丢失
+数据有序到达
+传输的数据不存在数据边界
+在面向连接的套接字中， read函数和write函数的调用次数并无太大意义
+可靠的、按序传递的、基于宇节的面向连接的数据传输方式的套接字
+面向消息的套接字（SOCK_DGRAM）
+强调快速传输而非传输顺序
+传输的数据可能丢失也可能损毁
+传输的数据存在数据边界
+限制每次传输的数据大小
+不可靠的、不按序传递的、以数据的高速传输为目的的套接字
+协议的最终选择
+同个协议族中可能存在多个数据传输方式相同的协议，所以还需指定最终选择的协议
+参数PF_INET指IPv4网络协议族，SOCK_STREAM是面向连接的数据传输。 满足这2个条件的协议只有IPPROTO_TCP
+参数PF_INET指IPv4网络协议族，SOCK_DGRAM指的是面向消息的数据传输方式，满足上述条件的协议只有IPPROTO_UDP
+验证 面向连接的套接字 的 传输数据无边界性 修改ch01中的hello_clint.c中read()函数的调用方式：
+// read() while (1) { str_len = read(sock, &amp;message[idx ++], 1); if (str_len == -1) error_handling(&#34;read() error!&#34;); else if (str_len == 0) break; cnt += str_len; } printf(&#34;Message from server : %s \n&#34;, message); printf(&#34;function read() call count is %d\n&#34;, cnt); 客户端运行效果如下：</div><div class="post-footer">
+        <a href="/posts/tcpip/notes/ch02/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">网络编程</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/tcpip/notes/ch01/">《TCP IP网络编程》学习笔记 ch01</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-07-29">2023-07-29</time></span>&nbsp;<span class="post-category">included in <a href="/categories/tcp-ip%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>《TCP IP网络编程》学习笔记</a></span></div><div class="content">《TCP IP网络编程》学习笔记 ch01 理解网络编程和套接字 1.1 理解网络编程和套接字 构建 接电话 套接字（服务器端） 创建服务器端的套接字需要以下函数：
+#include &lt;sys/socket.h&gt; // 创建套接字成功时返回文件描述符，失败时返回－1。 int socket(int domain, int type, int protocol); #include &lt;sys/socket.h&gt; // 绑定成功时返回0，失败时返回-1。 int bind(int sockfd, struct sockaddr *myaddr, socklen_t addrlen); #include &lt;sys/socket.h&gt; // 将套接字转化为可接收连接的状态，成功时返回0，失败时返回-1。 int listen(int sockfd, int backlog); #include &lt;sys/socket.h&gt; // 接受网络连接，成功时返回文件描述符，失败时返回-1。 int accept(int sockfd, struct sockaddr *addr, socklen_t *addrlen); 创建服务器端的套接字的基本步骤如下：
+第一步：调用socket()函数创建套接字
+第二步：调用bind()函数绑定套接字的IP和 端口号
+第三步：调用listen()函数把套接字转化为可接收连接状态
+第四步：调用accept()函数接受网络连接
+服务器端hello_server.c代码如下：
+#include &lt;stdio.h&gt; #include &lt;stdlib.h&gt; #include &lt;string.h&gt; #include &lt;unistd.h&gt; #include &lt;arpa/inet.</div><div class="post-footer">
+        <a href="/posts/tcpip/notes/ch01/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">网络编程</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/cs61a/homework/hw02/">CS61A Homework hw02</a>
     </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-07-29">2023-07-29</time></span>&nbsp;<span class="post-category">included in <a href="/categories/cs61a/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>CS61A</a></span></div><div class="content">Homework 2: Higher Order Functions 作业链接：Homework 2: Higher Order Functions
 Important Functions 一些文档测试可能基于以下函数：
 from operator import add, mul, sub square = lambda x: x * x identity = lambda x: x triple = lambda x: 3 * x increment = lambda x: x + 1 Q1: Product 仿照能够计算term(1) + ... + term(n)的summation(n, term)函数，编写一个能够计算term(1) * ... * term(n)的product(n, term)函数。
 思路：注意range函数的区间是左闭右开的。
 实现代码如下：
 def product(n, term): &#34;&#34;&#34;Return the product of the first n terms in a sequence.</div><div class="post-footer">
-        <a href="/posts/cs61a_homework_hw02/">Read More</a><div class="post-tags">
+        <a href="/posts/cs61a/homework/hw02/">Read More</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/python/">Python</a></div></div>
 </article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/cs61a_homework_hw01/">CS61A Homework hw01</a>
+        <a href="/posts/cs61a/homework/hw01/">CS61A Homework hw01</a>
     </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-07-29">2023-07-29</time></span>&nbsp;<span class="post-category">included in <a href="/categories/cs61a/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>CS61A</a></span></div><div class="content">Homework 1: Variables &amp; Functions, Control 作业链接：Homework 1: Variables &amp; Functions, Control
 Q1: Syllabus Quiz 教学大纲和课程政策，详见Syllabus Quiz和Syllabus &amp; Course Policies。
 Q2: A Plus Abs B Fill in the blanks in the following function for adding a to the absolute value of b, without calling abs. You may not modify any of the provided code other than the two blanks.
 题意就是实现如下函数f： $$ f(a, b) = a + \lvert b \rvert $$</div><div class="post-footer">
-        <a href="/posts/cs61a_homework_hw01/">Read More</a><div class="post-tags">
+        <a href="/posts/cs61a/homework/hw01/">Read More</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/python/">Python</a></div></div>
 </article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/cs61a_lab_lab01/">CS61A Lab lab01</a>
+        <a href="/posts/cs61a/lab/lab01/">CS61A Lab lab01</a>
     </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-07-29">2023-07-29</time></span>&nbsp;<span class="post-category">included in <a href="/categories/cs61a/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>CS61A</a></span></div><div class="content">Lab 1: Variables &amp; Functions, Control 实验链接：Lab 1: Variables &amp; Functions, Control
 如何下载实验压缩包：
 wget https://inst.eecs.berkeley.edu/~cs61a/sp21/lab/lab01/lab01.zip What Would Python Display(WWPD)? (Part 1) Q1: WWPD: Control 使用如下命令进行测试：
 python3 ok -q control -u --local 需要注意：
 若用整型或浮点型做控制语句的判断条件，0会被当作False，非0会被当作True 测试过程如下：
 ===================================================================== Assignment: Lab 1 OK, version v1.18.1 ===================================================================== ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Unlocking tests At each &#34;? &#34;, type what you would expect the output to be. Type exit() to quit --------------------------------------------------------------------- Control &gt; Suite 1 &gt; Case 1 (cases remaining: 5) What would Python display?</div><div class="post-footer">
-        <a href="/posts/cs61a_lab_lab01/">Read More</a><div class="post-tags">
+        <a href="/posts/cs61a/lab/lab01/">Read More</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/python/">Python</a></div></div>
 </article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/cs61a_lab_lab00/">CS61A Lab lab00</a>
+        <a href="/posts/cs61a/lab/lab00/">CS61A Lab lab00</a>
     </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-07-29">2023-07-29</time></span>&nbsp;<span class="post-category">included in <a href="/categories/cs61a/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>CS61A</a></span></div><div class="content">关于.gitignore **/*.zip **/__pycache__ git不需要维护**压缩包** 和 缓存文件
 Lab 0: Getting Started 实验链接：Lab 0: Getting Started
 关于实验测评：Using Ok
@@ -116,39 +154,7 @@ Text Editor（代码编辑器）
 ls cd mkdir unzip mv Python Basic Primitive Expressions（原始表达式） **原始表达式**只进行一步计算：
 &gt;&gt;&gt; 3 3 &gt;&gt;&gt; 12.5 12.5 &gt;&gt;&gt; True True Arithmetic Expressions（算术表达式） 算术表达式由以下运算符组成：
 加法：+ 减法：- 乘法：* 乘方：** 浮点数除法：/ 下取整除法：// 取余：% &gt;&gt;&gt; 7 / 4 1.75 &gt;&gt;&gt; (2 + 6) / 4	# Floating point division 2.0 &gt;&gt;&gt; 7 // 4 # Floor division (rounding down) 1 &gt;&gt;&gt; 7 % 4 # Modulus (remainder of 7 // 4) 3 Assignment statements（赋值语句） &gt;&gt;&gt; a = (100 + 50) // 2 &gt;&gt;&gt; a 75 Doing the assignment（实验任务） Unlocking tests（解锁测试） 完成正式实验前要进行一次测试，检测学生对python的基础知识的掌握程度，使用如下命令（--local参数使得测评在本地运行）：</div><div class="post-footer">
-        <a href="/posts/cs61a_lab_lab00/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/python/">Python</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/cs61a_project_hog/">CS61A Project Hog</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-07-29">2023-07-29</time></span>&nbsp;<span class="post-category">included in <a href="/categories/cs61a/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>CS61A</a></span></div><div class="content">Project 1: The Game of Hog Project地址：Project 1: The Game of Hog
-Rules 有两个玩家，轮流进行回合，玩家选择骰子的数量（最多10个），得到每个骰子的点数，将点数之和加入总分中，总分先达到100即获胜。
-Sow Sad：如果有一个骰子点数为1，本回合得分为1
-Piggy Points：如果选择0个骰子，本回合获得k + 3分，k为对手分数的平方的位数中值最小的一位。
-More Boar：回合结束后，如果玩家的最高位小于对手的最高位，玩家的次高位小于对手的次高位，继续进行一回合。
-若对规则有疑问，请仔细阅读项目网站。
-Final Product 最终效果可以参考：Final Product
-文件结构 项目目录如下：
-. ├── calc.py ├── default_graphics.py ├── dice.py ├── gui_files ├── hog_gui.py ├── hog.py ├── ok ├── proj01.ok ├── __pycache__ ├── tests └── ucb.py 其中比较重要的有：
-hog.py：项目的初始代码 dice.py：关于骰子的函数 hog_gui.py：项目的用户图形化界面（graphical user interface） ucb.py：本课程的实用函数 gui_files：Web GUI 使用的各种内容的目录 执行如下代码可以运行项目：
-python3 hog_gui.py Phase 1: Simulator Problem 0 (0 pt) dice.</div><div class="post-footer">
-        <a href="/posts/cs61a_project_hog/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/python/">Python</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/cs61a_notes_week2/">CS61A week2 study note</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-07-29">2023-07-29</time></span>&nbsp;<span class="post-category">included in <a href="/categories/cs61a/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>CS61A</a></span></div><div class="content">Week2 CS 61A 2021 Fall官网：CS 61A: Structure and Interpretation of Computer Programs
-翻译视频：【计算机程序的构造和解释】精译【UC Berkeley 公开课-CS61A (Spring 2021)】-中英双语字幕
-github:Maxwell2020152049/CS61A
-Lecture #3: Recap of Function Evaluation; Control Lab：Lab 1: Variables &amp; Functions, Control
-Slide：03-Control_full.pdf
-​	一个名字(name)总是被绑定(bound)到一个值(value)上。
-​	表达式和子表达式都会在同一个环境中求值，现在本地环境帧(local environment frame)中寻找，若找不到，再递归地在父环境
-(parent environment frame)中寻找。
-eg1.：
-# Create nested environment x = 1 y = 12 def g1(x): def g2(x): # Stop here print(x) g2(x + 1) g1(2) 输出：
-3 在pythontutor中运行结果如下：
-eg2.：
-# Illustrate chain of calls.</div><div class="post-footer">
-        <a href="/posts/cs61a_notes_week2/">Read More</a><div class="post-tags">
+        <a href="/posts/cs61a/lab/lab00/">Read More</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/python/">Python</a></div></div>
 </article><ul class="pagination"><li class="page-item ">
                     <span class="page-link">
@@ -165,6 +171,10 @@ eg2.：
                 </li><li class="page-item ">
                     <span class="page-link">
                         <a href="/page/4/">4</a>
+                    </span>
+                </li><li class="page-item ">
+                    <span class="page-link">
+                        <a href="/page/5/">5</a>
                     </span>
                 </li></ul></div></div>
             </main><footer class="footer">

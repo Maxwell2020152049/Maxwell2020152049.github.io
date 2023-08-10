@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>CS61A week4 study note - Rex&#39;s Blog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="CS61A week4 study note" />
+<meta property="og:description" content="Week4 CS 61A 2021 Fall官网：CS 61A: Structure and Interpretation of Computer Programs
+翻译视频：【计算机程序的构造和解释】精译【UC Berkeley 公开课-CS61A (Spring 2021)】-中英双语字幕
+github:Maxwell2020152049/CS61A
+Lecture #9: Still More on Functions Lab：Lab 3: Recursion, Tree Recursion
+Slide：09-Function_Examples_full.pdf
+练习：翻转数字（Exercise: Reversing Digits） 实现一个reverse digits(n)函数，返回翻转的n：
+def reverse_digits(n): &#34;&#34;&#34;Assuming N &gt;= 0 is an integer. Return the number whose base-10 representation is the reverse of that of N. &gt;&gt;&gt; reverse_digits(0) 0 &gt;&gt;&gt; reverse_digits(1) 1 &gt;&gt;&gt; reverse_digits(123) 321 &gt;&gt;&gt; reverse_digits(10) 1 &gt;&gt;&gt; reverse_digits(12321) 12321 &gt;&gt;&gt; reverse_digits(2222222) 2222222 &gt;&gt;&gt; reverse_digits(102) 201 &#34;&#34;&#34; assert type(n) is int and n &gt;= 0 if n &lt; 10: return n return reverse_digits(n // 10) &#43; (n % 10) * 10 ** (num_digits(n) - 1) def num_digits(x): &#34;&#34;&#34;Return the number of decimal digits in the positive integer X." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://Maxwell2020152049.github.io/posts/cs61a/notes/week4/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-07-31T15:18:23+08:00" />
+<meta property="article:modified_time" content="2023-07-31T15:18:23+08:00" /><meta property="og:site_name" content="My cool site" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="CS61A week4 study note"/>
+<meta name="twitter:description" content="Week4 CS 61A 2021 Fall官网：CS 61A: Structure and Interpretation of Computer Programs
+翻译视频：【计算机程序的构造和解释】精译【UC Berkeley 公开课-CS61A (Spring 2021)】-中英双语字幕
+github:Maxwell2020152049/CS61A
+Lecture #9: Still More on Functions Lab：Lab 3: Recursion, Tree Recursion
+Slide：09-Function_Examples_full.pdf
+练习：翻转数字（Exercise: Reversing Digits） 实现一个reverse digits(n)函数，返回翻转的n：
+def reverse_digits(n): &#34;&#34;&#34;Assuming N &gt;= 0 is an integer. Return the number whose base-10 representation is the reverse of that of N. &gt;&gt;&gt; reverse_digits(0) 0 &gt;&gt;&gt; reverse_digits(1) 1 &gt;&gt;&gt; reverse_digits(123) 321 &gt;&gt;&gt; reverse_digits(10) 1 &gt;&gt;&gt; reverse_digits(12321) 12321 &gt;&gt;&gt; reverse_digits(2222222) 2222222 &gt;&gt;&gt; reverse_digits(102) 201 &#34;&#34;&#34; assert type(n) is int and n &gt;= 0 if n &lt; 10: return n return reverse_digits(n // 10) &#43; (n % 10) * 10 ** (num_digits(n) - 1) def num_digits(x): &#34;&#34;&#34;Return the number of decimal digits in the positive integer X."/>
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://Maxwell2020152049.github.io/posts/cs61a/notes/week4/" /><link rel="prev" href="https://Maxwell2020152049.github.io/posts/cs61a/notes/week3/" /><link rel="next" href="https://Maxwell2020152049.github.io/posts/cs61a/notes/week5/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "CS61A week4 study note",
+        "inLanguage": "en-us",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/Maxwell2020152049.github.io\/posts\/cs61a\/notes\/week4\/"
+        },"genre": "posts","keywords": "Python","wordcount":  1660 ,
+        "url": "https:\/\/Maxwell2020152049.github.io\/posts\/cs61a\/notes\/week4\/","datePublished": "2023-07-31T15:18:23+08:00","dateModified": "2023-07-31T15:18:23+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Author"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Rex&#39;s Blog"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg"
+        data-srcset="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg, https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg 1.5x, https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg 2x"
+        data-sizes="auto"
+        alt="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg"
+        title="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg" />Rex&#39;s cool site</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Rex&#39;s Blog"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg"
+        data-srcset="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg, https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg 1.5x, https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg 2x"
+        data-sizes="auto"
+        alt="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg"
+        title="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg" />Rex&#39;s cool site</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">CS61A week4 study note</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-category">included in <a href="/categories/cs61a/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>CS61A</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-07-31">2023-07-31</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1660 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;8 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#week4">Week4</a>
+      <ul>
+        <li><a href="#lecture-9-still-more-on-functions">Lecture #9: Still More on Functions</a></li>
+        <li><a href="#lecture-10-containers-and-sequences">Lecture #10: Containers and Sequences</a></li>
+        <li><a href="#lecture-11-sequences-ii-and-data-abstraction">Lecture #11: Sequences (II) and Data Abstraction</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="week4">Week4</h2>
+<p><code>CS 61A 2021 Fall</code>官网：<a href="https://inst.eecs.berkeley.edu/~cs61a/sp21/" target="_blank" rel="noopener noreffer ">CS 61A: Structure and Interpretation of Computer Programs</a></p>
+<p><code>翻译视频</code>：<a href="https://www.bilibili.com/video/BV1v64y1Q78o/?spm_id_from=444.41.top_right_bar_window_default_collection.content.click&amp;vd_source=249a8ad55bb26717dd55ec3dd295f644" target="_blank" rel="noopener noreffer ">【计算机程序的构造和解释】精译【UC Berkeley 公开课-CS61A (Spring 2021)】-中英双语字幕</a></p>
+<p><code>github</code>:<a href="https://github.com/Maxwell2020152049/CS61A" target="_blank" rel="noopener noreffer ">Maxwell2020152049/CS61A</a></p>
+<h3 id="lecture-9-still-more-on-functions">Lecture #9: Still More on Functions</h3>
+<p><code>Lab</code>：<a href="https://inst.eecs.berkeley.edu/~cs61a/sp21/lab/lab03/" target="_blank" rel="noopener noreffer ">Lab 3: Recursion, Tree Recursion</a></p>
+<p><code>Slide</code>：<a href="https://inst.eecs.berkeley.edu/~cs61a/sp21/assets/slides/09-Function_Examples_full.pdf" target="_blank" rel="noopener noreffer ">09-Function_Examples_full.pdf</a></p>
+<h4 id="练习翻转数字exercise-reversing-digits">练习：翻转数字（<code>Exercise: Reversing Digits</code>）</h4>
+<p>实现一个<code>reverse digits(n)</code>函数，返回翻转的<code>n</code>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">reverse_digits</span>(n):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Assuming N &gt;= 0 is an integer.  Return the number whose
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    base-10 representation is the reverse of that of N.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; reverse_digits(0)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    0
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; reverse_digits(1)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    1
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; reverse_digits(123)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    321
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; reverse_digits(10)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    1
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; reverse_digits(12321)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    12321
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; reverse_digits(2222222)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    2222222
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; reverse_digits(102)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    201
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">assert</span> type(n) <span style="color:#f92672">is</span> int <span style="color:#f92672">and</span> n <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> n <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">10</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> n
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> reverse_digits(n <span style="color:#f92672">//</span> <span style="color:#ae81ff">10</span>) <span style="color:#f92672">+</span> (n <span style="color:#f92672">%</span> <span style="color:#ae81ff">10</span>) <span style="color:#f92672">*</span> <span style="color:#ae81ff">10</span> <span style="color:#f92672">**</span> (num_digits(n) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">num_digits</span>(x):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Return the number of decimal digits in the positive integer X.&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    x_count <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> x <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">10</span>:
+</span></span><span style="display:flex;"><span>        x_count <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>        x <span style="color:#f92672">//=</span> <span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> x_count
+</span></span></code></pre></div><h4 id="练习交错数字exercise-interleaving-digits">练习：交错数字（<code>Exercise: Interleaving Digits</code>）</h4>
+<p>实现一个<code>interleave(a, b)</code>函数，返回<code>a</code>、<code>b</code>交错的值：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Interleaving digits (spoiler alert!)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">interleave</span>(a, b):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Assuming A and B are non-negative integers with the same 
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    number of base-10 digits, return the number whose base-10 
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    representation is the interleaving of A&#39;s and B&#39;s digits,
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    starting with A.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; interleave(1, 2)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    12
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; interleave(0, 1)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    1
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; interleave(1, 0)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    10
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; interleave(123,456)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    142536
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; interleave(111111, 222222)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    121212121212
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> a <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">9</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> a <span style="color:#f92672">*</span> <span style="color:#ae81ff">10</span> <span style="color:#f92672">+</span> b
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> interleave(a <span style="color:#f92672">//</span> <span style="color:#ae81ff">10</span>, b <span style="color:#f92672">//</span> <span style="color:#ae81ff">10</span>) <span style="color:#f92672">*</span> <span style="color:#ae81ff">100</span> <span style="color:#f92672">+</span> interleave(a <span style="color:#f92672">%</span> <span style="color:#ae81ff">10</span>, b <span style="color:#f92672">%</span><span style="color:#ae81ff">10</span>)
+</span></span></code></pre></div><h4 id="环境图填空题environment-detective">环境图填空题（<code>Environment Detective</code>）</h4>
+<p>根据右侧的环境框架，给左边的程序代码填空：</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/img/image_cs61a_notes/image6.png"
+        data-srcset="/img/image_cs61a_notes/image6.png, /img/image_cs61a_notes/image6.png 1.5x, /img/image_cs61a_notes/image6.png 2x"
+        data-sizes="auto"
+        alt="/img/image_cs61a_notes/image6.png"
+        title="/img/image_cs61a_notes/image6.png" /></p>
+<p>答案如下：</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/img/image_cs61a_notes/image7.png"
+        data-srcset="/img/image_cs61a_notes/image7.png, /img/image_cs61a_notes/image7.png 1.5x, /img/image_cs61a_notes/image7.png 2x"
+        data-sizes="auto"
+        alt="/img/image_cs61a_notes/image7.png"
+        title="/img/image_cs61a_notes/image7.png" /></p>
+<p><a href="https://pythontutor.com/cp/composingprograms.html#code=def%20flip%28flop%29%3A%0A%20%20%20%20if%20flop%20%3D%3D%203%3A%0A%20%20%20%20%20%20%20%20return%20None%0A%20%20%20%20flip%20%3D%20lambda%20flip%3A%203%0A%20%20%20%20return%20flip%0A%0Adef%20flop%28flip%29%3A%0A%20%20%20%20return%20flop%0A%0Aflip,%20flop%20%3D%20flop,%20flip%0A%0Aflip%28flop%281%29%282%29%29%283%29&amp;cumulative=true&amp;curInstr=19&amp;mode=display&amp;origin=composingprograms.js&amp;py=3&amp;rawInputLstJSON=%5B%5D" target="_blank" rel="noopener noreffer ">在PythonTutor中可以看到效果</a></p>
+<h3 id="lecture-10-containers-and-sequences">Lecture #10: Containers and Sequences</h3>
+<p><code>Slide</code>：<a href="https://inst.eecs.berkeley.edu/~cs61a/sp21/assets/slides/10-Containers_full.pdf" target="_blank" rel="noopener noreffer ">10-Containers_full.pdf</a></p>
+<h4 id="decorators">Decorators</h4>
+<p>在<code>python</code>中，可以使用如下语法设置追踪函数，设置之后，每次调用<code>square</code>函数都会调用<code>trace1</code>函数：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Tracing</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">trace1</span>(f):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Return a function that takes a single argument, x, prints it,
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    computes and prints F(x), and returns the computed value.&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">traced</span>(x):
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#34;-&gt;&#34;</span>, x)
+</span></span><span style="display:flex;"><span>        r <span style="color:#f92672">=</span> f(x)
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#34;&lt;-&#34;</span>, r)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> r
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> traced
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@trace1</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">square</span>(x):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> x <span style="color:#f92672">*</span> x
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@trace1</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">traced_reverse</span>(n):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">assert</span> type(n) <span style="color:#f92672">is</span> int <span style="color:#f92672">and</span> n <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> n <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">10</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> n
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> traced_reverse(n <span style="color:#f92672">//</span> <span style="color:#ae81ff">10</span>) <span style="color:#f92672">+</span> (n <span style="color:#f92672">%</span> <span style="color:#ae81ff">10</span>) <span style="color:#f92672">*</span> <span style="color:#ae81ff">10</span> <span style="color:#f92672">**</span> (num_digits(n) <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>)
+</span></span></code></pre></div><h4 id="pairs">Pairs</h4>
+<p>在<code>python</code>中，如何使用已学知识实现一种含有两个元素的数据类型。</p>
+<p>若两个元素都是非负数，可以使用如下方法实现：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Pairs of non-negative integers</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">pair</span>(a, b):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Return a value that represents the ordered pair of
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    non-negative integer values (A, B).&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">2</span><span style="color:#f92672">**</span>a <span style="color:#f92672">*</span> <span style="color:#ae81ff">3</span><span style="color:#f92672">**</span>b
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">left</span>(p):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> multiplicity(<span style="color:#ae81ff">2</span>, p)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">right</span>(p):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> multiplicity(<span style="color:#ae81ff">3</span>, p)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">multiplicty</span>(factor, n):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Assuming FACTOR and N are integers with FACTOR &gt; 1, return
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    the number of times N may be evenly divided by FACTOR.&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    r <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> n <span style="color:#f92672">%</span> factor <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>        r <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>        n <span style="color:#f92672">//=</span> factor
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> r
+</span></span></code></pre></div><p>进一步泛化，可以使用如下方法实现能够修改的<code>pair</code>：</p>
+<p>注意：在内部函数直接给<code>a</code>、<code>b</code>复制会创建新的变量，不会达到预期的效果，可以用<code>nolocal</code>修饰符从父环境中引入环境变量。</p>
+<blockquote>
+<ul>
+<li>
+<p>Assignment in Python usually creates or sets a <code>local variable</code> in the currently executing environment frame.</p>
+</li>
+<li>
+<p>But that’s useless in the attempted implementation (see the test bad pair function in 10.py).</p>
+</li>
+<li>
+<p>We need instead to indicate that we actually want to set the variables a and b introduced <code>outside</code> the pair func function in the enclosing (parent) function’s (pair’s) frame.</p>
+</li>
+<li>
+<p>The declaration</p>
+<p><code>nonlocal</code> var1, var2, . . .</p>
+<p>means “assignment to any of the variables vari in the current frame actually assigns to those variables in its parent’s frame, grandparent’s frame, etc. (not including the global frame).”</p>
+</li>
+<li>
+<p>Furthermore, those variables must already exists in one of these ancestor frames.</p>
+</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">pair</span>(a, b):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">pair_func</span>(which, v<span style="color:#f92672">=</span><span style="color:#66d9ef">None</span>):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">nonlocal</span> a, b
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> which <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> a
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">elif</span> which <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> b
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">elif</span> which <span style="color:#f92672">==</span> <span style="color:#ae81ff">2</span>:
+</span></span><span style="display:flex;"><span>            a <span style="color:#f92672">=</span> v
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>            b <span style="color:#f92672">=</span> v
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> pair_func
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_good_pair</span>():
+</span></span><span style="display:flex;"><span>    aPair <span style="color:#f92672">=</span> pair(<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>    set_left(aPair, <span style="color:#ae81ff">5</span>)
+</span></span><span style="display:flex;"><span>    print(left(aPair))
+</span></span></code></pre></div><h4 id="序列sequences">序列（<code>Sequences</code>）</h4>
+<p>序列有以下属性（不同序列可能有不同属性）：</p>
+<ul>
+<li>有限性（<code>finite</code>）</li>
+<li>可修改性（<code>mutable</code>）</li>
+<li>可索引性（<code>indexable</code>）</li>
+<li>可迭代性（<code>iterable</code>）</li>
+</ul>
+<blockquote>
+<ul>
+<li>The term <code>sequence</code> refers generally to a data structure consisting of an <code>indexed collection of values</code>, which we&rsquo;ll generally call elements.</li>
+<li>That is, there is a first, second, third value (which CS types call #0, #1, #2, etc.)</li>
+<li>A sequence may be <code>finite</code> (with a length) or <code>infinite</code>.</li>
+<li>It may be <code>mutable</code> (elements can change) or <code>immutable</code>.</li>
+<li>It may be <code>indexable</code>: its elements may be accessed via <code>selection</code> by their indices.</li>
+<li>It may be <code>iterable</code>: its values may be accessed <code>sequentially</code> from first to last.</li>
+</ul>
+</blockquote>
+<p>在<code>python</code>中，有以下几种序列：</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/img/image_cs61a_notes/image8.png"
+        data-srcset="/img/image_cs61a_notes/image8.png, /img/image_cs61a_notes/image8.png 1.5x, /img/image_cs61a_notes/image8.png 2x"
+        data-sizes="auto"
+        alt="/img/image_cs61a_notes/image8.png"
+        title="/img/image_cs61a_notes/image8.png" /></p>
+<h4 id="字符串字面量string-literals">字符串字面量（<code>String Literals</code>）</h4>
+<p>以下代码说明了字符串字面量的特性：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># String Literals</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">string_literals</span>():
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#39;Single-quoted strings may contain &#34;double-quoted strings&#34;&#39;</span>)
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#34;Double-quoted strings may contain &#39;single-quoted strings&#39;&#34;</span>)
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#34;&#34;&#34;Triple double quotes allow &#39;this&#39;, &#34;this&#34;, and &#34;&#34;this&#34;&#34;,
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">as well as newline characters&#34;&#34;&#34;</span>)
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#39;&#39;&#39;Triple single quotes allow &#34;this&#34;, &#39;this&#39;, and &#39;&#39;this&#39;&#39;,
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">as well as newline characters&#39;&#39;&#39;</span>)
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#34;A test of</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">escapes</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">.&#34;</span>)
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#34;Some unicode: </span><span style="color:#ae81ff">\u0395\u1f55\u03c1\u03b7\u03ba\u03b1\u2764</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#34;In raw strings (starting with &#39;r&#39;), \escapes are not replaced&#34;</span>)
+</span></span></code></pre></div><h4 id="选择和切片">选择和切片</h4>
+<p>列表可以通过索引得到元素，通过区间切片的到部分列表：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Collection of sequence expressions</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">print_sequences</span>():
+</span></span><span style="display:flex;"><span>    t <span style="color:#f92672">=</span> (<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">9</span>, <span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">11</span>)   <span style="color:#75715e"># Tuple</span>
+</span></span><span style="display:flex;"><span>    L <span style="color:#f92672">=</span> [<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">9</span>, <span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">11</span>]   <span style="color:#75715e"># List</span>
+</span></span><span style="display:flex;"><span>    R <span style="color:#f92672">=</span> range(<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">13</span>)        <span style="color:#75715e"># Integers 2-12.</span>
+</span></span><span style="display:flex;"><span>    E <span style="color:#f92672">=</span> range(<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">13</span>, <span style="color:#ae81ff">2</span>)     <span style="color:#75715e"># Even integers 2-12.</span>
+</span></span><span style="display:flex;"><span>    S <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Hello, world!&#34;</span>     <span style="color:#75715e"># Strings (sequences of characters)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;t[2] == </span><span style="color:#e6db74">{</span>t[<span style="color:#ae81ff">2</span>]<span style="color:#e6db74">}</span><span style="color:#e6db74">; L[2] == </span><span style="color:#e6db74">{</span>L[<span style="color:#ae81ff">2</span>]<span style="color:#e6db74">}</span><span style="color:#e6db74">; R[2] == </span><span style="color:#e6db74">{</span>R[<span style="color:#ae81ff">2</span>]<span style="color:#e6db74">}</span><span style="color:#e6db74">; E[2] == </span><span style="color:#e6db74">{</span>E[<span style="color:#ae81ff">2</span>]<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;t[-1] == </span><span style="color:#e6db74">{</span>t[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39; t[len(t)-1] == </span><span style="color:#e6db74">{</span>t[len(t)<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;S[1] == </span><span style="color:#e6db74">{</span>S[<span style="color:#ae81ff">1</span>]<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;t[1:4] == </span><span style="color:#e6db74">{</span>t[<span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">4</span>]<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;t[2:] == </span><span style="color:#e6db74">{</span>t[<span style="color:#ae81ff">2</span>:]<span style="color:#e6db74">}</span><span style="color:#e6db74">; t[2:len(t)] == </span><span style="color:#e6db74">{</span>t[<span style="color:#ae81ff">2</span>:len(t)]<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;t[::2] == </span><span style="color:#e6db74">{</span>t[::<span style="color:#ae81ff">2</span>]<span style="color:#e6db74">}</span><span style="color:#e6db74">; t[0:len(t):2] == </span><span style="color:#e6db74">{</span>t[<span style="color:#ae81ff">0</span>:len(t):<span style="color:#ae81ff">2</span>]<span style="color:#e6db74">}</span><span style="color:#e6db74">; &#34;</span>,
+</span></span><span style="display:flex;"><span>          <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;t[::-1] == </span><span style="color:#e6db74">{</span>t[::<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;S[0:5] == </span><span style="color:#e6db74">{</span>S[<span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">5</span>]<span style="color:#e6db74">}</span><span style="color:#e6db74">; S[0:5:2] == </span><span style="color:#e6db74">{</span>S[<span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">5</span>:<span style="color:#ae81ff">2</span>]<span style="color:#e6db74">}</span><span style="color:#e6db74">; S[4::-1] == </span><span style="color:#e6db74">{</span>S[<span style="color:#ae81ff">4</span>::<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;S[1:2] == </span><span style="color:#e6db74">{</span>S[<span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">2</span>]<span style="color:#e6db74">}</span><span style="color:#e6db74">; S[1] == </span><span style="color:#e6db74">{</span>S[<span style="color:#ae81ff">1</span>]<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span></code></pre></div><p>用切片的特性很容易实现上节课的<code>reverse_digits</code>函数：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">reverse_digits</span>(n):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Assuming N &gt;= 0 is an integer.  Return the number whose
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    base-10 representation is the reverse of that of N.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; reverse_digits(0)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    0
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; reverse_digits(1)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    1
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; reverse_digits(123)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    321
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; reverse_digits(10)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    1
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; reverse_digits(12321)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    12321
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; reverse_digits(2222222)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    2222222
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; reverse_digits(102)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    201
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> int(str(n)[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>::<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>])
+</span></span></code></pre></div><h4 id="序列的结合与转化sequence-combination-and-conversion">序列的结合与转化（<code>Sequence Combination and Conversion</code>）</h4>
+<p>使用<code>list()</code>、<code>tuple()</code>、<code>str()</code>函数，可以实现不同序列的转化。</p>
+<h4 id="序列的循环迭代器sequence-iteration-for-loops">序列的循环迭代器（<code>Sequence Iteration: For Loops</code>）</h4>
+<p>可以使用如下形式，遍历列表中的元素</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> L:
+</span></span><span style="display:flex;"><span>    <span style="color:#960050;background-color:#1e0010">···</span>
+</span></span></code></pre></div><h4 id="一个有意思的点">一个有意思的点</h4>
+<p>元组（<code>tuple</code>）是不可被修改的，列表（<code>list</code>）是可以被修改的，但是元组中的列表的元素可以被修改。原因是，元组中保存的是列表的引用，该引用不可以被修改，但引用的对象是列表，可以被修改。</p>
+<p><code>eg</code>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> T <span style="color:#f92672">=</span> (<span style="color:#ae81ff">2020</span>, [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">5</span>], <span style="color:#ae81ff">2049</span>)
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> T[<span style="color:#ae81ff">1</span>][<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span> 
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> T
+</span></span><span style="display:flex;"><span>(<span style="color:#ae81ff">2020</span>, [<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">5</span>], <span style="color:#ae81ff">2049</span>)
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> T[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> [<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">5</span>]
+</span></span><span style="display:flex;"><span>Traceback (most recent call last):       
+</span></span><span style="display:flex;"><span>  File <span style="color:#e6db74">&#34;&lt;stdin&gt;&#34;</span>, line <span style="color:#ae81ff">1</span>, <span style="color:#f92672">in</span> <span style="color:#f92672">&lt;</span>module<span style="color:#f92672">&gt;</span>    
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">TypeError</span>: <span style="color:#e6db74">&#39;tuple&#39;</span> object does <span style="color:#f92672">not</span> support item assignment
+</span></span></code></pre></div><h3 id="lecture-11-sequences-ii-and-data-abstraction">Lecture #11: Sequences (II) and Data Abstraction</h3>
+<p><code>Lab</code>：<a href="https://inst.eecs.berkeley.edu/~cs61a/sp21/lab/lab04/" target="_blank" rel="noopener noreffer ">Lab 4: Midterm Review</a></p>
+<p><code>Slide</code>：<a href="https://inst.eecs.berkeley.edu/~cs61a/sp21/assets/slides/11-Data_Abstraction_full.pdf" target="_blank" rel="noopener noreffer ">11-Data_Abstraction_full.pdf</a></p>
+<h4 id="多变量multiple-variables">多变量（<code>Multiple Variables</code>）</h4>
+<p>序列的循环迭代器可以支持多变量的迭代：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> L <span style="color:#f92672">=</span> [ (<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">9</span>), (<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span>), (<span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">6</span>), (<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">3</span>) ]
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> same <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> <span style="color:#66d9ef">for</span> x, y <span style="color:#f92672">in</span> L:
+</span></span><span style="display:flex;"><span><span style="color:#f92672">...</span>    <span style="color:#66d9ef">if</span> x <span style="color:#f92672">==</span> y:
+</span></span><span style="display:flex;"><span><span style="color:#f92672">...</span>        same <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> same
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span>
+</span></span></code></pre></div><h4 id="zip">zip</h4>
+<p><code>zip</code>函数可以将多个序列组合在一起：</p>
+<p>注意，<code>zip</code>函数的返回值是<code>生成器</code>，可能需要类型转换函数进行转换。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Examples of zip() function and multiple assignment in a loop.</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> list(zip([<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">3</span>], [<span style="color:#ae81ff">9</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">10</span>]))
+</span></span><span style="display:flex;"><span>[(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">9</span>), (<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span>), (<span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">6</span>), (<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">3</span>)]
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> <span style="color:#75715e"># Length of result is that of shortest sequence</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> list(zip([<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">10</span>], [<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">11</span>], [<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">9</span>, <span style="color:#ae81ff">12</span>, <span style="color:#ae81ff">15</span>]))
+</span></span><span style="display:flex;"><span>[(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>), (<span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">6</span>), (<span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">9</span>), (<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">11</span>, <span style="color:#ae81ff">12</span>)]
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> beasts <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#34;aardvark&#34;</span>, <span style="color:#e6db74">&#34;axolotl&#34;</span>, <span style="color:#e6db74">&#34;gnu&#34;</span>, <span style="color:#e6db74">&#34;hartebeest&#34;</span>]
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> <span style="color:#66d9ef">for</span> n, animal <span style="color:#f92672">in</span> zip(range(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">5</span>), beasts):
+</span></span><span style="display:flex;"><span><span style="color:#f92672">...</span>     print(n, animal)
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">1</span> aardvark
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">2</span> axolotl
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">3</span> gnu
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">4</span> hartebeest
+</span></span></code></pre></div><h4 id="列表的修改modifying-lists">列表的修改（<code>Modifying Lists</code>）</h4>
+<p>列表是可以修改的，可以通过其元素的引用修改其内容，也可以通过切片修改：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Various examples of mutating a list.</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> L <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>]
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> L[<span style="color:#ae81ff">2</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">6</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> L
+</span></span><span style="display:flex;"><span>[<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>]
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> L[<span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">3</span>] <span style="color:#f92672">=</span> [<span style="color:#ae81ff">9</span>, <span style="color:#ae81ff">8</span>]
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> L
+</span></span><span style="display:flex;"><span>[<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">9</span>, <span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>]
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> L[<span style="color:#ae81ff">2</span>:<span style="color:#ae81ff">4</span>] <span style="color:#f92672">=</span> []            <span style="color:#75715e"># Deleting elements</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> L
+</span></span><span style="display:flex;"><span>[<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">9</span>, <span style="color:#ae81ff">5</span>]
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> L[<span style="color:#ae81ff">1</span>:<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> [<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>]  <span style="color:#75715e"># Inserting elements</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> L
+</span></span><span style="display:flex;"><span>[<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">9</span>, <span style="color:#ae81ff">5</span>]
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> L[len(L):] <span style="color:#f92672">=</span> [<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">11</span>]  <span style="color:#75715e"># Appending</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> L
+</span></span><span style="display:flex;"><span>[<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">9</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">11</span>]
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> L[<span style="color:#ae81ff">0</span>:<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> range(<span style="color:#f92672">-</span><span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">0</span>)  <span style="color:#75715e"># Prepending</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> L
+</span></span><span style="display:flex;"><span>[<span style="color:#f92672">-</span><span style="color:#ae81ff">3</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">9</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">11</span>]
+</span></span></code></pre></div><p>列表支持乘法运算符<code>*</code>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Examples of the * operators on sequences.</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> [<span style="color:#ae81ff">0</span>] <span style="color:#f92672">*</span> <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>[<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>]
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> (<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>) <span style="color:#f92672">*</span> <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> <span style="color:#e6db74">&#34;a&#34;</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">5</span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#39;aaaaa&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> <span style="color:#ae81ff">5</span> <span style="color:#f92672">*</span> <span style="color:#e6db74">&#39;a&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#39;aaaaa&#39;</span>
+</span></span></code></pre></div><h4 id="列表推导式list-comprehensions">列表推导式（<code>List Comprehensions</code>）</h4>
+<p>在<code>python</code>中，使用以下形式的语句可以推导出一个列表，推导式中的变量都是局部的：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>[ <span style="color:#f92672">&lt;</span>expression<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">for</span> <span style="color:#f92672">&lt;</span>var<span style="color:#f92672">&gt;</span> <span style="color:#f92672">in</span> <span style="color:#f92672">&lt;</span>sequence expression<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">if</span> <span style="color:#f92672">&lt;</span>boolean expression<span style="color:#f92672">&gt;</span> ]
+</span></span></code></pre></div><p>使用如下代码可以生成一个列表，包含[0, 100]中的素数的平方：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>[ x<span style="color:#f92672">*</span>x <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">101</span>) <span style="color:#66d9ef">if</span> isprime(x) ]
+</span></span></code></pre></div><p>可以在<code>for</code>语句中嵌套<code>for</code>语句：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> [ (a, b) <span style="color:#66d9ef">for</span> a <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">13</span>) <span style="color:#66d9ef">for</span> b <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">2</span>) ]
+</span></span><span style="display:flex;"><span>[(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">0</span>), (<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">1</span>), (<span style="color:#ae81ff">11</span>, <span style="color:#ae81ff">0</span>), (<span style="color:#ae81ff">11</span>, <span style="color:#ae81ff">1</span>), (<span style="color:#ae81ff">12</span>, <span style="color:#ae81ff">0</span>), (<span style="color:#ae81ff">12</span>, <span style="color:#ae81ff">1</span>)]
+</span></span></code></pre></div><p><code>eg</code>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> [ (a, b) <span style="color:#66d9ef">for</span> a <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">3</span>) <span style="color:#66d9ef">for</span> b <span style="color:#f92672">in</span> range(a, <span style="color:#ae81ff">4</span>) ]  
+</span></span><span style="display:flex;"><span>[(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>), (<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>), (<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">2</span>), (<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">3</span>), (<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>), (<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>), (<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">3</span>), (<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span>), (<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>)]
+</span></span></code></pre></div><p><code>eg</code>：</p>
+<p>如果一个变量不重要，可以使用<code>_</code>作为其变量名。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> [ <span style="color:#ae81ff">0</span> <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">5</span>)]  
+</span></span><span style="display:flex;"><span>[<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>]
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> [ <span style="color:#ae81ff">0</span> <span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">5</span>)] 
+</span></span><span style="display:flex;"><span>[<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>]
+</span></span></code></pre></div><h4 id="练习1exercise-i">练习1（<code>Exercise I</code>）</h4>
+<p>实现一个<code>match(a, b)</code>函数，返回<code>a</code>、<code>b</code>两个序列中相同索引的元素相等的个数：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">matches</span>(a, b):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Return the number of values k such that A[k] == B[k].
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; matches([1, 2, 3, 4, 5], [3, 2, 3, 0, 5])
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    3
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; matches(&#34;abdomens&#34;, &#34;indolence&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    4
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; matches(&#34;abcd&#34;, &#34;dcba&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    0
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; matches(&#34;abcde&#34;, &#34;edcba&#34;)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    1
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> x, y <span style="color:#f92672">in</span> zip(a, b):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> x <span style="color:#f92672">==</span> y:
+</span></span><span style="display:flex;"><span>            cnt <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> cnt
+</span></span></code></pre></div><p>等价的，更简洁的实现：</p>
+<p><code>sum</code>可以对列表求值，<code>True</code>和<code>False</code>支持加法运算符，结果是整数，<code>True</code>被视为<code>1</code>，<code>False</code>被视为<code>0</code>。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> sum([ <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">for</span> x, y <span style="color:#f92672">in</span> zip(a, b) <span style="color:#66d9ef">if</span> x <span style="color:#f92672">==</span> y ])
+</span></span></code></pre></div><h4 id="练习2exercise-ii">练习2（<code>Exercise II</code>）</h4>
+<p>实现<code>triangle(n)</code>函数，输出形如<code>[[0], ..., [n]]</code>的内容：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">triangle</span>(n):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Assuming N &gt;= 0, return the list consisting of N lists:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    [1], [1, 2], [1, 2, 3], ... [1, 2, ... N].
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; triangle(0)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    []
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; triangle(1)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    [[1]]
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; triangle(5)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    [[1], [1, 2], [1, 2, 3], [1, 2, 3, 4], [1, 2, 3, 4, 5]]
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> [ [ x <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1</span>, i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) ] <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1</span>, n <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) ]
+</span></span></code></pre></div><p>等价的，更简洁的实现：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> [ list(range(<span style="color:#ae81ff">1</span>, i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>)) <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1</span>, n <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) ]
+</span></span></code></pre></div><h4 id="数据抽象data-abstraction">数据抽象（<code>Data Abstraction</code>）</h4>
+<p>几个重要的概念：</p>
+<ul>
+<li>
+<p>抽象数据类型（<code>abstract data type (ADT)</code>）</p>
+</li>
+<li>
+<p>应用程序员接口（<code>Application Programmer’s Interface (API)</code>）</p>
+</li>
+</ul>
+<p>抽象数据类型需要：</p>
+<ul>
+<li>构造器（<code>Constructors</code>）</li>
+<li>访问器（<code>Accessors</code>）</li>
+<li>修改器（<code>Mutators</code>）</li>
+</ul>
+<h4 id="有理数rational-numbers">有理数（<code>Rational Numbers</code>）</h4>
+<p>本节课介绍了如何实现有理数的<code>ADT</code>，详见<code>Slide</code>的<code>P13~P21</code>，抽象层次图如下：</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/img/image_cs61a_notes/image9.png"
+        data-srcset="/img/image_cs61a_notes/image9.png, /img/image_cs61a_notes/image9.png 1.5x, /img/image_cs61a_notes/image9.png 2x"
+        data-sizes="auto"
+        alt="/img/image_cs61a_notes/image9.png"
+        title="/img/image_cs61a_notes/image9.png" /></p>
+<p>实现代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Rationals</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> math <span style="color:#f92672">import</span> gcd
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">make_rat</span>(n, d):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;The rational number N/D, assuming N, D are integers, D!=0&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    g <span style="color:#f92672">=</span> gcd(n, d)
+</span></span><span style="display:flex;"><span>    n <span style="color:#f92672">//=</span> g; d <span style="color:#f92672">//=</span> g
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> (n, d)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">numer</span>(r):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;The numerator of rational number R in lowest terms.&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> r[<span style="color:#ae81ff">0</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">denom</span>(r):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;The denominator of rational number R in lowest terms.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">       Always positive.&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> r[<span style="color:#ae81ff">1</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">add_rat</span>(x, y):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> make_rat(numer(x) <span style="color:#f92672">*</span> denom(y) <span style="color:#f92672">+</span> numer(y) <span style="color:#f92672">*</span> denom(x),
+</span></span><span style="display:flex;"><span>                    denom(x) <span style="color:#f92672">*</span> denom(y))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">mul_rat</span>(x, y):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> make_rat(numer(x) <span style="color:#f92672">*</span> numer(y), denom(x) <span style="color:#f92672">*</span> denom(y))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">str_rat</span>(r):  <span style="color:#75715e"># (For fun: a little new Python string magic)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> str(numer(r)) <span style="color:#66d9ef">if</span> denom(r) <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">else</span> <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{</span>numer(r)<span style="color:#e6db74">}</span><span style="color:#e6db74">/</span><span style="color:#e6db74">{</span>denom(r)<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">equal_rat</span>(x, y):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> numer(x) <span style="color:#f92672">*</span> denom(y) <span style="color:#f92672">==</span> numer(y) <span style="color:#f92672">*</span> denom(x)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">exact_harmonic_number</span>(n):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Return 1 + 1/2 + 1/3 + ... + 1/N as a rational number.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; str_rat(exact_harmonic_number(1))
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#39;1&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; str_rat(exact_harmonic_number(3))
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#39;11/6&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; str_rat(exact_harmonic_number(10))
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#39;7381/2520&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    s <span style="color:#f92672">=</span> make_rat(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> k <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1</span>, n <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>):
+</span></span><span style="display:flex;"><span>        s <span style="color:#f92672">=</span> add_rat(s, make_rat(<span style="color:#ae81ff">1</span>, k))
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> s
+</span></span></code></pre></div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-07-31</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://Maxwell2020152049.github.io/posts/cs61a/notes/week4/" data-title="CS61A week4 study note" data-hashtags="Python"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://Maxwell2020152049.github.io/posts/cs61a/notes/week4/" data-hashtag="Python"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://Maxwell2020152049.github.io/posts/cs61a/notes/week4/" data-title="CS61A week4 study note"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://Maxwell2020152049.github.io/posts/cs61a/notes/week4/" data-title="CS61A week4 study note"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://Maxwell2020152049.github.io/posts/cs61a/notes/week4/" data-title="CS61A week4 study note"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/python/">Python</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/cs61a/notes/week3/" class="prev" rel="prev" title="CS61A week3 study note"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>CS61A week3 study note</a>
+            <a href="/posts/cs61a/notes/week5/" class="next" rel="next" title="CS61A week5 study note">CS61A week5 study note<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.115.4">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank"></a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

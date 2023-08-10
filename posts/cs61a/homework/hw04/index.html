@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>CS61A Homework hw04 - Rex&#39;s Blog</title><meta name="Description" content="This is my cool site"><meta property="og:title" content="CS61A Homework hw04" />
+<meta property="og:description" content="Homework 4: Trees, Data Abstraction 作业链接：Homework 4: Trees, Data Abstraction
+使用以下命令可以下载作业：
+wget https://inst.eecs.berkeley.edu/~cs61a/sp21/hw/hw04/hw04.zip 本次作业的内容主要涉及抽象数据类型的编程，题目背景一般较为冗长，故不多加赘述，详见作业链接。
+做完实验，恍如隔世，不禁感叹 最是人间留不住，朱颜辞镜花辞树。
+Abstraction Q1: Weights 实现代码如下：
+def planet(size): &#34;&#34;&#34;Construct a planet of some size.&#34;&#34;&#34; assert size &gt; 0 &#34;*** YOUR CODE HERE ***&#34; return [&#39;planet&#39;, size] def size(w): &#34;&#34;&#34;Select the size of a planet.&#34;&#34;&#34; assert is_planet(w), &#39;must call size on a planet&#39; &#34;*** YOUR CODE HERE ***&#34; return w[1] Q2: Balanced 实现代码如下：
+def balanced(m): &#34;&#34;&#34;Return whether m is balanced." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://Maxwell2020152049.github.io/posts/cs61a/homework/hw04/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-08-06T01:53:00+08:00" />
+<meta property="article:modified_time" content="2023-08-06T01:53:00+08:00" /><meta property="og:site_name" content="My cool site" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="CS61A Homework hw04"/>
+<meta name="twitter:description" content="Homework 4: Trees, Data Abstraction 作业链接：Homework 4: Trees, Data Abstraction
+使用以下命令可以下载作业：
+wget https://inst.eecs.berkeley.edu/~cs61a/sp21/hw/hw04/hw04.zip 本次作业的内容主要涉及抽象数据类型的编程，题目背景一般较为冗长，故不多加赘述，详见作业链接。
+做完实验，恍如隔世，不禁感叹 最是人间留不住，朱颜辞镜花辞树。
+Abstraction Q1: Weights 实现代码如下：
+def planet(size): &#34;&#34;&#34;Construct a planet of some size.&#34;&#34;&#34; assert size &gt; 0 &#34;*** YOUR CODE HERE ***&#34; return [&#39;planet&#39;, size] def size(w): &#34;&#34;&#34;Select the size of a planet.&#34;&#34;&#34; assert is_planet(w), &#39;must call size on a planet&#39; &#34;*** YOUR CODE HERE ***&#34; return w[1] Q2: Balanced 实现代码如下：
+def balanced(m): &#34;&#34;&#34;Return whether m is balanced."/>
+<meta name="application-name" content="My cool site">
+<meta name="apple-mobile-web-app-title" content="My cool site"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://Maxwell2020152049.github.io/posts/cs61a/homework/hw04/" /><link rel="prev" href="https://Maxwell2020152049.github.io/posts/cs61a/notes/week6/" /><link rel="next" href="https://Maxwell2020152049.github.io/posts/cs61a/lab/lab06/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css"></noscript><link rel="preload" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "CS61A Homework hw04",
+        "inLanguage": "en-us",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/Maxwell2020152049.github.io\/posts\/cs61a\/homework\/hw04\/"
+        },"genre": "posts","keywords": "Python","wordcount":  1401 ,
+        "url": "https:\/\/Maxwell2020152049.github.io\/posts\/cs61a\/homework\/hw04\/","datePublished": "2023-08-06T01:53:00+08:00","dateModified": "2023-08-06T01:53:00+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Author"
+            },"description": ""
+    }
+    </script></head>
+    <body data-header-desktop="fixed" data-header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('dark' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'dark' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Rex&#39;s Blog"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg"
+        data-srcset="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg, https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg 1.5x, https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg 2x"
+        data-sizes="auto"
+        alt="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg"
+        title="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg" />Rex&#39;s cool site</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Rex&#39;s Blog"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg"
+        data-srcset="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg, https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg 1.5x, https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg 2x"
+        data-sizes="auto"
+        alt="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg"
+        title="https://static.vecteezy.com/system/resources/previews/009/273/280/original/concept-of-loneliness-and-disappointment-in-love-sad-man-sitting-element-of-the-picture-is-decorated-by-nasa-free-photo.jpg" />Rex&#39;s cool site</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw" aria-hidden="true"></i>
+            </a></div>
+    </div>
+</header><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">CS61A Homework hw04</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-category">included in <a href="/categories/cs61a/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>CS61A</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw" aria-hidden="true"></i>&nbsp;<time datetime="2023-08-06">2023-08-06</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden="true"></i>&nbsp;1401 words&nbsp;
+                <i class="far fa-clock fa-fw" aria-hidden="true"></i>&nbsp;7 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  data-kept="">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right" aria-hidden="true"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#abstraction">Abstraction</a>
+      <ul>
+        <li><a href="#q1-weights">Q1: Weights</a></li>
+        <li><a href="#q2-balanced">Q2: Balanced</a></li>
+        <li><a href="#q3-totals">Q3: Totals</a></li>
+      </ul>
+    </li>
+    <li><a href="#trees">Trees</a>
+      <ul>
+        <li><a href="#q4-replace-thor-at-leaf">Q4: Replace Thor at Leaf</a></li>
+        <li><a href="#q5-has-path">Q5: Has Path</a></li>
+        <li><a href="#q6-preorder">Q6: Preorder</a></li>
+        <li><a href="#最终测试">最终测试</a></li>
+      </ul>
+    </li>
+    <li><a href="#extra-questions">Extra Questions</a>
+      <ul>
+        <li><a href="#q7-interval-abstraction">Q7: Interval Abstraction</a></li>
+        <li><a href="#q8-sub-interval">Q8: Sub Interval</a></li>
+        <li><a href="#q9-div-interval">Q9: Div Interval</a></li>
+        <li><a href="#q10-par-diff">Q10: Par Diff</a></li>
+        <li><a href="#q11-multiple-references">Q11: Multiple References</a></li>
+        <li><a href="#q12-quadratic">Q12: Quadratic</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="homework-4-trees-data-abstraction">Homework 4: Trees, Data Abstraction</h1>
+<p>作业链接：<a href="https://inst.eecs.berkeley.edu/~cs61a/sp21/hw/hw04/" target="_blank" rel="noopener noreffer ">Homework 4: Trees, Data Abstraction</a></p>
+<p>使用以下命令可以下载作业：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>wget https://inst.eecs.berkeley.edu/~cs61a/sp21/hw/hw04/hw04.zip
+</span></span></code></pre></div><p>本次作业的内容主要涉及抽象数据类型的编程，题目背景一般较为冗长，故不多加赘述，详见<a href="https://inst.eecs.berkeley.edu/~cs61a/sp21/hw/hw04/" target="_blank" rel="noopener noreffer ">作业链接</a>。</p>
+<p>做完实验，恍如隔世，不禁感叹 <strong><code>最是人间留不住，朱颜辞镜花辞树</code></strong>。</p>
+<h2 id="abstraction">Abstraction</h2>
+<h3 id="q1-weights">Q1: Weights</h3>
+<p>实现代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">planet</span>(size):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Construct a planet of some size.&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">assert</span> size <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;*** YOUR CODE HERE ***&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> [<span style="color:#e6db74">&#39;planet&#39;</span>, size]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">size</span>(w):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Select the size of a planet.&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">assert</span> is_planet(w), <span style="color:#e6db74">&#39;must call size on a planet&#39;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;*** YOUR CODE HERE ***&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> w[<span style="color:#ae81ff">1</span>]
+</span></span></code></pre></div><h3 id="q2-balanced">Q2: Balanced</h3>
+<p>实现代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">balanced</span>(m):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Return whether m is balanced.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; t, u, v = examples()
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; balanced(t)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    True
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; balanced(v)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    True
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; w = mobile(arm(3, t), arm(2, u))
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; balanced(w)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    False
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; balanced(mobile(arm(1, v), arm(1, w)))
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    False
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; balanced(mobile(arm(1, w), arm(1, v)))
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    False
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; from construct_check import check
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; # checking for abstraction barrier violations by banning indexing
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; check(HW_SOURCE_FILE, &#39;balanced&#39;, [&#39;Index&#39;])
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    True
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;*** YOUR CODE HERE ***&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> is_planet(m):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">True</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    left_m <span style="color:#f92672">=</span> left(m)
+</span></span><span style="display:flex;"><span>    right_m <span style="color:#f92672">=</span> right(m)
+</span></span><span style="display:flex;"><span>    end_left_m <span style="color:#f92672">=</span> end(left_m)
+</span></span><span style="display:flex;"><span>    end_right_m <span style="color:#f92672">=</span> end(right_m)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span>  length(left_m) <span style="color:#f92672">*</span> total_weight(end_left_m) <span style="color:#f92672">==</span>\
+</span></span><span style="display:flex;"><span>        length(right_m) <span style="color:#f92672">*</span> total_weight(end_right_m) <span style="color:#f92672">and</span>\
+</span></span><span style="display:flex;"><span>            balanced(end_left_m) <span style="color:#f92672">and</span> balanced(end_right_m)
+</span></span></code></pre></div><h3 id="q3-totals">Q3: Totals</h3>
+<p>实现代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">totals_tree</span>(m):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Return a tree representing the mobile with its total weight at the root.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; t, u, v = examples()
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; print_tree(totals_tree(t))
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    3
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      2
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      1
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; print_tree(totals_tree(u))
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    6
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      1
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      5
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        3
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        2
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; print_tree(totals_tree(v))
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    9
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      3
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        2
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        1
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      6
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        1
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        5
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          3
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          2
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; from construct_check import check
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; # checking for abstraction barrier violations by banning indexing
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; check(HW_SOURCE_FILE, &#39;totals_tree&#39;, [&#39;Index&#39;])
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    True
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;*** YOUR CODE HERE ***&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> is_planet(m):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> tree(size(m))
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> tree(total_weight(m),\
+</span></span><span style="display:flex;"><span>        [ totals_tree(end(left(m))),\
+</span></span><span style="display:flex;"><span>            totals_tree(end(right(m))) ])
+</span></span></code></pre></div><h2 id="trees">Trees</h2>
+<h3 id="q4-replace-thor-at-leaf">Q4: Replace Thor at Leaf</h3>
+<p>实现代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">replace_thor_at_leaf</span>(t, thors_replacement):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Returns a new tree where every leaf value equal to &#34;thor&#34; has
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    been replaced with thors_replacement.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; yggdrasil = tree(&#39;odin&#39;,
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    ...                  [tree(&#39;balder&#39;,
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    ...                        [tree(&#39;thor&#39;),
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    ...                         tree(&#39;freya&#39;)]),
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    ...                   tree(&#39;frigg&#39;,
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    ...                        [tree(&#39;thor&#39;)]),
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    ...                   tree(&#39;thor&#39;,
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    ...                        [tree(&#39;sif&#39;),
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    ...                         tree(&#39;thor&#39;)]),
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    ...                   tree(&#39;thor&#39;)])
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; laerad = copy_tree(yggdrasil) # copy yggdrasil for testing purposes
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; print_tree(replace_thor_at_leaf(yggdrasil, &#39;freya&#39;))
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    odin
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      balder
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        freya
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        freya
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      frigg
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        freya
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      thor
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        sif
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        freya
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      freya
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; laerad == yggdrasil # Make sure original tree is unmodified
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    True
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;*** YOUR CODE HERE ***&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> is_leaf(t):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> tree(label(t) <span style="color:#66d9ef">if</span> label(t) <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;thor&#39;</span> <span style="color:#66d9ef">else</span> thors_replacement)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> tree(label(t),\
+</span></span><span style="display:flex;"><span>        [replace_thor_at_leaf(child, thors_replacement) <span style="color:#66d9ef">for</span> child <span style="color:#f92672">in</span> branches(t)] )
+</span></span></code></pre></div><h3 id="q5-has-path">Q5: Has Path</h3>
+<p>实现代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">has_path</span>(t, word):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Return whether there is a path in a tree where the entries along the path
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    spell out a particular word.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; greetings = tree(&#39;h&#39;, [tree(&#39;i&#39;),
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    ...                        tree(&#39;e&#39;, [tree(&#39;l&#39;, [tree(&#39;l&#39;, [tree(&#39;o&#39;)])]),
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    ...                                   tree(&#39;y&#39;)])])
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; print_tree(greetings)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    h
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      i
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      e
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        l
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">          l
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            o
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        y
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; has_path(greetings, &#39;h&#39;)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    True
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; has_path(greetings, &#39;i&#39;)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    False
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; has_path(greetings, &#39;hi&#39;)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    True
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; has_path(greetings, &#39;hello&#39;)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    True
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; has_path(greetings, &#39;hey&#39;)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    True
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; has_path(greetings, &#39;bye&#39;)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    False
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; has_path(greetings, &#39;hint&#39;)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    False
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">assert</span> len(word) <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>, <span style="color:#e6db74">&#39;no path for empty word.&#39;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;*** YOUR CODE HERE ***&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> word[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">!=</span> label(t):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">False</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> len(word) <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">True</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> is_leaf(t):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">False</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> child <span style="color:#f92672">in</span> branches(t):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> has_path(child, word[<span style="color:#ae81ff">1</span>:]):
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">True</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">False</span>
+</span></span></code></pre></div><h3 id="q6-preorder">Q6: Preorder</h3>
+<p>实现代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">preorder</span>(t):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Return a list of the entries in this tree in the order that they
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    would be visited by a preorder traversal (see problem description).
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; numbers = tree(1, [tree(2), tree(3, [tree(4), tree(5)]), tree(6, [tree(7)])])
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; preorder(numbers)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    [1, 2, 3, 4, 5, 6, 7]
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; preorder(tree(2, [tree(4, [tree(6)])]))
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    [2, 4, 6]
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;*** YOUR CODE HERE ***&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> is_leaf(t):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> [label(t)]
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    preorder_t <span style="color:#f92672">=</span> [label(t)]
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> child <span style="color:#f92672">in</span> branches(t):
+</span></span><span style="display:flex;"><span>        preorder_t <span style="color:#f92672">+=</span> preorder(child)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> preorder_t
+</span></span></code></pre></div><h3 id="最终测试">最终测试</h3>
+<p>使用如下命令对以上题目进行测试：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>python3 ok -q preorder --local
+</span></span></code></pre></div><p>结果如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>Assignment: Homework <span style="color:#ae81ff">4</span>
+</span></span><span style="display:flex;"><span>OK, version v1.18.1
+</span></span><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+</span></span><span style="display:flex;"><span>Running tests
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Test summary
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">1</span> test cases passed! No cases failed.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Cannot backup when running ok with --local.
+</span></span></code></pre></div><h2 id="extra-questions">Extra Questions</h2>
+<h3 id="q7-interval-abstraction">Q7: Interval Abstraction</h3>
+<p>使用如下代码进行解锁测试：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>python3 ok -q interval -u --local
+</span></span></code></pre></div><p>过程如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>Assignment: Homework <span style="color:#ae81ff">4</span>
+</span></span><span style="display:flex;"><span>OK, version v1.18.1
+</span></span><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+</span></span><span style="display:flex;"><span>Unlocking tests
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>At each <span style="color:#e6db74">&#34;? &#34;</span>, type what you would expect the output to be.
+</span></span><span style="display:flex;"><span>Type exit<span style="color:#f92672">()</span> to quit
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>interval &gt; Suite <span style="color:#ae81ff">1</span> &gt; Case <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 2<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; import hw04
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; from hw04 import *
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; str_interval<span style="color:#f92672">(</span>interval<span style="color:#f92672">(</span>-1, 2<span style="color:#f92672">))</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#e6db74">&#39;-1 to 2&#39;</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; str_interval<span style="color:#f92672">(</span>add_interval<span style="color:#f92672">(</span>interval<span style="color:#f92672">(</span>-1, 2<span style="color:#f92672">)</span>, interval<span style="color:#f92672">(</span>4, 8<span style="color:#f92672">)))</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#e6db74">&#39;3 to 10&#39;</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>OK! All cases <span style="color:#66d9ef">for</span> interval unlocked.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Cannot backup when running ok with --local.
+</span></span></code></pre></div><p>实现代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>def interval<span style="color:#f92672">(</span>a, b<span style="color:#f92672">)</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Construct an interval from a to b.&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#f92672">[</span>a, b<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>def lower_bound<span style="color:#f92672">(</span>x<span style="color:#f92672">)</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Return the lower bound of interval x.&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;*** YOUR CODE HERE ***&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> x<span style="color:#f92672">[</span>0<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>def upper_bound<span style="color:#f92672">(</span>x<span style="color:#f92672">)</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Return the upper bound of interval x.&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;*** YOUR CODE HERE ***&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> x<span style="color:#f92672">[</span>1<span style="color:#f92672">]</span>
+</span></span></code></pre></div><p>使用如下代码进行解锁测试：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>python3 ok -q mul_interval -u --local
+</span></span></code></pre></div><p>过程如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>Assignment: Homework <span style="color:#ae81ff">4</span>
+</span></span><span style="display:flex;"><span>OK, version v1.18.1
+</span></span><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+</span></span><span style="display:flex;"><span>Unlocking tests
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>At each <span style="color:#e6db74">&#34;? &#34;</span>, type what you would expect the output to be.
+</span></span><span style="display:flex;"><span>Type exit<span style="color:#f92672">()</span> to quit
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>mul_interval &gt; Suite <span style="color:#ae81ff">1</span> &gt; Case <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 2<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; import hw04
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; from hw04 import *
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; str_interval<span style="color:#f92672">(</span>mul_interval<span style="color:#f92672">(</span>interval<span style="color:#f92672">(</span>-1, 2<span style="color:#f92672">)</span>, interval<span style="color:#f92672">(</span>4, 8<span style="color:#f92672">)))</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#e6db74">&#39;-4 to 32&#39;</span>
+</span></span><span style="display:flex;"><span>-- Not quite. Try again! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>? <span style="color:#e6db74">&#39;-8 to 32&#39;</span>
+</span></span><span style="display:flex;"><span>-- Not quite. Try again! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>? <span style="color:#e6db74">&#39;-8 to 16&#39;</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>OK! All cases <span style="color:#66d9ef">for</span> mul_interval unlocked.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Cannot backup when running ok with --local.
+</span></span></code></pre></div><p>实现代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">mul_interval</span>(x, y):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Return the interval that contains the product of any value in x and any
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    value in y.&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    x0 <span style="color:#f92672">=</span> lower_bound(x)
+</span></span><span style="display:flex;"><span>    x1 <span style="color:#f92672">=</span> upper_bound(x)
+</span></span><span style="display:flex;"><span>    y0 <span style="color:#f92672">=</span> lower_bound(y)
+</span></span><span style="display:flex;"><span>    y1 <span style="color:#f92672">=</span> upper_bound(y)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    p1 <span style="color:#f92672">=</span> x0 <span style="color:#f92672">*</span> y0
+</span></span><span style="display:flex;"><span>    p2 <span style="color:#f92672">=</span> x0 <span style="color:#f92672">*</span> y1
+</span></span><span style="display:flex;"><span>    p3 <span style="color:#f92672">=</span> x1 <span style="color:#f92672">*</span> y0
+</span></span><span style="display:flex;"><span>    p4 <span style="color:#f92672">=</span> x1 <span style="color:#f92672">*</span> y1
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> interval(min(p1, p2, p3, p4), max(p1, p2, p3, p4))
+</span></span></code></pre></div><h3 id="q8-sub-interval">Q8: Sub Interval</h3>
+<p>使用如下代码进行解锁测试：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>python3 ok -q sub_interval -u --local
+</span></span></code></pre></div><p>过程如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>Assignment: Homework <span style="color:#ae81ff">4</span>
+</span></span><span style="display:flex;"><span>OK, version v1.18.1
+</span></span><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+</span></span><span style="display:flex;"><span>Unlocking tests
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>At each <span style="color:#e6db74">&#34;? &#34;</span>, type what you would expect the output to be.
+</span></span><span style="display:flex;"><span>Type exit<span style="color:#f92672">()</span> to quit
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>sub_interval &gt; Suite <span style="color:#ae81ff">1</span> &gt; Case <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 2<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; import hw04
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; from hw04 import *
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; str_interval<span style="color:#f92672">(</span>sub_interval<span style="color:#f92672">(</span>interval<span style="color:#f92672">(</span>-1, 2<span style="color:#f92672">)</span>, interval<span style="color:#f92672">(</span>4, 8<span style="color:#f92672">)))</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#e6db74">&#39;-9 to 9&#39;</span>
+</span></span><span style="display:flex;"><span>-- Not quite. Try again! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>? <span style="color:#e6db74">&#39;-9 to -2&#39;</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>OK! All cases <span style="color:#66d9ef">for</span> sub_interval unlocked.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Cannot backup when running ok with --local.
+</span></span></code></pre></div><p>实现代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">sub_interval</span>(x, y):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Return the interval that contains the difference between any value in x
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    and any value in y.&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;*** YOUR CODE HERE ***&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> interval(lower_bound(x) <span style="color:#f92672">-</span> upper_bound(y), upper_bound(x) <span style="color:#f92672">-</span> lower_bound(y))
+</span></span></code></pre></div><h3 id="q9-div-interval">Q9: Div Interval</h3>
+<p>使用如下代码进行解锁测试：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>python3 ok -q div_interval -u --local
+</span></span></code></pre></div><p>过程如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>Assignment: Homework <span style="color:#ae81ff">4</span>
+</span></span><span style="display:flex;"><span>OK, version v1.18.1
+</span></span><span style="display:flex;"><span><span style="color:#f92672">=====================================================================</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+</span></span><span style="display:flex;"><span>Unlocking tests
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>At each <span style="color:#e6db74">&#34;? &#34;</span>, type what you would expect the output to be.
+</span></span><span style="display:flex;"><span>Type exit<span style="color:#f92672">()</span> to quit
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>div_interval &gt; Suite <span style="color:#ae81ff">1</span> &gt; Case <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>cases remaining: 2<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; import hw04
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; from hw04 import *
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; <span style="color:#75715e"># Type AssertionError if you think an AssertionError is raised</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; str_interval<span style="color:#f92672">(</span>div_interval<span style="color:#f92672">(</span>interval<span style="color:#f92672">(</span>-1, 2<span style="color:#f92672">)</span>, interval<span style="color:#f92672">(</span>4, 8<span style="color:#f92672">)))</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#e6db74">&#39;-0.125 to 0.5&#39;</span>
+</span></span><span style="display:flex;"><span>-- Not quite. Try again! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>? <span style="color:#e6db74">&#39;-0.25 to 0.5&#39;</span>
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt; str_interval<span style="color:#f92672">(</span>div_interval<span style="color:#f92672">(</span>interval<span style="color:#f92672">(</span>4, 8<span style="color:#f92672">)</span>, interval<span style="color:#f92672">(</span>-1, 2<span style="color:#f92672">)))</span>
+</span></span><span style="display:flex;"><span>? <span style="color:#e6db74">&#39;-8.0 to 4.0&#39;</span>
+</span></span><span style="display:flex;"><span>-- Not quite. Try again! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>? <span style="color:#e6db74">&#39;-8 to 4&#39;</span>
+</span></span><span style="display:flex;"><span>-- Not quite. Try again! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>? <span style="color:#e6db74">&#39;-8.0 to 4.0&#39;</span>
+</span></span><span style="display:flex;"><span>-- Not quite. Try again! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>? AssertionError
+</span></span><span style="display:flex;"><span>-- OK! --
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>---------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>OK! All cases <span style="color:#66d9ef">for</span> div_interval unlocked.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Cannot backup when running ok with --local.
+</span></span></code></pre></div><p>实现代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">div_interval</span>(x, y):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Return the interval that contains the quotient of any value in x divided by
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    any value in y. Division is implemented as the multiplication of x by the
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    reciprocal of y.&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;*** YOUR CODE HERE ***&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">assert</span> lower_bound(y) <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">or</span> upper_bound(y) <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    reciprocal_y <span style="color:#f92672">=</span> interval(<span style="color:#ae81ff">1</span> <span style="color:#f92672">/</span> upper_bound(y), <span style="color:#ae81ff">1</span> <span style="color:#f92672">/</span> lower_bound(y))
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> mul_interval(x, reciprocal_y)
+</span></span></code></pre></div><h3 id="q10-par-diff">Q10: Par Diff</h3>
+<p>实现代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">check_par</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Return two intervals that give different results for parallel resistors.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; r1, r2 = check_par()
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; x = par1(r1, r2)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; y = par2(r1, r2)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; lower_bound(x) != lower_bound(y) or upper_bound(x) != upper_bound(y)
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    True
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    r1 <span style="color:#f92672">=</span> interval(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>)  <span style="color:#75715e"># Replace this line!</span>
+</span></span><span style="display:flex;"><span>    r2 <span style="color:#f92672">=</span> interval(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>)  <span style="color:#75715e"># Replace this line!</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> r1, r2
+</span></span></code></pre></div><h3 id="q11-multiple-references">Q11: Multiple References</h3>
+<p>实现代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">multiple_references_explanation</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;&#34;&#34;The multiple reference problem
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        caused more caculations
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span></code></pre></div><h3 id="q12-quadratic">Q12: Quadratic</h3>
+<p>实现代码如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">quadratic</span>(x, a, b, c):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Return the interval that is the range of the quadratic defined by
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    coefficients a, b, and c, for domain interval x.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; str_interval(quadratic(interval(0, 2), -2, 3, -1))
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#39;-3 to 0.125&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &gt;&gt;&gt; str_interval(quadratic(interval(1, 3), 2, -3, 1))
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#39;0 to 10&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;*** YOUR CODE HERE ***&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">f</span>(t):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> a <span style="color:#f92672">*</span> t <span style="color:#f92672">*</span> t <span style="color:#f92672">+</span> b <span style="color:#f92672">*</span> t <span style="color:#f92672">+</span> c
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    mid <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>b <span style="color:#f92672">/</span> (<span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> a)
+</span></span><span style="display:flex;"><span>    lower <span style="color:#f92672">=</span> lower_bound(x)
+</span></span><span style="display:flex;"><span>    upper <span style="color:#f92672">=</span> upper_bound(x)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    y0 <span style="color:#f92672">=</span> f(mid)
+</span></span><span style="display:flex;"><span>    y1 <span style="color:#f92672">=</span> f(lower)
+</span></span><span style="display:flex;"><span>    y2 <span style="color:#f92672">=</span> f(upper)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> lower <span style="color:#f92672">&lt;=</span> mid <span style="color:#f92672">&lt;=</span> upper:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> interval(min(y0, y1, y2), max(y0, y1, y2))
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> interval(min(y1, y2), max(y1, y2))
+</span></span></code></pre></div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2023-08-06</span>
+            </div></div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://Maxwell2020152049.github.io/posts/cs61a/homework/hw04/" data-title="CS61A Homework hw04" data-hashtags="Python"><i class="fab fa-twitter fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://Maxwell2020152049.github.io/posts/cs61a/homework/hw04/" data-hashtag="Python"><i class="fab fa-facebook-square fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Hacker News" data-sharer="hackernews" data-url="https://Maxwell2020152049.github.io/posts/cs61a/homework/hw04/" data-title="CS61A Homework hw04"><i class="fab fa-hacker-news fa-fw" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://Maxwell2020152049.github.io/posts/cs61a/homework/hw04/" data-title="CS61A Homework hw04"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg" aria-hidden="true"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://Maxwell2020152049.github.io/posts/cs61a/homework/hw04/" data-title="CS61A Homework hw04"><i class="fab fa-weibo fa-fw" aria-hidden="true"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/python/">Python</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/cs61a/notes/week6/" class="prev" rel="prev" title="CS61A week6 study note"><i class="fas fa-angle-left fa-fw" aria-hidden="true"></i>CS61A week6 study note</a>
+            <a href="/posts/cs61a/lab/lab06/" class="next" rel="next" title="CS61A Lab lab06">CS61A Lab lab06<i class="fas fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.115.4">Hugo</a> | Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.11"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden="true"></i> LoveIt</a>
+                </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw" aria-hidden="true"></i><span itemprop="copyrightYear">2022 - 2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank"></a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw" aria-hidden="true"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw" aria-hidden="true"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":50},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

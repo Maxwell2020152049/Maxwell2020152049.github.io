@@ -5,10 +5,10 @@
         <description>《TCP IP网络编程》学习笔记 - Category - Rex&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sat, 29 Jul 2023 02:10:49 &#43;0800</lastBuildDate><atom:link href="https://Maxwell2020152049.github.io/categories/tcp-ip%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="self" type="application/rss+xml" /><item>
     <title>《TCP IP网络编程》学习笔记 ch02</title>
-    <link>https://Maxwell2020152049.github.io/posts/tcpip_notes_ch02/</link>
+    <link>https://Maxwell2020152049.github.io/posts/tcpip/notes/ch02/</link>
     <pubDate>Sat, 29 Jul 2023 02:10:49 &#43;0800</pubDate>
     <author>Author</author>
-    <guid>https://Maxwell2020152049.github.io/posts/tcpip_notes_ch02/</guid>
+    <guid>https://Maxwell2020152049.github.io/posts/tcpip/notes/ch02/</guid>
     <description><![CDATA[ch02 套接字类型与协议设置 2.1 套接字协议及其数据传输特性 协议（Protocol） 协议是计算机之间对话必备的通信规则。
 创建套接字 #include &lt;sys/socket.h&gt; int socket(int domain, i nt type, int protocol); C语言中，创建套接字要使用socket()函数，下面介绍其参数以及具体使用：
 协议族（Protocol Family） PF_INET：IPv4互联网协议族 PF_INET6：IPv6互联网协议族 PF_LOCAL：本地通信的UNIX协议族 PF_PACKET：底层套接字的协议族 PF__IPX：IPX Novell协议族 本书重点讲解PF_INET，即IPv4互联网协议族。
@@ -34,10 +34,10 @@
 </item>
 <item>
     <title>《TCP IP网络编程》学习笔记 ch01</title>
-    <link>https://Maxwell2020152049.github.io/posts/tcpip_notes_ch01/</link>
+    <link>https://Maxwell2020152049.github.io/posts/tcpip/notes/ch01/</link>
     <pubDate>Sat, 29 Jul 2023 02:10:47 &#43;0800</pubDate>
     <author>Author</author>
-    <guid>https://Maxwell2020152049.github.io/posts/tcpip_notes_ch01/</guid>
+    <guid>https://Maxwell2020152049.github.io/posts/tcpip/notes/ch01/</guid>
     <description><![CDATA[《TCP IP网络编程》学习笔记 ch01 理解网络编程和套接字 1.1 理解网络编程和套接字 构建 接电话 套接字（服务器端） 创建服务器端的套接字需要以下函数：
 #include &lt;sys/socket.h&gt; // 创建套接字成功时返回文件描述符，失败时返回－1。 int socket(int domain, int type, int protocol); #include &lt;sys/socket.h&gt; // 绑定成功时返回0，失败时返回-1。 int bind(int sockfd, struct sockaddr *myaddr, socklen_t addrlen); #include &lt;sys/socket.h&gt; // 将套接字转化为可接收连接的状态，成功时返回0，失败时返回-1。 int listen(int sockfd, int backlog); #include &lt;sys/socket.h&gt; // 接受网络连接，成功时返回文件描述符，失败时返回-1。 int accept(int sockfd, struct sockaddr *addr, socklen_t *addrlen); 创建服务器端的套接字的基本步骤如下：
 第一步：调用socket()函数创建套接字

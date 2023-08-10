@@ -2,39 +2,41 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
-            <loc>https://Maxwell2020152049.github.io/categories/</loc><lastmod>2023-08-06T01:53:00&#43;08:00</lastmod></url><url>
-            <loc>https://Maxwell2020152049.github.io/categories/cs61a/</loc><lastmod>2023-08-06T01:53:00&#43;08:00</lastmod></url><url>
-            <loc>https://Maxwell2020152049.github.io/posts/cs61a_homework_hw04/</loc><lastmod>2023-08-06T01:53:00&#43;08:00</lastmod></url><url>
-            <loc>https://Maxwell2020152049.github.io/posts/</loc><lastmod>2023-08-06T01:53:00&#43;08:00</lastmod></url><url>
-            <loc>https://Maxwell2020152049.github.io/tags/python/</loc><lastmod>2023-08-06T01:53:00&#43;08:00</lastmod></url><url>
-            <loc>https://Maxwell2020152049.github.io/</loc><lastmod>2023-08-06T01:53:00&#43;08:00</lastmod></url><url>
-            <loc>https://Maxwell2020152049.github.io/tags/</loc><lastmod>2023-08-06T01:53:00&#43;08:00</lastmod></url><url>
-            <loc>https://Maxwell2020152049.github.io/posts/cs61a_notes_week6/</loc><lastmod>2023-08-05T19:59:02&#43;08:00</lastmod></url><url>
-            <loc>https://Maxwell2020152049.github.io/posts/cs61a_lab_lab05/</loc><lastmod>2023-08-05T17:02:12&#43;08:00</lastmod></url><url>
-            <loc>https://Maxwell2020152049.github.io/posts/cs61a_project_cats/</loc><lastmod>2023-08-03T14:55:49&#43;08:00</lastmod></url><url>
-            <loc>https://Maxwell2020152049.github.io/posts/cs61a_lab_lab03/</loc><lastmod>2023-08-02T15:18:03&#43;08:00</lastmod></url><url>
-            <loc>https://Maxwell2020152049.github.io/posts/cs61a_homework_hw03/</loc><lastmod>2023-08-02T01:02:48&#43;08:00</lastmod></url><url>
-            <loc>https://Maxwell2020152049.github.io/posts/cs61a_lab_lab02/</loc><lastmod>2023-08-01T16:55:23&#43;08:00</lastmod></url><url>
-            <loc>https://Maxwell2020152049.github.io/posts/cs61a_notes_week5/</loc><lastmod>2023-08-01T01:00:34&#43;08:00</lastmod></url><url>
-            <loc>https://Maxwell2020152049.github.io/posts/cs61a_notes_week4/</loc><lastmod>2023-07-31T15:18:23&#43;08:00</lastmod></url><url>
-            <loc>https://Maxwell2020152049.github.io/posts/cs61a_notes_week3/</loc><lastmod>2023-07-29T16:51:07&#43;08:00</lastmod></url><url>
+            <loc>https://Maxwell2020152049.github.io/categories/</loc><lastmod>2023-08-10T17:01:10&#43;08:00</lastmod></url><url>
+            <loc>https://Maxwell2020152049.github.io/categories/cs61a/</loc><lastmod>2023-08-10T17:01:10&#43;08:00</lastmod></url><url>
+            <loc>https://Maxwell2020152049.github.io/posts/cs61a/notes/week7/</loc><lastmod>2023-08-10T17:01:10&#43;08:00</lastmod></url><url>
+            <loc>https://Maxwell2020152049.github.io/posts/</loc><lastmod>2023-08-10T17:01:10&#43;08:00</lastmod></url><url>
+            <loc>https://Maxwell2020152049.github.io/tags/python/</loc><lastmod>2023-08-10T17:01:10&#43;08:00</lastmod></url><url>
+            <loc>https://Maxwell2020152049.github.io/</loc><lastmod>2023-08-10T17:01:10&#43;08:00</lastmod></url><url>
+            <loc>https://Maxwell2020152049.github.io/tags/</loc><lastmod>2023-08-10T17:01:10&#43;08:00</lastmod></url><url>
+            <loc>https://Maxwell2020152049.github.io/posts/cs61a/lab/lab06/</loc><lastmod>2023-08-06T13:35:33&#43;08:00</lastmod></url><url>
+            <loc>https://Maxwell2020152049.github.io/posts/cs61a/homework/hw04/</loc><lastmod>2023-08-06T01:53:00&#43;08:00</lastmod></url><url>
+            <loc>https://Maxwell2020152049.github.io/posts/cs61a/notes/week6/</loc><lastmod>2023-08-05T19:59:02&#43;08:00</lastmod></url><url>
+            <loc>https://Maxwell2020152049.github.io/posts/cs61a/lab/lab05/</loc><lastmod>2023-08-05T17:02:12&#43;08:00</lastmod></url><url>
+            <loc>https://Maxwell2020152049.github.io/posts/cs61a/project/cats/</loc><lastmod>2023-08-03T14:55:49&#43;08:00</lastmod></url><url>
+            <loc>https://Maxwell2020152049.github.io/posts/cs61a/lab/lab03/</loc><lastmod>2023-08-02T15:18:03&#43;08:00</lastmod></url><url>
+            <loc>https://Maxwell2020152049.github.io/posts/cs61a/homework/hw03/</loc><lastmod>2023-08-02T01:02:48&#43;08:00</lastmod></url><url>
+            <loc>https://Maxwell2020152049.github.io/posts/cs61a/lab/lab02/</loc><lastmod>2023-08-01T16:55:23&#43;08:00</lastmod></url><url>
+            <loc>https://Maxwell2020152049.github.io/posts/cs61a/notes/week5/</loc><lastmod>2023-08-01T01:00:34&#43;08:00</lastmod></url><url>
+            <loc>https://Maxwell2020152049.github.io/posts/cs61a/notes/week4/</loc><lastmod>2023-07-31T15:18:23&#43;08:00</lastmod></url><url>
+            <loc>https://Maxwell2020152049.github.io/posts/cs61a/notes/week3/</loc><lastmod>2023-07-29T16:51:07&#43;08:00</lastmod></url><url>
             <loc>https://Maxwell2020152049.github.io/categories/tcp-ip%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</loc><lastmod>2023-07-29T02:10:49&#43;08:00</lastmod></url><url>
-            <loc>https://Maxwell2020152049.github.io/posts/tcpip_notes_ch02/</loc><lastmod>2023-07-29T02:10:49&#43;08:00</lastmod></url><url>
+            <loc>https://Maxwell2020152049.github.io/posts/tcpip/notes/ch02/</loc><lastmod>2023-07-29T02:10:49&#43;08:00</lastmod></url><url>
             <loc>https://Maxwell2020152049.github.io/tags/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/</loc><lastmod>2023-07-29T02:10:49&#43;08:00</lastmod></url><url>
-            <loc>https://Maxwell2020152049.github.io/posts/tcpip_notes_ch01/</loc><lastmod>2023-07-29T02:10:47&#43;08:00</lastmod></url><url>
-            <loc>https://Maxwell2020152049.github.io/posts/cs61a_homework_hw02/</loc><lastmod>2023-07-29T02:05:51&#43;08:00</lastmod></url><url>
-            <loc>https://Maxwell2020152049.github.io/posts/cs61a_homework_hw01/</loc><lastmod>2023-07-29T02:05:49&#43;08:00</lastmod></url><url>
-            <loc>https://Maxwell2020152049.github.io/posts/cs61a_lab_lab01/</loc><lastmod>2023-07-29T02:03:12&#43;08:00</lastmod></url><url>
-            <loc>https://Maxwell2020152049.github.io/posts/cs61a_lab_lab00/</loc><lastmod>2023-07-29T02:03:09&#43;08:00</lastmod></url><url>
-            <loc>https://Maxwell2020152049.github.io/posts/cs61a_project_hog/</loc><lastmod>2023-07-29T01:57:41&#43;08:00</lastmod></url><url>
-            <loc>https://Maxwell2020152049.github.io/posts/cs61a_notes_week2/</loc><lastmod>2023-07-29T01:40:58&#43;08:00</lastmod></url><url>
-            <loc>https://Maxwell2020152049.github.io/posts/cs61a_notes_week1/</loc><lastmod>2023-07-29T01:37:07&#43;08:00</lastmod></url><url>
+            <loc>https://Maxwell2020152049.github.io/posts/tcpip/notes/ch01/</loc><lastmod>2023-07-29T02:10:47&#43;08:00</lastmod></url><url>
+            <loc>https://Maxwell2020152049.github.io/posts/cs61a/homework/hw02/</loc><lastmod>2023-07-29T02:05:51&#43;08:00</lastmod></url><url>
+            <loc>https://Maxwell2020152049.github.io/posts/cs61a/homework/hw01/</loc><lastmod>2023-07-29T02:05:49&#43;08:00</lastmod></url><url>
+            <loc>https://Maxwell2020152049.github.io/posts/cs61a/lab/lab01/</loc><lastmod>2023-07-29T02:03:12&#43;08:00</lastmod></url><url>
+            <loc>https://Maxwell2020152049.github.io/posts/cs61a/lab/lab00/</loc><lastmod>2023-07-29T02:03:09&#43;08:00</lastmod></url><url>
+            <loc>https://Maxwell2020152049.github.io/posts/cs61a/project/hog/</loc><lastmod>2023-07-29T01:57:41&#43;08:00</lastmod></url><url>
+            <loc>https://Maxwell2020152049.github.io/posts/cs61a/notes/week2/</loc><lastmod>2023-07-29T01:40:58&#43;08:00</lastmod></url><url>
+            <loc>https://Maxwell2020152049.github.io/posts/cs61a/notes/week1/</loc><lastmod>2023-07-29T01:37:07&#43;08:00</lastmod></url><url>
             <loc>https://Maxwell2020152049.github.io/categories/6s081/</loc><lastmod>2023-07-29T01:30:55&#43;08:00</lastmod></url><url>
-            <loc>https://Maxwell2020152049.github.io/posts/6s081_xv6book_ch02/</loc><lastmod>2023-07-29T01:30:55&#43;08:00</lastmod></url><url>
+            <loc>https://Maxwell2020152049.github.io/posts/6s081/xv6book/ch02/</loc><lastmod>2023-07-29T01:30:55&#43;08:00</lastmod></url><url>
             <loc>https://Maxwell2020152049.github.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</loc><lastmod>2023-07-29T01:30:55&#43;08:00</lastmod></url><url>
-            <loc>https://Maxwell2020152049.github.io/posts/6s081_xv6book_ch01/</loc><lastmod>2023-07-28T23:05:03&#43;08:00</lastmod></url><url>
-            <loc>https://Maxwell2020152049.github.io/posts/ffmpeg-manual/</loc><lastmod>2023-07-28T00:56:03&#43;08:00</lastmod></url><url>
+            <loc>https://Maxwell2020152049.github.io/posts/6s081/xv6book/ch01/</loc><lastmod>2023-07-28T23:05:03&#43;08:00</lastmod></url><url>
+            <loc>https://Maxwell2020152049.github.io/posts/tech_manual/ffmpeg-manual/</loc><lastmod>2023-07-28T00:56:03&#43;08:00</lastmod></url><url>
             <loc>https://Maxwell2020152049.github.io/tags/%E5%A4%9A%E5%AA%92%E4%BD%93/</loc><lastmod>2023-07-28T00:56:03&#43;08:00</lastmod></url><url>
             <loc>https://Maxwell2020152049.github.io/categories/%E6%8A%80%E6%9C%AF%E6%89%8B%E5%86%8C/</loc><lastmod>2023-07-28T00:56:03&#43;08:00</lastmod></url><url>
             <loc>https://Maxwell2020152049.github.io/tags/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</loc><lastmod>2023-07-28T00:33:37&#43;08:00</lastmod></url><url>
-            <loc>https://Maxwell2020152049.github.io/posts/self-blog/</loc><lastmod>2023-07-28T00:33:37&#43;08:00</lastmod></url></urlset>
+            <loc>https://Maxwell2020152049.github.io/posts/tech_manual/self-blog/</loc><lastmod>2023-07-28T00:33:37&#43;08:00</lastmod></url></urlset>

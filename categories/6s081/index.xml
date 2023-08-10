@@ -5,10 +5,10 @@
         <description>6s081 - Category - Rex&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sat, 29 Jul 2023 01:30:55 &#43;0800</lastBuildDate><atom:link href="https://Maxwell2020152049.github.io/categories/6s081/" rel="self" type="application/rss+xml" /><item>
     <title>ch02 Operating system organization</title>
-    <link>https://Maxwell2020152049.github.io/posts/6s081_xv6book_ch02/</link>
+    <link>https://Maxwell2020152049.github.io/posts/6s081/xv6book/ch02/</link>
     <pubDate>Sat, 29 Jul 2023 01:30:55 &#43;0800</pubDate>
     <author>Author</author>
-    <guid>https://Maxwell2020152049.github.io/posts/6s081_xv6book_ch02/</guid>
+    <guid>https://Maxwell2020152049.github.io/posts/6s081/xv6book/ch02/</guid>
     <description><![CDATA[ch02 Operating system organization 操作系统必须满足以下的需求：
 多路复用（资源由进程共享） 隔离性（Isolation，进程之间不会互相影响） 交互性（进程之间可以互相通信） 2.1 Abstract physical resources 为了实现强隔离，操作系统应该禁止应用程序直接访问硬件资源，而提供对于硬件资源的抽象，如文件系统等（open、read、write、close）。
 process：可以视为CPU的抽象 exec：可以视为内存的抽象 file：可以视为磁盘的抽象 2.2 User mode, supervisor mode, and system calls 强隔离性需要的硬件支持：
@@ -26,10 +26,10 @@ user/kernel mode virtual memory RISC-V有三种模式：
 </item>
 <item>
     <title>ch01 Operating system interface</title>
-    <link>https://Maxwell2020152049.github.io/posts/6s081_xv6book_ch01/</link>
+    <link>https://Maxwell2020152049.github.io/posts/6s081/xv6book/ch01/</link>
     <pubDate>Fri, 28 Jul 2023 23:05:03 &#43;0800</pubDate>
     <author>Author</author>
-    <guid>https://Maxwell2020152049.github.io/posts/6s081_xv6book_ch01/</guid>
+    <guid>https://Maxwell2020152049.github.io/posts/6s081/xv6book/ch01/</guid>
     <description><![CDATA[ch01 Operating system interface xv6的系统调用，详见bookriscv-rev1-chinese.pdf的P7
 1.1 Processes and memory xv6上的系统调用如下：
 在xv6上使用系统调用，一般要用到以下头文件：
