@@ -76,6 +76,19 @@
         alt="https://th.bing.com/th/id/OIP.bs9ePxW88yyxsxRKmQt_MQHaHa?w=193&amp;h=193&amp;c=7&amp;r=0&amp;o=5&amp;pid=1.7"
         title="https://th.bing.com/th/id/OIP.bs9ePxW88yyxsxRKmQt_MQHaHa?w=193&amp;h=193&amp;c=7&amp;r=0&amp;o=5&amp;pid=1.7" /></div><div class="home-subtitle"><div id="id-1" class="typeit"></div></div><div class="links"><a href="https://github.com/Maxwell2020152049" title="GitHub" target="_blank" rel="noopener noreffer me"><i class="fab fa-github fa-fw" aria-hidden="true"></i></a></div></div>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/cs61a/project/ants/">CS61A Project Ants</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-08-11">2023-08-11</time></span>&nbsp;<span class="post-category">included in <a href="/categories/cs61a/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>CS61A</a></span></div><div class="content">Project 3: Ants Vs. SomeBees Project地址：Project 3: Ants Vs. SomeBees
+使用如下命令可以下载项目：
+wget https://inst.eecs.berkeley.edu/~cs61a/sp21/proj/ants/ants.zip Optional Probelms的Problem 2和Problem 3未完成，之后再填坑。
+The Game Core concepts The colony：蚂蚁的领地，领地由若干隧道组成，蚂蚁从领地上获取食物。
+Places：区块，隧道由若干区块连接组成。一个区块上只能放置一只蚂蚁，但可能有多个蜜蜂。
+The Hive：蜂巢，蜜蜂产生的地方。
+Ants：蚂蚁，玩家可以放置蚂蚁在隧道的某一个区块上，由两种基本的蜜蜂类型：
+HarvesterAnt：收割蚂蚁，没有攻击能力，负责从领地上收获食物。 ThrowerAnt：投掷蚂蚁，能力是扔出树叶，攻击蜜蜂。 Bees：蜜蜂，玩家必须抵御蜜蜂的攻击。每个回合，如果某个蜜蜂前方的区块没有蚂蚁，蜜蜂就会前进一格，如果由蚂蚁，就会攻击该蚂蚁。如果某个隧道上，蜜蜂到达了最左边，游戏失败。
+The Colony. This is where the game takes place. The colony consists of several places that are chained together to form a tunnel where bees can travel through. The colony also has some quantity of food which can be expended in order to place an ant in a tunnel.</div><div class="post-footer">
+        <a href="/posts/cs61a/project/ants/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/python/">Python</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
         <a href="/posts/tech_manual/sql_exercise/">通关练习网站sqlmother</a>
     </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-08-11">2023-08-11</time></span>&nbsp;<span class="post-category">included in <a href="/categories/%E6%8A%80%E6%9C%AF%E6%89%8B%E5%86%8C/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>技术手册</a></span></div><div class="content">练习网站sqlmother通关 网站地址：sqlmother
 level1 基础语法 - 查询 - 全表查询 使用如下sql语句可以从tlb这张数据表中查询并返回所有信息：
@@ -137,15 +150,6 @@ Each layer only uses the layer above it.
 创建如下的树，draw是CS 61A Coder中实现的函数，能够绘制不同类型的结构的图形：
 def tree(label, children=None): &#34;&#34;&#34; Creates a tree whose root node is labeled LABEL and optionally has CHILDREN, a list of trees.</div><div class="post-footer">
         <a href="/posts/cs61a/notes/week6/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/python/">Python</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/cs61a/lab/lab05/">CS61A Lab lab05</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-08-05">2023-08-05</time></span>&nbsp;<span class="post-category">included in <a href="/categories/cs61a/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>CS61A</a></span></div><div class="content">Lab 5: Python Lists, Data Abstraction, Trees 实验链接：Lab 5: Python Lists, Data Abstraction, Trees
-如何下载实验压缩包：
-wget https://inst.eecs.berkeley.edu/~cs61a/sp21/lab/lab05/lab05.zip Required Questions List Comprehensions Q1: Couple 实现函数couple(s, t)，s和t是两个长度相同的列表，返回一个列表，第i个元素是[s[i], t[i]]。
-实现代码如下：
-def couple(s, t): &#34;&#34;&#34;Return a list of two-element lists in which the i-th element is [s[i], t[i]]. &gt;&gt;&gt; a = [1, 2, 3] &gt;&gt;&gt; b = [4, 5, 6] &gt;&gt;&gt; couple(a, b) [[1, 4], [2, 5], [3, 6]] &gt;&gt;&gt; c = [&#39;c&#39;, 6] &gt;&gt;&gt; d = [&#39;s&#39;, &#39;1&#39;] &gt;&gt;&gt; couple(c, d) [[&#39;c&#39;, &#39;s&#39;], [6, &#39;1&#39;]] &#34;&#34;&#34; assert len(s) == len(t) &#34;*** YOUR CODE HERE ***&#34; return [[x, y] for x, y in zip(s, t)] Data Abstraction 本实验提供了一个城市的抽象数据类型（ADT），用法如下：</div><div class="post-footer">
-        <a href="/posts/cs61a/lab/lab05/">Read More</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/python/">Python</a></div></div>
 </article><ul class="pagination"><li class="page-item active">
                     <span class="page-link">

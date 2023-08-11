@@ -76,6 +76,17 @@
         alt="https://th.bing.com/th/id/OIP.bs9ePxW88yyxsxRKmQt_MQHaHa?w=193&amp;h=193&amp;c=7&amp;r=0&amp;o=5&amp;pid=1.7"
         title="https://th.bing.com/th/id/OIP.bs9ePxW88yyxsxRKmQt_MQHaHa?w=193&amp;h=193&amp;c=7&amp;r=0&amp;o=5&amp;pid=1.7" /></div><div class="home-subtitle"><div id="id-1" class="typeit"></div></div><div class="links"><a href="https://github.com/Maxwell2020152049" title="GitHub" target="_blank" rel="noopener noreffer me"><i class="fab fa-github fa-fw" aria-hidden="true"></i></a></div></div>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/cs61a/notes/week4/">CS61A week4 study note</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-07-31">2023-07-31</time></span>&nbsp;<span class="post-category">included in <a href="/categories/cs61a/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>CS61A</a></span></div><div class="content">Week4 CS 61A 2021 Fall官网：CS 61A: Structure and Interpretation of Computer Programs
+翻译视频：【计算机程序的构造和解释】精译【UC Berkeley 公开课-CS61A (Spring 2021)】-中英双语字幕
+github:Maxwell2020152049/CS61A
+Lecture #9: Still More on Functions Lab：Lab 3: Recursion, Tree Recursion
+Slide：09-Function_Examples_full.pdf
+练习：翻转数字（Exercise: Reversing Digits） 实现一个reverse digits(n)函数，返回翻转的n：
+def reverse_digits(n): &#34;&#34;&#34;Assuming N &gt;= 0 is an integer. Return the number whose base-10 representation is the reverse of that of N. &gt;&gt;&gt; reverse_digits(0) 0 &gt;&gt;&gt; reverse_digits(1) 1 &gt;&gt;&gt; reverse_digits(123) 321 &gt;&gt;&gt; reverse_digits(10) 1 &gt;&gt;&gt; reverse_digits(12321) 12321 &gt;&gt;&gt; reverse_digits(2222222) 2222222 &gt;&gt;&gt; reverse_digits(102) 201 &#34;&#34;&#34; assert type(n) is int and n &gt;= 0 if n &lt; 10: return n return reverse_digits(n // 10) + (n % 10) * 10 ** (num_digits(n) - 1) def num_digits(x): &#34;&#34;&#34;Return the number of decimal digits in the positive integer X.</div><div class="post-footer">
+        <a href="/posts/cs61a/notes/week4/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/python/">Python</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
         <a href="/posts/cs61a/notes/week3/">CS61A week3 study note</a>
     </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-07-29">2023-07-29</time></span>&nbsp;<span class="post-category">included in <a href="/categories/cs61a/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>CS61A</a></span></div><div class="content">Week3 CS 61A 2021 Fall官网：CS 61A: Structure and Interpretation of Computer Programs
 翻译视频：【计算机程序的构造和解释】精译【UC Berkeley 公开课-CS61A (Spring 2021)】-中英双语字幕
@@ -144,16 +155,6 @@ Q1: Syllabus Quiz 教学大纲和课程政策，详见Syllabus Quiz和Syllabus &
 Q2: A Plus Abs B Fill in the blanks in the following function for adding a to the absolute value of b, without calling abs. You may not modify any of the provided code other than the two blanks.
 题意就是实现如下函数f： $$ f(a, b) = a + \lvert b \rvert $$</div><div class="post-footer">
         <a href="/posts/cs61a/homework/hw01/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/python/">Python</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/cs61a/lab/lab01/">CS61A Lab lab01</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-07-29">2023-07-29</time></span>&nbsp;<span class="post-category">included in <a href="/categories/cs61a/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>CS61A</a></span></div><div class="content">Lab 1: Variables &amp; Functions, Control 实验链接：Lab 1: Variables &amp; Functions, Control
-如何下载实验压缩包：
-wget https://inst.eecs.berkeley.edu/~cs61a/sp21/lab/lab01/lab01.zip What Would Python Display(WWPD)? (Part 1) Q1: WWPD: Control 使用如下命令进行测试：
-python3 ok -q control -u --local 需要注意：
-若用整型或浮点型做控制语句的判断条件，0会被当作False，非0会被当作True 测试过程如下：
-===================================================================== Assignment: Lab 1 OK, version v1.18.1 ===================================================================== ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Unlocking tests At each &#34;? &#34;, type what you would expect the output to be. Type exit() to quit --------------------------------------------------------------------- Control &gt; Suite 1 &gt; Case 1 (cases remaining: 5) What would Python display?</div><div class="post-footer">
-        <a href="/posts/cs61a/lab/lab01/">Read More</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/python/">Python</a></div></div>
 </article><ul class="pagination"><li class="page-item ">
                     <span class="page-link">

@@ -3,9 +3,25 @@
         <title>Rex&#39;s Blog</title>
         <link>https://Maxwell2020152049.github.io/</link>
         <description>This is my cool site</description>
-        <generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 11 Aug 2023 10:57:09 &#43;0800</lastBuildDate>
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 11 Aug 2023 13:00:53 &#43;0800</lastBuildDate>
             <atom:link href="https://Maxwell2020152049.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>CS61A Project Ants</title>
+    <link>https://Maxwell2020152049.github.io/posts/cs61a/project/ants/</link>
+    <pubDate>Fri, 11 Aug 2023 13:00:53 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://Maxwell2020152049.github.io/posts/cs61a/project/ants/</guid>
+    <description><![CDATA[Project 3: Ants Vs. SomeBees Project地址：Project 3: Ants Vs. SomeBees
+使用如下命令可以下载项目：
+wget https://inst.eecs.berkeley.edu/~cs61a/sp21/proj/ants/ants.zip Optional Probelms的Problem 2和Problem 3未完成，之后再填坑。
+The Game Core concepts The colony：蚂蚁的领地，领地由若干隧道组成，蚂蚁从领地上获取食物。
+Places：区块，隧道由若干区块连接组成。一个区块上只能放置一只蚂蚁，但可能有多个蜜蜂。
+The Hive：蜂巢，蜜蜂产生的地方。
+Ants：蚂蚁，玩家可以放置蚂蚁在隧道的某一个区块上，由两种基本的蜜蜂类型：
+HarvesterAnt：收割蚂蚁，没有攻击能力，负责从领地上收获食物。 ThrowerAnt：投掷蚂蚁，能力是扔出树叶，攻击蜜蜂。 Bees：蜜蜂，玩家必须抵御蜜蜂的攻击。每个回合，如果某个蜜蜂前方的区块没有蚂蚁，蜜蜂就会前进一格，如果由蚂蚁，就会攻击该蚂蚁。如果某个隧道上，蜜蜂到达了最左边，游戏失败。
+The Colony. This is where the game takes place. The colony consists of several places that are chained together to form a tunnel where bees can travel through. The colony also has some quantity of food which can be expended in order to place an ant in a tunnel.]]></description>
+</item>
+<item>
     <title>通关练习网站sqlmother</title>
     <link>https://Maxwell2020152049.github.io/posts/tech_manual/sql_exercise/</link>
     <pubDate>Fri, 11 Aug 2023 10:57:09 &#43;0800</pubDate>
@@ -134,19 +150,6 @@ wget https://inst.eecs.berkeley.edu/~cs61a/sp21/hw/hw03/hw03.zip Required questi
 不允许使用=、+=等赋值运算符。
 实现代码如下：
 def num_eights(x): &#34;&#34;&#34;Returns the number of times 8 appears as a digit of x. &gt;&gt;&gt; num_eights(3) 0 &gt;&gt;&gt; num_eights(8) 1 &gt;&gt;&gt; num_eights(88888888) 8 &gt;&gt;&gt; num_eights(2638) 1 &gt;&gt;&gt; num_eights(86380) 2 &gt;&gt;&gt; num_eights(12345) 0 &gt;&gt;&gt; from construct_check import check &gt;&gt;&gt; # ban all assignment statements &gt;&gt;&gt; check(HW_SOURCE_FILE, &#39;num_eights&#39;, ... [&#39;Assign&#39;, &#39;AugAssign&#39;]) True &#34;&#34;&#34; &#34;*** YOUR CODE HERE ***&#34; if x &lt; 10: return 1 if x == 8 else 0 return (1 if x % 10 == 8 else 0) + num_eights(x // 10) 使用python中布尔值和整数相加返回整数的特性，也可以实现如下：]]></description>
-</item>
-<item>
-    <title>CS61A Lab lab02</title>
-    <link>https://Maxwell2020152049.github.io/posts/cs61a/lab/lab02/</link>
-    <pubDate>Tue, 01 Aug 2023 16:55:23 &#43;0800</pubDate>
-    <author>Author</author>
-    <guid>https://Maxwell2020152049.github.io/posts/cs61a/lab/lab02/</guid>
-    <description><![CDATA[Lab 2: Higher-Order Functions, Lambda Expressions 实验链接：Lab 2: Higher-Order Functions, Lambda Expressions
-如何下载实验压缩包：
-wget https://inst.eecs.berkeley.edu/~cs61a/sp21/lab/lab02/lab02.zip What Would Python Display? Q1: WWPD: Lambda the Free 输入以下命令进行测试：
-如果结果是函数，就输入Function，如果是错误就输入Error，如果没有输出就输入Nothing。
-python3 ok -q lambda -u --local 过程如下：
-===================================================================== Assignment: Lab 2 OK, version v1.18.1 ===================================================================== ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Unlocking tests At each &#34;? &#34;, type what you would expect the output to be. Type exit() to quit --------------------------------------------------------------------- Lambda the Free &gt; Suite 1 &gt; Case 1 (cases remaining: 7) Q: Which of the following statements describes a difference between a def statement and a lambda expression?]]></description>
 </item>
 </channel>
 </rss>
