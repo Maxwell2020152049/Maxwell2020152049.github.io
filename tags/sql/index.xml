@@ -1,0 +1,28 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>SQL - Tag - Rex&#39;s Blog</title>
+        <link>https://Maxwell2020152049.github.io/tags/sql/</link>
+        <description>SQL - Tag - Rex&#39;s Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 11 Aug 2023 10:57:09 &#43;0800</lastBuildDate><atom:link href="https://Maxwell2020152049.github.io/tags/sql/" rel="self" type="application/rss+xml" /><item>
+    <title>通关练习网站sqlmother</title>
+    <link>https://Maxwell2020152049.github.io/posts/tech_manual/sql_exercise/</link>
+    <pubDate>Fri, 11 Aug 2023 10:57:09 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://Maxwell2020152049.github.io/posts/tech_manual/sql_exercise/</guid>
+    <description><![CDATA[练习网站sqlmother通关 网站地址：sqlmother
+level1 基础语法 - 查询 - 全表查询 使用如下sql语句可以从tlb这张数据表中查询并返回所有信息：
+select * from tlb 题目：
+请编写 SQL 查询语句，从名为 student 的数据表中查询出所有学生的信息。
+解答：
+select * from student level2 基础语法 - 查询 - 选择查询 使用如下sql语句可以从students这张数据表中查询并返回学生的name和gender信息：
+select name, gender from students 题目：
+请编写一条 SQL 查询语句，从名为 student 的数据表中选择出所有学生的姓名（name）和年龄（age）信息。
+注意，所有题目的 数据列输出顺序必须和题目的要求保持一致 ！比如本题必须学生姓名（name）在前，年龄（age）在后。
+解答：
+select name, age from student level3 基础语法 - 查询 - 别名 题目：
+请编写一条 SQL 查询语句，从名为 student 的数据表中选择出所有学生的姓名（name）和年龄（age）信息，并为它们取别名为 学生姓名 和 学生年龄。
+解答：
+select name as 学生姓名, age as 学生年龄 from student level4 基础语法 - 查询 - 常量和运算 题目：]]></description>
+</item>
+</channel>
+</rss>

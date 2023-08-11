@@ -76,6 +76,24 @@
         alt="https://th.bing.com/th/id/OIP.bs9ePxW88yyxsxRKmQt_MQHaHa?w=193&amp;h=193&amp;c=7&amp;r=0&amp;o=5&amp;pid=1.7"
         title="https://th.bing.com/th/id/OIP.bs9ePxW88yyxsxRKmQt_MQHaHa?w=193&amp;h=193&amp;c=7&amp;r=0&amp;o=5&amp;pid=1.7" /></div><div class="home-subtitle"><div id="id-1" class="typeit"></div></div><div class="links"><a href="https://github.com/Maxwell2020152049" title="GitHub" target="_blank" rel="noopener noreffer me"><i class="fab fa-github fa-fw" aria-hidden="true"></i></a></div></div>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/tech_manual/sql_exercise/">通关练习网站sqlmother</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-08-11">2023-08-11</time></span>&nbsp;<span class="post-category">included in <a href="/categories/%E6%8A%80%E6%9C%AF%E6%89%8B%E5%86%8C/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>技术手册</a></span></div><div class="content">练习网站sqlmother通关 网站地址：sqlmother
+level1 基础语法 - 查询 - 全表查询 使用如下sql语句可以从tlb这张数据表中查询并返回所有信息：
+select * from tlb 题目：
+请编写 SQL 查询语句，从名为 student 的数据表中查询出所有学生的信息。
+解答：
+select * from student level2 基础语法 - 查询 - 选择查询 使用如下sql语句可以从students这张数据表中查询并返回学生的name和gender信息：
+select name, gender from students 题目：
+请编写一条 SQL 查询语句，从名为 student 的数据表中选择出所有学生的姓名（name）和年龄（age）信息。
+注意，所有题目的 数据列输出顺序必须和题目的要求保持一致 ！比如本题必须学生姓名（name）在前，年龄（age）在后。
+解答：
+select name, age from student level3 基础语法 - 查询 - 别名 题目：
+请编写一条 SQL 查询语句，从名为 student 的数据表中选择出所有学生的姓名（name）和年龄（age）信息，并为它们取别名为 学生姓名 和 学生年龄。
+解答：
+select name as 学生姓名, age as 学生年龄 from student level4 基础语法 - 查询 - 常量和运算 题目：</div><div class="post-footer">
+        <a href="/posts/tech_manual/sql_exercise/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/sql/">SQL</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
         <a href="/posts/cs61a/notes/week7/">CS61A week7 study note</a>
     </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-08-10">2023-08-10</time></span>&nbsp;<span class="post-category">included in <a href="/categories/cs61a/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>CS61A</a></span></div><div class="content">Week7 CS 61A 2021 Fall官网：CS 61A: Structure and Interpretation of Computer Programs
 翻译视频：【计算机程序的构造和解释】精译【UC Berkeley 公开课-CS61A (Spring 2021)】-中英双语字幕
@@ -128,17 +146,6 @@ wget https://inst.eecs.berkeley.edu/~cs61a/sp21/lab/lab05/lab05.zip Required Que
 实现代码如下：
 def couple(s, t): &#34;&#34;&#34;Return a list of two-element lists in which the i-th element is [s[i], t[i]]. &gt;&gt;&gt; a = [1, 2, 3] &gt;&gt;&gt; b = [4, 5, 6] &gt;&gt;&gt; couple(a, b) [[1, 4], [2, 5], [3, 6]] &gt;&gt;&gt; c = [&#39;c&#39;, 6] &gt;&gt;&gt; d = [&#39;s&#39;, &#39;1&#39;] &gt;&gt;&gt; couple(c, d) [[&#39;c&#39;, &#39;s&#39;], [6, &#39;1&#39;]] &#34;&#34;&#34; assert len(s) == len(t) &#34;*** YOUR CODE HERE ***&#34; return [[x, y] for x, y in zip(s, t)] Data Abstraction 本实验提供了一个城市的抽象数据类型（ADT），用法如下：</div><div class="post-footer">
         <a href="/posts/cs61a/lab/lab05/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/python/">Python</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/cs61a/project/cats/">CS61A Project Cats</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="author" class="author"><i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>Author</a></span>&nbsp;<span class="post-publish">published on <time datetime="2023-08-03">2023-08-03</time></span>&nbsp;<span class="post-category">included in <a href="/categories/cs61a/"><i class="far fa-folder fa-fw" aria-hidden="true"></i>CS61A</a></span></div><div class="content">Project 2: CS 61A Autocorrected Typing Software Project地址：Project 2: CS 61A Autocorrected Typing Software
-使用如下命令可以下载项目：
-wget https://inst.eecs.berkeley.edu/~cs61a/sp21/proj/cats/cats.zip 项目的最终效果类似：Final Product
-Phase 1: Typing Problem 1 (1 pt) 实现choose(paragraphs, select, k)函数：
-paragraphs：一个字符串列表 select：选择函数，参数为字符串，若符合要求，返回True，否则返回False k：函数返回第k个符合要求的字符串 使用如下命令进行解锁测试：
-python3 ok -q 01 -u --local 过程如下：
-===================================================================== Assignment: Project 2: Cats OK, version v1.18.1 ===================================================================== ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Unlocking tests At each &#34;? &#34;, type what you would expect the output to be. Type exit() to quit --------------------------------------------------------------------- Problem 1 &gt; Suite 1 &gt; Case 1 (cases remaining: 102) &gt;&gt;&gt; from cats import choose &gt;&gt;&gt; ps = [&#39;short&#39;, &#39;really long&#39;, &#39;tiny&#39;] &gt;&gt;&gt; s = lambda p: len(p) &lt;= 5 &gt;&gt;&gt; choose(ps, s, 0) ?</div><div class="post-footer">
-        <a href="/posts/cs61a/project/cats/">Read More</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw" aria-hidden="true"></i>&nbsp;<a href="/tags/python/">Python</a></div></div>
 </article><ul class="pagination"><li class="page-item active">
                     <span class="page-link">

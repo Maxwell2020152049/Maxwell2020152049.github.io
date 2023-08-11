@@ -3,7 +3,28 @@
         <title>All Posts - Rex&#39;s Blog</title>
         <link>https://Maxwell2020152049.github.io/posts/</link>
         <description>All Posts | Rex&#39;s Blog</description>
-        <generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 10 Aug 2023 17:01:10 &#43;0800</lastBuildDate><atom:link href="https://Maxwell2020152049.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 11 Aug 2023 10:57:09 &#43;0800</lastBuildDate><atom:link href="https://Maxwell2020152049.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>通关练习网站sqlmother</title>
+    <link>https://Maxwell2020152049.github.io/posts/tech_manual/sql_exercise/</link>
+    <pubDate>Fri, 11 Aug 2023 10:57:09 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://Maxwell2020152049.github.io/posts/tech_manual/sql_exercise/</guid>
+    <description><![CDATA[练习网站sqlmother通关 网站地址：sqlmother
+level1 基础语法 - 查询 - 全表查询 使用如下sql语句可以从tlb这张数据表中查询并返回所有信息：
+select * from tlb 题目：
+请编写 SQL 查询语句，从名为 student 的数据表中查询出所有学生的信息。
+解答：
+select * from student level2 基础语法 - 查询 - 选择查询 使用如下sql语句可以从students这张数据表中查询并返回学生的name和gender信息：
+select name, gender from students 题目：
+请编写一条 SQL 查询语句，从名为 student 的数据表中选择出所有学生的姓名（name）和年龄（age）信息。
+注意，所有题目的 数据列输出顺序必须和题目的要求保持一致 ！比如本题必须学生姓名（name）在前，年龄（age）在后。
+解答：
+select name, age from student level3 基础语法 - 查询 - 别名 题目：
+请编写一条 SQL 查询语句，从名为 student 的数据表中选择出所有学生的姓名（name）和年龄（age）信息，并为它们取别名为 学生姓名 和 学生年龄。
+解答：
+select name as 学生姓名, age as 学生年龄 from student level4 基础语法 - 查询 - 常量和运算 题目：]]></description>
+</item>
+<item>
     <title>CS61A week7 study note</title>
     <link>https://Maxwell2020152049.github.io/posts/cs61a/notes/week7/</link>
     <pubDate>Thu, 10 Aug 2023 17:01:10 &#43;0800</pubDate>
@@ -124,22 +145,6 @@ wget https://inst.eecs.berkeley.edu/~cs61a/sp21/lab/lab02/lab02.zip What Would P
 如果结果是函数，就输入Function，如果是错误就输入Error，如果没有输出就输入Nothing。
 python3 ok -q lambda -u --local 过程如下：
 ===================================================================== Assignment: Lab 2 OK, version v1.18.1 ===================================================================== ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Unlocking tests At each &#34;? &#34;, type what you would expect the output to be. Type exit() to quit --------------------------------------------------------------------- Lambda the Free &gt; Suite 1 &gt; Case 1 (cases remaining: 7) Q: Which of the following statements describes a difference between a def statement and a lambda expression?]]></description>
-</item>
-<item>
-    <title>CS61A week5 study note</title>
-    <link>https://Maxwell2020152049.github.io/posts/cs61a/notes/week5/</link>
-    <pubDate>Tue, 01 Aug 2023 01:00:34 &#43;0800</pubDate>
-    <author>Author</author>
-    <guid>https://Maxwell2020152049.github.io/posts/cs61a/notes/week5/</guid>
-    <description><![CDATA[Week5 CS 61A 2021 Fall官网：CS 61A: Structure and Interpretation of Computer Programs
-翻译视频：【计算机程序的构造和解释】精译【UC Berkeley 公开课-CS61A (Spring 2021)】-中英双语字幕
-github:Maxwell2020152049/CS61A
-Lecture #12: Dictionaries, Matrices, and Trees： Project：Project 2: CS 61A Autocorrected Typing Software
-Slide：12-Trees_full.pdf or 12-Trees.html
-抽象层次的复习（Review: Layers of abstraction） Python类型的复习（Review: Python types） 字典（Dictionary） 字典是一种可修改的键-值对映射（key-value pair）。
-可以使用Key in Dict检查某个Key是否是字典的键，若是，返回True；若不是，返回False。
-eg：
-# Dictionaries states = { &#34;CA&#34;: &#34;California&#34;, &#34;DE&#34;: &#34;Delaware&#34;, &#34;NY&#34;: &#34;New York&#34;, &#34;TX&#34;: &#34;Texas&#34;, &#34;WY&#34;: &#34;Wyoming&#34; } print(len(states)) print(&#34;CA&#34; in states) print(&#34;ZZ&#34; in states) 输出：]]></description>
 </item>
 </channel>
 </rss>
