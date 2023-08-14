@@ -63,12 +63,13 @@ solo：基于Java语言
 使用Hugo搭建个人博客 在Linux上配置环境，使用Hugo + Github的组合搭建个人博客。
 下载brew 下载Hugo要使用brew这个工具。
 过程详见这篇博客：在 Linux 上安装和使用 Homebrew 包管理器
-下载Hugo 使用如下命令下载Hugo：
+注意一点，把最后两个添加PATH变量的命令写入~/.bashrc中，不然每次重启终端都要重新输入：
+# start hugo echo &#39;eval &#34;$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)&#34;&#39; &gt;&gt; $HOME/.bash_profile eval &#34;$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)&#34; 下载Hugo 使用如下命令下载Hugo：
 brew install hugo 使用如下命令检验是否下载成功：
 hugo version 若成功输出版本信息，说明下载成功：
 hugo v0.115.4+extended linux/amd64 BuildDate=unknown 创建一个名为blog博客：
 hugo new site blog 输出：
-Congratulations! Your new Hugo site is created in /home/rex/blog. Just a few more steps and you&#39;re ready to go: 1.]]></description>
+Congratulations! Your new Hugo site is created in /home/rex/blog.]]></description>
 </item>
 </channel>
 </rss>
