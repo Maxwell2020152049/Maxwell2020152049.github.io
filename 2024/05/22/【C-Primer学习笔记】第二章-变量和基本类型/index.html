@@ -27,7 +27,7 @@
 <meta property="og:description" content="C++ Primer第二章的学习笔记，主要包含C++的变量和基本类型的相关知识。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-05-22T15:29:16.000Z">
-<meta property="article:modified_time" content="2024-05-22T15:40:45.446Z">
+<meta property="article:modified_time" content="2024-05-22T15:45:51.510Z">
 <meta property="article:author" content="Rex">
 <meta property="article:tag" content="C++">
 <meta name="twitter:card" content="summary">
@@ -139,7 +139,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#chap02-%E5%8F%98%E9%87%8F%E5%92%8C%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.</span> <span class="nav-text">chap02 变量和基本类型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#cpp%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83"><span class="nav-number">1.1.</span> <span class="nav-text">cpp代码规范</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chap2-1-%E5%9F%BA%E6%9C%AC%E5%86%85%E7%BD%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.2.</span> <span class="nav-text">chap2.1 基本内置类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%83%E4%B9%A02-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">练习2.1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%83%E4%B9%A02-2"><span class="nav-number">1.2.2.</span> <span class="nav-text">练习2.2</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chap2-2-%E5%8F%98%E9%87%8F"><span class="nav-number">1.3.</span> <span class="nav-text">chap2.2 变量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%97%E8%A1%A8%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">1.3.1.</span> <span class="nav-text">列表初始化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chap2-3-%E5%A4%8D%E5%90%88%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.4.</span> <span class="nav-text">chap2.3 复合类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chap2-4-const%E9%99%90%E5%AE%9A%E7%AC%A6"><span class="nav-number">1.5.</span> <span class="nav-text">chap2.4 const限定符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A1%B6%E5%B1%82const%E5%92%8C%E5%BA%95%E5%B1%82const"><span class="nav-number">1.5.1.</span> <span class="nav-text">顶层const和底层const</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chap2-5-%E5%A4%84%E7%90%86%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.6.</span> <span class="nav-text">chap2.5 处理类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E6%96%B0%E7%9A%84%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.6.1.</span> <span class="nav-text">定义新的类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#auto%E7%B1%BB%E5%9E%8B%E8%AF%B4%E6%98%8E%E7%AC%A6"><span class="nav-number">1.6.2.</span> <span class="nav-text">auto类型说明符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#decltype%E7%B1%BB%E5%9E%8B%E6%8C%87%E7%A4%BA%E7%AC%A6"><span class="nav-number">1.6.3.</span> <span class="nav-text">decltype类型指示符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84Sales-data%E7%B1%BB"><span class="nav-number">1.6.4.</span> <span class="nav-text">编写自己的Sales_data类</span></a></li></ol></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#chap02-%E5%8F%98%E9%87%8F%E5%92%8C%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.</span> <span class="nav-text">chap02 变量和基本类型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#cpp%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83"><span class="nav-number">1.1.</span> <span class="nav-text">cpp代码规范</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chap2-1-%E5%9F%BA%E6%9C%AC%E5%86%85%E7%BD%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.2.</span> <span class="nav-text">chap2.1 基本内置类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%83%E4%B9%A02-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">练习2.1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%83%E4%B9%A02-2"><span class="nav-number">1.2.2.</span> <span class="nav-text">练习2.2</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chap2-2-%E5%8F%98%E9%87%8F"><span class="nav-number">1.3.</span> <span class="nav-text">chap2.2 变量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%97%E8%A1%A8%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">1.3.1.</span> <span class="nav-text">列表初始化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chap2-3-%E5%A4%8D%E5%90%88%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.4.</span> <span class="nav-text">chap2.3 复合类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chap2-4-const%E9%99%90%E5%AE%9A%E7%AC%A6"><span class="nav-number">1.5.</span> <span class="nav-text">chap2.4 const限定符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A1%B6%E5%B1%82const%E5%92%8C%E5%BA%95%E5%B1%82const"><span class="nav-number">1.5.1.</span> <span class="nav-text">顶层const和底层const</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chap2-5-%E5%A4%84%E7%90%86%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.6.</span> <span class="nav-text">chap2.5 处理类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E6%96%B0%E7%9A%84%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.6.1.</span> <span class="nav-text">定义新的类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#auto%E7%B1%BB%E5%9E%8B%E8%AF%B4%E6%98%8E%E7%AC%A6"><span class="nav-number">1.6.2.</span> <span class="nav-text">auto类型说明符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#decltype%E7%B1%BB%E5%9E%8B%E6%8C%87%E7%A4%BA%E7%AC%A6"><span class="nav-number">1.6.3.</span> <span class="nav-text">decltype类型指示符</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chap2-6-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="nav-number">1.7.</span> <span class="nav-text">chap2.6 自定义数据结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#struct%E5%92%8Cclass"><span class="nav-number">1.7.1.</span> <span class="nav-text">struct和class</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E5%86%99%E8%87%AA%E5%B7%B1%E7%9A%84Sales-data%E7%B1%BB"><span class="nav-number">1.7.2.</span> <span class="nav-text">编写自己的Sales_data类</span></a></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -214,7 +214,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2024-05-22 23:29:16 / 修改时间：23:40:45" itemprop="dateCreated datePublished" datetime="2024-05-22T23:29:16+08:00">2024-05-22</time>
+      <time title="创建时间：2024-05-22 23:29:16 / 修改时间：23:45:51" itemprop="dateCreated datePublished" datetime="2024-05-22T23:29:16+08:00">2024-05-22</time>
     </span>
 
   
@@ -278,74 +278,55 @@
 <li><p><code>auto</code>声明的变量必须有初始值，否则编译器无法推导出变量的类型。</p>
 </li>
 <li><p>使用<code>auto</code>声明多个变量时，这些变量的类型必须一致。</p>
+</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @brief </span></span><br><span class="line"><span class="comment"> * ci是const int</span></span><br><span class="line"><span class="comment"> * m是int</span></span><br><span class="line"><span class="comment"> * p是指向const int的指针</span></span><br><span class="line"><span class="comment"> * error: inconsistent deduction for &#x27;auto&#x27;: &#x27;int&#x27; and then &#x27;const int&#x27;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">auto</span> m = ci, *p = &amp;ci;</span><br></pre></td></tr></table></figure>
+
+
 <ul>
-<li><pre><code class="cpp">  /**
-   * @brief 
-   * ci是const int
-   * m是int
-   * p是指向const int的指针
-   * error: inconsistent deduction for &#39;auto&#39;: &#39;int&#39; and then &#39;const int&#39;
-   */
-  auto m = ci, *p = &amp;ci;
-  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">- `auto`推导引用的类型时，会得到引用指向对象的类型。</span><br><span class="line"></span><br><span class="line">    - ```cpp</span><br><span class="line">        /**</span><br><span class="line">         * @brief </span><br><span class="line">         * r是int的引用，a是int</span><br><span class="line">         */</span><br><span class="line">        auto a = r;</span><br></pre></td></tr></table></figure>
-</code></pre>
-</li>
+<li><code>auto</code>推导引用的类型时，会得到引用指向对象的类型。</li>
 </ul>
-</li>
-<li><p><code>auto</code>会忽略<code>顶层const</code>，保留<code>底层const</code>，如果需要定义const对象，则使用<code>const auto</code>。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @brief </span></span><br><span class="line"><span class="comment"> * r是int的引用，a是int</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">auto</span> a = r;</span><br></pre></td></tr></table></figure>
+
 <ul>
-<li><pre><code class="cpp">  /**
-   * @brief 
-   * cr是对const int的引用
-   * 此时顶层const被忽略
-   * c是int
-   */
-  auto c = cr;
-  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- ```cpp</span><br><span class="line">    /**</span><br><span class="line">     * @brief </span><br><span class="line">     * ci是const int</span><br><span class="line">     * 此时顶层const被忽略</span><br><span class="line">     * 但auto前明确指出该类型是一个顶层const</span><br><span class="line">     * 故f是const int</span><br><span class="line">     */</span><br><span class="line">    const auto f = ci;</span><br></pre></td></tr></table></figure>
-</code></pre>
-</li>
+<li><code>auto</code>会忽略<code>顶层const</code>，保留<code>底层const</code>，如果需要定义const对象，则使用<code>const auto</code>。</li>
 </ul>
-</li>
-<li><p><code>auto</code>支持声明引用类型，以<code>auto &amp;r</code>的形式</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @brief </span></span><br><span class="line"><span class="comment"> * cr是对const int的引用</span></span><br><span class="line"><span class="comment"> * 此时顶层const被忽略</span></span><br><span class="line"><span class="comment"> * c是int</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">auto</span> c = cr;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @brief </span></span><br><span class="line"><span class="comment"> * ci是const int</span></span><br><span class="line"><span class="comment"> * 此时顶层const被忽略</span></span><br><span class="line"><span class="comment"> * 但auto前明确指出该类型是一个顶层const</span></span><br><span class="line"><span class="comment"> * 故f是const int</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">const</span> <span class="keyword">auto</span> f = ci;</span><br></pre></td></tr></table></figure>
+
 <ul>
-<li><pre><code class="cpp">  /**
-   * @brief 
-   * ci是const int
-   * 此时const退化为底层引用
-   * 故g为const int的引用
-   */
-  auto &amp;g = ci;
-  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- ```cpp</span><br><span class="line">    /**</span><br><span class="line">     * @brief</span><br><span class="line">     * 42是int</span><br><span class="line">     * j是对int常量的引用</span><br><span class="line">     */</span><br><span class="line">    const auto &amp;j = 42;</span><br></pre></td></tr></table></figure>
-</code></pre>
-</li>
+<li><code>auto</code>支持声明引用类型，以<code>auto &amp;r</code>的形式</li>
 </ul>
-</li>
-</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @brief </span></span><br><span class="line"><span class="comment"> * ci是const int</span></span><br><span class="line"><span class="comment"> * 此时const退化为底层引用</span></span><br><span class="line"><span class="comment"> * 故g为const int的引用</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">auto</span> &amp;g = ci;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @brief</span></span><br><span class="line"><span class="comment"> * 42是int</span></span><br><span class="line"><span class="comment"> * j是对int常量的引用</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">const</span> <span class="keyword">auto</span> &amp;j = <span class="number">42</span>;</span><br></pre></td></tr></table></figure>
+
 <p>参考：<a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/language/auto">Placeholder type specifiers</a></p>
 <h3 id="decltype类型指示符"><a href="#decltype类型指示符" class="headerlink" title="decltype类型指示符"></a><code>decltype</code>类型指示符</h3><p><code>C++11</code>还提供了<code>decltype</code>关键字用于推导类型，该关键字使用表达式推导类型。</p>
 <p>需要注意：</p>
 <ul>
-<li><p>与<code>auto</code>不同，<code>deltype</code>不会忽略表达式的类型中存在的<code>顶层const</code></p>
+<li>与<code>auto</code>不同，<code>deltype</code>不会忽略表达式的类型中存在的<code>顶层const</code></li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> ci = <span class="number">42</span>;</span><br><span class="line"><span class="keyword">auto</span> a = ci;            <span class="comment">// a: int</span></span><br><span class="line"><span class="keyword">decltype</span>(ci) b = <span class="number">2024</span>;  <span class="comment">// b: const int</span></span><br></pre></td></tr></table></figure>
+
 <ul>
-<li><pre><code class="cpp">  const int ci = 42;
-  auto a = ci;            // a: int
-  decltype(ci) b = 2024;  // b: const int
-  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 赋值表达式的类型是左值引用</span><br><span class="line"></span><br><span class="line">    - ```cpp</span><br><span class="line">        int a = 3, b = 4;</span><br><span class="line">        decltype(a) c = a;      // c: int</span><br><span class="line">        decltype(a = b) d = a;  // d: int&amp;</span><br></pre></td></tr></table></figure>
-</code></pre>
-</li>
+<li>赋值表达式的类型是左值引用</li>
 </ul>
-</li>
-<li><p>变量不加括号，类型是其本身；变量加了括号，就变成了表达式，类型是其本身的引用</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a = <span class="number">3</span>, b = <span class="number">4</span>;</span><br><span class="line"><span class="keyword">decltype</span>(a) c = a;      <span class="comment">// c: int</span></span><br><span class="line"><span class="keyword">decltype</span>(a = b) d = a;  <span class="comment">// d: int&amp;</span></span><br></pre></td></tr></table></figure>
+
 <ul>
-<li><pre><code class="cpp">  int a = 3, b = 4;
-  decltype(a) c = a;      // c: int
-  decltype((b)) d = b;    // d: int&amp;
-  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">参考：[decltype specifier](https://en.cppreference.com/w/cpp/language/decltype)</span><br><span class="line"></span><br><span class="line">## chap2.6 自定义数据结构</span><br><span class="line"></span><br><span class="line">- C++如何定义数据结构？</span><br><span class="line"></span><br><span class="line">### `struct`和`class`</span><br><span class="line"></span><br><span class="line">使用结构体可以定义数据结构：</span><br><span class="line"></span><br><span class="line">```cpp</span><br><span class="line">struct Sales_data &#123;</span><br><span class="line">    std::string book_no;        // 书籍ISBN号</span><br><span class="line">    int sales_num = 0;          // 销量</span><br><span class="line">    double sales_revenue = 0.0;     // 平均售价</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-</code></pre>
-</li>
+<li>变量不加括号，类型是其本身；变量加了括号，就变成了表达式，类型是其本身的引用</li>
 </ul>
-</li>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a = <span class="number">3</span>, b = <span class="number">4</span>;</span><br><span class="line"><span class="keyword">decltype</span>(a) c = a;      <span class="comment">// c: int</span></span><br><span class="line"><span class="keyword">decltype</span>((b)) d = b;    <span class="comment">// d: int&amp;</span></span><br></pre></td></tr></table></figure>
+
+<p>参考：<a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/language/decltype">decltype specifier</a></p>
+<h2 id="chap2-6-自定义数据结构"><a href="#chap2-6-自定义数据结构" class="headerlink" title="chap2.6 自定义数据结构"></a>chap2.6 自定义数据结构</h2><ul>
+<li>C++如何定义数据结构？</li>
 </ul>
+<h3 id="struct和class"><a href="#struct和class" class="headerlink" title="struct和class"></a><code>struct</code>和<code>class</code></h3><p>使用结构体可以定义数据结构：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">Sales_data</span> &#123;</span><br><span class="line">    std::string book_no;        <span class="comment">// 书籍ISBN号</span></span><br><span class="line">    <span class="type">int</span> sales_num = <span class="number">0</span>;          <span class="comment">// 销量</span></span><br><span class="line">    <span class="type">double</span> sales_revenue = <span class="number">0.0</span>;     <span class="comment">// 平均售价</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
 <p>使用类也可以起到同样的效果：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Sales_data</span> &#123;</span><br><span class="line"> <span class="keyword">public</span>:</span><br><span class="line">    std::string book_no;        <span class="comment">// 书籍ISBN号</span></span><br><span class="line">    <span class="type">int</span> sales_num = <span class="number">0</span>;          <span class="comment">// 销量</span></span><br><span class="line">    <span class="type">double</span> sales_revenue = <span class="number">0.0</span>;     <span class="comment">// 平均售价</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 

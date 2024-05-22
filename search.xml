@@ -192,6 +192,34 @@
       </tags>
   </entry>
   <entry>
+    <title>【Hexo的图片管理问题】阿里云OSS + PicGo搭建图床</title>
+    <url>/2024/05/21/%E3%80%90Hexo%E7%9A%84%E5%9B%BE%E7%89%87%E7%AE%A1%E7%90%86%E9%97%AE%E9%A2%98%E3%80%91%E9%98%BF%E9%87%8C%E4%BA%91OSS-PicGo%E6%90%AD%E5%BB%BA%E5%9B%BE%E5%BA%8A/</url>
+    <content><![CDATA[<h2 id="阿里云OSS"><a href="#阿里云OSS" class="headerlink" title="阿里云OSS"></a>阿里云OSS</h2><h3 id="Bucket的存储和读取"><a href="#Bucket的存储和读取" class="headerlink" title="Bucket的存储和读取"></a>Bucket的存储和读取</h3><p>在阿里云上开通<a href="https://oss.console.aliyun.com/overview">OSS</a>，创建一个<code>Bucket</code>，地区选择<strong>华南1-深圳</strong>，存储类型为<strong>标准存储</strong>，存储冗余类型为<strong>本地冗余存储</strong>。</p>
+<p>购买OSS资源包，选择<strong>40G&#x2F;1年</strong>的套餐，这样就能够把图片存储到阿里云上了。</p>
+<p><img src="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/22127b7f64ff476d3f5bae1a8d0c938.png" alt="22127b7f64ff476d3f5bae1a8d0c938"></p>
+<p>需要注意：因为图床需要让任何来源都能访问到资源，<code>Bucket</code>的读写权限需要设置为<strong>公共读</strong>（需要关闭<strong>“阻止公共访问”</strong>）。</p>
+<p><img src="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/ffdb72988de51e8038a4c1497d0d4ed.png" alt="ffdb72988de51e8038a4c1497d0d4ed"></p>
+<p>另外，<strong>OSS资源包不包括外网流出流量，就是说从阿里云拉取图片产生的流量是需要付费的</strong>，<a href="https://www.aliyun.com/price/product?spm=a2c4g.11186623.0.0.14d71887x72wt4#/oss/detail/ossbag">收费标准</a>如下（开启<strong>同城冗余</strong>和<strong>跨区域复制</strong>流量费更高）：</p>
+<p><img src="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/99b459af64d549b1186f90d6320429d.png" alt="99b459af64d549b1186f90d6320429d"></p>
+<h3 id="创建用户进行访问控制"><a href="#创建用户进行访问控制" class="headerlink" title="创建用户进行访问控制"></a>创建用户进行访问控制</h3><p>在阿里云的访问控制模块中创建新用户，注意需要勾选<strong>启动OpenAPI</strong>选项，记录下生成的<strong>AccessKey ID</strong>和<strong>AccessKey Secret</strong>。</p>
+<p><img src="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/dd34568a7bdd19f85b830c649a97a71.png" alt="dd34568a7bdd19f85b830c649a97a71"></p>
+<h2 id="PicGo"><a href="#PicGo" class="headerlink" title="PicGo"></a>PicGo</h2><p>在<a href="https://github.com/Molunerfinn/PicGo/releases/tag/v2.3.1">PicGo官网</a>下载稳定版本的<code>PicGo</code>客户端，使用之前获取的参数进行设置（img目录需要在阿里云上先创建，初始使用可以不填写<strong>存储路径</strong>）：</p>
+<p><img src="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/67cb206f75494599386f7558f512e0b.png" alt="67cb206f75494599386f7558f512e0b"></p>
+<h2 id="Typora上传插入图片"><a href="#Typora上传插入图片" class="headerlink" title="Typora上传插入图片"></a>Typora上传插入图片</h2><p>在<code>Typora</code>上进行设置，使用<code>PicGo</code>上传插入的图片到阿里云。</p>
+<p>配置完成后，可以使用<code>Typora</code>的<strong>验证图片上传选项</strong>测试图床是否被正确配置。</p>
+<p><img src="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/acb0232932277fccf8ef1fcc2b22d6f.png" alt="acb0232932277fccf8ef1fcc2b22d6f"></p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><p><a href="https://blog.csdn.net/qq_30105599/article/details/119651114">关于Hexo写博客时的图片插入问题（OSS对象存储+PicGo搭建图床）</a></p>
+</li>
+<li><p><a href="https://zhuanlan.zhihu.com/p/104152479">阿里云OSS PicGo 配置图床教程 超详细</a></p>
+</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>个人博客</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>【C++ Primer学习笔记】第二章 变量和基本类型</title>
     <url>/2024/05/22/%E3%80%90C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E5%8F%98%E9%87%8F%E5%92%8C%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B/</url>
     <content><![CDATA[<h1 id="chap02-变量和基本类型"><a href="#chap02-变量和基本类型" class="headerlink" title="chap02 变量和基本类型"></a>chap02 变量和基本类型</h1><h2 id="cpp代码规范"><a href="#cpp代码规范" class="headerlink" title="cpp代码规范"></a><code>cpp</code>代码规范</h2><p>使用<code>Google C++ Style</code>规范代码，用到了<code>VSCode</code>的<code>cpplint</code>插件。</p>
@@ -245,74 +273,55 @@
 <li><p><code>auto</code>声明的变量必须有初始值，否则编译器无法推导出变量的类型。</p>
 </li>
 <li><p>使用<code>auto</code>声明多个变量时，这些变量的类型必须一致。</p>
+</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @brief </span></span><br><span class="line"><span class="comment"> * ci是const int</span></span><br><span class="line"><span class="comment"> * m是int</span></span><br><span class="line"><span class="comment"> * p是指向const int的指针</span></span><br><span class="line"><span class="comment"> * error: inconsistent deduction for &#x27;auto&#x27;: &#x27;int&#x27; and then &#x27;const int&#x27;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">auto</span> m = ci, *p = &amp;ci;</span><br></pre></td></tr></table></figure>
+
+
 <ul>
-<li><pre><code class="cpp">  /**
-   * @brief 
-   * ci是const int
-   * m是int
-   * p是指向const int的指针
-   * error: inconsistent deduction for &#39;auto&#39;: &#39;int&#39; and then &#39;const int&#39;
-   */
-  auto m = ci, *p = &amp;ci;
-  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">- `auto`推导引用的类型时，会得到引用指向对象的类型。</span><br><span class="line"></span><br><span class="line">    - ```cpp</span><br><span class="line">        /**</span><br><span class="line">         * @brief </span><br><span class="line">         * r是int的引用，a是int</span><br><span class="line">         */</span><br><span class="line">        auto a = r;</span><br></pre></td></tr></table></figure>
-</code></pre>
-</li>
+<li><code>auto</code>推导引用的类型时，会得到引用指向对象的类型。</li>
 </ul>
-</li>
-<li><p><code>auto</code>会忽略<code>顶层const</code>，保留<code>底层const</code>，如果需要定义const对象，则使用<code>const auto</code>。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @brief </span></span><br><span class="line"><span class="comment"> * r是int的引用，a是int</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">auto</span> a = r;</span><br></pre></td></tr></table></figure>
+
 <ul>
-<li><pre><code class="cpp">  /**
-   * @brief 
-   * cr是对const int的引用
-   * 此时顶层const被忽略
-   * c是int
-   */
-  auto c = cr;
-  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">- ```cpp</span><br><span class="line">    /**</span><br><span class="line">     * @brief </span><br><span class="line">     * ci是const int</span><br><span class="line">     * 此时顶层const被忽略</span><br><span class="line">     * 但auto前明确指出该类型是一个顶层const</span><br><span class="line">     * 故f是const int</span><br><span class="line">     */</span><br><span class="line">    const auto f = ci;</span><br></pre></td></tr></table></figure>
-</code></pre>
-</li>
+<li><code>auto</code>会忽略<code>顶层const</code>，保留<code>底层const</code>，如果需要定义const对象，则使用<code>const auto</code>。</li>
 </ul>
-</li>
-<li><p><code>auto</code>支持声明引用类型，以<code>auto &amp;r</code>的形式</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @brief </span></span><br><span class="line"><span class="comment"> * cr是对const int的引用</span></span><br><span class="line"><span class="comment"> * 此时顶层const被忽略</span></span><br><span class="line"><span class="comment"> * c是int</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">auto</span> c = cr;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @brief </span></span><br><span class="line"><span class="comment"> * ci是const int</span></span><br><span class="line"><span class="comment"> * 此时顶层const被忽略</span></span><br><span class="line"><span class="comment"> * 但auto前明确指出该类型是一个顶层const</span></span><br><span class="line"><span class="comment"> * 故f是const int</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">const</span> <span class="keyword">auto</span> f = ci;</span><br></pre></td></tr></table></figure>
+
 <ul>
-<li><pre><code class="cpp">  /**
-   * @brief 
-   * ci是const int
-   * 此时const退化为底层引用
-   * 故g为const int的引用
-   */
-  auto &amp;g = ci;
-  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">- ```cpp</span><br><span class="line">    /**</span><br><span class="line">     * @brief</span><br><span class="line">     * 42是int</span><br><span class="line">     * j是对int常量的引用</span><br><span class="line">     */</span><br><span class="line">    const auto &amp;j = 42;</span><br></pre></td></tr></table></figure>
-</code></pre>
-</li>
+<li><code>auto</code>支持声明引用类型，以<code>auto &amp;r</code>的形式</li>
 </ul>
-</li>
-</ul>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @brief </span></span><br><span class="line"><span class="comment"> * ci是const int</span></span><br><span class="line"><span class="comment"> * 此时const退化为底层引用</span></span><br><span class="line"><span class="comment"> * 故g为const int的引用</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">auto</span> &amp;g = ci;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @brief</span></span><br><span class="line"><span class="comment"> * 42是int</span></span><br><span class="line"><span class="comment"> * j是对int常量的引用</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">const</span> <span class="keyword">auto</span> &amp;j = <span class="number">42</span>;</span><br></pre></td></tr></table></figure>
+
 <p>参考：<a href="https://en.cppreference.com/w/cpp/language/auto">Placeholder type specifiers</a></p>
 <h3 id="decltype类型指示符"><a href="#decltype类型指示符" class="headerlink" title="decltype类型指示符"></a><code>decltype</code>类型指示符</h3><p><code>C++11</code>还提供了<code>decltype</code>关键字用于推导类型，该关键字使用表达式推导类型。</p>
 <p>需要注意：</p>
 <ul>
-<li><p>与<code>auto</code>不同，<code>deltype</code>不会忽略表达式的类型中存在的<code>顶层const</code></p>
+<li>与<code>auto</code>不同，<code>deltype</code>不会忽略表达式的类型中存在的<code>顶层const</code></li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> ci = <span class="number">42</span>;</span><br><span class="line"><span class="keyword">auto</span> a = ci;            <span class="comment">// a: int</span></span><br><span class="line"><span class="keyword">decltype</span>(ci) b = <span class="number">2024</span>;  <span class="comment">// b: const int</span></span><br></pre></td></tr></table></figure>
+
 <ul>
-<li><pre><code class="cpp">  const int ci = 42;
-  auto a = ci;            // a: int
-  decltype(ci) b = 2024;  // b: const int
-  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">- 赋值表达式的类型是左值引用</span><br><span class="line"></span><br><span class="line">    - ```cpp</span><br><span class="line">        int a = 3, b = 4;</span><br><span class="line">        decltype(a) c = a;      // c: int</span><br><span class="line">        decltype(a = b) d = a;  // d: int&amp;</span><br></pre></td></tr></table></figure>
-</code></pre>
-</li>
+<li>赋值表达式的类型是左值引用</li>
 </ul>
-</li>
-<li><p>变量不加括号，类型是其本身；变量加了括号，就变成了表达式，类型是其本身的引用</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> a = <span class="number">3</span>, b = <span class="number">4</span>;</span><br><span class="line"><span class="keyword">decltype</span>(a) c = a;      <span class="comment">// c: int</span></span><br><span class="line"><span class="keyword">decltype</span>(a = b) d = a;  <span class="comment">// d: int&amp;</span></span><br></pre></td></tr></table></figure>
+
 <ul>
-<li><pre><code class="cpp">  int a = 3, b = 4;
-  decltype(a) c = a;      // c: int
-  decltype((b)) d = b;    // d: int&amp;
-  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">参考：[decltype specifier](https://en.cppreference.com/w/cpp/language/decltype)</span><br><span class="line"></span><br><span class="line">## chap2.6 自定义数据结构</span><br><span class="line"></span><br><span class="line">- C++如何定义数据结构？</span><br><span class="line"></span><br><span class="line">### `struct`和`class`</span><br><span class="line"></span><br><span class="line">使用结构体可以定义数据结构：</span><br><span class="line"></span><br><span class="line">```cpp</span><br><span class="line">struct Sales_data &#123;</span><br><span class="line">    std::string book_no;        // 书籍ISBN号</span><br><span class="line">    int sales_num = 0;          // 销量</span><br><span class="line">    double sales_revenue = 0.0;     // 平均售价</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-</code></pre>
-</li>
+<li>变量不加括号，类型是其本身；变量加了括号，就变成了表达式，类型是其本身的引用</li>
 </ul>
-</li>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> a = <span class="number">3</span>, b = <span class="number">4</span>;</span><br><span class="line"><span class="keyword">decltype</span>(a) c = a;      <span class="comment">// c: int</span></span><br><span class="line"><span class="keyword">decltype</span>((b)) d = b;    <span class="comment">// d: int&amp;</span></span><br></pre></td></tr></table></figure>
+
+<p>参考：<a href="https://en.cppreference.com/w/cpp/language/decltype">decltype specifier</a></p>
+<h2 id="chap2-6-自定义数据结构"><a href="#chap2-6-自定义数据结构" class="headerlink" title="chap2.6 自定义数据结构"></a>chap2.6 自定义数据结构</h2><ul>
+<li>C++如何定义数据结构？</li>
 </ul>
+<h3 id="struct和class"><a href="#struct和class" class="headerlink" title="struct和class"></a><code>struct</code>和<code>class</code></h3><p>使用结构体可以定义数据结构：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">Sales_data</span> &#123;</span><br><span class="line">    std::string book_no;        <span class="comment">// 书籍ISBN号</span></span><br><span class="line">    <span class="type">int</span> sales_num = <span class="number">0</span>;          <span class="comment">// 销量</span></span><br><span class="line">    <span class="type">double</span> sales_revenue = <span class="number">0.0</span>;     <span class="comment">// 平均售价</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
 <p>使用类也可以起到同样的效果：</p>
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Sales_data</span> &#123;</span><br><span class="line"> <span class="keyword">public</span>:</span><br><span class="line">    std::string book_no;        <span class="comment">// 书籍ISBN号</span></span><br><span class="line">    <span class="type">int</span> sales_num = <span class="number">0</span>;          <span class="comment">// 销量</span></span><br><span class="line">    <span class="type">double</span> sales_revenue = <span class="number">0.0</span>;     <span class="comment">// 平均售价</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
@@ -331,34 +340,6 @@
 ]]></content>
       <tags>
         <tag>C++</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>【Hexo的图片管理问题】阿里云OSS + PicGo搭建图床</title>
-    <url>/2024/05/21/%E3%80%90Hexo%E7%9A%84%E5%9B%BE%E7%89%87%E7%AE%A1%E7%90%86%E9%97%AE%E9%A2%98%E3%80%91%E9%98%BF%E9%87%8C%E4%BA%91OSS-PicGo%E6%90%AD%E5%BB%BA%E5%9B%BE%E5%BA%8A/</url>
-    <content><![CDATA[<h2 id="阿里云OSS"><a href="#阿里云OSS" class="headerlink" title="阿里云OSS"></a>阿里云OSS</h2><h3 id="Bucket的存储和读取"><a href="#Bucket的存储和读取" class="headerlink" title="Bucket的存储和读取"></a>Bucket的存储和读取</h3><p>在阿里云上开通<a href="https://oss.console.aliyun.com/overview">OSS</a>，创建一个<code>Bucket</code>，地区选择<strong>华南1-深圳</strong>，存储类型为<strong>标准存储</strong>，存储冗余类型为<strong>本地冗余存储</strong>。</p>
-<p>购买OSS资源包，选择<strong>40G&#x2F;1年</strong>的套餐，这样就能够把图片存储到阿里云上了。</p>
-<p><img src="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/22127b7f64ff476d3f5bae1a8d0c938.png" alt="22127b7f64ff476d3f5bae1a8d0c938"></p>
-<p>需要注意：因为图床需要让任何来源都能访问到资源，<code>Bucket</code>的读写权限需要设置为<strong>公共读</strong>（需要关闭<strong>“阻止公共访问”</strong>）。</p>
-<p><img src="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/ffdb72988de51e8038a4c1497d0d4ed.png" alt="ffdb72988de51e8038a4c1497d0d4ed"></p>
-<p>另外，<strong>OSS资源包不包括外网流出流量，就是说从阿里云拉取图片产生的流量是需要付费的</strong>，<a href="https://www.aliyun.com/price/product?spm=a2c4g.11186623.0.0.14d71887x72wt4#/oss/detail/ossbag">收费标准</a>如下（开启<strong>同城冗余</strong>和<strong>跨区域复制</strong>流量费更高）：</p>
-<p><img src="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/99b459af64d549b1186f90d6320429d.png" alt="99b459af64d549b1186f90d6320429d"></p>
-<h3 id="创建用户进行访问控制"><a href="#创建用户进行访问控制" class="headerlink" title="创建用户进行访问控制"></a>创建用户进行访问控制</h3><p>在阿里云的访问控制模块中创建新用户，注意需要勾选<strong>启动OpenAPI</strong>选项，记录下生成的<strong>AccessKey ID</strong>和<strong>AccessKey Secret</strong>。</p>
-<p><img src="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/dd34568a7bdd19f85b830c649a97a71.png" alt="dd34568a7bdd19f85b830c649a97a71"></p>
-<h2 id="PicGo"><a href="#PicGo" class="headerlink" title="PicGo"></a>PicGo</h2><p>在<a href="https://github.com/Molunerfinn/PicGo/releases/tag/v2.3.1">PicGo官网</a>下载稳定版本的<code>PicGo</code>客户端，使用之前获取的参数进行设置（img目录需要在阿里云上先创建，初始使用可以不填写<strong>存储路径</strong>）：</p>
-<p><img src="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/67cb206f75494599386f7558f512e0b.png" alt="67cb206f75494599386f7558f512e0b"></p>
-<h2 id="Typora上传插入图片"><a href="#Typora上传插入图片" class="headerlink" title="Typora上传插入图片"></a>Typora上传插入图片</h2><p>在<code>Typora</code>上进行设置，使用<code>PicGo</code>上传插入的图片到阿里云。</p>
-<p>配置完成后，可以使用<code>Typora</code>的<strong>验证图片上传选项</strong>测试图床是否被正确配置。</p>
-<p><img src="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/acb0232932277fccf8ef1fcc2b22d6f.png" alt="acb0232932277fccf8ef1fcc2b22d6f"></p>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li><p><a href="https://blog.csdn.net/qq_30105599/article/details/119651114">关于Hexo写博客时的图片插入问题（OSS对象存储+PicGo搭建图床）</a></p>
-</li>
-<li><p><a href="https://zhuanlan.zhihu.com/p/104152479">阿里云OSS PicGo 配置图床教程 超详细</a></p>
-</li>
-</ul>
-]]></content>
-      <tags>
-        <tag>个人博客</tag>
       </tags>
   </entry>
 </search>
