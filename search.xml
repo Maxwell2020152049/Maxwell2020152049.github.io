@@ -1,70 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>【C++ Primer学习笔记】第一章 开始</title>
-    <url>/2024/05/19/%E3%80%90C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91%E7%AC%AC%E4%B8%80%E7%AB%A0-%E5%BC%80%E5%A7%8B/</url>
-    <content><![CDATA[<h1 id="chap01-开始"><a href="#chap01-开始" class="headerlink" title="chap01 开始"></a>chap01 开始</h1><h2 id="chap1-1-编写一个简单的C-程序"><a href="#chap1-1-编写一个简单的C-程序" class="headerlink" title="chap1.1 编写一个简单的C++程序"></a>chap1.1 编写一个简单的C++程序</h2><ul>
-<li>如何编译运行一个<code>cpp</code>程序</li>
-<li>如何获得系统执行完程序的退出状态码</li>
-<li><code>return 0</code>和<code>return -1</code>的退出状态码有什么区别</li>
-</ul>
-<h3 id="编译运行cpp程序"><a href="#编译运行cpp程序" class="headerlink" title="编译运行cpp程序"></a>编译运行cpp程序</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">g++ -o main main.cpp</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">./main</span></span><br></pre></td></tr></table></figure>
-
-<p>如果缺省<code>-o</code>选项，<code>Windows</code>系统上编译得到的可执行文件为<code>a.exe</code>，<code>Linux</code>系统上得到<code>a.out</code>。</p>
-<h3 id="退出状态码"><a href="#退出状态码" class="headerlink" title="退出状态码"></a>退出状态码</h3><p><code>Linux</code>系统 (<code>Windows</code>系统使用<code>Git Bash</code>也一样) 上使用如下命令获取退出状态码：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">echo</span> $?</span></span><br><span class="line">0</span><br></pre></td></tr></table></figure>
-
-<p>通常情况下，程序成功执行返回0，失败返回127。</p>
-<p><code>return 0</code>和<code>return -1</code>的退出状态码分别为0和127。</p>
-<h2 id="chap1-2-初识输入输出"><a href="#chap1-2-初识输入输出" class="headerlink" title="chap1.2 初识输入输出"></a>chap1.2 初识输入输出</h2><ul>
-<li>标准库定义了哪四个IO对象，它们分别是什么类型</li>
-<li><code>istream</code>和<code>ostream</code>类型的对象运算时有什么区别，计算结果是什么</li>
-<li>命名空间<code>std</code>有什么用</li>
-</ul>
-<h3 id="标准库的IO对象"><a href="#标准库的IO对象" class="headerlink" title="标准库的IO对象"></a>标准库的IO对象</h3><ul>
-<li><code>cin</code>，<code>istream</code></li>
-<li><code>cout</code>，<code>ostream</code></li>
-<li><code>cerr</code>，<code>ostream</code></li>
-<li><code>clog</code>，<code>ostream</code></li>
-</ul>
-<p>在<code>iostream</code>声明如下：</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">extern</span> istream cin;		  <span class="comment">/// Linked to standard input</span></span><br><span class="line"><span class="keyword">extern</span> ostream cout;		<span class="comment">/// Linked to standard output</span></span><br><span class="line"><span class="keyword">extern</span> ostream cerr;		<span class="comment">/// Linked to standard error (unbuffered)</span></span><br><span class="line"><span class="keyword">extern</span> ostream clog;		<span class="comment">/// Linked to standard error (buffered)</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="istream和ostream类型的运算"><a href="#istream和ostream类型的运算" class="headerlink" title="istream和ostream类型的运算"></a><code>istream</code>和<code>ostream</code>类型的运算</h3><p><code>istream</code>使用<code>&gt;&gt;</code>运算符，运算结果是左侧的对象。</p>
-<p><code>ostream</code>使用<code>&lt;&lt;</code>运算符，运算结果是左侧的对象。</p>
-<h3 id="命名空间std"><a href="#命名空间std" class="headerlink" title="命名空间std"></a>命名空间<code>std</code></h3><p><code>std</code>用于隔离变量和函数的命名，使得不同的命名空间能够有同名的函数和变量。</p>
-<p>使用<code>std::cin</code>的形式调用命名空间中的变量。</p>
-<p><code>::</code>称为作用域运算符。</p>
-<h3 id="Windows命令行运行C-程序出现中文乱码"><a href="#Windows命令行运行C-程序出现中文乱码" class="headerlink" title="Windows命令行运行C++程序出现中文乱码"></a><code>Windows</code>命令行运行C++程序出现中文乱码</h3><p><code>VSCode</code>的默认编码为<code>UTF-8</code>，终端的编码默认为<code>GBK</code>，将<code>VSCode</code>的编码设置为<code>GBK</code>即可解决问题。</p>
-<h2 id="chap1-3-注释简介"><a href="#chap1-3-注释简介" class="headerlink" title="chap1.3 注释简介"></a>chap1.3 注释简介</h2><ul>
-<li>C++如何编写注释，有哪些类型的注释</li>
-</ul>
-<h3 id="C-的注释"><a href="#C-的注释" class="headerlink" title="C++的注释"></a>C++的注释</h3><p>单行注释：<code>//</code></p>
-<p>多行注释：</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * ...</span></span><br><span class="line"><span class="comment"> * ...</span></span><br><span class="line"><span class="comment"> * ...</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="chap1-4-控制流"><a href="#chap1-4-控制流" class="headerlink" title="chap1.4 控制流"></a>chap1.4 控制流</h2><ul>
-<li>while语句</li>
-<li>for语句</li>
-<li>if语句</li>
-</ul>
-<h3 id="读取数量不确定的输入数据"><a href="#读取数量不确定的输入数据" class="headerlink" title="读取数量不确定的输入数据"></a>读取数量不确定的输入数据</h3><p>可以使用如下的模式读取不确定数量的输入数据：</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> value;</span><br><span class="line"><span class="keyword">while</span> (std::cin &gt;&gt; value) &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><code>std::cin &gt;&gt; value</code>会将输入存入<code>value</code>这个变量中，返回<code>std::cin</code>，如果<code>std::cin</code>的状态无效，比如读取到非整型或者EOF（<code>Windows</code>输入<code>Ctrl-Z</code>，<code>Linux</code>输入<code>Ctrl-D</code>），则退出循环，结束读取。</p>
-<h2 id="chap1-5-类简介"><a href="#chap1-5-类简介" class="headerlink" title="chap1.5 类简介"></a>chap1.5 类简介</h2><ul>
-<li>类与基本数据类型的区别在哪里</li>
-</ul>
-<p>类聚合了一组数据和操作，对于基本数据类型（如整型），<code>&lt;&lt;</code>、<code>&gt;&gt;</code>、<code>+</code>、<code>=</code>等运算符能够被C++语言默认支持，但类的对象需要自己实现，书中提供了<code>Sales_item</code>这个头文件，能够提供<code>Sales_item</code>这个类，支持了对各种运算符的操作，能够方便地进行读写和计算。</p>
-]]></content>
-      <categories>
-        <category>C++</category>
-      </categories>
-      <tags>
-        <tag>技术</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Hello World</title>
     <url>/2024/05/18/hello-world/</url>
     <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
@@ -198,82 +134,64 @@
       </tags>
   </entry>
   <entry>
-    <title>【个人博客优化】Hexo+Next</title>
-    <url>/2024/05/24/%E3%80%90%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E4%BC%98%E5%8C%96%E3%80%91Hexo-Next/</url>
-    <content><![CDATA[<p>注意：下文将<code>Hexo</code>的主题文件<code>_config.yml</code>称为<strong>站点配置文件</strong>，将<code>_config.next.yml</code>称为<strong>主题配置文件</strong>。</p>
-<h2 id="首页设置"><a href="#首页设置" class="headerlink" title="首页设置"></a>首页设置</h2><p><code>Hexo</code>默认的首页会显示每一篇文章的标题和全文，笔者觉得不是很美观，故想把首页样式修改为只显示文章的标题和摘要，这点可以比较方便的通过设置<strong>主题配置文件</strong>实现：</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Use `description` in front-matter to specify post excerpt.</span></span><br><span class="line"><span class="attr">excerpt_description:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-
-<p>之后在博客的模板文件中，添加<code>description</code>一项，这样创建博客时会自动创建描述，再简单修改就可以实现目标功能：</p>
-<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">title: &#123;&#123; title &#125;&#125;</span><br><span class="line">date: &#123;&#123; date &#125;&#125;</span><br><span class="line">tags:</span><br><span class="line">toc: true</span><br><span class="line">description: 这是显示在首页的概述，正文内容均会被隐藏。</span><br></pre></td></tr></table></figure>
-
-<p>设置成功后，效果如下：</p>
-<p><img src="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/049a2fc7b2ce5230b68a1e46ae83f27.png" alt="049a2fc7b2ce5230b68a1e46ae83f27"></p>
-<h2 id="菜单页设置"><a href="#菜单页设置" class="headerlink" title="菜单页设置"></a>菜单页设置</h2><p>在<strong>主题配置文件</strong>中，开启所需的菜单项：</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">menu:</span></span><br><span class="line">  <span class="attr">home:</span> <span class="string">/</span> <span class="string">||</span> <span class="string">fa</span> <span class="string">fa-home</span></span><br><span class="line">  <span class="comment"># about: /about/ || fa fa-user</span></span><br><span class="line">  <span class="attr">tags:</span> <span class="string">/tags/</span> <span class="string">||</span> <span class="string">fa</span> <span class="string">fa-tags</span></span><br><span class="line">  <span class="attr">categories:</span> <span class="string">/categories/</span> <span class="string">||</span> <span class="string">fa</span> <span class="string">fa-th</span></span><br><span class="line">  <span class="attr">archives:</span> <span class="string">/archives/</span> <span class="string">||</span> <span class="string">fa</span> <span class="string">fa-archive</span></span><br><span class="line">  <span class="comment">#schedule: /schedule/ || fa fa-calendar</span></span><br><span class="line">  <span class="comment">#sitemap: /sitemap.xml || fa fa-sitemap</span></span><br><span class="line">  <span class="comment">#commonweal: /404/ || fa fa-heartbeat</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="搜索栏"><a href="#搜索栏" class="headerlink" title="搜索栏"></a>搜索栏</h2><p>在站点配置文件中加入以下内容（<code>limit</code>的值表示搜索条目的最大数量）：</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">search:</span></span><br><span class="line">  <span class="attr">path:</span> <span class="string">search.xml</span></span><br><span class="line">  <span class="attr">field:</span> <span class="string">post</span></span><br><span class="line">  <span class="attr">format:</span> <span class="string">html</span></span><br><span class="line">  <span class="attr">limit:</span> <span class="number">10000</span></span><br></pre></td></tr></table></figure>
-
-<p>在主题配置文件中，启动本地搜索功能：</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Local Search</span></span><br><span class="line"><span class="comment"># Dependencies: https://github.com/next-theme/hexo-generator-searchdb</span></span><br><span class="line"><span class="attr">local_search:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-
-<p>安装依赖项：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">npm install hexo-generator-searchdb --save</span></span><br></pre></td></tr></table></figure>
-
-<p>最终效果如下：</p>
-<p><img src="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/b048d568938326cdc0d662a5f2c50c5.png" alt="b048d568938326cdc0d662a5f2c50c5"></p>
-<h2 id="标签页和分类页"><a href="#标签页和分类页" class="headerlink" title="标签页和分类页"></a>标签页和分类页</h2><p>创建分类目录文件和标签目录文件：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo new page categories</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo new page tags</span></span><br></pre></td></tr></table></figure>
-
-<p>将对应页面的类型（<code>type</code>）设置正确：</p>
-<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">title: categories</span><br><span class="line">toc: true</span><br><span class="line">date: 2024-05-24 10:16:44</span><br><span class="line">type: &quot;categories&quot;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">title: tags</span><br><span class="line">toc: true</span><br><span class="line">date: 2024-05-24 10:21:41</span><br><span class="line">type: &quot;tags&quot;</span><br></pre></td></tr></table></figure>
-
-<p>在博客文件中设置<code>tags</code>和<code>categories</code>词条，就能在对应目录下显示了。</p>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li><p><a href="https://blog.smallerpig.com/set-hexo-show-more-button-on-indexpage.html">让hexo的首页只显示文章的部分内容而不是全部</a></p>
-</li>
-<li><p><a href="https://theme-next.iissnan.com/getting-started.html">Next 开始使用</a></p>
-</li>
-<li><p><a href="https://www.sqlsec.com/2017/12/hexosearch.html">Hexo 博客无法搜索的终极解决方法</a></p>
-</li>
+    <title>【C++ Primer学习笔记】第一章 开始</title>
+    <url>/2024/05/19/%E3%80%90C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91%E7%AC%AC%E4%B8%80%E7%AB%A0-%E5%BC%80%E5%A7%8B/</url>
+    <content><![CDATA[<h1 id="chap01-开始"><a href="#chap01-开始" class="headerlink" title="chap01 开始"></a>chap01 开始</h1><h2 id="chap1-1-编写一个简单的C-程序"><a href="#chap1-1-编写一个简单的C-程序" class="headerlink" title="chap1.1 编写一个简单的C++程序"></a>chap1.1 编写一个简单的C++程序</h2><ul>
+<li>如何编译运行一个<code>cpp</code>程序</li>
+<li>如何获得系统执行完程序的退出状态码</li>
+<li><code>return 0</code>和<code>return -1</code>的退出状态码有什么区别</li>
 </ul>
+<h3 id="编译运行cpp程序"><a href="#编译运行cpp程序" class="headerlink" title="编译运行cpp程序"></a>编译运行cpp程序</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">g++ -o main main.cpp</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">./main</span></span><br></pre></td></tr></table></figure>
+
+<p>如果缺省<code>-o</code>选项，<code>Windows</code>系统上编译得到的可执行文件为<code>a.exe</code>，<code>Linux</code>系统上得到<code>a.out</code>。</p>
+<h3 id="退出状态码"><a href="#退出状态码" class="headerlink" title="退出状态码"></a>退出状态码</h3><p><code>Linux</code>系统 (<code>Windows</code>系统使用<code>Git Bash</code>也一样) 上使用如下命令获取退出状态码：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">echo</span> $?</span></span><br><span class="line">0</span><br></pre></td></tr></table></figure>
+
+<p>通常情况下，程序成功执行返回0，失败返回127。</p>
+<p><code>return 0</code>和<code>return -1</code>的退出状态码分别为0和127。</p>
+<h2 id="chap1-2-初识输入输出"><a href="#chap1-2-初识输入输出" class="headerlink" title="chap1.2 初识输入输出"></a>chap1.2 初识输入输出</h2><ul>
+<li>标准库定义了哪四个IO对象，它们分别是什么类型</li>
+<li><code>istream</code>和<code>ostream</code>类型的对象运算时有什么区别，计算结果是什么</li>
+<li>命名空间<code>std</code>有什么用</li>
+</ul>
+<h3 id="标准库的IO对象"><a href="#标准库的IO对象" class="headerlink" title="标准库的IO对象"></a>标准库的IO对象</h3><ul>
+<li><code>cin</code>，<code>istream</code></li>
+<li><code>cout</code>，<code>ostream</code></li>
+<li><code>cerr</code>，<code>ostream</code></li>
+<li><code>clog</code>，<code>ostream</code></li>
+</ul>
+<p>在<code>iostream</code>声明如下：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">extern</span> istream cin;		  <span class="comment">/// Linked to standard input</span></span><br><span class="line"><span class="keyword">extern</span> ostream cout;		<span class="comment">/// Linked to standard output</span></span><br><span class="line"><span class="keyword">extern</span> ostream cerr;		<span class="comment">/// Linked to standard error (unbuffered)</span></span><br><span class="line"><span class="keyword">extern</span> ostream clog;		<span class="comment">/// Linked to standard error (buffered)</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="istream和ostream类型的运算"><a href="#istream和ostream类型的运算" class="headerlink" title="istream和ostream类型的运算"></a><code>istream</code>和<code>ostream</code>类型的运算</h3><p><code>istream</code>使用<code>&gt;&gt;</code>运算符，运算结果是左侧的对象。</p>
+<p><code>ostream</code>使用<code>&lt;&lt;</code>运算符，运算结果是左侧的对象。</p>
+<h3 id="命名空间std"><a href="#命名空间std" class="headerlink" title="命名空间std"></a>命名空间<code>std</code></h3><p><code>std</code>用于隔离变量和函数的命名，使得不同的命名空间能够有同名的函数和变量。</p>
+<p>使用<code>std::cin</code>的形式调用命名空间中的变量。</p>
+<p><code>::</code>称为作用域运算符。</p>
+<h3 id="Windows命令行运行C-程序出现中文乱码"><a href="#Windows命令行运行C-程序出现中文乱码" class="headerlink" title="Windows命令行运行C++程序出现中文乱码"></a><code>Windows</code>命令行运行C++程序出现中文乱码</h3><p><code>VSCode</code>的默认编码为<code>UTF-8</code>，终端的编码默认为<code>GBK</code>，将<code>VSCode</code>的编码设置为<code>GBK</code>即可解决问题。</p>
+<h2 id="chap1-3-注释简介"><a href="#chap1-3-注释简介" class="headerlink" title="chap1.3 注释简介"></a>chap1.3 注释简介</h2><ul>
+<li>C++如何编写注释，有哪些类型的注释</li>
+</ul>
+<h3 id="C-的注释"><a href="#C-的注释" class="headerlink" title="C++的注释"></a>C++的注释</h3><p>单行注释：<code>//</code></p>
+<p>多行注释：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * ...</span></span><br><span class="line"><span class="comment"> * ...</span></span><br><span class="line"><span class="comment"> * ...</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="chap1-4-控制流"><a href="#chap1-4-控制流" class="headerlink" title="chap1.4 控制流"></a>chap1.4 控制流</h2><ul>
+<li>while语句</li>
+<li>for语句</li>
+<li>if语句</li>
+</ul>
+<h3 id="读取数量不确定的输入数据"><a href="#读取数量不确定的输入数据" class="headerlink" title="读取数量不确定的输入数据"></a>读取数量不确定的输入数据</h3><p>可以使用如下的模式读取不确定数量的输入数据：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> value;</span><br><span class="line"><span class="keyword">while</span> (std::cin &gt;&gt; value) &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>std::cin &gt;&gt; value</code>会将输入存入<code>value</code>这个变量中，返回<code>std::cin</code>，如果<code>std::cin</code>的状态无效，比如读取到非整型或者EOF（<code>Windows</code>输入<code>Ctrl-Z</code>，<code>Linux</code>输入<code>Ctrl-D</code>），则退出循环，结束读取。</p>
+<h2 id="chap1-5-类简介"><a href="#chap1-5-类简介" class="headerlink" title="chap1.5 类简介"></a>chap1.5 类简介</h2><ul>
+<li>类与基本数据类型的区别在哪里</li>
+</ul>
+<p>类聚合了一组数据和操作，对于基本数据类型（如整型），<code>&lt;&lt;</code>、<code>&gt;&gt;</code>、<code>+</code>、<code>=</code>等运算符能够被C++语言默认支持，但类的对象需要自己实现，书中提供了<code>Sales_item</code>这个头文件，能够提供<code>Sales_item</code>这个类，支持了对各种运算符的操作，能够方便地进行读写和计算。</p>
 ]]></content>
       <categories>
-        <category>Hexo博客</category>
-      </categories>
-      <tags>
-        <tag>技术</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>【Hexo的图片管理问题】阿里云OSS + PicGo搭建图床</title>
-    <url>/2024/05/21/%E3%80%90Hexo%E7%9A%84%E5%9B%BE%E7%89%87%E7%AE%A1%E7%90%86%E9%97%AE%E9%A2%98%E3%80%91%E9%98%BF%E9%87%8C%E4%BA%91OSS-PicGo%E6%90%AD%E5%BB%BA%E5%9B%BE%E5%BA%8A/</url>
-    <content><![CDATA[<h2 id="阿里云OSS"><a href="#阿里云OSS" class="headerlink" title="阿里云OSS"></a>阿里云OSS</h2><h3 id="Bucket的存储和读取"><a href="#Bucket的存储和读取" class="headerlink" title="Bucket的存储和读取"></a>Bucket的存储和读取</h3><p>在阿里云上开通<a href="https://oss.console.aliyun.com/overview">OSS</a>，创建一个<code>Bucket</code>，地区选择<strong>华南1-深圳</strong>，存储类型为<strong>标准存储</strong>，存储冗余类型为<strong>本地冗余存储</strong>。</p>
-<p>购买OSS资源包，选择<strong>40G&#x2F;1年</strong>的套餐，这样就能够把图片存储到阿里云上了。</p>
-<p><img src="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/22127b7f64ff476d3f5bae1a8d0c938.png" alt="22127b7f64ff476d3f5bae1a8d0c938"></p>
-<p>需要注意：因为图床需要让任何来源都能访问到资源，<code>Bucket</code>的读写权限需要设置为<strong>公共读</strong>（需要关闭<strong>“阻止公共访问”</strong>）。</p>
-<p><img src="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/ffdb72988de51e8038a4c1497d0d4ed.png" alt="ffdb72988de51e8038a4c1497d0d4ed"></p>
-<p>另外，<strong>OSS资源包不包括外网流出流量，就是说从阿里云拉取图片产生的流量是需要付费的</strong>，<a href="https://www.aliyun.com/price/product?spm=a2c4g.11186623.0.0.14d71887x72wt4#/oss/detail/ossbag">收费标准</a>如下（开启<strong>同城冗余</strong>和<strong>跨区域复制</strong>流量费更高）：</p>
-<p><img src="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/99b459af64d549b1186f90d6320429d.png" alt="99b459af64d549b1186f90d6320429d"></p>
-<h3 id="创建用户进行访问控制"><a href="#创建用户进行访问控制" class="headerlink" title="创建用户进行访问控制"></a>创建用户进行访问控制</h3><p>在阿里云的访问控制模块中创建新用户，注意需要勾选<strong>启动OpenAPI</strong>选项，记录下生成的<strong>AccessKey ID</strong>和<strong>AccessKey Secret</strong>。</p>
-<p><img src="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/dd34568a7bdd19f85b830c649a97a71.png" alt="dd34568a7bdd19f85b830c649a97a71"></p>
-<h2 id="PicGo"><a href="#PicGo" class="headerlink" title="PicGo"></a>PicGo</h2><p>在<a href="https://github.com/Molunerfinn/PicGo/releases/tag/v2.3.1">PicGo官网</a>下载稳定版本的<code>PicGo</code>客户端，使用之前获取的参数进行设置（img目录需要在阿里云上先创建，初始使用可以不填写<strong>存储路径</strong>）：</p>
-<p><img src="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/67cb206f75494599386f7558f512e0b.png" alt="67cb206f75494599386f7558f512e0b"></p>
-<h2 id="Typora上传插入图片"><a href="#Typora上传插入图片" class="headerlink" title="Typora上传插入图片"></a>Typora上传插入图片</h2><p>在<code>Typora</code>上进行设置，使用<code>PicGo</code>上传插入的图片到阿里云。</p>
-<p>配置完成后，可以使用<code>Typora</code>的<strong>验证图片上传选项</strong>测试图床是否被正确配置。</p>
-<p><img src="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/acb0232932277fccf8ef1fcc2b22d6f.png" alt="acb0232932277fccf8ef1fcc2b22d6f"></p>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li><p><a href="https://blog.csdn.net/qq_30105599/article/details/119651114">关于Hexo写博客时的图片插入问题（OSS对象存储+PicGo搭建图床）</a></p>
-</li>
-<li><p><a href="https://zhuanlan.zhihu.com/p/104152479">阿里云OSS PicGo 配置图床教程 超详细</a></p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Hexo博客</category>
+        <category>C++</category>
       </categories>
       <tags>
         <tag>技术</tag>
@@ -400,6 +318,90 @@
 ]]></content>
       <categories>
         <category>C++</category>
+      </categories>
+      <tags>
+        <tag>技术</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【Hexo的图片管理问题】阿里云OSS + PicGo搭建图床</title>
+    <url>/2024/05/21/%E3%80%90Hexo%E7%9A%84%E5%9B%BE%E7%89%87%E7%AE%A1%E7%90%86%E9%97%AE%E9%A2%98%E3%80%91%E9%98%BF%E9%87%8C%E4%BA%91OSS-PicGo%E6%90%AD%E5%BB%BA%E5%9B%BE%E5%BA%8A/</url>
+    <content><![CDATA[<h2 id="阿里云OSS"><a href="#阿里云OSS" class="headerlink" title="阿里云OSS"></a>阿里云OSS</h2><h3 id="Bucket的存储和读取"><a href="#Bucket的存储和读取" class="headerlink" title="Bucket的存储和读取"></a>Bucket的存储和读取</h3><p>在阿里云上开通<a href="https://oss.console.aliyun.com/overview">OSS</a>，创建一个<code>Bucket</code>，地区选择<strong>华南1-深圳</strong>，存储类型为<strong>标准存储</strong>，存储冗余类型为<strong>本地冗余存储</strong>。</p>
+<p>购买OSS资源包，选择<strong>40G&#x2F;1年</strong>的套餐，这样就能够把图片存储到阿里云上了。</p>
+<p><img src="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/22127b7f64ff476d3f5bae1a8d0c938.png" alt="22127b7f64ff476d3f5bae1a8d0c938"></p>
+<p>需要注意：因为图床需要让任何来源都能访问到资源，<code>Bucket</code>的读写权限需要设置为<strong>公共读</strong>（需要关闭<strong>“阻止公共访问”</strong>）。</p>
+<p><img src="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/ffdb72988de51e8038a4c1497d0d4ed.png" alt="ffdb72988de51e8038a4c1497d0d4ed"></p>
+<p>另外，<strong>OSS资源包不包括外网流出流量，就是说从阿里云拉取图片产生的流量是需要付费的</strong>，<a href="https://www.aliyun.com/price/product?spm=a2c4g.11186623.0.0.14d71887x72wt4#/oss/detail/ossbag">收费标准</a>如下（开启<strong>同城冗余</strong>和<strong>跨区域复制</strong>流量费更高）：</p>
+<p><img src="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/99b459af64d549b1186f90d6320429d.png" alt="99b459af64d549b1186f90d6320429d"></p>
+<h3 id="创建用户进行访问控制"><a href="#创建用户进行访问控制" class="headerlink" title="创建用户进行访问控制"></a>创建用户进行访问控制</h3><p>在阿里云的访问控制模块中创建新用户，注意需要勾选<strong>启动OpenAPI</strong>选项，记录下生成的<strong>AccessKey ID</strong>和<strong>AccessKey Secret</strong>。</p>
+<p><img src="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/dd34568a7bdd19f85b830c649a97a71.png" alt="dd34568a7bdd19f85b830c649a97a71"></p>
+<h2 id="PicGo"><a href="#PicGo" class="headerlink" title="PicGo"></a>PicGo</h2><p>在<a href="https://github.com/Molunerfinn/PicGo/releases/tag/v2.3.1">PicGo官网</a>下载稳定版本的<code>PicGo</code>客户端，使用之前获取的参数进行设置（img目录需要在阿里云上先创建，初始使用可以不填写<strong>存储路径</strong>）：</p>
+<p><img src="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/67cb206f75494599386f7558f512e0b.png" alt="67cb206f75494599386f7558f512e0b"></p>
+<h2 id="Typora上传插入图片"><a href="#Typora上传插入图片" class="headerlink" title="Typora上传插入图片"></a>Typora上传插入图片</h2><p>在<code>Typora</code>上进行设置，使用<code>PicGo</code>上传插入的图片到阿里云。</p>
+<p>配置完成后，可以使用<code>Typora</code>的<strong>验证图片上传选项</strong>测试图床是否被正确配置。</p>
+<p><img src="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/acb0232932277fccf8ef1fcc2b22d6f.png" alt="acb0232932277fccf8ef1fcc2b22d6f"></p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><p><a href="https://blog.csdn.net/qq_30105599/article/details/119651114">关于Hexo写博客时的图片插入问题（OSS对象存储+PicGo搭建图床）</a></p>
+</li>
+<li><p><a href="https://zhuanlan.zhihu.com/p/104152479">阿里云OSS PicGo 配置图床教程 超详细</a></p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Hexo博客</category>
+      </categories>
+      <tags>
+        <tag>技术</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【个人博客优化】Hexo+Next</title>
+    <url>/2024/05/24/%E3%80%90%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E4%BC%98%E5%8C%96%E3%80%91Hexo-Next/</url>
+    <content><![CDATA[<p>注意：下文将<code>Hexo</code>的主题文件<code>_config.yml</code>称为<strong>站点配置文件</strong>，将<code>_config.next.yml</code>称为<strong>主题配置文件</strong>。</p>
+<h2 id="首页设置"><a href="#首页设置" class="headerlink" title="首页设置"></a>首页设置</h2><p><code>Hexo</code>默认的首页会显示每一篇文章的标题和全文，笔者觉得不是很美观，故想把首页样式修改为只显示文章的标题和摘要，这点可以比较方便的通过设置<strong>主题配置文件</strong>实现：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Use `description` in front-matter to specify post excerpt.</span></span><br><span class="line"><span class="attr">excerpt_description:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<p>之后在博客的模板文件中，添加<code>description</code>一项，这样创建博客时会自动创建描述，再简单修改就可以实现目标功能：</p>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">title: &#123;&#123; title &#125;&#125;</span><br><span class="line">date: &#123;&#123; date &#125;&#125;</span><br><span class="line">tags:</span><br><span class="line">toc: true</span><br><span class="line">description: 这是显示在首页的概述，正文内容均会被隐藏。</span><br></pre></td></tr></table></figure>
+
+<p>设置成功后，效果如下：</p>
+<p><img src="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/049a2fc7b2ce5230b68a1e46ae83f27.png" alt="049a2fc7b2ce5230b68a1e46ae83f27"></p>
+<h2 id="菜单页设置"><a href="#菜单页设置" class="headerlink" title="菜单页设置"></a>菜单页设置</h2><p>在<strong>主题配置文件</strong>中，开启所需的菜单项：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">menu:</span></span><br><span class="line">  <span class="attr">home:</span> <span class="string">/</span> <span class="string">||</span> <span class="string">fa</span> <span class="string">fa-home</span></span><br><span class="line">  <span class="comment"># about: /about/ || fa fa-user</span></span><br><span class="line">  <span class="attr">tags:</span> <span class="string">/tags/</span> <span class="string">||</span> <span class="string">fa</span> <span class="string">fa-tags</span></span><br><span class="line">  <span class="attr">categories:</span> <span class="string">/categories/</span> <span class="string">||</span> <span class="string">fa</span> <span class="string">fa-th</span></span><br><span class="line">  <span class="attr">archives:</span> <span class="string">/archives/</span> <span class="string">||</span> <span class="string">fa</span> <span class="string">fa-archive</span></span><br><span class="line">  <span class="comment">#schedule: /schedule/ || fa fa-calendar</span></span><br><span class="line">  <span class="comment">#sitemap: /sitemap.xml || fa fa-sitemap</span></span><br><span class="line">  <span class="comment">#commonweal: /404/ || fa fa-heartbeat</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="搜索栏"><a href="#搜索栏" class="headerlink" title="搜索栏"></a>搜索栏</h2><p>在站点配置文件中加入以下内容（<code>limit</code>的值表示搜索条目的最大数量）：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">search:</span></span><br><span class="line">  <span class="attr">path:</span> <span class="string">search.xml</span></span><br><span class="line">  <span class="attr">field:</span> <span class="string">post</span></span><br><span class="line">  <span class="attr">format:</span> <span class="string">html</span></span><br><span class="line">  <span class="attr">limit:</span> <span class="number">10000</span></span><br></pre></td></tr></table></figure>
+
+<p>在主题配置文件中，启动本地搜索功能：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Local Search</span></span><br><span class="line"><span class="comment"># Dependencies: https://github.com/next-theme/hexo-generator-searchdb</span></span><br><span class="line"><span class="attr">local_search:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<p>安装依赖项：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">npm install hexo-generator-searchdb --save</span></span><br></pre></td></tr></table></figure>
+
+<p>最终效果如下：</p>
+<p><img src="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/b048d568938326cdc0d662a5f2c50c5.png" alt="b048d568938326cdc0d662a5f2c50c5"></p>
+<h2 id="标签页和分类页"><a href="#标签页和分类页" class="headerlink" title="标签页和分类页"></a>标签页和分类页</h2><p>创建分类目录文件和标签目录文件：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo new page categories</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">hexo new page tags</span></span><br></pre></td></tr></table></figure>
+
+<p>将对应页面的类型（<code>type</code>）设置正确：</p>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">title: categories</span><br><span class="line">toc: true</span><br><span class="line">date: 2024-05-24 10:16:44</span><br><span class="line">type: &quot;categories&quot;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">title: tags</span><br><span class="line">toc: true</span><br><span class="line">date: 2024-05-24 10:21:41</span><br><span class="line">type: &quot;tags&quot;</span><br></pre></td></tr></table></figure>
+
+<p>在博客文件中设置<code>tags</code>和<code>categories</code>词条，就能在对应目录下显示了。</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><p><a href="https://blog.smallerpig.com/set-hexo-show-more-button-on-indexpage.html">让hexo的首页只显示文章的部分内容而不是全部</a></p>
+</li>
+<li><p><a href="https://theme-next.iissnan.com/getting-started.html">Next 开始使用</a></p>
+</li>
+<li><p><a href="https://www.sqlsec.com/2017/12/hexosearch.html">Hexo 博客无法搜索的终极解决方法</a></p>
+</li>
+<li><p><a href="https://tohugo.com/2021/01/26/%E5%B7%A5%E5%85%B7%E9%85%8D%E7%BD%AE/Hexo%E6%B7%BB%E5%8A%A0%E5%88%86%E7%B1%BB%E5%8F%8A%E6%A0%87%E7%AD%BE%EF%BC%88%E5%9C%A8Next%E4%B8%BB%E9%A2%98%E4%B8%8B%EF%BC%89/">Hexo添加分类及标签（在Next主题下）</a></p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Hexo博客</category>
       </categories>
       <tags>
         <tag>技术</tag>
