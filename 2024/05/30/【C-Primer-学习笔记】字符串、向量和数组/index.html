@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.2.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="本文是对C++ Primer第三章的总结，介绍了C++的字符串、向量和数组。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【C++ Primer 学习笔记】字符串、向量和数组">
+<meta property="og:url" content="http://example.com/2024/05/30/%E3%80%90C-Primer-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91%E5%AD%97%E7%AC%A6%E4%B8%B2%E3%80%81%E5%90%91%E9%87%8F%E5%92%8C%E6%95%B0%E7%BB%84/index.html">
+<meta property="og:site_name" content="Rex&#39;s Blog">
+<meta property="og:description" content="本文是对C++ Primer第三章的总结，介绍了C++的字符串、向量和数组。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-05-30T04:43:00.000Z">
+<meta property="article:modified_time" content="2024-05-30T04:45:27.914Z">
+<meta property="article:author" content="Rex">
+<meta property="article:tag" content="技术">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2024/05/30/%E3%80%90C-Primer-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91%E5%AD%97%E7%AC%A6%E4%B8%B2%E3%80%81%E5%90%91%E9%87%8F%E5%92%8C%E6%95%B0%E7%BB%84/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2024/05/30/%E3%80%90C-Primer-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91%E5%AD%97%E7%AC%A6%E4%B8%B2%E3%80%81%E5%90%91%E9%87%8F%E5%92%8C%E6%95%B0%E7%BB%84/","path":"2024/05/30/【C-Primer-学习笔记】字符串、向量和数组/","title":"【C++ Primer 学习笔记】字符串、向量和数组"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>【C++ Primer 学习笔记】字符串、向量和数组 | Rex's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Rex's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#chap03-%E5%AD%97%E7%AC%A6%E4%B8%B2%E3%80%81%E5%90%91%E9%87%8F%E5%92%8C%E6%95%B0%E7%BB%84"><span class="nav-number">1.</span> <span class="nav-text">chap03 字符串、向量和数组</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#chap3-1-%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4%E7%9A%84using%E5%A3%B0%E6%98%8E"><span class="nav-number">1.1.</span> <span class="nav-text">chap3.1 命名空间的using声明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chap3-2-%E6%A0%87%E5%87%86%E5%BA%93%E7%B1%BB%E5%9E%8Bstring"><span class="nav-number">1.2.</span> <span class="nav-text">chap3.2 标准库类型string</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#string%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">1.2.1.</span> <span class="nav-text">string初始化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#range-for"><span class="nav-number">1.2.2.</span> <span class="nav-text">range for</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chap3-3-%E6%A0%87%E5%87%86%E5%BA%93vector"><span class="nav-number">1.3.</span> <span class="nav-text">chap3.3 标准库vector</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#vector%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">1.3.1.</span> <span class="nav-text">vector初始化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chap3-4-%E8%BF%AD%E4%BB%A3%E5%99%A8%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.4.</span> <span class="nav-text">chap3.4 迭代器介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%AD%E4%BB%A3%E5%99%A8%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">1.4.1.</span> <span class="nav-text">迭代器的使用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chap3-5-%E6%95%B0%E7%BB%84"><span class="nav-number">1.5.</span> <span class="nav-text">chap3.5 数组</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Rex</p>
+  <div class="site-description" itemprop="description">最是人间留不住，朱颜辞镜花辞树。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/30/%E3%80%90C-Primer-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91%E5%AD%97%E7%AC%A6%E4%B8%B2%E3%80%81%E5%90%91%E9%87%8F%E5%92%8C%E6%95%B0%E7%BB%84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Rex">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rex's Blog">
+      <meta itemprop="description" content="最是人间留不住，朱颜辞镜花辞树。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="【C++ Primer 学习笔记】字符串、向量和数组 | Rex's Blog">
+      <meta itemprop="description" content="本文是对C++ Primer第三章的总结，介绍了C++的字符串、向量和数组。">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【C++ Primer 学习笔记】字符串、向量和数组
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-05-30 12:43:00 / 修改时间：12:45:27" itemprop="dateCreated datePublished" datetime="2024-05-30T12:43:00+08:00">2024-05-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">本文是对C++ Primer第三章的总结，介绍了C++的字符串、向量和数组。</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="chap03-字符串、向量和数组"><a href="#chap03-字符串、向量和数组" class="headerlink" title="chap03 字符串、向量和数组"></a>chap03 字符串、向量和数组</h1><h2 id="chap3-1-命名空间的using声明"><a href="#chap3-1-命名空间的using声明" class="headerlink" title="chap3.1 命名空间的using声明"></a>chap3.1 命名空间的<code>using</code>声明</h2><ul>
+<li><code>C++</code>中的<code>using</code>关键字有什么作用？</li>
+</ul>
+<p><code>using</code>声明可以将命名空间中的成员的作用域拓展到全局作用域，故不需要使用形如<code>std::cin</code>的方式，而是直接使用<code>cin</code>就能从标准输入读取信息。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> std::cin;</span><br><span class="line"><span class="keyword">using</span> std::cout;</span><br><span class="line"><span class="keyword">using</span> std::endl;</span><br></pre></td></tr></table></figure>
+
+<p>需要注意，<code>using</code>声明不能放在头文件中，因为头文件会被多个源文件包含，容易可能导致命名冲突，应该尽量减小命名空间的作用范围。</p>
+<h2 id="chap3-2-标准库类型string"><a href="#chap3-2-标准库类型string" class="headerlink" title="chap3.2 标准库类型string"></a>chap3.2 标准库类型<code>string</code></h2><ul>
+<li>如何初始化<code>string</code>？</li>
+<li><code>string</code>支持哪些操作？</li>
+</ul>
+<h3 id="string初始化"><a href="#string初始化" class="headerlink" title="string初始化"></a><code>string</code>初始化</h3><p><code>string</code>包含直接初始化和赋值初始化。使用赋值运算符<code>=</code>进行初始化，就是拷贝初始化；否则就是直接初始化。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">string s1 = <span class="string">&quot;Hello, World!&quot;</span>;    <span class="comment">// 拷贝初始化</span></span><br><span class="line"><span class="function">string <span class="title">s2</span><span class="params">(<span class="string">&quot;Hello, World!&quot;</span>)</span></span>;     <span class="comment">// 直接初始化</span></span><br><span class="line">string s3 = &#123;<span class="string">&quot;Hello, World!&quot;</span>&#125;;  <span class="comment">// 拷贝初始化</span></span><br><span class="line">string s4&#123;<span class="string">&quot;Hello, World!&quot;</span>&#125;;     <span class="comment">// 直接初始化</span></span><br><span class="line"></span><br><span class="line">string s5 = s1;                 <span class="comment">// 拷贝初始化</span></span><br><span class="line"><span class="function">string <span class="title">s6</span><span class="params">(s1)</span></span>;                  <span class="comment">// 直接初始化</span></span><br><span class="line"></span><br><span class="line"><span class="function">string <span class="title">s7</span><span class="params">(<span class="number">10</span>, <span class="string">&#x27;c&#x27;</span>)</span></span>;             <span class="comment">// 直接初始化</span></span><br><span class="line">string s7 = <span class="built_in">string</span>(<span class="number">10</span>, <span class="string">&#x27;c&#x27;</span>);    <span class="comment">// 拷贝初始化</span></span><br></pre></td></tr></table></figure>
+
+<p>使用<code>cin &gt;&gt; s</code>读取字符串时，遇到空白符停止，使用<code>getline(cin, s)</code>读取字符串时，遇到换行符停止。</p>
+<p>默认初始化指的是不为变量提供初始值。<code>string</code>进行默认初始化时，默认为空串。整型进行初始化时，默认为0。</p>
+<p>需要注意，定义内置类型的局部变量，不会进行默认初始化，会产生未定义行为。</p>
+<h3 id="range-for"><a href="#range-for" class="headerlink" title="range for"></a><code>range for</code></h3><p>C++11提供了<code>range for</code>，可以很方便地遍历序列的元素：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">string s&#123;<span class="string">&quot;Hello, World!&quot;</span>&#125;;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">auto</span> &amp;c : s) &#123;</span><br><span class="line">    c = <span class="string">&#x27;X&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="chap3-3-标准库vector"><a href="#chap3-3-标准库vector" class="headerlink" title="chap3.3 标准库vector"></a>chap3.3 标准库vector</h2><ul>
+<li><p>如何初始化<code>vector</code>？</p>
+</li>
+<li><p><code>vector</code>支持哪些操作？</p>
+</li>
+</ul>
+<h3 id="vector初始化"><a href="#vector初始化" class="headerlink" title="vector初始化"></a><code>vector</code>初始化</h3><p><code>vector</code>和<code>string</code>一样，也支持直接初始化和赋值初始化：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;<span class="type">int</span>&gt; v1;			<span class="comment">// 直接初始化</span></span><br><span class="line"><span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">v2</span><span class="params">(<span class="number">10</span>)</span></span>; 	<span class="comment">// 直接初始化</span></span><br><span class="line"><span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">v3</span><span class="params">(<span class="number">10</span>, <span class="number">42</span>)</span></span>;	<span class="comment">// 直接初始化</span></span><br><span class="line">vector&lt;<span class="type">int</span>&gt; v4&#123;<span class="number">10</span>&#125;;		<span class="comment">// 列表初始化</span></span><br><span class="line">vector&lt;<span class="type">int</span>&gt; v5&#123;<span class="number">10</span>, <span class="number">42</span>&#125;;	<span class="comment">// 列表初始化</span></span><br><span class="line">vector&lt;string&gt; v6&#123;<span class="number">10</span>&#125;;	<span class="comment">// 列表初始化</span></span><br><span class="line">vector&lt;string&gt; v7&#123;<span class="number">10</span>, <span class="string">&quot;hi&quot;</span>&#125;;	<span class="comment">// 列表初始化</span></span><br></pre></td></tr></table></figure>
+
+<p>列表初始化也可以是赋值初始化：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;<span class="type">int</span>&gt; vec = &#123;<span class="number">42</span>, <span class="number">42</span>, <span class="number">42</span>, <span class="number">42</span>, <span class="number">42</span>, <span class="number">42</span>, <span class="number">42</span>, <span class="number">42</span>, <span class="number">42</span>, <span class="number">42</span>&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>列表初始化的原理是，如果参数支持列表列表初始化，就进行列表初始化，否则就尝试直接初始化，如果还是失败，就编译出错。</p>
+<h2 id="chap3-4-迭代器介绍"><a href="#chap3-4-迭代器介绍" class="headerlink" title="chap3.4 迭代器介绍"></a>chap3.4 迭代器介绍</h2><ul>
+<li>如何使用迭代器？</li>
+<li>什么情况下迭代器可能失效？</li>
+</ul>
+<h3 id="迭代器的使用"><a href="#迭代器的使用" class="headerlink" title="迭代器的使用"></a>迭代器的使用</h3><p>迭代器主要用于访问容器的元素，与索引访问容器元素的区别在于，索引在存储上是连续的，迭代器不一定是连续的，所以需要使用<code>!=</code>判断是否迭代结束。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">vec</span><span class="params">(<span class="number">10</span>, <span class="number">2020</span>)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">auto</span> it = vec.<span class="built_in">begin</span>(); it != vec.<span class="built_in">end</span>(); it++) &#123;</span><br><span class="line">    *it *= <span class="number">2</span>;</span><br><span class="line">    cout &lt;&lt; *it &lt;&lt; endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>初始化迭代器后，如果容器的元素个数发生变化，可能会导致迭代器异常，即迭代器失效。</p>
+<p><code>sizeof(std::string) == 32</code></p>
+<p><code>sizeof(std::vector&lt;int&gt;) == 24</code></p>
+<h2 id="chap3-5-数组"><a href="#chap3-5-数组" class="headerlink" title="chap3.5 数组"></a>chap3.5 数组</h2><ul>
+<li>如何对数组进行初始化？</li>
+<li>数组和<code>vector</code>比较，有什么缺点？</li>
+</ul>
+<p>数组可以使用列表初始化。数组使用默认初始化时，会将元素进行默认初始化。</p>
+<p><code>vector</code>是不定长的容器，数组的长度固定，在很多无法预知数据大小的场合，<code>vector</code>更有优势。</p>
+<p><code>vector</code>提供了一组便于操作数据的接口，和数组相比，减小了如越界、手动计数索引等问题。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%8A%80%E6%9C%AF/" rel="tag"># 技术</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/05/24/%E3%80%90C-%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E3%80%91EasyX%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA-%E8%B7%9F%E9%9A%8F%E9%BC%A0%E6%A0%87%E7%A7%BB%E5%8A%A8%E7%9A%84%E5%B0%8F%E7%90%83/" rel="prev" title="【C++游戏开发】EasyX开发环境搭建|跟随鼠标移动的小球">
+                  <i class="fa fa-angle-left"></i> 【C++游戏开发】EasyX开发环境搭建|跟随鼠标移动的小球
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Rex</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
