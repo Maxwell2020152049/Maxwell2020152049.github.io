@@ -1,24 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Hello World</title>
-    <url>/2024/05/18/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
-  </entry>
-  <entry>
     <title>如何搭建个人博客</title>
     <url>/2024/05/18/%E5%A6%82%E4%BD%95%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
     <content><![CDATA[<p>受到了b站一位up主<a href="https://space.bilibili.com/384068749">CodeSheep</a>的启发：</p>
@@ -134,6 +116,24 @@
       </tags>
   </entry>
   <entry>
+    <title>Hello World</title>
+    <url>/2024/05/18/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+  </entry>
+  <entry>
     <title>【C++ Primer 学习笔记】第一章 开始</title>
     <url>/2024/05/19/%E3%80%90C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91%E7%AC%AC%E4%B8%80%E7%AB%A0-%E5%BC%80%E5%A7%8B/</url>
     <content><![CDATA[<h1 id="chap01-开始"><a href="#chap01-开始" class="headerlink" title="chap01 开始"></a>chap01 开始</h1><h2 id="chap1-1-编写一个简单的C-程序"><a href="#chap1-1-编写一个简单的C-程序" class="headerlink" title="chap1.1 编写一个简单的C++程序"></a>chap1.1 编写一个简单的C++程序</h2><ul>
@@ -199,96 +199,52 @@
       </tags>
   </entry>
   <entry>
-    <title>【Hexo的图片管理问题】阿里云OSS + PicGo搭建图床</title>
-    <url>/2024/05/21/%E3%80%90Hexo%E7%9A%84%E5%9B%BE%E7%89%87%E7%AE%A1%E7%90%86%E9%97%AE%E9%A2%98%E3%80%91%E9%98%BF%E9%87%8C%E4%BA%91OSS-PicGo%E6%90%AD%E5%BB%BA%E5%9B%BE%E5%BA%8A/</url>
-    <content><![CDATA[<h2 id="阿里云OSS"><a href="#阿里云OSS" class="headerlink" title="阿里云OSS"></a>阿里云OSS</h2><h3 id="Bucket的存储和读取"><a href="#Bucket的存储和读取" class="headerlink" title="Bucket的存储和读取"></a>Bucket的存储和读取</h3><p>在阿里云上开通<a href="https://oss.console.aliyun.com/overview">OSS</a>，创建一个<code>Bucket</code>，地区选择<strong>华南1-深圳</strong>，存储类型为<strong>标准存储</strong>，存储冗余类型为<strong>本地冗余存储</strong>。</p>
-<p>购买OSS资源包，选择<strong>40G&#x2F;1年</strong>的套餐，这样就能够把图片存储到阿里云上了。</p>
-<p><img src="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/22127b7f64ff476d3f5bae1a8d0c938.png" alt="22127b7f64ff476d3f5bae1a8d0c938"></p>
-<p>需要注意：因为图床需要让任何来源都能访问到资源，<code>Bucket</code>的读写权限需要设置为<strong>公共读</strong>（需要关闭<strong>“阻止公共访问”</strong>）。</p>
-<p><img src="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/ffdb72988de51e8038a4c1497d0d4ed.png" alt="ffdb72988de51e8038a4c1497d0d4ed"></p>
-<p>另外，<strong>OSS资源包不包括外网流出流量，就是说从阿里云拉取图片产生的流量是需要付费的</strong>，<a href="https://www.aliyun.com/price/product?spm=a2c4g.11186623.0.0.14d71887x72wt4#/oss/detail/ossbag">收费标准</a>如下（开启<strong>同城冗余</strong>和<strong>跨区域复制</strong>流量费更高）：</p>
-<p><img src="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/99b459af64d549b1186f90d6320429d.png" alt="99b459af64d549b1186f90d6320429d"></p>
-<h3 id="创建用户进行访问控制"><a href="#创建用户进行访问控制" class="headerlink" title="创建用户进行访问控制"></a>创建用户进行访问控制</h3><p>在阿里云的访问控制模块中创建新用户，注意需要勾选<strong>启动OpenAPI</strong>选项，记录下生成的<strong>AccessKey ID</strong>和<strong>AccessKey Secret</strong>。</p>
-<p><img src="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/dd34568a7bdd19f85b830c649a97a71.png" alt="dd34568a7bdd19f85b830c649a97a71"></p>
-<h2 id="PicGo"><a href="#PicGo" class="headerlink" title="PicGo"></a>PicGo</h2><p>在<a href="https://github.com/Molunerfinn/PicGo/releases/tag/v2.3.1">PicGo官网</a>下载稳定版本的<code>PicGo</code>客户端，使用之前获取的参数进行设置（img目录需要在阿里云上先创建，初始使用可以不填写<strong>存储路径</strong>）：</p>
-<p><img src="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/67cb206f75494599386f7558f512e0b.png" alt="67cb206f75494599386f7558f512e0b"></p>
-<h2 id="Typora上传插入图片"><a href="#Typora上传插入图片" class="headerlink" title="Typora上传插入图片"></a>Typora上传插入图片</h2><p>在<code>Typora</code>上进行设置，使用<code>PicGo</code>上传插入的图片到阿里云。</p>
-<p>配置完成后，可以使用<code>Typora</code>的<strong>验证图片上传选项</strong>测试图床是否被正确配置。</p>
-<p><img src="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/acb0232932277fccf8ef1fcc2b22d6f.png" alt="acb0232932277fccf8ef1fcc2b22d6f"></p>
+    <title>【C++游戏开发】EasyX开发环境搭建|跟随鼠标移动的小球</title>
+    <url>/2024/05/24/%E3%80%90C-%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E3%80%91EasyX%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA-%E8%B7%9F%E9%9A%8F%E9%BC%A0%E6%A0%87%E7%A7%BB%E5%8A%A8%E7%9A%84%E5%B0%8F%E7%90%83/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近在学习<code>C++ Primer</code>，学习语法之余，还需要找些项目练练手，刚好在b站上看到了<a href="https://space.bilibili.com/25864506"><strong>Voidmatrix</strong></a></p>
+<p>做的<a href="https://space.bilibili.com/25864506/channel/collectiondetail?sid=1825182&ctype=0">【从零开始的C++游戏开发】</a>系列教程，本期博客是参考了<a href="https://www.bilibili.com/video/BV1iQ4y1s7Qj/">【从零开始的C++游戏开发】EasyX开发环境搭建 | 跟随鼠标移动的小球</a>，完成<code>EasyX</code>开发环境的搭建和实现第一个游戏<code>Demo</code>。</p>
+<h2 id="EasyX开发环境搭建"><a href="#EasyX开发环境搭建" class="headerlink" title="EasyX开发环境搭建"></a>EasyX开发环境搭建</h2><p><code>IDE</code>使用<a href="https://visualstudio.microsoft.com/zh-hans/free-developer-offers/">Visual Studio</a>，安装<strong>C++的桌面开发</strong>即可。</p>
+<p>在<a href="https://easyx.cn/t/download">EasyX</a>官网下载最新版的<code>EasyX</code>库，为<code>VS2022</code>安装即可。</p>
+<p>写一段打印EasyX版本号的代码，验证环境是否正常运行：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;graphics.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%ws\n&quot;</span>, <span class="built_in">GetEasyXVer</span>());</span><br><span class="line">	std::wcout &lt;&lt; <span class="built_in">GetEasyXVer</span>() &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意<code>GetEasyXVer</code>这个函数，返回类型为换字符的字符串，打印的方式与<code>std::string</code>略有不同：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">const</span> TCHAR* <span class="title">GetEasyXVer</span><span class="params">()</span></span>;						<span class="comment">// Get version of EasyX library</span></span><br></pre></td></tr></table></figure>
+
+<p>打印结果如下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">20240225</span><br><span class="line">20240225</span><br></pre></td></tr></table></figure>
+
+<h2 id="跟随鼠标移动的小球"><a href="#跟随鼠标移动的小球" class="headerlink" title="跟随鼠标移动的小球"></a>跟随鼠标移动的小球</h2><h3 id="绘制窗口"><a href="#绘制窗口" class="headerlink" title="绘制窗口"></a>绘制窗口</h3><p>EasyX提供了<a href="https://docs.easyx.cn/zh-cn/initgraph">initgraph</a>用于绘制窗口，实际使用如下：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 初始化窗口</span></span><br><span class="line"><span class="built_in">initgraph</span>(<span class="number">1280</span>, <span class="number">960</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="绘制填充圆"><a href="#绘制填充圆" class="headerlink" title="绘制填充圆"></a>绘制填充圆</h3><p><code>EasyX</code>提供了<a href="https://docs.easyx.cn/zh-cn/solidcircle">solidcircle</a>用于绘制圆，实际使用如下：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// (x, y)为圆心</span></span><br><span class="line"><span class="built_in">solidcircle</span>(x, y, <span class="number">100</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="处理鼠标事件"><a href="#处理鼠标事件" class="headerlink" title="处理鼠标事件"></a>处理鼠标事件</h3><p><code>EasyX</code>自带了消息队列，提供了一组<a href="https://docs.easyx.cn/zh-cn/msg-func">消息处理相关函数</a>进行处理，使用<code>peekmessage</code>函数获取一个消息，消费消息队列的模式如下：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">ExMessage msg;</span><br><span class="line"><span class="keyword">while</span> (<span class="built_in">peekmessage</span>(&amp;msg)) &#123;</span><br><span class="line">	<span class="keyword">if</span> (msg.message == WM_MOUSEMOVE) &#123;</span><br><span class="line">		...</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>ExMessage</code>类型的变量用于存放鼠标消息，定义了成员变量<code>message</code>作为消息标识，其中<code>WM_MOUSEMOVE</code>标识鼠标移动。</p>
+<h3 id="清除屏幕"><a href="#清除屏幕" class="headerlink" title="清除屏幕"></a>清除屏幕</h3><p>进行绘制后需要有规律地清除屏幕，否则屏幕会比较杂乱，此时使用<a href="https://docs.easyx.cn/zh-cn/cleardevice">cleardevice</a>，用于清除屏幕。注意：清屏操作需要在绘制操作之前进行，否则刷新速度较快，会看不到绘制的内容。</p>
+<h3 id="屏幕闪烁"><a href="#屏幕闪烁" class="headerlink" title="屏幕闪烁"></a>屏幕闪烁</h3><p>使用<a href="https://docs.easyx.cn/zh-cn/beginbatchdraw">BeginBatchDraw</a>、<a href="https://docs.easyx.cn/zh-cn/endbatchdraw">EndBatchDraw</a>、<a href="https://docs.easyx.cn/zh-cn/flushbatchdraw">FlushBatchDraw</a>解决该问题。</p>
+<h3 id="残影效果"><a href="#残影效果" class="headerlink" title="残影效果"></a>残影效果</h3><p>绘制100次圆后，清除屏幕一次，这样小球会留下移动的痕迹。</p>
+<p>最终实现代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;graphics.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="comment">// 初始化窗口</span></span><br><span class="line">	<span class="built_in">initgraph</span>(<span class="number">1280</span>, <span class="number">960</span>);</span><br><span class="line"></span><br><span class="line">	<span class="type">int</span> x = <span class="number">300</span>, y = <span class="number">300</span>;</span><br><span class="line">	ExMessage msg;</span><br><span class="line">	<span class="type">const</span> <span class="type">unsigned</span> CIRCLE_COUNT = <span class="number">100</span>;</span><br><span class="line">	<span class="type">unsigned</span> crc_cnt = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">BeginBatchDraw</span>();</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">		<span class="keyword">while</span> (<span class="built_in">peekmessage</span>(&amp;msg)) &#123;</span><br><span class="line">			<span class="keyword">if</span> (msg.message == WM_MOUSEMOVE) &#123;</span><br><span class="line">				<span class="comment">// 圆心坐标即为鼠标位置</span></span><br><span class="line">				x = msg.x, y = msg.y;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="comment">// 清除屏幕和绘制的顺序不能反过来</span></span><br><span class="line">			<span class="comment">// 不然在屏幕上看不到圆</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">// 打印100次圆后清除屏幕</span></span><br><span class="line">		<span class="keyword">if</span> (crc_cnt == CIRCLE_COUNT) &#123;</span><br><span class="line">			<span class="built_in">cleardevice</span>();</span><br><span class="line">			crc_cnt = <span class="number">0</span>;</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			crc_cnt++;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="built_in">solidcircle</span>(x, y, <span class="number">100</span>);</span><br><span class="line">		<span class="built_in">FlushBatchDraw</span>();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">EndBatchDraw</span>();</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最终效果如下：</p>
+<p><img src="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/b20140e55d4b1a59f562087ad63e7fa.png" alt="b20140e55d4b1a59f562087ad63e7fa"></p>
 <h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li><p><a href="https://blog.csdn.net/qq_30105599/article/details/119651114">关于Hexo写博客时的图片插入问题（OSS对象存储+PicGo搭建图床）</a></p>
-</li>
-<li><p><a href="https://zhuanlan.zhihu.com/p/104152479">阿里云OSS PicGo 配置图床教程 超详细</a></p>
-</li>
+<li><a href="https://space.bilibili.com/25864506/channel/collectiondetail">合集·从零开始的提瓦特幸存者</a></li>
+<li><a href="https://www.bilibili.com/video/BV1iQ4y1s7Qj/">【从零开始的C++游戏开发】EasyX开发环境搭建 | 跟随鼠标移动的小球</a></li>
+<li><a href="https://docs.easyx.cn/zh-cn/intro">EasyX 在线文档</a></li>
 </ul>
-]]></content>
-      <categories>
-        <category>Hexo博客</category>
-      </categories>
-      <tags>
-        <tag>技术</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>【C++ Primer 学习笔记】第三章 字符串、向量和数组</title>
-    <url>/2024/05/30/%E3%80%90C-Primer-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91%E5%AD%97%E7%AC%A6%E4%B8%B2%E3%80%81%E5%90%91%E9%87%8F%E5%92%8C%E6%95%B0%E7%BB%84/</url>
-    <content><![CDATA[<h1 id="chap03-字符串、向量和数组"><a href="#chap03-字符串、向量和数组" class="headerlink" title="chap03 字符串、向量和数组"></a>chap03 字符串、向量和数组</h1><h2 id="chap3-1-命名空间的using声明"><a href="#chap3-1-命名空间的using声明" class="headerlink" title="chap3.1 命名空间的using声明"></a>chap3.1 命名空间的<code>using</code>声明</h2><ul>
-<li><code>C++</code>中的<code>using</code>关键字有什么作用？</li>
-</ul>
-<p><code>using</code>声明可以将命名空间中的成员的作用域拓展到全局作用域，故不需要使用形如<code>std::cin</code>的方式，而是直接使用<code>cin</code>就能从标准输入读取信息。</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">using</span> std::cin;</span><br><span class="line"><span class="keyword">using</span> std::cout;</span><br><span class="line"><span class="keyword">using</span> std::endl;</span><br></pre></td></tr></table></figure>
-
-<p>需要注意，<code>using</code>声明不能放在头文件中，因为头文件会被多个源文件包含，容易可能导致命名冲突，应该尽量减小命名空间的作用范围。</p>
-<h2 id="chap3-2-标准库类型string"><a href="#chap3-2-标准库类型string" class="headerlink" title="chap3.2 标准库类型string"></a>chap3.2 标准库类型<code>string</code></h2><ul>
-<li>如何初始化<code>string</code>？</li>
-<li><code>string</code>支持哪些操作？</li>
-</ul>
-<h3 id="string初始化"><a href="#string初始化" class="headerlink" title="string初始化"></a><code>string</code>初始化</h3><p><code>string</code>包含直接初始化和赋值初始化。使用赋值运算符<code>=</code>进行初始化，就是拷贝初始化；否则就是直接初始化。</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">string s1 = <span class="string">&quot;Hello, World!&quot;</span>;    <span class="comment">// 拷贝初始化</span></span><br><span class="line"><span class="function">string <span class="title">s2</span><span class="params">(<span class="string">&quot;Hello, World!&quot;</span>)</span></span>;     <span class="comment">// 直接初始化</span></span><br><span class="line">string s3 = &#123;<span class="string">&quot;Hello, World!&quot;</span>&#125;;  <span class="comment">// 拷贝初始化</span></span><br><span class="line">string s4&#123;<span class="string">&quot;Hello, World!&quot;</span>&#125;;     <span class="comment">// 直接初始化</span></span><br><span class="line"></span><br><span class="line">string s5 = s1;                 <span class="comment">// 拷贝初始化</span></span><br><span class="line"><span class="function">string <span class="title">s6</span><span class="params">(s1)</span></span>;                  <span class="comment">// 直接初始化</span></span><br><span class="line"></span><br><span class="line"><span class="function">string <span class="title">s7</span><span class="params">(<span class="number">10</span>, <span class="string">&#x27;c&#x27;</span>)</span></span>;             <span class="comment">// 直接初始化</span></span><br><span class="line">string s7 = <span class="built_in">string</span>(<span class="number">10</span>, <span class="string">&#x27;c&#x27;</span>);    <span class="comment">// 拷贝初始化</span></span><br></pre></td></tr></table></figure>
-
-<p>使用<code>cin &gt;&gt; s</code>读取字符串时，遇到空白符停止，使用<code>getline(cin, s)</code>读取字符串时，遇到换行符停止。</p>
-<p>默认初始化指的是不为变量提供初始值。<code>string</code>进行默认初始化时，默认为空串。整型进行初始化时，默认为0。</p>
-<p>需要注意，定义内置类型的局部变量，不会进行默认初始化，会产生未定义行为。</p>
-<h3 id="range-for"><a href="#range-for" class="headerlink" title="range for"></a><code>range for</code></h3><p>C++11提供了<code>range for</code>，可以很方便地遍历序列的元素：</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">string s&#123;<span class="string">&quot;Hello, World!&quot;</span>&#125;;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">auto</span> &amp;c : s) &#123;</span><br><span class="line">    c = <span class="string">&#x27;X&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="chap3-3-标准库vector"><a href="#chap3-3-标准库vector" class="headerlink" title="chap3.3 标准库vector"></a>chap3.3 标准库vector</h2><ul>
-<li><p>如何初始化<code>vector</code>？</p>
-</li>
-<li><p><code>vector</code>支持哪些操作？</p>
-</li>
-</ul>
-<h3 id="vector初始化"><a href="#vector初始化" class="headerlink" title="vector初始化"></a><code>vector</code>初始化</h3><p><code>vector</code>和<code>string</code>一样，也支持直接初始化和赋值初始化：</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">vector&lt;<span class="type">int</span>&gt; v1;			<span class="comment">// 直接初始化</span></span><br><span class="line"><span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">v2</span><span class="params">(<span class="number">10</span>)</span></span>; 	<span class="comment">// 直接初始化</span></span><br><span class="line"><span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">v3</span><span class="params">(<span class="number">10</span>, <span class="number">42</span>)</span></span>;	<span class="comment">// 直接初始化</span></span><br><span class="line">vector&lt;<span class="type">int</span>&gt; v4&#123;<span class="number">10</span>&#125;;		<span class="comment">// 列表初始化</span></span><br><span class="line">vector&lt;<span class="type">int</span>&gt; v5&#123;<span class="number">10</span>, <span class="number">42</span>&#125;;	<span class="comment">// 列表初始化</span></span><br><span class="line">vector&lt;string&gt; v6&#123;<span class="number">10</span>&#125;;	<span class="comment">// 列表初始化</span></span><br><span class="line">vector&lt;string&gt; v7&#123;<span class="number">10</span>, <span class="string">&quot;hi&quot;</span>&#125;;	<span class="comment">// 列表初始化</span></span><br></pre></td></tr></table></figure>
-
-<p>列表初始化也可以是赋值初始化：</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">vector&lt;<span class="type">int</span>&gt; vec = &#123;<span class="number">42</span>, <span class="number">42</span>, <span class="number">42</span>, <span class="number">42</span>, <span class="number">42</span>, <span class="number">42</span>, <span class="number">42</span>, <span class="number">42</span>, <span class="number">42</span>, <span class="number">42</span>&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>列表初始化的原理是，如果参数支持列表列表初始化，就进行列表初始化，否则就尝试直接初始化，如果还是失败，就编译出错。</p>
-<h2 id="chap3-4-迭代器介绍"><a href="#chap3-4-迭代器介绍" class="headerlink" title="chap3.4 迭代器介绍"></a>chap3.4 迭代器介绍</h2><ul>
-<li>如何使用迭代器？</li>
-<li>什么情况下迭代器可能失效？</li>
-</ul>
-<h3 id="迭代器的使用"><a href="#迭代器的使用" class="headerlink" title="迭代器的使用"></a>迭代器的使用</h3><p>迭代器主要用于访问容器的元素，与索引访问容器元素的区别在于，索引在存储上是连续的，迭代器不一定是连续的，所以需要使用<code>!=</code>判断是否迭代结束。</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">vec</span><span class="params">(<span class="number">10</span>, <span class="number">2020</span>)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">auto</span> it = vec.<span class="built_in">begin</span>(); it != vec.<span class="built_in">end</span>(); it++) &#123;</span><br><span class="line">    *it *= <span class="number">2</span>;</span><br><span class="line">    cout &lt;&lt; *it &lt;&lt; endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>初始化迭代器后，如果容器的元素个数发生变化，可能会导致迭代器异常，即迭代器失效。</p>
-<p><code>sizeof(std::string) == 32</code></p>
-<p><code>sizeof(std::vector&lt;int&gt;) == 24</code></p>
-<h2 id="chap3-5-数组"><a href="#chap3-5-数组" class="headerlink" title="chap3.5 数组"></a>chap3.5 数组</h2><ul>
-<li>如何对数组进行初始化？</li>
-<li>数组和<code>vector</code>比较，有什么缺点？</li>
-</ul>
-<p>数组可以使用列表初始化。数组使用默认初始化时，会将元素进行默认初始化。</p>
-<p><code>vector</code>是不定长的容器，数组的长度固定，在很多无法预知数据大小的场合，<code>vector</code>更有优势。</p>
-<p><code>vector</code>提供了一组便于操作数据的接口，和数组相比，减小了如越界、手动计数索引等问题。</p>
 ]]></content>
       <categories>
         <category>C++</category>
-        <category>C++ Primer</category>
+        <category>EasyX</category>
       </categories>
       <tags>
         <tag>技术</tag>
+        <tag>基于EasyX的游戏开发</tag>
       </tags>
   </entry>
   <entry>
@@ -344,80 +300,6 @@
       </categories>
       <tags>
         <tag>技术</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>【C++游戏开发】EasyX开发环境搭建|跟随鼠标移动的小球</title>
-    <url>/2024/05/24/%E3%80%90C-%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E3%80%91EasyX%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA-%E8%B7%9F%E9%9A%8F%E9%BC%A0%E6%A0%87%E7%A7%BB%E5%8A%A8%E7%9A%84%E5%B0%8F%E7%90%83/</url>
-    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近在学习<code>C++ Primer</code>，学习语法之余，还需要找些项目练练手，刚好在b站上看到了<a href="https://space.bilibili.com/25864506"><strong>Voidmatrix</strong></a></p>
-<p>做的<a href="https://space.bilibili.com/25864506/channel/collectiondetail?sid=1825182&ctype=0">【从零开始的C++游戏开发】</a>系列教程，本期博客是参考了<a href="https://www.bilibili.com/video/BV1iQ4y1s7Qj/">【从零开始的C++游戏开发】EasyX开发环境搭建 | 跟随鼠标移动的小球</a>，完成<code>EasyX</code>开发环境的搭建和实现第一个游戏<code>Demo</code>。</p>
-<h2 id="EasyX开发环境搭建"><a href="#EasyX开发环境搭建" class="headerlink" title="EasyX开发环境搭建"></a>EasyX开发环境搭建</h2><p><code>IDE</code>使用<a href="https://visualstudio.microsoft.com/zh-hans/free-developer-offers/">Visual Studio</a>，安装<strong>C++的桌面开发</strong>即可。</p>
-<p>在<a href="https://easyx.cn/t/download">EasyX</a>官网下载最新版的<code>EasyX</code>库，为<code>VS2022</code>安装即可。</p>
-<p>写一段打印EasyX版本号的代码，验证环境是否正常运行：</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;graphics.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%ws\n&quot;</span>, <span class="built_in">GetEasyXVer</span>());</span><br><span class="line">	std::wcout &lt;&lt; <span class="built_in">GetEasyXVer</span>() &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>注意<code>GetEasyXVer</code>这个函数，返回类型为换字符的字符串，打印的方式与<code>std::string</code>略有不同：</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">const</span> TCHAR* <span class="title">GetEasyXVer</span><span class="params">()</span></span>;						<span class="comment">// Get version of EasyX library</span></span><br></pre></td></tr></table></figure>
-
-<p>打印结果如下：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">20240225</span><br><span class="line">20240225</span><br></pre></td></tr></table></figure>
-
-<h2 id="跟随鼠标移动的小球"><a href="#跟随鼠标移动的小球" class="headerlink" title="跟随鼠标移动的小球"></a>跟随鼠标移动的小球</h2><h3 id="绘制窗口"><a href="#绘制窗口" class="headerlink" title="绘制窗口"></a>绘制窗口</h3><p>EasyX提供了<a href="https://docs.easyx.cn/zh-cn/initgraph">initgraph</a>用于绘制窗口，实际使用如下：</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 初始化窗口</span></span><br><span class="line"><span class="built_in">initgraph</span>(<span class="number">1280</span>, <span class="number">960</span>);</span><br></pre></td></tr></table></figure>
-
-<h3 id="绘制填充圆"><a href="#绘制填充圆" class="headerlink" title="绘制填充圆"></a>绘制填充圆</h3><p><code>EasyX</code>提供了<a href="https://docs.easyx.cn/zh-cn/solidcircle">solidcircle</a>用于绘制圆，实际使用如下：</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// (x, y)为圆心</span></span><br><span class="line"><span class="built_in">solidcircle</span>(x, y, <span class="number">100</span>);</span><br></pre></td></tr></table></figure>
-
-<h3 id="处理鼠标事件"><a href="#处理鼠标事件" class="headerlink" title="处理鼠标事件"></a>处理鼠标事件</h3><p><code>EasyX</code>自带了消息队列，提供了一组<a href="https://docs.easyx.cn/zh-cn/msg-func">消息处理相关函数</a>进行处理，使用<code>peekmessage</code>函数获取一个消息，消费消息队列的模式如下：</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">ExMessage msg;</span><br><span class="line"><span class="keyword">while</span> (<span class="built_in">peekmessage</span>(&amp;msg)) &#123;</span><br><span class="line">	<span class="keyword">if</span> (msg.message == WM_MOUSEMOVE) &#123;</span><br><span class="line">		...</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><code>ExMessage</code>类型的变量用于存放鼠标消息，定义了成员变量<code>message</code>作为消息标识，其中<code>WM_MOUSEMOVE</code>标识鼠标移动。</p>
-<h3 id="清除屏幕"><a href="#清除屏幕" class="headerlink" title="清除屏幕"></a>清除屏幕</h3><p>进行绘制后需要有规律地清除屏幕，否则屏幕会比较杂乱，此时使用<a href="https://docs.easyx.cn/zh-cn/cleardevice">cleardevice</a>，用于清除屏幕。注意：清屏操作需要在绘制操作之前进行，否则刷新速度较快，会看不到绘制的内容。</p>
-<h3 id="屏幕闪烁"><a href="#屏幕闪烁" class="headerlink" title="屏幕闪烁"></a>屏幕闪烁</h3><p>使用<a href="https://docs.easyx.cn/zh-cn/beginbatchdraw">BeginBatchDraw</a>、<a href="https://docs.easyx.cn/zh-cn/endbatchdraw">EndBatchDraw</a>、<a href="https://docs.easyx.cn/zh-cn/flushbatchdraw">FlushBatchDraw</a>解决该问题。</p>
-<h3 id="残影效果"><a href="#残影效果" class="headerlink" title="残影效果"></a>残影效果</h3><p>绘制100次圆后，清除屏幕一次，这样小球会留下移动的痕迹。</p>
-<p>最终实现代码如下：</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;graphics.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="comment">// 初始化窗口</span></span><br><span class="line">	<span class="built_in">initgraph</span>(<span class="number">1280</span>, <span class="number">960</span>);</span><br><span class="line"></span><br><span class="line">	<span class="type">int</span> x = <span class="number">300</span>, y = <span class="number">300</span>;</span><br><span class="line">	ExMessage msg;</span><br><span class="line">	<span class="type">const</span> <span class="type">unsigned</span> CIRCLE_COUNT = <span class="number">100</span>;</span><br><span class="line">	<span class="type">unsigned</span> crc_cnt = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">BeginBatchDraw</span>();</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">		<span class="keyword">while</span> (<span class="built_in">peekmessage</span>(&amp;msg)) &#123;</span><br><span class="line">			<span class="keyword">if</span> (msg.message == WM_MOUSEMOVE) &#123;</span><br><span class="line">				<span class="comment">// 圆心坐标即为鼠标位置</span></span><br><span class="line">				x = msg.x, y = msg.y;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="comment">// 清除屏幕和绘制的顺序不能反过来</span></span><br><span class="line">			<span class="comment">// 不然在屏幕上看不到圆</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">// 打印100次圆后清除屏幕</span></span><br><span class="line">		<span class="keyword">if</span> (crc_cnt == CIRCLE_COUNT) &#123;</span><br><span class="line">			<span class="built_in">cleardevice</span>();</span><br><span class="line">			crc_cnt = <span class="number">0</span>;</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			crc_cnt++;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="built_in">solidcircle</span>(x, y, <span class="number">100</span>);</span><br><span class="line">		<span class="built_in">FlushBatchDraw</span>();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">EndBatchDraw</span>();</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>最终效果如下：</p>
-<p><img src="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/b20140e55d4b1a59f562087ad63e7fa.png" alt="b20140e55d4b1a59f562087ad63e7fa"></p>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
-<li><a href="https://space.bilibili.com/25864506/channel/collectiondetail">合集·从零开始的提瓦特幸存者</a></li>
-<li><a href="https://www.bilibili.com/video/BV1iQ4y1s7Qj/">【从零开始的C++游戏开发】EasyX开发环境搭建 | 跟随鼠标移动的小球</a></li>
-<li><a href="https://docs.easyx.cn/zh-cn/intro">EasyX 在线文档</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>C++</category>
-        <category>EasyX</category>
-      </categories>
-      <tags>
-        <tag>技术</tag>
-        <tag>基于EasyX的游戏开发</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>【C++ Primer 学习笔记】第四章 表达式</title>
-    <url>/2024/06/05/cppPrimerNotesChapter04-md/</url>
-    <content><![CDATA[<h2 id="如何看待C-的表达式"><a href="#如何看待C-的表达式" class="headerlink" title="如何看待C++的表达式"></a>如何看待C++的表达式</h2><p>C++的表达式运算符和操作数组成的式子。</p>
-<p>C++有一元运算符、二元运算符、三元运算符。（区别在于操作数的不同）</p>
-<p>运算符有以下属性：</p>
-<ul>
-<li><p>优先级：运算符的计算顺序</p>
-</li>
-<li><p>求值顺序：操作数的计算顺序</p>
-</li>
-<li><p>结合律：相同的运算符之间的计算顺序</p>
-</li>
-<li><p>返回值：运算符运算后的结果。</p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>C++</category>
-        <category>C++ Primer</category>
-      </categories>
-      <tags>
-        <tag>编程语言</tag>
       </tags>
   </entry>
   <entry>
@@ -559,6 +441,286 @@
       </tags>
   </entry>
   <entry>
+    <title>【C++ Primer 学习笔记】第三章 字符串、向量和数组</title>
+    <url>/2024/05/30/%E3%80%90C-Primer-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91%E5%AD%97%E7%AC%A6%E4%B8%B2%E3%80%81%E5%90%91%E9%87%8F%E5%92%8C%E6%95%B0%E7%BB%84/</url>
+    <content><![CDATA[<h1 id="chap03-字符串、向量和数组"><a href="#chap03-字符串、向量和数组" class="headerlink" title="chap03 字符串、向量和数组"></a>chap03 字符串、向量和数组</h1><h2 id="chap3-1-命名空间的using声明"><a href="#chap3-1-命名空间的using声明" class="headerlink" title="chap3.1 命名空间的using声明"></a>chap3.1 命名空间的<code>using</code>声明</h2><ul>
+<li><code>C++</code>中的<code>using</code>关键字有什么作用？</li>
+</ul>
+<p><code>using</code>声明可以将命名空间中的成员的作用域拓展到全局作用域，故不需要使用形如<code>std::cin</code>的方式，而是直接使用<code>cin</code>就能从标准输入读取信息。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">using</span> std::cin;</span><br><span class="line"><span class="keyword">using</span> std::cout;</span><br><span class="line"><span class="keyword">using</span> std::endl;</span><br></pre></td></tr></table></figure>
+
+<p>需要注意，<code>using</code>声明不能放在头文件中，因为头文件会被多个源文件包含，容易可能导致命名冲突，应该尽量减小命名空间的作用范围。</p>
+<h2 id="chap3-2-标准库类型string"><a href="#chap3-2-标准库类型string" class="headerlink" title="chap3.2 标准库类型string"></a>chap3.2 标准库类型<code>string</code></h2><ul>
+<li>如何初始化<code>string</code>？</li>
+<li><code>string</code>支持哪些操作？</li>
+</ul>
+<h3 id="string初始化"><a href="#string初始化" class="headerlink" title="string初始化"></a><code>string</code>初始化</h3><p><code>string</code>包含直接初始化和赋值初始化。使用赋值运算符<code>=</code>进行初始化，就是拷贝初始化；否则就是直接初始化。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">string s1 = <span class="string">&quot;Hello, World!&quot;</span>;    <span class="comment">// 拷贝初始化</span></span><br><span class="line"><span class="function">string <span class="title">s2</span><span class="params">(<span class="string">&quot;Hello, World!&quot;</span>)</span></span>;     <span class="comment">// 直接初始化</span></span><br><span class="line">string s3 = &#123;<span class="string">&quot;Hello, World!&quot;</span>&#125;;  <span class="comment">// 拷贝初始化</span></span><br><span class="line">string s4&#123;<span class="string">&quot;Hello, World!&quot;</span>&#125;;     <span class="comment">// 直接初始化</span></span><br><span class="line"></span><br><span class="line">string s5 = s1;                 <span class="comment">// 拷贝初始化</span></span><br><span class="line"><span class="function">string <span class="title">s6</span><span class="params">(s1)</span></span>;                  <span class="comment">// 直接初始化</span></span><br><span class="line"></span><br><span class="line"><span class="function">string <span class="title">s7</span><span class="params">(<span class="number">10</span>, <span class="string">&#x27;c&#x27;</span>)</span></span>;             <span class="comment">// 直接初始化</span></span><br><span class="line">string s7 = <span class="built_in">string</span>(<span class="number">10</span>, <span class="string">&#x27;c&#x27;</span>);    <span class="comment">// 拷贝初始化</span></span><br></pre></td></tr></table></figure>
+
+<p>使用<code>cin &gt;&gt; s</code>读取字符串时，遇到空白符停止，使用<code>getline(cin, s)</code>读取字符串时，遇到换行符停止。</p>
+<p>默认初始化指的是不为变量提供初始值。<code>string</code>进行默认初始化时，默认为空串。整型进行初始化时，默认为0。</p>
+<p>需要注意，定义内置类型的局部变量，不会进行默认初始化，会产生未定义行为。</p>
+<h3 id="range-for"><a href="#range-for" class="headerlink" title="range for"></a><code>range for</code></h3><p>C++11提供了<code>range for</code>，可以很方便地遍历序列的元素：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">string s&#123;<span class="string">&quot;Hello, World!&quot;</span>&#125;;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">auto</span> &amp;c : s) &#123;</span><br><span class="line">    c = <span class="string">&#x27;X&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="chap3-3-标准库vector"><a href="#chap3-3-标准库vector" class="headerlink" title="chap3.3 标准库vector"></a>chap3.3 标准库vector</h2><ul>
+<li><p>如何初始化<code>vector</code>？</p>
+</li>
+<li><p><code>vector</code>支持哪些操作？</p>
+</li>
+</ul>
+<h3 id="vector初始化"><a href="#vector初始化" class="headerlink" title="vector初始化"></a><code>vector</code>初始化</h3><p><code>vector</code>和<code>string</code>一样，也支持直接初始化和赋值初始化：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">vector&lt;<span class="type">int</span>&gt; v1;			<span class="comment">// 直接初始化</span></span><br><span class="line"><span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">v2</span><span class="params">(<span class="number">10</span>)</span></span>; 	<span class="comment">// 直接初始化</span></span><br><span class="line"><span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">v3</span><span class="params">(<span class="number">10</span>, <span class="number">42</span>)</span></span>;	<span class="comment">// 直接初始化</span></span><br><span class="line">vector&lt;<span class="type">int</span>&gt; v4&#123;<span class="number">10</span>&#125;;		<span class="comment">// 列表初始化</span></span><br><span class="line">vector&lt;<span class="type">int</span>&gt; v5&#123;<span class="number">10</span>, <span class="number">42</span>&#125;;	<span class="comment">// 列表初始化</span></span><br><span class="line">vector&lt;string&gt; v6&#123;<span class="number">10</span>&#125;;	<span class="comment">// 列表初始化</span></span><br><span class="line">vector&lt;string&gt; v7&#123;<span class="number">10</span>, <span class="string">&quot;hi&quot;</span>&#125;;	<span class="comment">// 列表初始化</span></span><br></pre></td></tr></table></figure>
+
+<p>列表初始化也可以是赋值初始化：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">vector&lt;<span class="type">int</span>&gt; vec = &#123;<span class="number">42</span>, <span class="number">42</span>, <span class="number">42</span>, <span class="number">42</span>, <span class="number">42</span>, <span class="number">42</span>, <span class="number">42</span>, <span class="number">42</span>, <span class="number">42</span>, <span class="number">42</span>&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>列表初始化的原理是，如果参数支持列表列表初始化，就进行列表初始化，否则就尝试直接初始化，如果还是失败，就编译出错。</p>
+<h2 id="chap3-4-迭代器介绍"><a href="#chap3-4-迭代器介绍" class="headerlink" title="chap3.4 迭代器介绍"></a>chap3.4 迭代器介绍</h2><ul>
+<li>如何使用迭代器？</li>
+<li>什么情况下迭代器可能失效？</li>
+</ul>
+<h3 id="迭代器的使用"><a href="#迭代器的使用" class="headerlink" title="迭代器的使用"></a>迭代器的使用</h3><p>迭代器主要用于访问容器的元素，与索引访问容器元素的区别在于，索引在存储上是连续的，迭代器不一定是连续的，所以需要使用<code>!=</code>判断是否迭代结束。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">vec</span><span class="params">(<span class="number">10</span>, <span class="number">2020</span>)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">auto</span> it = vec.<span class="built_in">begin</span>(); it != vec.<span class="built_in">end</span>(); it++) &#123;</span><br><span class="line">    *it *= <span class="number">2</span>;</span><br><span class="line">    cout &lt;&lt; *it &lt;&lt; endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>初始化迭代器后，如果容器的元素个数发生变化，可能会导致迭代器异常，即迭代器失效。</p>
+<p><code>sizeof(std::string) == 32</code></p>
+<p><code>sizeof(std::vector&lt;int&gt;) == 24</code></p>
+<h2 id="chap3-5-数组"><a href="#chap3-5-数组" class="headerlink" title="chap3.5 数组"></a>chap3.5 数组</h2><ul>
+<li>如何对数组进行初始化？</li>
+<li>数组和<code>vector</code>比较，有什么缺点？</li>
+</ul>
+<p>数组可以使用列表初始化。数组使用默认初始化时，会将元素进行默认初始化。</p>
+<p><code>vector</code>是不定长的容器，数组的长度固定，在很多无法预知数据大小的场合，<code>vector</code>更有优势。</p>
+<p><code>vector</code>提供了一组便于操作数据的接口，和数组相比，减小了如越界、手动计数索引等问题。</p>
+]]></content>
+      <categories>
+        <category>C++</category>
+        <category>C++ Primer</category>
+      </categories>
+      <tags>
+        <tag>技术</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【Hexo的图片管理问题】阿里云OSS + PicGo搭建图床</title>
+    <url>/2024/05/21/%E3%80%90Hexo%E7%9A%84%E5%9B%BE%E7%89%87%E7%AE%A1%E7%90%86%E9%97%AE%E9%A2%98%E3%80%91%E9%98%BF%E9%87%8C%E4%BA%91OSS-PicGo%E6%90%AD%E5%BB%BA%E5%9B%BE%E5%BA%8A/</url>
+    <content><![CDATA[<h2 id="阿里云OSS"><a href="#阿里云OSS" class="headerlink" title="阿里云OSS"></a>阿里云OSS</h2><h3 id="Bucket的存储和读取"><a href="#Bucket的存储和读取" class="headerlink" title="Bucket的存储和读取"></a>Bucket的存储和读取</h3><p>在阿里云上开通<a href="https://oss.console.aliyun.com/overview">OSS</a>，创建一个<code>Bucket</code>，地区选择<strong>华南1-深圳</strong>，存储类型为<strong>标准存储</strong>，存储冗余类型为<strong>本地冗余存储</strong>。</p>
+<p>购买OSS资源包，选择<strong>40G&#x2F;1年</strong>的套餐，这样就能够把图片存储到阿里云上了。</p>
+<p><img src="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/22127b7f64ff476d3f5bae1a8d0c938.png" alt="22127b7f64ff476d3f5bae1a8d0c938"></p>
+<p>需要注意：因为图床需要让任何来源都能访问到资源，<code>Bucket</code>的读写权限需要设置为<strong>公共读</strong>（需要关闭<strong>“阻止公共访问”</strong>）。</p>
+<p><img src="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/ffdb72988de51e8038a4c1497d0d4ed.png" alt="ffdb72988de51e8038a4c1497d0d4ed"></p>
+<p>另外，<strong>OSS资源包不包括外网流出流量，就是说从阿里云拉取图片产生的流量是需要付费的</strong>，<a href="https://www.aliyun.com/price/product?spm=a2c4g.11186623.0.0.14d71887x72wt4#/oss/detail/ossbag">收费标准</a>如下（开启<strong>同城冗余</strong>和<strong>跨区域复制</strong>流量费更高）：</p>
+<p><img src="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/99b459af64d549b1186f90d6320429d.png" alt="99b459af64d549b1186f90d6320429d"></p>
+<h3 id="创建用户进行访问控制"><a href="#创建用户进行访问控制" class="headerlink" title="创建用户进行访问控制"></a>创建用户进行访问控制</h3><p>在阿里云的访问控制模块中创建新用户，注意需要勾选<strong>启动OpenAPI</strong>选项，记录下生成的<strong>AccessKey ID</strong>和<strong>AccessKey Secret</strong>。</p>
+<p><img src="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/dd34568a7bdd19f85b830c649a97a71.png" alt="dd34568a7bdd19f85b830c649a97a71"></p>
+<h2 id="PicGo"><a href="#PicGo" class="headerlink" title="PicGo"></a>PicGo</h2><p>在<a href="https://github.com/Molunerfinn/PicGo/releases/tag/v2.3.1">PicGo官网</a>下载稳定版本的<code>PicGo</code>客户端，使用之前获取的参数进行设置（img目录需要在阿里云上先创建，初始使用可以不填写<strong>存储路径</strong>）：</p>
+<p><img src="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/67cb206f75494599386f7558f512e0b.png" alt="67cb206f75494599386f7558f512e0b"></p>
+<h2 id="Typora上传插入图片"><a href="#Typora上传插入图片" class="headerlink" title="Typora上传插入图片"></a>Typora上传插入图片</h2><p>在<code>Typora</code>上进行设置，使用<code>PicGo</code>上传插入的图片到阿里云。</p>
+<p>配置完成后，可以使用<code>Typora</code>的<strong>验证图片上传选项</strong>测试图床是否被正确配置。</p>
+<p><img src="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/acb0232932277fccf8ef1fcc2b22d6f.png" alt="acb0232932277fccf8ef1fcc2b22d6f"></p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><p><a href="https://blog.csdn.net/qq_30105599/article/details/119651114">关于Hexo写博客时的图片插入问题（OSS对象存储+PicGo搭建图床）</a></p>
+</li>
+<li><p><a href="https://zhuanlan.zhihu.com/p/104152479">阿里云OSS PicGo 配置图床教程 超详细</a></p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Hexo博客</category>
+      </categories>
+      <tags>
+        <tag>技术</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【C++ Primer 学习笔记】第四章 表达式</title>
+    <url>/2024/06/05/cppPrimerNotesChapter04-md/</url>
+    <content><![CDATA[<h2 id="如何看待C-的表达式"><a href="#如何看待C-的表达式" class="headerlink" title="如何看待C++的表达式"></a>如何看待C++的表达式</h2><p>C++的表达式运算符和操作数组成的式子。</p>
+<p>C++有一元运算符、二元运算符、三元运算符。（区别在于操作数的不同）</p>
+<p>运算符有以下属性：</p>
+<ul>
+<li><p>优先级：运算符的计算顺序</p>
+</li>
+<li><p>求值顺序：操作数的计算顺序</p>
+</li>
+<li><p>结合律：相同的运算符之间的计算顺序</p>
+</li>
+<li><p>返回值：运算符运算后的结果。</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>C++</category>
+        <category>C++ Primer</category>
+      </categories>
+      <tags>
+        <tag>编程语言</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CS61A Homework01</title>
+    <url>/2024/06/08/CS61A-Homework01/</url>
+    <content><![CDATA[<h2 id="Homework-1-Variables-Functions-Control"><a href="#Homework-1-Variables-Functions-Control" class="headerlink" title="Homework 1: Variables &amp; Functions, Control"></a>Homework 1: Variables &amp; Functions, Control</h2><h3 id="Q1-Syllabus-Quiz"><a href="#Q1-Syllabus-Quiz" class="headerlink" title="Q1: Syllabus Quiz"></a>Q1: Syllabus Quiz</h3><p>教学大纲和课程政策，详见<a href="https://docs.google.com/forms/d/e/1FAIpQLSfCH090Wp9dmmstwizj5MEXDDmb9J55G8L8Wjqczmwz1NLW_w/viewform">Syllabus Quiz</a>。</p>
+<h3 id="Q2-A-Plus-Abs-B"><a href="#Q2-A-Plus-Abs-B" class="headerlink" title="Q2: A Plus Abs B"></a>Q2: A Plus Abs B</h3><blockquote>
+<p>Fill in the blanks in the following function for adding <code>a</code> to the absolute value of <code>b</code>, without calling <code>abs</code>. You may <strong>not</strong> modify any of the provided code other than the two blanks.</p>
+</blockquote>
+<p>题意就是实现如下函数<code>f</code>：<br>$$<br>f(a, b) &#x3D; a + \lvert b \rvert<br>$$</p>
+<p>实现代码如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">a_plus_abs_b</span>(<span class="params">a, b</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Return a+abs(b), but without calling abs.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; a_plus_abs_b(2, 3)</span></span><br><span class="line"><span class="string">    5</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; a_plus_abs_b(2, -3)</span></span><br><span class="line"><span class="string">    5</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; # a check that you didn&#x27;t change the return statement!</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; import inspect, re</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; re.findall(r&#x27;^\s*(return .*)&#x27;, inspect.getsource(a_plus_abs_b), re.M)</span></span><br><span class="line"><span class="string">    [&#x27;return f(a, b)&#x27;]</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">if</span> b &lt; <span class="number">0</span>:</span><br><span class="line">        f = <span class="keyword">lambda</span> x, y : x - y</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        f = <span class="keyword">lambda</span> x, y : x + y</span><br><span class="line">    <span class="keyword">return</span> f(a, b)</span><br></pre></td></tr></table></figure>
+
+<p>另一种实现（使用<code>lambda</code>表达式）：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">a_plus_abs_b</span>(<span class="params">a, b</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Return a+abs(b), but without calling abs.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; a_plus_abs_b(2, 3)</span></span><br><span class="line"><span class="string">    5</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; a_plus_abs_b(2, -3)</span></span><br><span class="line"><span class="string">    5</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; # a check that you didn&#x27;t change the return statement!</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; import inspect, re</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; re.findall(r&#x27;^\s*(return .*)&#x27;, inspect.getsource(a_plus_abs_b), re.M)</span></span><br><span class="line"><span class="string">    [&#x27;return f(a, b)&#x27;]</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> b &lt; <span class="number">0</span>:</span><br><span class="line">        f = sub</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        f = add</span><br><span class="line">    <span class="keyword">return</span> f(a, b)</span><br></pre></td></tr></table></figure>
+
+<h3 id="Q3-Two-of-Three"><a href="#Q3-Two-of-Three" class="headerlink" title="Q3: Two of Three"></a>Q3: Two of Three</h3><blockquote>
+<p>Write a function that takes three <em>positive</em> numbers as arguments and returns the sum of the squares of the two smallest numbers. <strong>Use only a single line for the body of the function.</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>Hint:</strong> Consider using the <code>max</code> or <code>min</code> function:</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">max</span>(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)</span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">min</span>(-<span class="number">1</span>, -<span class="number">2</span>, -<span class="number">3</span>)</span><br><span class="line">-<span class="number">3</span></span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>思路：最小的数可以用<code>min()</code>函数得到，次小的数可以用<code>x</code>、<code>y</code>、<code>z</code>三个数的和减掉最小值和最大值（<code>max()</code>）。</p>
+<p>实现代码如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">two_of_three</span>(<span class="params">x, y, z</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Return a*a + b*b, where a and b are the two smallest members of the</span></span><br><span class="line"><span class="string">    positive numbers x, y, and z.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; two_of_three(1, 2, 3)</span></span><br><span class="line"><span class="string">    5</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; two_of_three(5, 3, 1)</span></span><br><span class="line"><span class="string">    10</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; two_of_three(10, 2, 8)</span></span><br><span class="line"><span class="string">    68</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; two_of_three(5, 5, 5)</span></span><br><span class="line"><span class="string">    50</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; # check that your code consists of nothing but an expression (this docstring)</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; # a return statement</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; import inspect, ast</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; [type(x).__name__ for x in ast.parse(inspect.getsource(two_of_three)).body[0].body]</span></span><br><span class="line"><span class="string">    [&#x27;Expr&#x27;, &#x27;Return&#x27;]</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">min</span>(x, y, z) ** <span class="number">2</span> + (x + y + z - <span class="built_in">min</span>(x, y, z) - <span class="built_in">max</span>(x, y, z)) ** <span class="number">2</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Q4-Largest-Factor"><a href="#Q4-Largest-Factor" class="headerlink" title="Q4: Largest Factor"></a>Q4: Largest Factor</h3><blockquote>
+<p>Write a function that takes an integer <code>n</code> that is <strong>greater than 1</strong> and returns the largest integer that is smaller than <code>n</code> and evenly divides <code>n</code>.</p>
+<p><strong>Hint:</strong> To check if <code>b</code> evenly divides <code>a</code>, you can use the expression <code>a % b == 0</code>, which can be read as, “the remainder of dividing <code>a</code> by <code>b</code> is 0.”</p>
+</blockquote>
+<p>思路：找一个数<code>n</code>的最大因子，用循环把<code>1~n-1</code>都检查一遍就行了。</p>
+<p>实现代码：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">largest_factor</span>(<span class="params">n</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Return the largest factor of n that is smaller than n.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; largest_factor(15) # factors are 1, 3, 5</span></span><br><span class="line"><span class="string">    5</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; largest_factor(80) # factors are 1, 2, 4, 5, 8, 10, 16, 20, 40</span></span><br><span class="line"><span class="string">    40</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; largest_factor(13) # factor is 1 since 13 is prime</span></span><br><span class="line"><span class="string">    1</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="string">&quot;*** YOUR CODE HERE ***&quot;</span></span><br><span class="line">    ans = <span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, n):</span><br><span class="line">        <span class="keyword">if</span> n % i == <span class="number">0</span>:</span><br><span class="line">            ans = i</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>
+
+<h3 id="Q5-If-Function-vs-Statement"><a href="#Q5-If-Function-vs-Statement" class="headerlink" title="Q5: If Function vs Statement"></a>Q5: If Function vs Statement</h3><blockquote>
+<p>Let’s try to write a function that does the same thing as an <code>if</code> statement.</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">if_function</span>(<span class="params">condition, true_result, false_result</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Return true_result if condition is a true value, and</span></span><br><span class="line"><span class="string">    false_result otherwise.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; if_function(True, 2, 3)</span></span><br><span class="line"><span class="string">    2</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; if_function(False, 2, 3)</span></span><br><span class="line"><span class="string">    3</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; if_function(3==2, &#x27;equal&#x27;, &#x27;not equal&#x27;)</span></span><br><span class="line"><span class="string">    &#x27;not equal&#x27;</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; if_function(3&gt;2, &#x27;bigger&#x27;, &#x27;smaller&#x27;)</span></span><br><span class="line"><span class="string">    &#x27;bigger&#x27;</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">if</span> condition:</span><br><span class="line">        <span class="keyword">return</span> true_result</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> false_result</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Despite the doctests above, this function actually does <em>not</em> do the same thing as an <code>if</code> statement in all cases. To prove this fact, write functions <code>cond</code>, <code>true_func</code>, and <code>false_func</code> such that <code>with_if_statement</code> prints <code>61A</code>, but <code>with_if_function</code> prints both <code>Welcome to</code> and <code>61A</code> on separate lines.</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">with_if_statement</span>():</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; result = with_if_statement()</span></span><br><span class="line"><span class="string">    61A</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; print(result)</span></span><br><span class="line"><span class="string">    None</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">if</span> cond():</span><br><span class="line">        <span class="keyword">return</span> true_func()</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> false_func()</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">with_if_function</span>():</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; result = with_if_function()</span></span><br><span class="line"><span class="string">    Welcome to</span></span><br><span class="line"><span class="string">    61A</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; print(result)</span></span><br><span class="line"><span class="string">    None</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">return</span> if_function(cond(), true_func(), false_func())</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">cond</span>():</span><br><span class="line">    <span class="string">&quot;*** YOUR CODE HERE ***&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">true_func</span>():</span><br><span class="line">    <span class="string">&quot;*** YOUR CODE HERE ***&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">false_func</span>():</span><br><span class="line">    <span class="string">&quot;*** YOUR CODE HERE ***&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>思路：这个题主要是考查对<code>if</code>语句的理解和对函数传递参数的理解，观察<code>with_if_statement()</code>和<code>with_if_function()</code>两个函数，不难发现，要实现的三个函数有以下特点：</p>
+<ul>
+<li>cond()：返回<code>True</code>或者<code>False</code>。</li>
+<li><code>true_func()</code>和<code>false_func()</code>：调用输出函数，没有返回值，一个输出<code>&quot;Welcome to&quot;</code>，一个输出<code>&quot;61A&quot;</code>。</li>
+</ul>
+<p>综合下来，实现代码如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">cond</span>():</span><br><span class="line">    <span class="string">&quot;*** YOUR CODE HERE ***&quot;</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">true_func</span>():</span><br><span class="line">    <span class="string">&quot;*** YOUR CODE HERE ***&quot;</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;Welcome to&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">false_func</span>():</span><br><span class="line">    <span class="string">&quot;*** YOUR CODE HERE ***&quot;</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;61A&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="Q6-Hailstone"><a href="#Q6-Hailstone" class="headerlink" title="Q6: Hailstone"></a>Q6: Hailstone</h3><blockquote>
+<p>Douglas Hofstadter’s Pulitzer-prize-winning book, <em>Gödel, Escher, Bach</em>, poses the following mathematical puzzle.</p>
+<ol>
+<li>Pick a positive integer <code>n</code> as the start.</li>
+<li>If <code>n</code> is even, divide it by 2.</li>
+<li>If <code>n</code> is odd, multiply it by 3 and add 1.</li>
+<li>Continue this process until <code>n</code> is 1.</li>
+</ol>
+<p>The number <code>n</code> will travel up and down but eventually end at 1 (at least for all numbers that have ever been tried – nobody has ever proved that the sequence will terminate). Analogously, a hailstone travels up and down in the atmosphere before eventually landing on earth.</p>
+<p>This sequence of values of <code>n</code> is often called a Hailstone sequence. Write a function that takes a single argument with formal parameter name <code>n</code>, prints out the hailstone sequence starting at <code>n</code>, and returns the number of steps in the sequence:</p>
+</blockquote>
+<p>思路：经典的<code>3*n+1</code>问题，注意最开始的<code>n</code>就算作一步。</p>
+<p>实现代码如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">hailstone</span>(<span class="params">n</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Print the hailstone sequence starting at n and return its</span></span><br><span class="line"><span class="string">    length.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; a = hailstone(10)</span></span><br><span class="line"><span class="string">    10</span></span><br><span class="line"><span class="string">    5</span></span><br><span class="line"><span class="string">    16</span></span><br><span class="line"><span class="string">    8</span></span><br><span class="line"><span class="string">    4</span></span><br><span class="line"><span class="string">    2</span></span><br><span class="line"><span class="string">    1</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; a</span></span><br><span class="line"><span class="string">    7</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="string">&quot;*** YOUR CODE HERE ***&quot;</span></span><br><span class="line">    step = <span class="number">1</span></span><br><span class="line">    <span class="built_in">print</span>(n)</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        <span class="keyword">if</span> n % <span class="number">2</span> == <span class="number">0</span>:</span><br><span class="line">            n //= <span class="number">2</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            n = n * <span class="number">3</span> + <span class="number">1</span></span><br><span class="line">        <span class="built_in">print</span>(n)</span><br><span class="line">        step += <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> n == <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        </span><br><span class="line">    <span class="keyword">return</span> step</span><br></pre></td></tr></table></figure>
+
+<h3 id="测评结果"><a href="#测评结果" class="headerlink" title="测评结果"></a>测评结果</h3><p>运行测评代码：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">python ok --local</span><br></pre></td></tr></table></figure>
+
+<p>测评结果如下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">=====================================================================</span><br><span class="line">Assignment: Homework 1</span><br><span class="line">OK, version v1.18.1</span><br><span class="line">=====================================================================</span><br><span class="line"></span><br><span class="line">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span><br><span class="line">Running tests</span><br><span class="line"></span><br><span class="line">---------------------------------------------------------------------</span><br><span class="line">Test summary</span><br><span class="line">    6 test cases passed! No cases failed.</span><br><span class="line"></span><br><span class="line">Cannot backup when running ok with --local.</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>CS61A</category>
+        <category>Homework</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>CS61A Lab00</title>
+    <url>/2024/06/08/CS61A-Lab00/</url>
+    <content><![CDATA[<h2 id="Lab-0-Getting-Started"><a href="#Lab-0-Getting-Started" class="headerlink" title="Lab 0: Getting Started"></a>Lab 0: Getting Started</h2><h3 id="实验环境配置"><a href="#实验环境配置" class="headerlink" title="实验环境配置"></a>实验环境配置</h3><p><code>CS 61A</code>的实验需要：</p>
+<ul>
+<li><p><code>Terminal（终端）</code></p>
+</li>
+<li><p><code>Python3</code></p>
+</li>
+<li><p><code>Text Editor（代码编辑器）</code></p>
+</li>
+</ul>
+<h3 id="命令行工具的使用"><a href="#命令行工具的使用" class="headerlink" title="命令行工具的使用"></a>命令行工具的使用</h3><p>实验会可能用到的命令：</p>
+<ul>
+<li><code>ls</code></li>
+<li><code>cd</code></li>
+<li><code>mkdir</code></li>
+<li><code>unzip</code></li>
+<li><code>mv</code></li>
+</ul>
+<h3 id="Python-Basic"><a href="#Python-Basic" class="headerlink" title="Python Basic"></a>Python Basic</h3><h4 id="Primitive-Expressions（原始表达式）"><a href="#Primitive-Expressions（原始表达式）" class="headerlink" title="Primitive Expressions（原始表达式）"></a>Primitive Expressions（原始表达式）</h4><p>**<code>原始表达式</code>**只进行一步计算：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">3</span></span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">12.5</span></span><br><span class="line"><span class="number">12.5</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="literal">True</span></span><br><span class="line"><span class="literal">True</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="Arithmetic-Expressions（算术表达式）"><a href="#Arithmetic-Expressions（算术表达式）" class="headerlink" title="Arithmetic Expressions（算术表达式）"></a>Arithmetic Expressions（算术表达式）</h4><p>算术表达式由以下运算符组成：</p>
+<ul>
+<li>加法：<code>+</code></li>
+<li>减法：<code>-</code></li>
+<li>乘法：<code>*</code></li>
+<li>乘方：<code>**</code></li>
+<li>浮点数除法：<code>/</code></li>
+<li>下取整除法：<code>//</code></li>
+<li>取余：<code>%</code></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">7</span> / <span class="number">4</span></span><br><span class="line"><span class="number">1.75</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>(<span class="number">2</span> + <span class="number">6</span>) / <span class="number">4</span>	  <span class="comment"># Floating point division</span></span><br><span class="line"><span class="number">2.0</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">7</span> // <span class="number">4</span>        <span class="comment"># Floor division (rounding down)</span></span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">7</span> % <span class="number">4</span>         <span class="comment"># Modulus (remainder of 7 // 4)</span></span><br><span class="line"><span class="number">3</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="Assignment-statements（赋值语句）"><a href="#Assignment-statements（赋值语句）" class="headerlink" title="Assignment statements（赋值语句）"></a>Assignment statements（赋值语句）</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = (<span class="number">100</span> + <span class="number">50</span>) // <span class="number">2</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line"><span class="number">75</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Doing-the-assignment（实验任务）"><a href="#Doing-the-assignment（实验任务）" class="headerlink" title="Doing the assignment（实验任务）"></a>Doing the assignment（实验任务）</h3><h4 id="Unlocking-tests（解锁测试）"><a href="#Unlocking-tests（解锁测试）" class="headerlink" title="Unlocking tests（解锁测试）"></a>Unlocking tests（解锁测试）</h4><p>完成正式实验前要进行一次测试，检测学生对<code>python</code>的基础知识的掌握程度，使用如下命令（<code>--local</code>参数使得测评在本地运行）：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">python3 ok -q python-basics -u --local</span><br></pre></td></tr></table></figure>
+
+<p>测试过程如下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">=====================================================================</span><br><span class="line">Assignment: Lab 0</span><br><span class="line">OK, version v1.18.1</span><br><span class="line">=====================================================================</span><br><span class="line"></span><br><span class="line">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span><br><span class="line">Unlocking tests</span><br><span class="line"></span><br><span class="line">At each &quot;? &quot;, type what you would expect the output to be.</span><br><span class="line">Type exit() to quit</span><br><span class="line"></span><br><span class="line">---------------------------------------------------------------------</span><br><span class="line">Python Basics &gt; Suite 1 &gt; Case 1</span><br><span class="line">(cases remaining: 2)</span><br><span class="line"></span><br><span class="line">What would Python display? If you get stuck, try it out in the Python</span><br><span class="line">interpreter!</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; 10 + 2</span></span><br><span class="line">? 12</span><br><span class="line">-- OK! --</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; 7 / 2</span></span><br><span class="line">? 3.5</span><br><span class="line">-- OK! --</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; 7 // 2</span></span><br><span class="line">? 3</span><br><span class="line">-- OK! --</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; 7 % 2                       <span class="comment"># 7 modulo 2, the remainder when dividing 7 by 2.</span></span></span><br><span class="line">? 1</span><br><span class="line">-- OK! --</span><br><span class="line"></span><br><span class="line">---------------------------------------------------------------------</span><br><span class="line">Python Basics &gt; Suite 2 &gt; Case 1</span><br><span class="line">(cases remaining: 1)</span><br><span class="line"></span><br><span class="line">What would Python display? If you get stuck, try it out in the Python</span><br><span class="line">interpreter!</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; x = 20</span></span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; x + 2</span></span><br><span class="line">? 22</span><br><span class="line">-- OK! --</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; x</span></span><br><span class="line">? 20</span><br><span class="line">-- OK! --</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; y = 5</span></span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; y = y + 3</span></span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; y * 2</span></span><br><span class="line">? 16</span><br><span class="line">-- OK! --</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; y = y // 4</span></span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; y + x</span></span><br><span class="line">? 22</span><br><span class="line">-- OK! --</span><br><span class="line"></span><br><span class="line">---------------------------------------------------------------------</span><br><span class="line">OK! All cases for Python Basics unlocked.</span><br><span class="line"></span><br><span class="line">Cannot backup when running ok with --local.</span><br></pre></td></tr></table></figure>
+
+<h4 id="Understanding-problems（了解问题）"><a href="#Understanding-problems（了解问题）" class="headerlink" title="Understanding problems（了解问题）"></a>Understanding problems（了解问题）</h4><blockquote>
+<p>In <code>twenty_twenty_one</code>,</p>
+<ul>
+<li>The docstring tells you to “come up with the most creative expression that evaluates to 2021,” but that you can only use numbers and arithmetic operators <code>+</code> (add), <code>*</code> (multiply), and <code>-</code> (subtract).</li>
+<li>The <code>doctest</code> checks that the function call <code>twenty_twenty_one()</code> should return the number 2021.</li>
+</ul>
+</blockquote>
+<p>代码如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">twenty_twenty_one</span>():</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Come up with the most creative expression that evaluates to 2021,</span></span><br><span class="line"><span class="string">    using only numbers and the +, *, and - operators.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; twenty_twenty_one()</span></span><br><span class="line"><span class="string">    2021</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">20</span> * <span class="number">100</span> + <span class="number">21</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="Running-tests（运行测试）"><a href="#Running-tests（运行测试）" class="headerlink" title="Running tests（运行测试）"></a>Running tests（运行测试）</h4><p>使用如下命令测评代码：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">python3 ok --local</span><br></pre></td></tr></table></figure>
+
+<p>测评结果如下：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">=====================================================================</span><br><span class="line">Assignment: Lab 0</span><br><span class="line">OK, version v1.18.1</span><br><span class="line">=====================================================================</span><br><span class="line"></span><br><span class="line">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span><br><span class="line">Running tests</span><br><span class="line"></span><br><span class="line">---------------------------------------------------------------------</span><br><span class="line">Test summary</span><br><span class="line">    3 test cases passed! No cases failed.</span><br><span class="line"></span><br><span class="line">Cannot backup when running ok with --local.</span><br></pre></td></tr></table></figure>
+
+<h3 id="Appendix-Useful-Python-command-line-options（有用的Python命令行选项）"><a href="#Appendix-Useful-Python-command-line-options（有用的Python命令行选项）" class="headerlink" title="Appendix: Useful Python command line options（有用的Python命令行选项）"></a>Appendix: Useful Python command line options（有用的Python命令行选项）</h3><blockquote>
+<ul>
+<li><p><strong><code>-i</code></strong>: The <code>-i</code> option runs your Python script, then opens an interactive session. In an interactive session, you run Python code line by line and get immediate feedback instead of running an entire file all at once. To exit, type <code>exit()</code> into the interpreter prompt. You can also use the keyboard shortcut <code>Ctrl-D</code> on Linux&#x2F;Mac machines or <code>Ctrl-Z Enter</code> on Windows.</p>
+<p>  If you edit the Python file while running it interactively, you will need to exit and restart the interpreter in order for those changes to take effect.</p>
+  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">python3 -i </span><br></pre></td></tr></table></figure></li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li><p><strong><code>-m doctest</code></strong>: Runs doctests in a particular file. Doctests are surrounded by triple quotes (<code>&quot;&quot;&quot;</code>) within functions.</p>
+<p>  Each test in the file consists of <code>&gt;&gt;&gt;</code> followed by some Python code and the expected output (though the <code>&gt;&gt;&gt;</code> are not seen in the output of the doctest command).</p>
+  <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">python3 -m doctest </span><br></pre></td></tr></table></figure></li>
+</ul>
+</blockquote>
+<h2 id="关于-gitignore"><a href="#关于-gitignore" class="headerlink" title="关于.gitignore"></a>关于<code>.gitignore</code></h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">**/*.zip</span><br><span class="line">**/__pycache__</span><br></pre></td></tr></table></figure>
+
+<p><code>git</code>不需要维护**<code>压缩包</code>** 和 <strong><code>缓存文件</code></strong></p>
+]]></content>
+      <categories>
+        <category>CS61A</category>
+        <category>Lab</category>
+      </categories>
+  </entry>
+  <entry>
     <title>CS61A 课程笔记 week01</title>
     <url>/2024/06/08/CS61A-courseNotes-week01/</url>
     <content><![CDATA[<h3 id="Wed-1-20-Lecture-1-Introduction"><a href="#Wed-1-20-Lecture-1-Introduction" class="headerlink" title="Wed 1&#x2F;20 Lecture #1: Introduction"></a>Wed 1&#x2F;20 Lecture #1: Introduction</h3><h4 id="Computer-Science"><a href="#Computer-Science" class="headerlink" title="Computer Science"></a>Computer Science</h4><p>简单介绍了计算机科学的分支：</p>
@@ -696,90 +858,6 @@
       <categories>
         <category>CS61A</category>
         <category>Course Notes</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>CS61A Lab00</title>
-    <url>/2024/06/08/CS61A-Lab00/</url>
-    <content><![CDATA[<h2 id="Lab-0-Getting-Started"><a href="#Lab-0-Getting-Started" class="headerlink" title="Lab 0: Getting Started"></a>Lab 0: Getting Started</h2><h3 id="实验环境配置"><a href="#实验环境配置" class="headerlink" title="实验环境配置"></a>实验环境配置</h3><p><code>CS 61A</code>的实验需要：</p>
-<ul>
-<li><p><code>Terminal（终端）</code></p>
-</li>
-<li><p><code>Python3</code></p>
-</li>
-<li><p><code>Text Editor（代码编辑器）</code></p>
-</li>
-</ul>
-<h3 id="命令行工具的使用"><a href="#命令行工具的使用" class="headerlink" title="命令行工具的使用"></a>命令行工具的使用</h3><p>实验会可能用到的命令：</p>
-<ul>
-<li><code>ls</code></li>
-<li><code>cd</code></li>
-<li><code>mkdir</code></li>
-<li><code>unzip</code></li>
-<li><code>mv</code></li>
-</ul>
-<h3 id="Python-Basic"><a href="#Python-Basic" class="headerlink" title="Python Basic"></a>Python Basic</h3><h4 id="Primitive-Expressions（原始表达式）"><a href="#Primitive-Expressions（原始表达式）" class="headerlink" title="Primitive Expressions（原始表达式）"></a>Primitive Expressions（原始表达式）</h4><p>**<code>原始表达式</code>**只进行一步计算：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">3</span></span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">12.5</span></span><br><span class="line"><span class="number">12.5</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="literal">True</span></span><br><span class="line"><span class="literal">True</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="Arithmetic-Expressions（算术表达式）"><a href="#Arithmetic-Expressions（算术表达式）" class="headerlink" title="Arithmetic Expressions（算术表达式）"></a>Arithmetic Expressions（算术表达式）</h4><p>算术表达式由以下运算符组成：</p>
-<ul>
-<li>加法：<code>+</code></li>
-<li>减法：<code>-</code></li>
-<li>乘法：<code>*</code></li>
-<li>乘方：<code>**</code></li>
-<li>浮点数除法：<code>/</code></li>
-<li>下取整除法：<code>//</code></li>
-<li>取余：<code>%</code></li>
-</ul>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">7</span> / <span class="number">4</span></span><br><span class="line"><span class="number">1.75</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>(<span class="number">2</span> + <span class="number">6</span>) / <span class="number">4</span>	  <span class="comment"># Floating point division</span></span><br><span class="line"><span class="number">2.0</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">7</span> // <span class="number">4</span>        <span class="comment"># Floor division (rounding down)</span></span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">7</span> % <span class="number">4</span>         <span class="comment"># Modulus (remainder of 7 // 4)</span></span><br><span class="line"><span class="number">3</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="Assignment-statements（赋值语句）"><a href="#Assignment-statements（赋值语句）" class="headerlink" title="Assignment statements（赋值语句）"></a>Assignment statements（赋值语句）</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = (<span class="number">100</span> + <span class="number">50</span>) // <span class="number">2</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line"><span class="number">75</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="Doing-the-assignment（实验任务）"><a href="#Doing-the-assignment（实验任务）" class="headerlink" title="Doing the assignment（实验任务）"></a>Doing the assignment（实验任务）</h3><h4 id="Unlocking-tests（解锁测试）"><a href="#Unlocking-tests（解锁测试）" class="headerlink" title="Unlocking tests（解锁测试）"></a>Unlocking tests（解锁测试）</h4><p>完成正式实验前要进行一次测试，检测学生对<code>python</code>的基础知识的掌握程度，使用如下命令（<code>--local</code>参数使得测评在本地运行）：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">python3 ok -q python-basics -u --local</span><br></pre></td></tr></table></figure>
-
-<p>测试过程如下：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">=====================================================================</span><br><span class="line">Assignment: Lab 0</span><br><span class="line">OK, version v1.18.1</span><br><span class="line">=====================================================================</span><br><span class="line"></span><br><span class="line">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span><br><span class="line">Unlocking tests</span><br><span class="line"></span><br><span class="line">At each &quot;? &quot;, type what you would expect the output to be.</span><br><span class="line">Type exit() to quit</span><br><span class="line"></span><br><span class="line">---------------------------------------------------------------------</span><br><span class="line">Python Basics &gt; Suite 1 &gt; Case 1</span><br><span class="line">(cases remaining: 2)</span><br><span class="line"></span><br><span class="line">What would Python display? If you get stuck, try it out in the Python</span><br><span class="line">interpreter!</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; 10 + 2</span></span><br><span class="line">? 12</span><br><span class="line">-- OK! --</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; 7 / 2</span></span><br><span class="line">? 3.5</span><br><span class="line">-- OK! --</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; 7 // 2</span></span><br><span class="line">? 3</span><br><span class="line">-- OK! --</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; 7 % 2                       <span class="comment"># 7 modulo 2, the remainder when dividing 7 by 2.</span></span></span><br><span class="line">? 1</span><br><span class="line">-- OK! --</span><br><span class="line"></span><br><span class="line">---------------------------------------------------------------------</span><br><span class="line">Python Basics &gt; Suite 2 &gt; Case 1</span><br><span class="line">(cases remaining: 1)</span><br><span class="line"></span><br><span class="line">What would Python display? If you get stuck, try it out in the Python</span><br><span class="line">interpreter!</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; x = 20</span></span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; x + 2</span></span><br><span class="line">? 22</span><br><span class="line">-- OK! --</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; x</span></span><br><span class="line">? 20</span><br><span class="line">-- OK! --</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; y = 5</span></span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; y = y + 3</span></span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; y * 2</span></span><br><span class="line">? 16</span><br><span class="line">-- OK! --</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; y = y // 4</span></span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; y + x</span></span><br><span class="line">? 22</span><br><span class="line">-- OK! --</span><br><span class="line"></span><br><span class="line">---------------------------------------------------------------------</span><br><span class="line">OK! All cases for Python Basics unlocked.</span><br><span class="line"></span><br><span class="line">Cannot backup when running ok with --local.</span><br></pre></td></tr></table></figure>
-
-<h4 id="Understanding-problems（了解问题）"><a href="#Understanding-problems（了解问题）" class="headerlink" title="Understanding problems（了解问题）"></a>Understanding problems（了解问题）</h4><blockquote>
-<p>In <code>twenty_twenty_one</code>,</p>
-<ul>
-<li>The docstring tells you to “come up with the most creative expression that evaluates to 2021,” but that you can only use numbers and arithmetic operators <code>+</code> (add), <code>*</code> (multiply), and <code>-</code> (subtract).</li>
-<li>The <code>doctest</code> checks that the function call <code>twenty_twenty_one()</code> should return the number 2021.</li>
-</ul>
-</blockquote>
-<p>代码如下：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">twenty_twenty_one</span>():</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Come up with the most creative expression that evaluates to 2021,</span></span><br><span class="line"><span class="string">    using only numbers and the +, *, and - operators.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; twenty_twenty_one()</span></span><br><span class="line"><span class="string">    2021</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">20</span> * <span class="number">100</span> + <span class="number">21</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="Running-tests（运行测试）"><a href="#Running-tests（运行测试）" class="headerlink" title="Running tests（运行测试）"></a>Running tests（运行测试）</h4><p>使用如下命令测评代码：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">python3 ok --local</span><br></pre></td></tr></table></figure>
-
-<p>测评结果如下：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">=====================================================================</span><br><span class="line">Assignment: Lab 0</span><br><span class="line">OK, version v1.18.1</span><br><span class="line">=====================================================================</span><br><span class="line"></span><br><span class="line">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span><br><span class="line">Running tests</span><br><span class="line"></span><br><span class="line">---------------------------------------------------------------------</span><br><span class="line">Test summary</span><br><span class="line">    3 test cases passed! No cases failed.</span><br><span class="line"></span><br><span class="line">Cannot backup when running ok with --local.</span><br></pre></td></tr></table></figure>
-
-<h3 id="Appendix-Useful-Python-command-line-options（有用的Python命令行选项）"><a href="#Appendix-Useful-Python-command-line-options（有用的Python命令行选项）" class="headerlink" title="Appendix: Useful Python command line options（有用的Python命令行选项）"></a>Appendix: Useful Python command line options（有用的Python命令行选项）</h3><blockquote>
-<ul>
-<li><p><strong><code>-i</code></strong>: The <code>-i</code> option runs your Python script, then opens an interactive session. In an interactive session, you run Python code line by line and get immediate feedback instead of running an entire file all at once. To exit, type <code>exit()</code> into the interpreter prompt. You can also use the keyboard shortcut <code>Ctrl-D</code> on Linux&#x2F;Mac machines or <code>Ctrl-Z Enter</code> on Windows.</p>
-<p>  If you edit the Python file while running it interactively, you will need to exit and restart the interpreter in order for those changes to take effect.</p>
-  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">python3 -i </span><br></pre></td></tr></table></figure></li>
-</ul>
-</blockquote>
-<blockquote>
-<ul>
-<li><p><strong><code>-m doctest</code></strong>: Runs doctests in a particular file. Doctests are surrounded by triple quotes (<code>&quot;&quot;&quot;</code>) within functions.</p>
-<p>  Each test in the file consists of <code>&gt;&gt;&gt;</code> followed by some Python code and the expected output (though the <code>&gt;&gt;&gt;</code> are not seen in the output of the doctest command).</p>
-  <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">python3 -m doctest </span><br></pre></td></tr></table></figure></li>
-</ul>
-</blockquote>
-<h2 id="关于-gitignore"><a href="#关于-gitignore" class="headerlink" title="关于.gitignore"></a>关于<code>.gitignore</code></h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">**/*.zip</span><br><span class="line">**/__pycache__</span><br></pre></td></tr></table></figure>
-
-<p><code>git</code>不需要维护**<code>压缩包</code>** 和 <strong><code>缓存文件</code></strong></p>
-]]></content>
-      <categories>
-        <category>CS61A</category>
-        <category>Lab</category>
       </categories>
   </entry>
 </search>

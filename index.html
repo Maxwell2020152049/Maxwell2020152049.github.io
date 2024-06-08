@@ -148,13 +148,13 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-count">12</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -176,6 +176,96 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/06/08/CS61A-Homework01/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Rex">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rex's Blog">
+      <meta itemprop="description" content="最是人间留不住，朱颜辞镜花辞树。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Rex's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/06/08/CS61A-Homework01/" class="post-title-link" itemprop="url">CS61A Homework01</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-06-08 17:58:14 / 修改时间：18:02:01" itemprop="dateCreated datePublished" datetime="2024-06-08T17:58:14+08:00">2024-06-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/CS61A/" itemprop="url" rel="index"><span itemprop="name">CS61A</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/CS61A/Homework/" itemprop="url" rel="index"><span itemprop="name">Homework</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>本文涵盖了Python编程中的变量、函数和控制流的基本概念，通过具体问题如实现`a_plus_abs_b`函数、计算两最小数的平方和、寻找最大因子、模拟`if`语句行为以及实现Hailstone序列等，展示了如何应用这些概念解决问题。每个问题都提供了详细的代码实现和解释，有助于加深对Python编程的理解。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/06/08/CS61A-Homework01/">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -215,7 +305,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2024-06-08 17:53:13 / 修改时间：17:56:49" itemprop="dateCreated datePublished" datetime="2024-06-08T17:53:13+08:00">2024-06-08</time>
+      <time title="创建时间：2024-06-08 17:53:13 / 修改时间：17:59:05" itemprop="dateCreated datePublished" datetime="2024-06-08T17:53:13+08:00">2024-06-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -241,82 +331,15 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="Lab-0-Getting-Started"><a href="#Lab-0-Getting-Started" class="headerlink" title="Lab 0: Getting Started"></a>Lab 0: Getting Started</h2><h3 id="实验环境配置"><a href="#实验环境配置" class="headerlink" title="实验环境配置"></a>实验环境配置</h3><p><code>CS 61A</code>的实验需要：</p>
-<ul>
-<li><p><code>Terminal（终端）</code></p>
-</li>
-<li><p><code>Python3</code></p>
-</li>
-<li><p><code>Text Editor（代码编辑器）</code></p>
-</li>
-</ul>
-<h3 id="命令行工具的使用"><a href="#命令行工具的使用" class="headerlink" title="命令行工具的使用"></a>命令行工具的使用</h3><p>实验会可能用到的命令：</p>
-<ul>
-<li><code>ls</code></li>
-<li><code>cd</code></li>
-<li><code>mkdir</code></li>
-<li><code>unzip</code></li>
-<li><code>mv</code></li>
-</ul>
-<h3 id="Python-Basic"><a href="#Python-Basic" class="headerlink" title="Python Basic"></a>Python Basic</h3><h4 id="Primitive-Expressions（原始表达式）"><a href="#Primitive-Expressions（原始表达式）" class="headerlink" title="Primitive Expressions（原始表达式）"></a>Primitive Expressions（原始表达式）</h4><p>**<code>原始表达式</code>**只进行一步计算：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">3</span></span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">12.5</span></span><br><span class="line"><span class="number">12.5</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="literal">True</span></span><br><span class="line"><span class="literal">True</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="Arithmetic-Expressions（算术表达式）"><a href="#Arithmetic-Expressions（算术表达式）" class="headerlink" title="Arithmetic Expressions（算术表达式）"></a>Arithmetic Expressions（算术表达式）</h4><p>算术表达式由以下运算符组成：</p>
-<ul>
-<li>加法：<code>+</code></li>
-<li>减法：<code>-</code></li>
-<li>乘法：<code>*</code></li>
-<li>乘方：<code>**</code></li>
-<li>浮点数除法：<code>/</code></li>
-<li>下取整除法：<code>//</code></li>
-<li>取余：<code>%</code></li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">7</span> / <span class="number">4</span></span><br><span class="line"><span class="number">1.75</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>(<span class="number">2</span> + <span class="number">6</span>) / <span class="number">4</span>	  <span class="comment"># Floating point division</span></span><br><span class="line"><span class="number">2.0</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">7</span> // <span class="number">4</span>        <span class="comment"># Floor division (rounding down)</span></span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">7</span> % <span class="number">4</span>         <span class="comment"># Modulus (remainder of 7 // 4)</span></span><br><span class="line"><span class="number">3</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="Assignment-statements（赋值语句）"><a href="#Assignment-statements（赋值语句）" class="headerlink" title="Assignment statements（赋值语句）"></a>Assignment statements（赋值语句）</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = (<span class="number">100</span> + <span class="number">50</span>) // <span class="number">2</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line"><span class="number">75</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="Doing-the-assignment（实验任务）"><a href="#Doing-the-assignment（实验任务）" class="headerlink" title="Doing the assignment（实验任务）"></a>Doing the assignment（实验任务）</h3><h4 id="Unlocking-tests（解锁测试）"><a href="#Unlocking-tests（解锁测试）" class="headerlink" title="Unlocking tests（解锁测试）"></a>Unlocking tests（解锁测试）</h4><p>完成正式实验前要进行一次测试，检测学生对<code>python</code>的基础知识的掌握程度，使用如下命令（<code>--local</code>参数使得测评在本地运行）：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 ok -q python-basics -u --local</span><br></pre></td></tr></table></figure>
-
-<p>测试过程如下：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line">=====================================================================</span><br><span class="line">Assignment: Lab 0</span><br><span class="line">OK, version v1.18.1</span><br><span class="line">=====================================================================</span><br><span class="line"></span><br><span class="line">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span><br><span class="line">Unlocking tests</span><br><span class="line"></span><br><span class="line">At each &quot;? &quot;, type what you would expect the output to be.</span><br><span class="line">Type exit() to quit</span><br><span class="line"></span><br><span class="line">---------------------------------------------------------------------</span><br><span class="line">Python Basics &gt; Suite 1 &gt; Case 1</span><br><span class="line">(cases remaining: 2)</span><br><span class="line"></span><br><span class="line">What would Python display? If you get stuck, try it out in the Python</span><br><span class="line">interpreter!</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; 10 + 2</span></span><br><span class="line">? 12</span><br><span class="line">-- OK! --</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; 7 / 2</span></span><br><span class="line">? 3.5</span><br><span class="line">-- OK! --</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; 7 // 2</span></span><br><span class="line">? 3</span><br><span class="line">-- OK! --</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; 7 % 2                       <span class="comment"># 7 modulo 2, the remainder when dividing 7 by 2.</span></span></span><br><span class="line">? 1</span><br><span class="line">-- OK! --</span><br><span class="line"></span><br><span class="line">---------------------------------------------------------------------</span><br><span class="line">Python Basics &gt; Suite 2 &gt; Case 1</span><br><span class="line">(cases remaining: 1)</span><br><span class="line"></span><br><span class="line">What would Python display? If you get stuck, try it out in the Python</span><br><span class="line">interpreter!</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; x = 20</span></span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; x + 2</span></span><br><span class="line">? 22</span><br><span class="line">-- OK! --</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; x</span></span><br><span class="line">? 20</span><br><span class="line">-- OK! --</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; y = 5</span></span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; y = y + 3</span></span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; y * 2</span></span><br><span class="line">? 16</span><br><span class="line">-- OK! --</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; y = y // 4</span></span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; y + x</span></span><br><span class="line">? 22</span><br><span class="line">-- OK! --</span><br><span class="line"></span><br><span class="line">---------------------------------------------------------------------</span><br><span class="line">OK! All cases for Python Basics unlocked.</span><br><span class="line"></span><br><span class="line">Cannot backup when running ok with --local.</span><br></pre></td></tr></table></figure>
-
-<h4 id="Understanding-problems（了解问题）"><a href="#Understanding-problems（了解问题）" class="headerlink" title="Understanding problems（了解问题）"></a>Understanding problems（了解问题）</h4><blockquote>
-<p>In <code>twenty_twenty_one</code>,</p>
-<ul>
-<li>The docstring tells you to “come up with the most creative expression that evaluates to 2021,” but that you can only use numbers and arithmetic operators <code>+</code> (add), <code>*</code> (multiply), and <code>-</code> (subtract).</li>
-<li>The <code>doctest</code> checks that the function call <code>twenty_twenty_one()</code> should return the number 2021.</li>
-</ul>
-</blockquote>
-<p>代码如下：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">twenty_twenty_one</span>():</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Come up with the most creative expression that evaluates to 2021,</span></span><br><span class="line"><span class="string">    using only numbers and the +, *, and - operators.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; twenty_twenty_one()</span></span><br><span class="line"><span class="string">    2021</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">20</span> * <span class="number">100</span> + <span class="number">21</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="Running-tests（运行测试）"><a href="#Running-tests（运行测试）" class="headerlink" title="Running tests（运行测试）"></a>Running tests（运行测试）</h4><p>使用如下命令测评代码：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 ok --local</span><br></pre></td></tr></table></figure>
-
-<p>测评结果如下：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">=====================================================================</span><br><span class="line">Assignment: Lab 0</span><br><span class="line">OK, version v1.18.1</span><br><span class="line">=====================================================================</span><br><span class="line"></span><br><span class="line">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span><br><span class="line">Running tests</span><br><span class="line"></span><br><span class="line">---------------------------------------------------------------------</span><br><span class="line">Test summary</span><br><span class="line">    3 test cases passed! No cases failed.</span><br><span class="line"></span><br><span class="line">Cannot backup when running ok with --local.</span><br></pre></td></tr></table></figure>
-
-<h3 id="Appendix-Useful-Python-command-line-options（有用的Python命令行选项）"><a href="#Appendix-Useful-Python-command-line-options（有用的Python命令行选项）" class="headerlink" title="Appendix: Useful Python command line options（有用的Python命令行选项）"></a>Appendix: Useful Python command line options（有用的Python命令行选项）</h3><blockquote>
-<ul>
-<li><p><strong><code>-i</code></strong>: The <code>-i</code> option runs your Python script, then opens an interactive session. In an interactive session, you run Python code line by line and get immediate feedback instead of running an entire file all at once. To exit, type <code>exit()</code> into the interpreter prompt. You can also use the keyboard shortcut <code>Ctrl-D</code> on Linux&#x2F;Mac machines or <code>Ctrl-Z Enter</code> on Windows.</p>
-<p>  If you edit the Python file while running it interactively, you will need to exit and restart the interpreter in order for those changes to take effect.</p>
-  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 -i </span><br></pre></td></tr></table></figure></li>
-</ul>
-</blockquote>
-<blockquote>
-<ul>
-<li><p><strong><code>-m doctest</code></strong>: Runs doctests in a particular file. Doctests are surrounded by triple quotes (<code>&quot;&quot;&quot;</code>) within functions.</p>
-<p>  Each test in the file consists of <code>&gt;&gt;&gt;</code> followed by some Python code and the expected output (though the <code>&gt;&gt;&gt;</code> are not seen in the output of the doctest command).</p>
-  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 -m doctest </span><br></pre></td></tr></table></figure></li>
-</ul>
-</blockquote>
-<h2 id="关于-gitignore"><a href="#关于-gitignore" class="headerlink" title="关于.gitignore"></a>关于<code>.gitignore</code></h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">**/*.zip</span><br><span class="line">**/__pycache__</span><br></pre></td></tr></table></figure>
-
-<p><code>git</code>不需要维护**<code>压缩包</code>** 和 <strong><code>缓存文件</code></strong></p>
-
+          <p>本实验介绍了CS 61A的实验环境配置，包括Terminal、Python3和代码编辑器的使用。涵盖了命令行工具的基本操作、Python基础知识如原始表达式、算术表达式和赋值语句。通过解锁测试和运行测试，学生可以检验和巩固Python基础知识。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/06/08/CS61A-Lab00/">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -1060,98 +1083,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2024/05/19/%E3%80%90C-Primer%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91%E7%AC%AC%E4%B8%80%E7%AB%A0-%E5%BC%80%E5%A7%8B/">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/18/%E5%A6%82%E4%BD%95%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Rex">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Rex's Blog">
-      <meta itemprop="description" content="最是人间留不住，朱颜辞镜花辞树。">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Rex's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/05/18/%E5%A6%82%E4%BD%95%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" class="post-title-link" itemprop="url">如何搭建个人博客</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2024-05-18 10:28:35" itemprop="dateCreated datePublished" datetime="2024-05-18T10:28:35+08:00">2024-05-18</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-05-24 10:27:42" itemprop="dateModified" datetime="2024-05-24T10:27:42+08:00">2024-05-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Hexo%E5%8D%9A%E5%AE%A2/" itemprop="url" rel="index"><span itemprop="name">Hexo博客</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>本文包括以下内容：1. 常见博客框架的简单介绍；2. 重点介绍hexo和hugo框架；3. 如何部署自己的博客到Github Page上。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/05/18/%E5%A6%82%E4%BD%95%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">
                 阅读全文 &raquo;
               </a>
             </div>
