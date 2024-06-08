@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.2.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Lab 0: Getting Started实验环境配置CS 61A的实验需要：  Terminal（终端）  Python3  Text Editor（代码编辑器）   命令行工具的使用实验会可能用到的命令：  ls cd mkdir unzip mv  Python BasicPrimitive Expressions（原始表达式）**原始表达式**只进行一步计算： 123456&gt;&amp;gt">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CS61A Lab00">
+<meta property="og:url" content="http://example.com/2024/06/08/CS61A-Lab00/index.html">
+<meta property="og:site_name" content="Rex&#39;s Blog">
+<meta property="og:description" content="Lab 0: Getting Started实验环境配置CS 61A的实验需要：  Terminal（终端）  Python3  Text Editor（代码编辑器）   命令行工具的使用实验会可能用到的命令：  ls cd mkdir unzip mv  Python BasicPrimitive Expressions（原始表达式）**原始表达式**只进行一步计算： 123456&gt;&amp;gt">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-06-08T09:53:13.000Z">
+<meta property="article:modified_time" content="2024-06-08T09:56:49.603Z">
+<meta property="article:author" content="Rex">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2024/06/08/CS61A-Lab00/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2024/06/08/CS61A-Lab00/","path":"2024/06/08/CS61A-Lab00/","title":"CS61A Lab00"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>CS61A Lab00 | Rex's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Rex's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Lab-0-Getting-Started"><span class="nav-number">1.</span> <span class="nav-text">Lab 0: Getting Started</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="nav-number">1.1.</span> <span class="nav-text">实验环境配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">1.2.</span> <span class="nav-text">命令行工具的使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Python-Basic"><span class="nav-number">1.3.</span> <span class="nav-text">Python Basic</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Primitive-Expressions%EF%BC%88%E5%8E%9F%E5%A7%8B%E8%A1%A8%E8%BE%BE%E5%BC%8F%EF%BC%89"><span class="nav-number">1.3.1.</span> <span class="nav-text">Primitive Expressions（原始表达式）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Arithmetic-Expressions%EF%BC%88%E7%AE%97%E6%9C%AF%E8%A1%A8%E8%BE%BE%E5%BC%8F%EF%BC%89"><span class="nav-number">1.3.2.</span> <span class="nav-text">Arithmetic Expressions（算术表达式）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Assignment-statements%EF%BC%88%E8%B5%8B%E5%80%BC%E8%AF%AD%E5%8F%A5%EF%BC%89"><span class="nav-number">1.3.3.</span> <span class="nav-text">Assignment statements（赋值语句）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Doing-the-assignment%EF%BC%88%E5%AE%9E%E9%AA%8C%E4%BB%BB%E5%8A%A1%EF%BC%89"><span class="nav-number">1.4.</span> <span class="nav-text">Doing the assignment（实验任务）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Unlocking-tests%EF%BC%88%E8%A7%A3%E9%94%81%E6%B5%8B%E8%AF%95%EF%BC%89"><span class="nav-number">1.4.1.</span> <span class="nav-text">Unlocking tests（解锁测试）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Understanding-problems%EF%BC%88%E4%BA%86%E8%A7%A3%E9%97%AE%E9%A2%98%EF%BC%89"><span class="nav-number">1.4.2.</span> <span class="nav-text">Understanding problems（了解问题）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Running-tests%EF%BC%88%E8%BF%90%E8%A1%8C%E6%B5%8B%E8%AF%95%EF%BC%89"><span class="nav-number">1.4.3.</span> <span class="nav-text">Running tests（运行测试）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Appendix-Useful-Python-command-line-options%EF%BC%88%E6%9C%89%E7%94%A8%E7%9A%84Python%E5%91%BD%E4%BB%A4%E8%A1%8C%E9%80%89%E9%A1%B9%EF%BC%89"><span class="nav-number">1.5.</span> <span class="nav-text">Appendix: Useful Python command line options（有用的Python命令行选项）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E-gitignore"><span class="nav-number">2.</span> <span class="nav-text">关于.gitignore</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Rex</p>
+  <div class="site-description" itemprop="description">最是人间留不住，朱颜辞镜花辞树。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/06/08/CS61A-Lab00/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Rex">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rex's Blog">
+      <meta itemprop="description" content="最是人间留不住，朱颜辞镜花辞树。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="CS61A Lab00 | Rex's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          CS61A Lab00
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-06-08 17:53:13 / 修改时间：17:56:49" itemprop="dateCreated datePublished" datetime="2024-06-08T17:53:13+08:00">2024-06-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/CS61A/" itemprop="url" rel="index"><span itemprop="name">CS61A</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/CS61A/Lab/" itemprop="url" rel="index"><span itemprop="name">Lab</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="Lab-0-Getting-Started"><a href="#Lab-0-Getting-Started" class="headerlink" title="Lab 0: Getting Started"></a>Lab 0: Getting Started</h2><h3 id="实验环境配置"><a href="#实验环境配置" class="headerlink" title="实验环境配置"></a>实验环境配置</h3><p><code>CS 61A</code>的实验需要：</p>
+<ul>
+<li><p><code>Terminal（终端）</code></p>
+</li>
+<li><p><code>Python3</code></p>
+</li>
+<li><p><code>Text Editor（代码编辑器）</code></p>
+</li>
+</ul>
+<h3 id="命令行工具的使用"><a href="#命令行工具的使用" class="headerlink" title="命令行工具的使用"></a>命令行工具的使用</h3><p>实验会可能用到的命令：</p>
+<ul>
+<li><code>ls</code></li>
+<li><code>cd</code></li>
+<li><code>mkdir</code></li>
+<li><code>unzip</code></li>
+<li><code>mv</code></li>
+</ul>
+<h3 id="Python-Basic"><a href="#Python-Basic" class="headerlink" title="Python Basic"></a>Python Basic</h3><h4 id="Primitive-Expressions（原始表达式）"><a href="#Primitive-Expressions（原始表达式）" class="headerlink" title="Primitive Expressions（原始表达式）"></a>Primitive Expressions（原始表达式）</h4><p>**<code>原始表达式</code>**只进行一步计算：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">3</span></span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">12.5</span></span><br><span class="line"><span class="number">12.5</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="literal">True</span></span><br><span class="line"><span class="literal">True</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="Arithmetic-Expressions（算术表达式）"><a href="#Arithmetic-Expressions（算术表达式）" class="headerlink" title="Arithmetic Expressions（算术表达式）"></a>Arithmetic Expressions（算术表达式）</h4><p>算术表达式由以下运算符组成：</p>
+<ul>
+<li>加法：<code>+</code></li>
+<li>减法：<code>-</code></li>
+<li>乘法：<code>*</code></li>
+<li>乘方：<code>**</code></li>
+<li>浮点数除法：<code>/</code></li>
+<li>下取整除法：<code>//</code></li>
+<li>取余：<code>%</code></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">7</span> / <span class="number">4</span></span><br><span class="line"><span class="number">1.75</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>(<span class="number">2</span> + <span class="number">6</span>) / <span class="number">4</span>	  <span class="comment"># Floating point division</span></span><br><span class="line"><span class="number">2.0</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">7</span> // <span class="number">4</span>        <span class="comment"># Floor division (rounding down)</span></span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">7</span> % <span class="number">4</span>         <span class="comment"># Modulus (remainder of 7 // 4)</span></span><br><span class="line"><span class="number">3</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="Assignment-statements（赋值语句）"><a href="#Assignment-statements（赋值语句）" class="headerlink" title="Assignment statements（赋值语句）"></a>Assignment statements（赋值语句）</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = (<span class="number">100</span> + <span class="number">50</span>) // <span class="number">2</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line"><span class="number">75</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Doing-the-assignment（实验任务）"><a href="#Doing-the-assignment（实验任务）" class="headerlink" title="Doing the assignment（实验任务）"></a>Doing the assignment（实验任务）</h3><h4 id="Unlocking-tests（解锁测试）"><a href="#Unlocking-tests（解锁测试）" class="headerlink" title="Unlocking tests（解锁测试）"></a>Unlocking tests（解锁测试）</h4><p>完成正式实验前要进行一次测试，检测学生对<code>python</code>的基础知识的掌握程度，使用如下命令（<code>--local</code>参数使得测评在本地运行）：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 ok -q python-basics -u --local</span><br></pre></td></tr></table></figure>
+
+<p>测试过程如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line">=====================================================================</span><br><span class="line">Assignment: Lab 0</span><br><span class="line">OK, version v1.18.1</span><br><span class="line">=====================================================================</span><br><span class="line"></span><br><span class="line">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span><br><span class="line">Unlocking tests</span><br><span class="line"></span><br><span class="line">At each &quot;? &quot;, type what you would expect the output to be.</span><br><span class="line">Type exit() to quit</span><br><span class="line"></span><br><span class="line">---------------------------------------------------------------------</span><br><span class="line">Python Basics &gt; Suite 1 &gt; Case 1</span><br><span class="line">(cases remaining: 2)</span><br><span class="line"></span><br><span class="line">What would Python display? If you get stuck, try it out in the Python</span><br><span class="line">interpreter!</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; 10 + 2</span></span><br><span class="line">? 12</span><br><span class="line">-- OK! --</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; 7 / 2</span></span><br><span class="line">? 3.5</span><br><span class="line">-- OK! --</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; 7 // 2</span></span><br><span class="line">? 3</span><br><span class="line">-- OK! --</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; 7 % 2                       <span class="comment"># 7 modulo 2, the remainder when dividing 7 by 2.</span></span></span><br><span class="line">? 1</span><br><span class="line">-- OK! --</span><br><span class="line"></span><br><span class="line">---------------------------------------------------------------------</span><br><span class="line">Python Basics &gt; Suite 2 &gt; Case 1</span><br><span class="line">(cases remaining: 1)</span><br><span class="line"></span><br><span class="line">What would Python display? If you get stuck, try it out in the Python</span><br><span class="line">interpreter!</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; x = 20</span></span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; x + 2</span></span><br><span class="line">? 22</span><br><span class="line">-- OK! --</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; x</span></span><br><span class="line">? 20</span><br><span class="line">-- OK! --</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; y = 5</span></span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; y = y + 3</span></span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; y * 2</span></span><br><span class="line">? 16</span><br><span class="line">-- OK! --</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; y = y // 4</span></span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; y + x</span></span><br><span class="line">? 22</span><br><span class="line">-- OK! --</span><br><span class="line"></span><br><span class="line">---------------------------------------------------------------------</span><br><span class="line">OK! All cases for Python Basics unlocked.</span><br><span class="line"></span><br><span class="line">Cannot backup when running ok with --local.</span><br></pre></td></tr></table></figure>
+
+<h4 id="Understanding-problems（了解问题）"><a href="#Understanding-problems（了解问题）" class="headerlink" title="Understanding problems（了解问题）"></a>Understanding problems（了解问题）</h4><blockquote>
+<p>In <code>twenty_twenty_one</code>,</p>
+<ul>
+<li>The docstring tells you to “come up with the most creative expression that evaluates to 2021,” but that you can only use numbers and arithmetic operators <code>+</code> (add), <code>*</code> (multiply), and <code>-</code> (subtract).</li>
+<li>The <code>doctest</code> checks that the function call <code>twenty_twenty_one()</code> should return the number 2021.</li>
+</ul>
+</blockquote>
+<p>代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">twenty_twenty_one</span>():</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Come up with the most creative expression that evaluates to 2021,</span></span><br><span class="line"><span class="string">    using only numbers and the +, *, and - operators.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; twenty_twenty_one()</span></span><br><span class="line"><span class="string">    2021</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">20</span> * <span class="number">100</span> + <span class="number">21</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="Running-tests（运行测试）"><a href="#Running-tests（运行测试）" class="headerlink" title="Running tests（运行测试）"></a>Running tests（运行测试）</h4><p>使用如下命令测评代码：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 ok --local</span><br></pre></td></tr></table></figure>
+
+<p>测评结果如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">=====================================================================</span><br><span class="line">Assignment: Lab 0</span><br><span class="line">OK, version v1.18.1</span><br><span class="line">=====================================================================</span><br><span class="line"></span><br><span class="line">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span><br><span class="line">Running tests</span><br><span class="line"></span><br><span class="line">---------------------------------------------------------------------</span><br><span class="line">Test summary</span><br><span class="line">    3 test cases passed! No cases failed.</span><br><span class="line"></span><br><span class="line">Cannot backup when running ok with --local.</span><br></pre></td></tr></table></figure>
+
+<h3 id="Appendix-Useful-Python-command-line-options（有用的Python命令行选项）"><a href="#Appendix-Useful-Python-command-line-options（有用的Python命令行选项）" class="headerlink" title="Appendix: Useful Python command line options（有用的Python命令行选项）"></a>Appendix: Useful Python command line options（有用的Python命令行选项）</h3><blockquote>
+<ul>
+<li><p><strong><code>-i</code></strong>: The <code>-i</code> option runs your Python script, then opens an interactive session. In an interactive session, you run Python code line by line and get immediate feedback instead of running an entire file all at once. To exit, type <code>exit()</code> into the interpreter prompt. You can also use the keyboard shortcut <code>Ctrl-D</code> on Linux&#x2F;Mac machines or <code>Ctrl-Z Enter</code> on Windows.</p>
+<p>  If you edit the Python file while running it interactively, you will need to exit and restart the interpreter in order for those changes to take effect.</p>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 -i </span><br></pre></td></tr></table></figure></li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li><p><strong><code>-m doctest</code></strong>: Runs doctests in a particular file. Doctests are surrounded by triple quotes (<code>&quot;&quot;&quot;</code>) within functions.</p>
+<p>  Each test in the file consists of <code>&gt;&gt;&gt;</code> followed by some Python code and the expected output (though the <code>&gt;&gt;&gt;</code> are not seen in the output of the doctest command).</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 -m doctest </span><br></pre></td></tr></table></figure></li>
+</ul>
+</blockquote>
+<h2 id="关于-gitignore"><a href="#关于-gitignore" class="headerlink" title="关于.gitignore"></a>关于<code>.gitignore</code></h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">**/*.zip</span><br><span class="line">**/__pycache__</span><br></pre></td></tr></table></figure>
+
+<p><code>git</code>不需要维护**<code>压缩包</code>** 和 <strong><code>缓存文件</code></strong></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/06/08/CS61A-courseNotes-week01/" rel="prev" title="CS61A 课程笔记 week01">
+                  <i class="fa fa-angle-left"></i> CS61A 课程笔记 week01
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Rex</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
