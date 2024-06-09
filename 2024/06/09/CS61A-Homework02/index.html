@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.2.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="本笔记涵盖了Python中高阶函数的应用，包括&#96;product&#96;、&#96;accumulate&#96;、&#96;make_repeater&#96;等函数的实现，以及使用高阶函数构造的丘奇代数系统。通过这些例子，展示了如何使用函数作为参数和返回值，以及如何通过高阶函数实现复杂的数学运算和逻辑。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CS61A Homework02">
+<meta property="og:url" content="http://example.com/2024/06/09/CS61A-Homework02/index.html">
+<meta property="og:site_name" content="Rex&#39;s Blog">
+<meta property="og:description" content="本笔记涵盖了Python中高阶函数的应用，包括&#96;product&#96;、&#96;accumulate&#96;、&#96;make_repeater&#96;等函数的实现，以及使用高阶函数构造的丘奇代数系统。通过这些例子，展示了如何使用函数作为参数和返回值，以及如何通过高阶函数实现复杂的数学运算和逻辑。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-06-09T02:59:41.000Z">
+<meta property="article:modified_time" content="2024-06-09T03:01:23.029Z">
+<meta property="article:author" content="Rex">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2024/06/09/CS61A-Homework02/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2024/06/09/CS61A-Homework02/","path":"2024/06/09/CS61A-Homework02/","title":"CS61A Homework02"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>CS61A Homework02 | Rex's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Rex's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Homework-2-Higher-Order-Functions"><span class="nav-number">1.</span> <span class="nav-text">Homework 2: Higher Order Functions</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Important-Functions"><span class="nav-number">1.1.</span> <span class="nav-text">Important Functions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q1-Product"><span class="nav-number">1.2.</span> <span class="nav-text">Q1: Product</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q2-Accumulate"><span class="nav-number">1.3.</span> <span class="nav-text">Q2: Accumulate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q3-Make-Repeater"><span class="nav-number">1.4.</span> <span class="nav-text">Q3: Make Repeater</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q4-Church-numerals"><span class="nav-number">1.5.</span> <span class="nav-text">Q4: Church numerals</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Rex</p>
+  <div class="site-description" itemprop="description">最是人间留不住，朱颜辞镜花辞树。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/06/09/CS61A-Homework02/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Rex">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rex's Blog">
+      <meta itemprop="description" content="最是人间留不住，朱颜辞镜花辞树。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="CS61A Homework02 | Rex's Blog">
+      <meta itemprop="description" content="本笔记涵盖了Python中高阶函数的应用，包括`product`、`accumulate`、`make_repeater`等函数的实现，以及使用高阶函数构造的丘奇代数系统。通过这些例子，展示了如何使用函数作为参数和返回值，以及如何通过高阶函数实现复杂的数学运算和逻辑。">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          CS61A Homework02
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-06-09 10:59:41 / 修改时间：11:01:23" itemprop="dateCreated datePublished" datetime="2024-06-09T10:59:41+08:00">2024-06-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/CS61A/" itemprop="url" rel="index"><span itemprop="name">CS61A</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/CS61A/Homework/" itemprop="url" rel="index"><span itemprop="name">Homework</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">本笔记涵盖了Python中高阶函数的应用，包括`product`、`accumulate`、`make_repeater`等函数的实现，以及使用高阶函数构造的丘奇代数系统。通过这些例子，展示了如何使用函数作为参数和返回值，以及如何通过高阶函数实现复杂的数学运算和逻辑。</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="Homework-2-Higher-Order-Functions"><a href="#Homework-2-Higher-Order-Functions" class="headerlink" title="Homework 2: Higher Order Functions"></a>Homework 2: Higher Order Functions</h2><h3 id="Important-Functions"><a href="#Important-Functions" class="headerlink" title="Important Functions"></a>Important Functions</h3><p>一些文档测试可能基于以下函数：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> operator <span class="keyword">import</span> add, mul, sub</span><br><span class="line"></span><br><span class="line">square = <span class="keyword">lambda</span> x: x * x</span><br><span class="line"></span><br><span class="line">identity = <span class="keyword">lambda</span> x: x</span><br><span class="line"></span><br><span class="line">triple = <span class="keyword">lambda</span> x: <span class="number">3</span> * x</span><br><span class="line"></span><br><span class="line">increment = <span class="keyword">lambda</span> x: x + <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Q1-Product"><a href="#Q1-Product" class="headerlink" title="Q1: Product"></a>Q1: Product</h3><p>仿照能够计算<code>term(1) + ... + term(n)</code>的<code>summation(n, term)</code>函数，编写一个能够计算<code>term(1) * ... * term(n)</code>的<code>product(n, term)</code>函数。</p>
+<p>思路：注意<code>range</code>函数的区间是左闭右开的。</p>
+<p>实现代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">product</span>(<span class="params">n, term</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Return the product of the first n terms in a sequence.</span></span><br><span class="line"><span class="string">    n -- a positive integer</span></span><br><span class="line"><span class="string">    term -- a function that takes one argument to produce the term</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; product(3, identity)  # 1 * 2 * 3</span></span><br><span class="line"><span class="string">    6</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; product(5, identity)  # 1 * 2 * 3 * 4 * 5</span></span><br><span class="line"><span class="string">    120</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; product(3, square)    # 1^2 * 2^2 * 3^2</span></span><br><span class="line"><span class="string">    36</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; product(5, square)    # 1^2 * 2^2 * 3^2 * 4^2 * 5^2</span></span><br><span class="line"><span class="string">    14400</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; product(3, increment) # (1+1) * (2+1) * (3+1)</span></span><br><span class="line"><span class="string">    24</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; product(3, triple)    # 1*3 * 2*3 * 3*3</span></span><br><span class="line"><span class="string">    162</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="string">&quot;*** YOUR CODE HERE ***&quot;</span></span><br><span class="line">    pdt = <span class="number">1</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, n + <span class="number">1</span>):</span><br><span class="line">        pdt *= term(i)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> pdt</span><br></pre></td></tr></table></figure>
+
+<h3 id="Q2-Accumulate"><a href="#Q2-Accumulate" class="headerlink" title="Q2: Accumulate"></a>Q2: Accumulate</h3><p>在<code>product</code>和<code>summation</code>函数的基础上，进行泛化，<code>combiner</code>参数指定运算符，<code>base</code>参数指定初始值。</p>
+<p>实现代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">accumulate</span>(<span class="params">combiner, base, n, term</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Return the result of combining the first n terms in a sequence and base.</span></span><br><span class="line"><span class="string">    The terms to be combined are term(1), term(2), ..., term(n).  combiner is a</span></span><br><span class="line"><span class="string">    two-argument commutative function.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; accumulate(add, 0, 5, identity)  # 0 + 1 + 2 + 3 + 4 + 5</span></span><br><span class="line"><span class="string">    15</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; accumulate(add, 11, 5, identity) # 11 + 1 + 2 + 3 + 4 + 5</span></span><br><span class="line"><span class="string">    26</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; accumulate(add, 11, 0, identity) # 11</span></span><br><span class="line"><span class="string">    11</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; accumulate(add, 11, 3, square)   # 11 + 1^2 + 2^2 + 3^2</span></span><br><span class="line"><span class="string">    25</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; accumulate(mul, 2, 3, square)    # 2 * 1^2 * 2^2 * 3^2</span></span><br><span class="line"><span class="string">    72</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; accumulate(lambda x, y: x + y + 1, 2, 3, square)</span></span><br><span class="line"><span class="string">    19</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; accumulate(lambda x, y: 2 * (x + y), 2, 3, square)</span></span><br><span class="line"><span class="string">    58</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; accumulate(lambda x, y: (x + y) % 17, 19, 20, square)</span></span><br><span class="line"><span class="string">    16</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="string">&quot;*** YOUR CODE HERE ***&quot;</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, n + <span class="number">1</span>):</span><br><span class="line">        base = combiner(base, term(i))</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> base</span><br></pre></td></tr></table></figure>
+
+<p>实现<code>accumulate</code>函数之后，用该函数实现<code>product</code>和<code>summation</code>函数：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">summation_using_accumulate</span>(<span class="params">n, term</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Returns the sum of term(1) + ... + term(n). The implementation</span></span><br><span class="line"><span class="string">    uses accumulate.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; summation_using_accumulate(5, square)</span></span><br><span class="line"><span class="string">    55</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; summation_using_accumulate(5, triple)</span></span><br><span class="line"><span class="string">    45</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; from construct_check import check</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; # ban iteration and recursion</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; check(HW_SOURCE_FILE, &#x27;summation_using_accumulate&#x27;,</span></span><br><span class="line"><span class="string">    ...       [&#x27;Recursion&#x27;, &#x27;For&#x27;, &#x27;While&#x27;])</span></span><br><span class="line"><span class="string">    True</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="string">&quot;*** YOUR CODE HERE ***&quot;</span></span><br><span class="line">    <span class="keyword">return</span> accumulate(add, <span class="number">0</span>, n, term)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">product_using_accumulate</span>(<span class="params">n, term</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;An implementation of product using accumulate.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; product_using_accumulate(4, square)</span></span><br><span class="line"><span class="string">    576</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; product_using_accumulate(6, triple)</span></span><br><span class="line"><span class="string">    524880</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; from construct_check import check</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; # ban iteration and recursion</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; check(HW_SOURCE_FILE, &#x27;product_using_accumulate&#x27;,</span></span><br><span class="line"><span class="string">    ...       [&#x27;Recursion&#x27;, &#x27;For&#x27;, &#x27;While&#x27;])</span></span><br><span class="line"><span class="string">    True</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="string">&quot;*** YOUR CODE HERE ***&quot;</span></span><br><span class="line">    <span class="keyword">return</span> accumulate(mul, <span class="number">1</span>, n, term)</span><br></pre></td></tr></table></figure>
+
+<h3 id="Q3-Make-Repeater"><a href="#Q3-Make-Repeater" class="headerlink" title="Q3: Make Repeater"></a>Q3: Make Repeater</h3><p>实现<code>make_repeater(func, n)(x)</code>函数，返回<code>func(func(...func(x)...))</code>，其中有n个<code>func</code>.</p>
+<p>思路：使用上述实现的<code>accumulate</code>和<code>compose1</code>函数可以很容易得到目标函数，也可以循环嵌套得到。</p>
+<p>实现代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">make_repeater</span>(<span class="params">func, n</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Return the function that computes the nth application of func.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; add_three = make_repeater(increment, 3)</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; add_three(5)</span></span><br><span class="line"><span class="string">    8</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; make_repeater(triple, 5)(1) # 3 * 3 * 3 * 3 * 3 * 1</span></span><br><span class="line"><span class="string">    243</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; make_repeater(square, 2)(5) # square(square(5))</span></span><br><span class="line"><span class="string">    625</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; make_repeater(square, 4)(5) # square(square(square(square(5))))</span></span><br><span class="line"><span class="string">    152587890625</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; make_repeater(square, 0)(5) # Yes, it makes sense to apply the function zero times!</span></span><br><span class="line"><span class="string">    5</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="string">&quot;*** YOUR CODE HERE ***&quot;</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># return accumulate(compose1, lambda x : x, n, lambda x : func)</span></span><br><span class="line"></span><br><span class="line">    base = <span class="keyword">lambda</span> x : x</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, n + <span class="number">1</span>):</span><br><span class="line">        base = compose1(base, func)</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">return</span> base</span><br></pre></td></tr></table></figure>
+
+<p>使用如下命令进行测评：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 ok --local</span><br></pre></td></tr></table></figure>
+
+<p>结果如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">=====================================================================</span><br><span class="line">Assignment: Homework 2</span><br><span class="line">OK, version v1.18.1</span><br><span class="line">=====================================================================</span><br><span class="line"></span><br><span class="line">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span><br><span class="line">Running tests</span><br><span class="line"></span><br><span class="line">---------------------------------------------------------------------</span><br><span class="line">Test summary</span><br><span class="line">    5 test cases passed! No cases failed.</span><br><span class="line"></span><br><span class="line">Cannot backup when running ok with --local.</span><br></pre></td></tr></table></figure>
+
+<h3 id="Q4-Church-numerals"><a href="#Q4-Church-numerals" class="headerlink" title="Q4: Church numerals"></a>Q4: Church numerals</h3><p>使用高阶函数（<code>Higher Order Function</code>）构造一个简单的丘奇代数系统。</p>
+<p>实现代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">zero</span>(<span class="params">f</span>):</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">lambda</span> x: x</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">successor</span>(<span class="params">n</span>):</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">lambda</span> f: <span class="keyword">lambda</span> x: f(n(f)(x))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">one</span>(<span class="params">f</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Church numeral 1: same as successor(zero)&quot;&quot;&quot;</span></span><br><span class="line">    <span class="string">&quot;*** YOUR CODE HERE ***&quot;</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">lambda</span> x: f(x)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">two</span>(<span class="params">f</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Church numeral 2: same as successor(successor(zero))&quot;&quot;&quot;</span></span><br><span class="line">    <span class="string">&quot;*** YOUR CODE HERE ***&quot;</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">lambda</span> x: f(f(x))</span><br><span class="line"></span><br><span class="line">three = successor(two)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">church_to_int</span>(<span class="params">n</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Convert the Church numeral n to a Python integer.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; church_to_int(zero)</span></span><br><span class="line"><span class="string">    0</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; church_to_int(one)</span></span><br><span class="line"><span class="string">    1</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; church_to_int(two)</span></span><br><span class="line"><span class="string">    2</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; church_to_int(three)</span></span><br><span class="line"><span class="string">    3</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="string">&quot;*** YOUR CODE HERE ***&quot;</span></span><br><span class="line">    f = <span class="keyword">lambda</span> x: x + <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> n(f)(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">add_church</span>(<span class="params">m, n</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Return the Church numeral for m + n, for Church numerals m and n.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; church_to_int(add_church(two, three))</span></span><br><span class="line"><span class="string">    5</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="string">&quot;*** YOUR CODE HERE ***&quot;</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">func</span>(<span class="params">f</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">lambda</span> x: m(f)(n(f)(x))</span><br><span class="line">    <span class="keyword">return</span> func</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">mul_church</span>(<span class="params">m, n</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Return the Church numeral for m * n, for Church numerals m and n.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; four = successor(three)</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; church_to_int(mul_church(two, three))</span></span><br><span class="line"><span class="string">    6</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; church_to_int(mul_church(three, four))</span></span><br><span class="line"><span class="string">    12</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="string">&quot;*** YOUR CODE HERE ***&quot;</span></span><br><span class="line">    base = zero</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, church_to_int(n)):</span><br><span class="line">        base = add_church(base, m)</span><br><span class="line">    <span class="keyword">return</span> base</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">pow_church</span>(<span class="params">m, n</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Return the Church numeral m ** n, for Church numerals m and n.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; church_to_int(pow_church(two, three))</span></span><br><span class="line"><span class="string">    8</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; church_to_int(pow_church(three, two))</span></span><br><span class="line"><span class="string">    9</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="string">&quot;*** YOUR CODE HERE ***&quot;</span></span><br><span class="line">    base = one</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, church_to_int(n)):</span><br><span class="line">        base = mul_church(base, m)</span><br><span class="line">    <span class="keyword">return</span> base</span><br></pre></td></tr></table></figure>
+
+<p>使用如下命令进行测评：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">python3 ok -q church_to_int</span><br><span class="line">python3 ok -q add_church</span><br><span class="line">python3 ok -q mul_church</span><br><span class="line">python3 ok -q pow_church</span><br></pre></td></tr></table></figure>
+
+<p>结果如下（4个结果都是一样的）：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">rex@rex-virtual-machine:~/CS61A/HW/HW02/hw02$ python3 ok -q mul_church --local</span><br><span class="line">=====================================================================</span><br><span class="line">Assignment: Homework 2</span><br><span class="line">OK, version v1.18.1</span><br><span class="line">=====================================================================</span><br><span class="line"></span><br><span class="line">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span><br><span class="line">Running tests</span><br><span class="line"></span><br><span class="line">---------------------------------------------------------------------</span><br><span class="line">Test summary</span><br><span class="line">    1 test cases passed! No cases failed.</span><br><span class="line"></span><br><span class="line">Cannot backup when running ok with --local.</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/06/09/CS61A-Lab01/" rel="prev" title="CS61A Lab01">
+                  <i class="fa fa-angle-left"></i> CS61A Lab01
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Rex</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
