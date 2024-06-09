@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.2.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="本文总结了CS 61A课程中的关键概念，包括函数评估、控制结构、条件表达式、短路求值、循环语句以及高阶函数。通过示例和练习，展示了如何使用Python实现这些概念，并强调了函数设计和重构的重要性。此外，还介绍了函数注释的作用和设计原则，以提高代码的可读性和可维护性。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CS61A 课程笔记 Week02">
+<meta property="og:url" content="http://example.com/2024/06/09/CS61A-courseNote-week02/index.html">
+<meta property="og:site_name" content="Rex&#39;s Blog">
+<meta property="og:description" content="本文总结了CS 61A课程中的关键概念，包括函数评估、控制结构、条件表达式、短路求值、循环语句以及高阶函数。通过示例和练习，展示了如何使用Python实现这些概念，并强调了函数设计和重构的重要性。此外，还介绍了函数注释的作用和设计原则，以提高代码的可读性和可维护性。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/image1.png">
+<meta property="og:image" content="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/e3be4e9ce16265e5cd16801d14896c7.png">
+<meta property="og:image" content="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/6aeac24948da7c8f770e04bd9a8eb98.png">
+<meta property="og:image" content="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/b289188d9ee06ef6aa142ce40a9a74e.png">
+<meta property="article:published_time" content="2024-06-09T02:35:13.000Z">
+<meta property="article:modified_time" content="2024-06-09T02:46:12.699Z">
+<meta property="article:author" content="Rex">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/image1.png">
+
+
+<link rel="canonical" href="http://example.com/2024/06/09/CS61A-courseNote-week02/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2024/06/09/CS61A-courseNote-week02/","path":"2024/06/09/CS61A-courseNote-week02/","title":"CS61A 课程笔记 Week02"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>CS61A 课程笔记 Week02 | Rex's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Rex's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Lecture-3-Recap-of-Function-Evaluation-Control"><span class="nav-number">1.</span> <span class="nav-text">Lecture #3: Recap of Function Evaluation; Control</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6%E8%A1%A8%E8%BE%BE%E5%BC%8F%EF%BC%88conditional-expressions%EF%BC%89"><span class="nav-number">1.1.</span> <span class="nav-text">条件表达式（conditional expressions）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9F%AD%E8%B7%AF%E6%B1%82%E5%80%BC%EF%BC%88short-circuit-evaluation%EF%BC%89"><span class="nav-number">1.2.</span> <span class="nav-text">短路求值（short circuit evaluation）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6%E8%AF%AD%E5%8F%A5%EF%BC%88conditional-statements%EF%BC%89"><span class="nav-number">1.3.</span> <span class="nav-text">条件语句（conditional statements）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BE%AA%E7%8E%AF%E8%AF%AD%E5%8F%A5%EF%BC%88loop-statements%EF%BC%89"><span class="nav-number">1.4.</span> <span class="nav-text">循环语句（loop statements）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lecture-4-Higher-Order-Functions"><span class="nav-number">2.</span> <span class="nav-text">Lecture #4: Higher-Order Functions</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%BE%E5%A0%82%E7%BB%83%E4%B9%A0"><span class="nav-number">2.1.</span> <span class="nav-text">课堂练习</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%87%8D%E6%9E%84%E5%87%BD%E6%95%B0%E5%BC%95%E5%8F%91%E7%9A%84%E6%80%9D%E8%80%83"><span class="nav-number">2.2.</span> <span class="nav-text">重构函数引发的思考</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E6%B3%A8%E9%87%8A%EF%BC%88comments-on-functions-in-general-terminology-%EF%BC%89"><span class="nav-number">2.3.</span> <span class="nav-text">函数注释（comments on functions in general terminology ）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%BE%E8%AE%A1%E5%87%BD%E6%95%B0%E7%9A%84%E4%B8%A4%E6%9D%A1%E5%8E%9F%E5%88%99%EF%BC%88Two-Design-Principles%EF%BC%89"><span class="nav-number">2.4.</span> <span class="nav-text">设计函数的两条原则（Two Design Principles）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lecture-5-Exercising-Environments"><span class="nav-number">3.</span> <span class="nav-text">Lecture #5: Exercising Environments</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">4.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Rex</p>
+  <div class="site-description" itemprop="description">最是人间留不住，朱颜辞镜花辞树。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/06/09/CS61A-courseNote-week02/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Rex">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rex's Blog">
+      <meta itemprop="description" content="最是人间留不住，朱颜辞镜花辞树。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="CS61A 课程笔记 Week02 | Rex's Blog">
+      <meta itemprop="description" content="本文总结了CS 61A课程中的关键概念，包括函数评估、控制结构、条件表达式、短路求值、循环语句以及高阶函数。通过示例和练习，展示了如何使用Python实现这些概念，并强调了函数设计和重构的重要性。此外，还介绍了函数注释的作用和设计原则，以提高代码的可读性和可维护性。">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          CS61A 课程笔记 Week02
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-06-09 10:35:13 / 修改时间：10:46:12" itemprop="dateCreated datePublished" datetime="2024-06-09T10:35:13+08:00">2024-06-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/CS61A/" itemprop="url" rel="index"><span itemprop="name">CS61A</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/CS61A/Course-Notes/" itemprop="url" rel="index"><span itemprop="name">Course Notes</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">本文总结了CS 61A课程中的关键概念，包括函数评估、控制结构、条件表达式、短路求值、循环语句以及高阶函数。通过示例和练习，展示了如何使用Python实现这些概念，并强调了函数设计和重构的重要性。此外，还介绍了函数注释的作用和设计原则，以提高代码的可读性和可维护性。</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h3 id="Lecture-3-Recap-of-Function-Evaluation-Control"><a href="#Lecture-3-Recap-of-Function-Evaluation-Control" class="headerlink" title="Lecture #3: Recap of Function Evaluation; Control"></a>Lecture #3: Recap of Function Evaluation; Control</h3><p>一个名字(<code>name</code>)总是被绑定(<code>bound</code>)到一个值(<code>value</code>)上。</p>
+<p>表达式和子表达式都会在同一个环境中求值，现在本地环境帧(<code>local environment frame</code>)中寻找，若找不到，再递归地在父环境(<code>parent environment frame</code>)中寻找。</p>
+<p><code>eg1.</code>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Create nested environment</span></span><br><span class="line">x = <span class="number">1</span></span><br><span class="line">y = <span class="number">12</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">g1</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">g2</span>(<span class="params">x</span>):</span><br><span class="line">        <span class="comment"># Stop here</span></span><br><span class="line">        <span class="built_in">print</span>(x)</span><br><span class="line">    g2(x + <span class="number">1</span>)</span><br><span class="line">g1(<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3</span><br></pre></td></tr></table></figure>
+
+<p>在<a target="_blank" rel="noopener" href="https://pythontutor.com/cp/composingprograms.html#code=%23%20Create%20nested%20environment%0Ax%20%3D%201%0Ay%20%3D%2012%0Adef%20g1%28x%29%3A%0A%20%20%20%20def%20g2%28x%29%3A%0A%20%20%20%20%20%20%20%20%23%20Stop%20here%0A%20%20%20%20%20%20%20%20print%28x%29%0A%20%20%20%20g2%28x%20%2B%201%29%0Ag1%282%29&cumulative=true&curInstr=0&mode=display&origin=composingprograms.js&py=3&rawInputLstJSON=%5B%5D">pythontutor</a>中运行结果如下：</p>
+<p><img src="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/image1.png" alt="image1"></p>
+<p><code>eg2.</code>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Illustrate chain of calls.</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">square</span>(<span class="params">x</span>): <span class="keyword">return</span> x*x </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">sum_square</span>(<span class="params">x, y</span>):</span><br><span class="line">    <span class="keyword">return</span> square(x)+square(y) </span><br><span class="line">z = sum_square(<span class="number">3</span>, <span class="number">4</span>)</span><br></pre></td></tr></table></figure>
+
+<p>在<a target="_blank" rel="noopener" href="https://pythontutor.com/cp/composingprograms.html#code=%23%20Illustrate%20chain%20of%20calls.%0Adef%20square%28x%29%3A%20return%20x*x%20%0Adef%20sum_square%28x,%20y%29%3A%0A%20%20%20%20return%20square%28x%29%2Bsquare%28y%29%20%0Az%20%3D%20sum_square%283,%204%29&cumulative=true&curInstr=0&mode=display&origin=composingprograms.js&py=3&rawInputLstJSON=%5B%5D">pythontutor</a>中运行结果如下：</p>
+<p><img src="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/e3be4e9ce16265e5cd16801d14896c7.png" alt="e3be4e9ce16265e5cd16801d14896c7"></p>
+<p><code>eg3.</code>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Functions taking and returning functions</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">id</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="keyword">return</span> x</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">id</span>(<span class="built_in">id</span>)(<span class="built_in">id</span>(<span class="number">13</span>)))</span><br></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">13</span><br></pre></td></tr></table></figure>
+
+<p>在<a target="_blank" rel="noopener" href="https://pythontutor.com/cp/composingprograms.html#code=%23%20Create%20nested%20environment%0Ax%20%3D%201%0Ay%20%3D%2012%0Adef%20g1%28x%29%3A%0A%20%20%20%20def%20g2%28x%29%3A%0A%20%20%20%20%20%20%20%20%23%20Stop%20here%0A%20%20%20%20%20%20%20%20print%28x%29%0A%20%20%20%20g2%28x%20%2B%201%29%0Ag1%282%29&cumulative=true&curInstr=0&mode=display&origin=composingprograms.js&py=3&rawInputLstJSON=%5B%5D">pythontutor</a>中运行结果如下：</p>
+<p><img src="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/6aeac24948da7c8f770e04bd9a8eb98.png" alt="6aeac24948da7c8f770e04bd9a8eb98"></p>
+<p><code>eg4.</code>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Illustration of returing a nested function.</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">incr</span>(<span class="params">n</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">f</span>(<span class="params">x</span>):</span><br><span class="line">        <span class="keyword">return</span> n + x</span><br><span class="line">    <span class="keyword">return</span> f</span><br><span class="line"></span><br><span class="line">incr(<span class="number">5</span>)(<span class="number">6</span>)</span><br></pre></td></tr></table></figure>
+
+<p>在<a target="_blank" rel="noopener" href="https://pythontutor.com/cp/composingprograms.html#code=%23%20Create%20nested%20environment%0Ax%20%3D%201%0Ay%20%3D%2012%0Adef%20g1%28x%29%3A%0A%20%20%20%20def%20g2%28x%29%3A%0A%20%20%20%20%20%20%20%20%23%20Stop%20here%0A%20%20%20%20%20%20%20%20print%28x%29%0A%20%20%20%20g2%28x%20%2B%201%29%0Ag1%282%29&cumulative=true&curInstr=0&mode=display&origin=composingprograms.js&py=3&rawInputLstJSON=%5B%5D">pythontutor</a>中运行结果如下：</p>
+<p><img src="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/b289188d9ee06ef6aa142ce40a9a74e.png" alt="b289188d9ee06ef6aa142ce40a9a74e"></p>
+<h4 id="条件表达式（conditional-expressions）"><a href="#条件表达式（conditional-expressions）" class="headerlink" title="条件表达式（conditional expressions）"></a>条件表达式（<code>conditional expressions</code>）</h4><p><code>True Part</code> if <code>Condition</code> else <code>False Part</code></p>
+<p>对于上面的python语句，先计算 <code>Condition</code> ，若结果为<code>True value</code>，就执行<code>True Part</code> ，否则，执行<code>False Part</code> 。</p>
+<p><code>Example</code>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x = <span class="number">2</span></span><br><span class="line">y = <span class="number">1</span> / x <span class="keyword">if</span> x != <span class="number">0</span> <span class="keyword">else</span> <span class="number">1</span></span><br><span class="line"><span class="built_in">print</span>(y)</span><br></pre></td></tr></table></figure>
+
+<p><code>输出</code>：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0.5</span><br></pre></td></tr></table></figure>
+
+<p><code>Example</code>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x = <span class="number">0</span></span><br><span class="line">y = <span class="number">1</span> / x <span class="keyword">if</span> x != <span class="number">0</span> <span class="keyword">else</span> <span class="number">1</span></span><br><span class="line"><span class="built_in">print</span>(y)</span><br></pre></td></tr></table></figure>
+
+<p><code>输出</code>：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1</span><br></pre></td></tr></table></figure>
+
+<p><code>Example</code>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">y = <span class="number">13</span> <span class="keyword">if</span> <span class="number">0</span> <span class="keyword">else</span> <span class="number">5</span> == <span class="number">13</span> <span class="keyword">if</span> [] <span class="keyword">else</span> <span class="number">5</span> == <span class="number">5</span></span><br><span class="line"><span class="built_in">print</span>(y)</span><br></pre></td></tr></table></figure>
+
+<p><code>输出</code>：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">True</span><br></pre></td></tr></table></figure>
+
+<p>如果有多个<code>if-else</code>语句在同一行中，从左到右计算。</p>
+<p>在<code>python</code>中，以下值都是<code>False value</code>：</p>
+<ul>
+<li>False</li>
+<li>None</li>
+<li>0</li>
+<li>Empty strings, sets, lists, tuples, and directories</li>
+</ul>
+<p>其他的值都是<code>True value</code>。</p>
+<h4 id="短路求值（short-circuit-evaluation）"><a href="#短路求值（short-circuit-evaluation）" class="headerlink" title="短路求值（short circuit evaluation）"></a>短路求值（<code>short circuit evaluation</code>）</h4><p><code>Left</code> and <code>Right</code>：</p>
+<p>如果<code>Left</code>是<code>True value</code>，返回<code>Right</code>的结果，如果<code>Left</code>是<code>False value</code>，返回<code>Left</code>的结果。</p>
+<p><code>Left</code> or <code>Right</code>：</p>
+<p>如果<code>Left</code>是<code>True value</code>，返回<code>Left</code>的结果，如果<code>Left</code>是<code>False value</code>，返回<code>Right</code>的结果。</p>
+<h4 id="条件语句（conditional-statements）"><a href="#条件语句（conditional-statements）" class="headerlink" title="条件语句（conditional statements）"></a>条件语句（<code>conditional statements</code>）</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> Condition1:</span><br><span class="line">	Statements1</span><br><span class="line"><span class="keyword">elif</span> Condition2:</span><br><span class="line">	Statements2</span><br><span class="line">...</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">	Statementsn</span><br></pre></td></tr></table></figure>
+
+<p>如果<code>Condition1</code>为<strong>真</strong>，就执行<code>Statement1</code>；</p>
+<p>如果<code>Condition2</code>为<strong>真</strong>，就执行<code>Statement2</code>；</p>
+<p>······</p>
+<p>如果所有条件都为<strong>假</strong>，就执行<code>Statementn</code>；</p>
+<p>在<code>python</code>中，使用<strong>缩进</strong>来控制语句块。</p>
+<h4 id="循环语句（loop-statements）"><a href="#循环语句（loop-statements）" class="headerlink" title="循环语句（loop statements）"></a>循环语句（<code>loop statements</code>）</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> Condition:</span><br><span class="line">	Statements</span><br></pre></td></tr></table></figure>
+
+<p>如果<code>Condition</code>为<strong>真</strong>，就执行<code>Statement</code>，如果<code>Condition</code>为<strong>假</strong>，结束循环；</p>
+<h3 id="Lecture-4-Higher-Order-Functions"><a href="#Lecture-4-Higher-Order-Functions" class="headerlink" title="Lecture #4: Higher-Order Functions"></a>Lecture #4: Higher-Order Functions</h3><h4 id="课堂练习"><a href="#课堂练习" class="headerlink" title="课堂练习"></a>课堂练习</h4><p>上节课没讲完的程序，使用<code>python3 -m doctest &#123;filename&#125;</code>可以运行程序注释中的测试样例，以检测程序的正确性：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#  Prime numbers</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">is_prime</span>(<span class="params">n</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Return True iff N is prime.</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; is_prime(1)</span></span><br><span class="line"><span class="string">    False</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; is_prime(2)</span></span><br><span class="line"><span class="string">    True</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; is_prime(8)</span></span><br><span class="line"><span class="string">    False</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; is_prime(21)</span></span><br><span class="line"><span class="string">    False</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; is_prime(23)</span></span><br><span class="line"><span class="string">    True</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    </span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">smallest_factor</span>(<span class="params">n</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Returns the smallest value k&gt;1 that evenly divides N.&quot;&quot;&quot;</span></span><br><span class="line">    <span class="comment"># The following can be speeded up a great deal!</span></span><br><span class="line">    </span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">print_factors</span>(<span class="params">n</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Print the prime factors of N.</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; print_factors(180)</span></span><br><span class="line"><span class="string">    2</span></span><br><span class="line"><span class="string">    2</span></span><br><span class="line"><span class="string">    3</span></span><br><span class="line"><span class="string">    3</span></span><br><span class="line"><span class="string">    5</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    </span><br><span class="line">    </span><br></pre></td></tr></table></figure>
+
+<p>我的实现：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#  Prime numbers</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">is_prime</span>(<span class="params">n</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Return True iff N is prime.</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; is_prime(1)</span></span><br><span class="line"><span class="string">    False</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; is_prime(2)</span></span><br><span class="line"><span class="string">    True</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; is_prime(8)</span></span><br><span class="line"><span class="string">    False</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; is_prime(21)</span></span><br><span class="line"><span class="string">    False</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; is_prime(23)</span></span><br><span class="line"><span class="string">    True</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">if</span> (n == <span class="number">1</span>):    <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">    i = <span class="number">2</span></span><br><span class="line">    <span class="keyword">while</span> i &lt; n:</span><br><span class="line">        <span class="keyword">if</span> n % i == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        i += <span class="number">1</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">smallest_factor</span>(<span class="params">n</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Returns the smallest value k&gt;1 that evenly divides N.&quot;&quot;&quot;</span></span><br><span class="line">    i = <span class="number">2</span></span><br><span class="line">    <span class="keyword">while</span> i &lt;= n:</span><br><span class="line">        <span class="keyword">if</span> n % i == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> i</span><br><span class="line">        i += <span class="number">1</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">print_factors</span>(<span class="params">n</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Print the prime factors of N.</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; print_factors(180)</span></span><br><span class="line"><span class="string">    2</span></span><br><span class="line"><span class="string">    2</span></span><br><span class="line"><span class="string">    3</span></span><br><span class="line"><span class="string">    3</span></span><br><span class="line"><span class="string">    5</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">while</span> n != <span class="number">1</span>:</span><br><span class="line">        i = <span class="number">2</span></span><br><span class="line">        <span class="keyword">while</span> i &lt;= n:</span><br><span class="line">            <span class="keyword">if</span> n % i == <span class="number">0</span>:</span><br><span class="line">                <span class="built_in">print</span>(i)</span><br><span class="line">                n //= i</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            i += <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p>本课程给出的参考答案很巧妙，<code>is_prime</code>和<code>print_factors</code>的实现都使用了<code>smallest_factor</code>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#  Prime numbers</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">is_prime</span>(<span class="params">n</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Return True iff N is prime.</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; is_prime(1)</span></span><br><span class="line"><span class="string">    False</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; is_prime(2)</span></span><br><span class="line"><span class="string">    True</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; is_prime(8)</span></span><br><span class="line"><span class="string">    False</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; is_prime(21)</span></span><br><span class="line"><span class="string">    False</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; is_prime(23)</span></span><br><span class="line"><span class="string">    True</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">return</span> n &gt; <span class="number">1</span> <span class="keyword">and</span> smallest_factor(n) == n</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">smallest_factor</span>(<span class="params">n</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Returns the smallest value k&gt;1 that evenly divides N.&quot;&quot;&quot;</span></span><br><span class="line">    <span class="comment"># The following can be speeded up a great deal!</span></span><br><span class="line">    k = <span class="number">2</span></span><br><span class="line">    <span class="keyword">while</span> k &lt;= n:</span><br><span class="line">        <span class="keyword">if</span> n % k == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> k</span><br><span class="line">        k += <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">print_factors</span>(<span class="params">n</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Print the prime factors of N.</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; print_factors(180)</span></span><br><span class="line"><span class="string">    2</span></span><br><span class="line"><span class="string">    2</span></span><br><span class="line"><span class="string">    3</span></span><br><span class="line"><span class="string">    3</span></span><br><span class="line"><span class="string">    5</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    k = <span class="number">2</span></span><br><span class="line">    <span class="keyword">while</span> n &gt; <span class="number">1</span>:</span><br><span class="line">        d = smallest_factor(n)</span><br><span class="line">        <span class="built_in">print</span>(d)</span><br><span class="line">        n = n // d     <span class="comment"># or n //= d</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="重构函数引发的思考"><a href="#重构函数引发的思考" class="headerlink" title="重构函数引发的思考"></a>重构函数引发的思考</h4><p>实现一个函数，判断参数<code>a</code>和<code>b</code>是否有相同位数：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Designing Functions</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">same_length</span>(<span class="params">a, b</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Return true iff positive integers A and B have the same</span></span><br><span class="line"><span class="string">    number of digits when written in decimal.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; same_length(50, 70)</span></span><br><span class="line"><span class="string">    True</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; same_length(50, 100)</span></span><br><span class="line"><span class="string">    False</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; same_length(1000, 100000)</span></span><br><span class="line"><span class="string">    False</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    a_count = <span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> a &gt;= <span class="number">10</span>:</span><br><span class="line">        a_count += <span class="number">1</span></span><br><span class="line">        a //= <span class="number">10</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># The next section looks the same as the first. Yuch!</span></span><br><span class="line">    b_count = <span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> b &gt;= <span class="number">10</span>:</span><br><span class="line">        b_count += <span class="number">1</span></span><br><span class="line">        b //= <span class="number">10</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> a_count == b_count</span><br></pre></td></tr></table></figure>
+
+<p>将重复的代码段用函数实现：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># So, we refactor into two functions</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">same_length2</span>(<span class="params">a, b</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Return true iff positive integers A and B have the same</span></span><br><span class="line"><span class="string">    number of digits when written in decimal.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; same_length2(50, 70)</span></span><br><span class="line"><span class="string">    True</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; same_length2(50, 100)</span></span><br><span class="line"><span class="string">    False</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; same_length2(1000, 100000)</span></span><br><span class="line"><span class="string">    False</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">return</span> digits2(a) == digits2(b)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">digits2</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Return the number of decimal digits in the positive integer X.&quot;&quot;&quot;</span></span><br><span class="line">    x_count = <span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> x &gt;= <span class="number">10</span>:</span><br><span class="line">        x_count += <span class="number">1</span></span><br><span class="line">        x //= <span class="number">10</span></span><br><span class="line">    <span class="keyword">return</span> x_count</span><br><span class="line"></span><br><span class="line"><span class="comment"># Now let&#x27;s generalize even further!</span></span><br></pre></td></tr></table></figure>
+
+<p>进一步重构函数，使其适用性更强：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Now let&#x27;s generalize even further!</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">same_length3</span>(<span class="params">a, b, base=<span class="number">10</span></span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Return true iff positive integers A and B have the same</span></span><br><span class="line"><span class="string">    number of digits when written in radix BASE.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; same_length3(50, 70)</span></span><br><span class="line"><span class="string">    True</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; same_length3(20, 100)</span></span><br><span class="line"><span class="string">    False</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; same_length3(50, 100)</span></span><br><span class="line"><span class="string">    False</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; same_length3(1000, 100000)</span></span><br><span class="line"><span class="string">    False</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; same_length3(50, 100, 16)</span></span><br><span class="line"><span class="string">    True</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">return</span> digits3(a, base) == digits3(b, base)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">digits3</span>(<span class="params">x, base=<span class="number">10</span></span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Return the number of radix BASE digits in the positive integer X.&quot;&quot;&quot;</span></span><br><span class="line">    x_count = <span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> x &gt;= base:</span><br><span class="line">        x_count += <span class="number">1</span></span><br><span class="line">        x //= base</span><br><span class="line">    <span class="keyword">return</span> x_count</span><br></pre></td></tr></table></figure>
+
+<h4 id="函数注释（comments-on-functions-in-general-terminology-）"><a href="#函数注释（comments-on-functions-in-general-terminology-）" class="headerlink" title="函数注释（comments on functions in general terminology ）"></a>函数注释（<code>comments on functions in general terminology</code> ）</h4><p><code>domain</code>：定义域，函数合法的参数的集合</p>
+<p><code>range</code>：值域，函数合法的返回值的集合</p>
+<p><code>codomain</code>：上域，函数合法的返回值的超集</p>
+<p>在<code>python</code>中，可以使用<code>&quot;&quot;&quot; &quot;&quot;&quot;</code>在函数开头编写注释文档，作用如下：</p>
+<ul>
+<li>文档注释可以提供足够的信息给程序员，使其不需要阅读函数体，就能明白如何使用该函数；</li>
+<li>文档注释明确什么输入是合法的，以及什么情况下程序员可以使用该函数，这叫做<code>前置条件</code>；</li>
+<li>文档注释明确函数接收合法输入时的输出和副作用，这叫做<code>后置条件</code>；</li>
+<li>总之，这就是函数的<strong>行为</strong>和<strong>语义</strong>。</li>
+</ul>
+<p>原文在本课的<code>ppt</code>的第4页：</p>
+<blockquote>
+<ul>
+<li>Ideally, a <code>documentation comment</code> for a function provides enough information so that a programmer can use the function properly and understand what it does <code>without</code> having to read its body. </li>
+<li>It should make clear what inputs are valid or under what conditions the function may be called. This is the <code>precondition</code>. </li>
+<li>Likewise, it should make clear what the resulting output or effect of the function will be for correct inputs. This is the <code>postcondition</code>. </li>
+<li>Together, these are the <code>behavior</code> or <code>semantics</code> (meaning) of the function.</li>
+</ul>
+</blockquote>
+<h4 id="设计函数的两条原则（Two-Design-Principles）"><a href="#设计函数的两条原则（Two-Design-Principles）" class="headerlink" title="设计函数的两条原则（Two Design Principles）"></a>设计函数的两条原则（<code>Two Design Principles</code>）</h4><p>设计函数应当遵循以下原则：</p>
+<ul>
+<li>函数是良定义（<code>well-defined</code>）的，即函数应该简洁清晰；</li>
+<li>不要重复，但程序出现很多重复的语句块时，就要进行重构（<code>refactor</code>）；</li>
+<li>编写可用性更强的函数。</li>
+</ul>
+<p>原文在本课的<code>ppt</code>的第5页：</p>
+<blockquote>
+<ul>
+<li>Functions should do one well-defined thing (a complicated documentation comment might suggest your function does too much).</li>
+<li><code>DRY</code> (Don’t Repeat Yourself). <ul>
+<li>Multiple segments of code that look really similar to each other cry out for <code>refactoring</code>. . . </li>
+<li>That is, for replacing the segments with simple calls to a single general function that states their shared structure just once, with parameters used to specialize to the various cases.</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h3 id="Lecture-5-Exercising-Environments"><a href="#Lecture-5-Exercising-Environments" class="headerlink" title="Lecture #5: Exercising Environments"></a>Lecture #5: Exercising Environments</h3><p>这节课主要讲了很多关于环境(<code>environment</code>)的习题，具体请看本节课的<code>slide</code>。</p>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ul>
+<li><p><strong>翻译视频</strong>：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1v64y1Q78o/?spm_id_from=444.41.top_right_bar_window_default_collection.content.click&vd_source=249a8ad55bb26717dd55ec3dd295f644">【计算机程序的构造和解释】精译【UC Berkeley 公开课-CS61A (Spring 2021)】-中英双语字幕</a></p>
+</li>
+<li><p><code>github</code>: <a target="_blank" rel="noopener" href="https://github.com/Maxwell2020152049/CS61A">Maxwell2020152049&#x2F;CS61A</a></p>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/06/08/CS61A-Homework01/" rel="prev" title="CS61A Homework01">
+                  <i class="fa fa-angle-left"></i> CS61A Homework01
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Rex</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
