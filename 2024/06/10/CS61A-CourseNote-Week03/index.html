@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.2.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="本文总结了CS 61A课程中的递归概念，包括简单线性递归、尾递归、树递归及其应用，如Sierpinski&#39;s Triangle、寻路问题和分区计数。同时介绍了高阶函数、Currying、函数抽象和异常处理。通过实例和练习，加深了对递归和函数设计的理解。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CS61A 课程笔记 Week03">
+<meta property="og:url" content="http://example.com/2024/06/10/CS61A-CourseNote-Week03/index.html">
+<meta property="og:site_name" content="Rex&#39;s Blog">
+<meta property="og:description" content="本文总结了CS 61A课程中的递归概念，包括简单线性递归、尾递归、树递归及其应用，如Sierpinski&#39;s Triangle、寻路问题和分区计数。同时介绍了高阶函数、Currying、函数抽象和异常处理。通过实例和练习，加深了对递归和函数设计的理解。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/9646793e6f6f565b04701586f8fb3b8.png">
+<meta property="article:published_time" content="2024-06-10T07:53:18.000Z">
+<meta property="article:modified_time" content="2024-06-10T08:08:41.965Z">
+<meta property="article:author" content="Rex">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/9646793e6f6f565b04701586f8fb3b8.png">
+
+
+<link rel="canonical" href="http://example.com/2024/06/10/CS61A-CourseNote-Week03/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2024/06/10/CS61A-CourseNote-Week03/","path":"2024/06/10/CS61A-CourseNote-Week03/","title":"CS61A 课程笔记 Week03"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>CS61A 课程笔记 Week03 | Rex's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Rex's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Week3"><span class="nav-number">1.</span> <span class="nav-text">Week3</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Lecture-6-Recursion"><span class="nav-number">1.1.</span> <span class="nav-text">Lecture #6: Recursion</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%80%E4%B8%AA%E6%9C%89%E6%84%8F%E6%80%9D%E7%9A%84%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0%EF%BC%9A"><span class="nav-number">1.1.1.</span> <span class="nav-text">一个有意思的高阶函数：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Currying"><span class="nav-number">1.1.2.</span> <span class="nav-text">Currying</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E5%93%B2%E5%AD%A6%EF%BC%88Philosophy-of-Functions%EF%BC%89"><span class="nav-number">1.1.3.</span> <span class="nav-text">函数哲学（Philosophy of Functions）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E6%8A%BD%E8%B1%A1"><span class="nav-number">1.1.4.</span> <span class="nav-text">函数抽象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E7%BA%BF%E6%80%A7%E9%80%92%E5%BD%92%EF%BC%88Simple-Linear-Recursions%EF%BC%89"><span class="nav-number">1.1.5.</span> <span class="nav-text">简单线性递归（Simple Linear Recursions）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%BE%E9%80%92%E5%BD%92%EF%BC%88Tail-Recursion%EF%BC%89"><span class="nav-number">1.1.6.</span> <span class="nav-text">尾递归（Tail Recursion）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%92%E5%BD%92%E7%9A%84%E6%80%9D%E6%83%B3%EF%BC%88Recursive-Thinking%EF%BC%89"><span class="nav-number">1.1.7.</span> <span class="nav-text">递归的思想（Recursive Thinking）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E6%A0%91%E9%80%92%E5%BD%92%E7%9A%84Sierpinski-s-Triangle"><span class="nav-number">1.1.8.</span> <span class="nav-text">基于树递归的Sierpinski&#39;s Triangle</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lecture-7-Tree-Recursion"><span class="nav-number">1.2.</span> <span class="nav-text">Lecture #7: Tree Recursion</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A0%91%E9%80%92%E5%BD%92%EF%BC%88Tree-Recursion%EF%BC%89"><span class="nav-number">1.2.1.</span> <span class="nav-text">树递归（Tree Recursion）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%BB%E8%B7%AF%E9%97%AE%E9%A2%98%EF%BC%88Finding-a-Path%EF%BC%89"><span class="nav-number">1.2.2.</span> <span class="nav-text">寻路问题（Finding a Path）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%86%E5%8C%BA%E8%AE%A1%E6%95%B0%EF%BC%88Counting-Partitions%EF%BC%89"><span class="nav-number">1.2.3.</span> <span class="nav-text">分区计数（Counting Partitions）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lecture-8-More-on-Functions"><span class="nav-number">1.3.</span> <span class="nav-text">Lecture #8: More on Functions</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B1%89%E8%AF%BA%E5%A1%94%EF%BC%88The-Towers-of-Hanoi%EF%BC%89"><span class="nav-number">1.3.1.</span> <span class="nav-text">汉诺塔（The Towers of Hanoi）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%82%E5%B8%B8%EF%BC%88Exceptions%EF%BC%89"><span class="nav-number">1.3.2.</span> <span class="nav-text">异常（Exceptions）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BC%96%E7%A8%8B%E7%BB%83%E4%B9%A0"><span class="nav-number">1.3.3.</span> <span class="nav-text">编程练习</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">1.4.</span> <span class="nav-text">参考资料</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Rex</p>
+  <div class="site-description" itemprop="description">最是人间留不住，朱颜辞镜花辞树。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/06/10/CS61A-CourseNote-Week03/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Rex">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rex's Blog">
+      <meta itemprop="description" content="最是人间留不住，朱颜辞镜花辞树。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="CS61A 课程笔记 Week03 | Rex's Blog">
+      <meta itemprop="description" content="本文总结了CS 61A课程中的递归概念，包括简单线性递归、尾递归、树递归及其应用，如Sierpinski's Triangle、寻路问题和分区计数。同时介绍了高阶函数、Currying、函数抽象和异常处理。通过实例和练习，加深了对递归和函数设计的理解。">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          CS61A 课程笔记 Week03
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-06-10 15:53:18 / 修改时间：16:08:41" itemprop="dateCreated datePublished" datetime="2024-06-10T15:53:18+08:00">2024-06-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/CS61A/" itemprop="url" rel="index"><span itemprop="name">CS61A</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/CS61A/Course-Notes/" itemprop="url" rel="index"><span itemprop="name">Course Notes</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">本文总结了CS 61A课程中的递归概念，包括简单线性递归、尾递归、树递归及其应用，如Sierpinski's Triangle、寻路问题和分区计数。同时介绍了高阶函数、Currying、函数抽象和异常处理。通过实例和练习，加深了对递归和函数设计的理解。</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="Week3"><a href="#Week3" class="headerlink" title="Week3"></a>Week3</h2><h3 id="Lecture-6-Recursion"><a href="#Lecture-6-Recursion" class="headerlink" title="Lecture #6: Recursion"></a>Lecture #6: Recursion</h3><h4 id="一个有意思的高阶函数："><a href="#一个有意思的高阶函数：" class="headerlink" title="一个有意思的高阶函数："></a>一个有意思的高阶函数：</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">print_sums</span>(<span class="params">n</span>):</span><br><span class="line">    <span class="built_in">print</span>(n)</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">next_sum</span>(<span class="params">k</span>):</span><br><span class="line">        <span class="keyword">return</span> print_sums(n+k)</span><br><span class="line">    <span class="keyword">return</span> next_sum</span><br><span class="line"></span><br><span class="line">print_sums(<span class="number">1</span>)(<span class="number">3</span>)(<span class="number">5</span>)</span><br></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1</span><br><span class="line">4</span><br><span class="line">9</span><br></pre></td></tr></table></figure>
+
+<h4 id="Currying"><a href="#Currying" class="headerlink" title="Currying"></a>Currying</h4><p>一种将多参数函数转化为一系列单参数函数的方法，也称部分实例化（<code>partial instantiation</code>）。</p>
+<p><code>eg.</code>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> operator <span class="keyword">import</span> add</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">curry2</span>(<span class="params">f</span>):</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">lambda</span> x: \</span><br><span class="line">    <span class="keyword">lambda</span> y: \</span><br><span class="line">    f(x, y)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(curry2(add)(<span class="number">30</span>)(<span class="number">12</span>))</span><br><span class="line"><span class="built_in">print</span>(curry2(add)(<span class="number">30</span>))</span><br></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">42</span><br><span class="line">&lt;function curry2.&lt;locals&gt;.&lt;lambda&gt;.&lt;locals&gt;.&lt;lambda&gt; at 0x7fa093dc1620&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="函数哲学（Philosophy-of-Functions）"><a href="#函数哲学（Philosophy-of-Functions）" class="headerlink" title="函数哲学（Philosophy of Functions）"></a>函数哲学（<code>Philosophy of Functions</code>）</h4><ul>
+<li>语法规范说明了函数调用的语法（函数参数）</li>
+<li>语义规范说明了如果工作：<ul>
+<li>前置条件说明了对调用者的要求</li>
+<li>后置条件说明了来自函数实现者的承诺</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<ul>
+<li>Specifies a <code>contract</code> between caller and function implementer. </li>
+<li><code>Syntactic specification</code> gives syntax for calling (number of arguments). </li>
+<li><code>Semantic specification</code> tells what it does: <ul>
+<li>Preconditions are requirements on the caller. </li>
+<li>Postconditions are promises from the function’s implementer.</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h4 id="函数抽象"><a href="#函数抽象" class="headerlink" title="函数抽象"></a>函数抽象</h4><p><strong>用户</strong>和<strong>函数实现者</strong>之间有不同的关注点：</p>
+<ul>
+<li>用户只提供函数参数并使用函数的返回值作为结果，不关心计算过程</li>
+<li>函数实现者只考虑如果计算，不关心函数参数的来源和返回值如何被使用</li>
+<li>对于用户来说，<code>sqrt</code>函数（平方根函数）就是一种抽象</li>
+<li>综上，我们称其为<strong>函数抽象</strong></li>
+</ul>
+<blockquote>
+<ul>
+<li>Ideally, the specification (syntactic and semantic) should suffice to use the function (i.e., without seeing its body). </li>
+<li>There is a <code>separation of concerns</code> here: <ul>
+<li>The caller (client) is concerned with providing values of x and using the results, but <code>not</code> how the result is computed. </li>
+<li>The implementer is concerned with how the result is computed, but <code>not</code> where x comes from or how the value is used. </li>
+<li>From the client’s point of view, sqrt is an <code>abstraction</code> from the set of possible ways to compute this result. </li>
+<li>Therefore, we call this <code>functional abstraction</code>.</li>
+</ul>
+</li>
+<li>Programming is largely about choosing abstractions that lead to clear, fast, and maintainable programs.</li>
+</ul>
+</blockquote>
+<h4 id="简单线性递归（Simple-Linear-Recursions）"><a href="#简单线性递归（Simple-Linear-Recursions）" class="headerlink" title="简单线性递归（Simple Linear Recursions）"></a>简单线性递归（<code>Simple Linear Recursions</code>）</h4><p>用<strong>递归</strong>实现一个求<code>1</code>到<code>N</code>的平方和的函数<code>sum_squares</code>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Simple linear recursions.</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">sum_squares1</span>(<span class="params">N</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Return The sum of K**2 for K from 1 to N (inclusive).</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; sum_squares1(-1)</span></span><br><span class="line"><span class="string">    0</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; sum_squares1(0)</span></span><br><span class="line"><span class="string">    0</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; sum_squares1(1)</span></span><br><span class="line"><span class="string">    1</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; sum_squares1(4)</span></span><br><span class="line"><span class="string">    30</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> N &lt; <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> sum_squares1(N - <span class="number">1</span>) + N**<span class="number">2</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="尾递归（Tail-Recursion）"><a href="#尾递归（Tail-Recursion）" class="headerlink" title="尾递归（Tail Recursion）"></a>尾递归（<code>Tail Recursion</code>）</h4><p><strong>尾递归</strong>：递归函数的调用是该递归函数最后计算的部分，或者是返回值。</p>
+<blockquote>
+<p>The right version is a <code>tail-recursive</code> function, meaning that the recursive call is either the returned value or the very last action performed.</p>
+</blockquote>
+<p>上述函数可以用<strong>尾递归</strong>的方式实现：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Tail-recursive sum_squares</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">sum_squares2</span>(<span class="params">N</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Return the sum of K**2 for 1 &lt;= K &lt;= N.</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; sum_squares2(-1)</span></span><br><span class="line"><span class="string">    0</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; sum_squares2(0)</span></span><br><span class="line"><span class="string">    0</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; sum_squares2(1)</span></span><br><span class="line"><span class="string">    1</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; sum_squares2(4)</span></span><br><span class="line"><span class="string">    30</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">part_sum</span>(<span class="params">accum, k</span>):</span><br><span class="line">        <span class="string">&quot;&quot;&quot;Return the sum of ACCUM + K**2 + (K+1)**2 + ... + N**2.&quot;&quot;&quot;</span></span><br><span class="line">        <span class="keyword">if</span> k &gt; N:</span><br><span class="line">            <span class="keyword">return</span> accum</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> part_sum(accum + k**<span class="number">2</span>, k + <span class="number">1</span>)</span><br><span class="line">    <span class="keyword">return</span> part_sum(<span class="number">0</span>, <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<p>也可以用<strong>迭代</strong>方式实现：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Iterattive version</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">sum_squares3</span>(<span class="params">N</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Return the sum of K**2 for 1 &lt;= K &lt;= N.</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; sum_squares3(-1)</span></span><br><span class="line"><span class="string">    0</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; sum_squares3(0)</span></span><br><span class="line"><span class="string">    0</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; sum_squares3(1)</span></span><br><span class="line"><span class="string">    1</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; sum_squares3(4)</span></span><br><span class="line"><span class="string">    30</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    accum = <span class="number">0</span></span><br><span class="line">    k = <span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> k &lt;= N:</span><br><span class="line">        accum = accum + k**<span class="number">2</span></span><br><span class="line">        k = k + <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> accum</span><br></pre></td></tr></table></figure>
+
+<h4 id="递归的思想（Recursive-Thinking）"><a href="#递归的思想（Recursive-Thinking）" class="headerlink" title="递归的思想（Recursive Thinking）"></a>递归的思想（<code>Recursive Thinking</code>）</h4><p>简单来说，递归的正确性的数学证明很像<strong>数学归纳法</strong>，详见本节课的<code>Slide</code>的<code>P11~P14</code>，写的很详细：</p>
+<p>概括如下：</p>
+<ul>
+<li><p>起始步骤</p>
+</li>
+<li><p>递推步骤</p>
+</li>
+<li><p>递归要使得问题越变越小，有一个能够终止的终点</p>
+</li>
+</ul>
+<h4 id="基于树递归的Sierpinski-s-Triangle"><a href="#基于树递归的Sierpinski-s-Triangle" class="headerlink" title="基于树递归的Sierpinski&#39;s Triangle"></a>基于树递归的<code>Sierpinski&#39;s Triangle</code></h4><p><code>Sierpinski&#39;s Triangle</code>是一种典型的基于递归实现的图形结构。</p>
+<p>修改了课程给的示例代码，在<code>Linux</code>上可以跑起来了（<code>Windows</code>上跑不起来，可能是缺少对应的库），把<code>make_displayer</code>函数中的<code>-g1300x1000</code>修改为<code>-g1300x8000</code>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">from</span> math <span class="keyword">import</span> sqrt</span><br><span class="line"><span class="keyword">from</span> subprocess <span class="keyword">import</span> Popen, DEVNULL, PIPE</span><br><span class="line"></span><br><span class="line">sin60 = sqrt(<span class="number">3</span>) / <span class="number">2</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># To use interactively:  Download 06.py from the cs61a.org website.</span></span><br><span class="line"><span class="comment"># Install gs (ghostscript) and put it in your path.  Then, run the command</span></span><br><span class="line"><span class="comment">#     python3 -i 06.py</span></span><br><span class="line"><span class="comment"># (or equivalent) on your local machine, at which point you can run</span></span><br><span class="line"><span class="comment"># &gt;&gt;&gt; d = make_displayer()</span></span><br><span class="line"><span class="comment"># &gt;&gt;&gt; draw_gasket(3, d.stdin)</span></span><br><span class="line"><span class="comment"># &gt;&gt;&gt; draw_gasket(6, d.stdin)</span></span><br><span class="line"><span class="comment"># ...</span></span><br><span class="line"><span class="comment"># &gt;&gt;&gt; stop_displayer(d)   # To clean up.</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">make_gasket</span>(<span class="params">n, x, y, s, output</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Write Postscript commands to OUTPUT that draw an Nth-order</span></span><br><span class="line"><span class="string">    Sierpinski&#x27;s gasket, with lower-left corner at (X,Y), and</span></span><br><span class="line"><span class="string">    size S X S (units of points: 1/72 in).&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">if</span> n == <span class="number">0</span>:</span><br><span class="line">        draw_solid_triangle(x, y, s, output)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        make_gasket(n - <span class="number">1</span>, x, y, s/<span class="number">2</span>, output)</span><br><span class="line">        make_gasket(n - <span class="number">1</span>, x + s/<span class="number">2</span>, y, s/<span class="number">2</span>, output)</span><br><span class="line">        make_gasket(n - <span class="number">1</span>, x + s/<span class="number">4</span>, y + sin60*s/<span class="number">2</span>, s/<span class="number">2</span>, output)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">draw_solid_triangle</span>(<span class="params">x, y, s, output</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Draw a solid triangle lower-left corner at (X, Y)</span></span><br><span class="line"><span class="string">    and side S on OUTPUT.&quot;&quot;&quot;</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;<span class="subst">&#123;x:<span class="number">.2</span>f&#125;</span> <span class="subst">&#123;y:<span class="number">.2</span>f&#125;</span> moveto &quot;</span></span><br><span class="line">          <span class="string">f&quot;<span class="subst">&#123;s:<span class="number">.2</span>f&#125;</span> 0 rlineto &quot;</span></span><br><span class="line">          <span class="string">f&quot;-<span class="subst">&#123;s/<span class="number">2</span>:<span class="number">.2</span>f&#125;</span> <span class="subst">&#123;s*sin60:<span class="number">.2</span>f&#125;</span> rlineto &quot;</span></span><br><span class="line">          <span class="string">&quot;closepath fill&quot;</span>, file=output)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">draw_gasket</span>(<span class="params">n, output=sys.stdout, x=<span class="number">10</span>, y=<span class="number">10</span>, s=<span class="number">400</span></span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Create a complete Postscript file for the gasket created by</span></span><br><span class="line"><span class="string">    make_gasket(N, X, Y, S, OUTPUT).&quot;&quot;&quot;</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;%!&quot;</span>, file=output)</span><br><span class="line">    make_gasket(n, x, y, s, output=output)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;showpage&quot;</span>, file=output)</span><br><span class="line">    output.flush()</span><br><span class="line">    </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">make_displayer</span>():</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Create a Ghostscript process that displays its input (sent in through</span></span><br><span class="line"><span class="string">    .stdin).&quot;&quot;&quot;</span></span><br><span class="line">    <span class="comment"># Adjust the -gWIDTHxHEIGHT option to change drawing area.  Units are</span></span><br><span class="line">    <span class="comment"># pixels.</span></span><br><span class="line">    <span class="keyword">return</span> Popen([<span class="string">&quot;gs&quot;</span>, <span class="string">&quot;-g1300x8000&quot;</span>],</span><br><span class="line">                  universal_newlines=<span class="literal">True</span>, stdin=PIPE, stdout=DEVNULL)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">stop_displayer</span>(<span class="params">d</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Terminate execution of displayer D (created by make_displayer).&quot;&quot;&quot;</span></span><br><span class="line">    d.stdin.close()</span><br><span class="line">    d.wait()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>在终端中输入以下命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">python3 -i 06.py</span> </span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; d = make_displayer()</span></span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; draw_gasket(4, d.stdin)</span></span><br></pre></td></tr></table></figure>
+
+<p>效果如下：</p>
+<p><img src="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/9646793e6f6f565b04701586f8fb3b8.png"></p>
+<h3 id="Lecture-7-Tree-Recursion"><a href="#Lecture-7-Tree-Recursion" class="headerlink" title="Lecture #7: Tree Recursion"></a>Lecture #7: Tree Recursion</h3><h4 id="树递归（Tree-Recursion）"><a href="#树递归（Tree-Recursion）" class="headerlink" title="树递归（Tree Recursion）"></a>树递归（<code>Tree Recursion</code>）</h4><p>上节课用到的<code>make_gasket</code>函数就是用树递归实现的。</p>
+<blockquote>
+<ul>
+<li>The <code>make gasket</code> function is an example of a tree recursion, where each call makes multiple recursive calls on itself. </li>
+<li>A <code>linear recursion</code> makes at most one recursive call per call. </li>
+<li>A <code>tail recursion</code> has at most one recursive call per call, and it is the last thing evaluated.</li>
+</ul>
+</blockquote>
+<p>一个<strong>尾递归</strong>的例子，<code>find_zero(lowest, highest, func)</code>函数返回<code>func</code>函数的<code>[lowest, highest]</code>区间上的零点的横坐标：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">find</span> zero(lowest, highest, func):</span><br><span class="line"><span class="string">&quot;&quot;&quot;Return a value v such that LOWEST &lt;= v &lt;= HIGHEST and</span></span><br><span class="line"><span class="string">FUNC(v) == 0, or None if there is no such value.</span></span><br><span class="line"><span class="string">Assumes that FUNC is a non-decreasing function from integers</span></span><br><span class="line"><span class="string">to integers (that is, if a &lt; b, then FUNC(a) &lt;= FUNC(b).&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">if</span> lowest &gt; highest: 		<span class="comment"># Base Case</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">    <span class="keyword">elif</span> func(lowest) == <span class="number">0</span>: 	<span class="comment"># Base Case</span></span><br><span class="line">        <span class="keyword">return</span> lowest</span><br><span class="line">    <span class="keyword">else</span>: 								<span class="comment"># Inductive (Recursive) Case</span></span><br><span class="line">    	<span class="keyword">return</span> find zero(lowest + <span class="number">1</span>, highest, func)</span><br></pre></td></tr></table></figure>
+
+<p>等价的迭代版本：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Equivalent iterative solution</span></span><br><span class="line"><span class="keyword">while</span> lowest &lt;= highest:</span><br><span class="line">	<span class="keyword">if</span> func(lowest) == <span class="number">0</span>:</span><br><span class="line">		<span class="keyword">return</span> lowest</span><br><span class="line">	lowest += <span class="number">1</span></span><br><span class="line"><span class="comment"># If we get here, returns None</span></span><br></pre></td></tr></table></figure>
+
+<p>使用<strong>二分</strong>思想查找零点：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">find_zero</span>(<span class="params">lowest, highest, func</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Return a value v such that LOWEST &lt;= v &lt;= HIGHEST and </span></span><br><span class="line"><span class="string">    FUNC(v) == 0, or None if there is no such value.</span></span><br><span class="line"><span class="string">    Assumes that FUNC is a non-descending function from integers</span></span><br><span class="line"><span class="string">    to integers (that is, if a &lt; b, then FUNC(a) &lt;= FUNC(b).</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; find_zero(0, 10, lambda x: x - 4)</span></span><br><span class="line"><span class="string">    4</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; find_zero(0, 100, lambda x: x**2 - 36)</span></span><br><span class="line"><span class="string">    6</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; find_zero(0, 100, lambda x: x**2 - 37)</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> lowest &gt; highest:</span><br><span class="line">         <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">    middle = (lowest + highest) // <span class="number">2</span></span><br><span class="line">    <span class="keyword">if</span> func(middle) == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> middle</span><br><span class="line">    <span class="keyword">elif</span> func(middle) &lt; <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> find_zero(middle + <span class="number">1</span>, highest, func)</span><br><span class="line">    <span class="keyword">else</span>: </span><br><span class="line">        <span class="keyword">return</span> find_zero(lowest, middle -<span class="number">1</span>, func)</span><br></pre></td></tr></table></figure>
+
+<p>等价的迭代版本：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Equivalent iterative solution</span></span><br><span class="line"><span class="keyword">while</span> lowest &lt;= highest:</span><br><span class="line">	middle = (lowest + highest) // <span class="number">2</span></span><br><span class="line">    <span class="keyword">if</span> func(middle) == <span class="number">0</span>:</span><br><span class="line">   		<span class="keyword">return</span> middle</span><br><span class="line">    <span class="keyword">elif</span> func(middle) &lt; <span class="number">0</span>:</span><br><span class="line">    	lowest = middle + <span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">    	highest = middle - <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p>不使用<code>if</code>语句，只是用<code>and/or</code>逻辑运算符也能够实现一样的功能，详见本节课的<code>Slide</code>的<code>P16~P23</code></p>
+<h4 id="寻路问题（Finding-a-Path）"><a href="#寻路问题（Finding-a-Path）" class="headerlink" title="寻路问题（Finding a Path）"></a>寻路问题（<code>Finding a Path</code>）</h4><p>树递归的另一个例子，在迷宫中自上向下寻路，搜索是否存在路径或者存在多少条路径：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Maze configuration from lecture</span></span><br><span class="line"><span class="comment"># 第一个迷宫，用于测试 is_path 函数</span></span><br><span class="line">BLOCKS1 = &#123; (<span class="number">0</span>, <span class="number">0</span>), (<span class="number">0</span>, <span class="number">3</span>), (<span class="number">0</span>, <span class="number">4</span>), (<span class="number">0</span>, <span class="number">5</span>), (<span class="number">0</span>, <span class="number">6</span>), (<span class="number">1</span>, <span class="number">0</span>), (<span class="number">1</span>, <span class="number">2</span>), (<span class="number">1</span>, <span class="number">3</span>),</span><br><span class="line">            (<span class="number">1</span>, <span class="number">4</span>), (<span class="number">1</span>, <span class="number">5</span>), (<span class="number">2</span>, <span class="number">0</span>), (<span class="number">2</span>, <span class="number">1</span>), (<span class="number">2</span>, <span class="number">3</span>), (<span class="number">2</span>, <span class="number">4</span>), (<span class="number">2</span>, <span class="number">6</span>), (<span class="number">3</span>, <span class="number">0</span>),</span><br><span class="line">            (<span class="number">3</span>, <span class="number">1</span>), (<span class="number">3</span>, <span class="number">3</span>), (<span class="number">3</span>, <span class="number">5</span>), (<span class="number">3</span>, <span class="number">6</span>), (<span class="number">4</span>, <span class="number">0</span>), (<span class="number">4</span>, <span class="number">1</span>), (<span class="number">4</span>, <span class="number">2</span>), (<span class="number">4</span>, <span class="number">3</span>),</span><br><span class="line">            (<span class="number">4</span>, <span class="number">4</span>), (<span class="number">4</span>, <span class="number">6</span>), (<span class="number">5</span>, <span class="number">0</span>), (<span class="number">5</span>, <span class="number">2</span>), (<span class="number">5</span>, <span class="number">3</span>), (<span class="number">5</span>, <span class="number">4</span>), (<span class="number">5</span>, <span class="number">5</span>), (<span class="number">6</span>, <span class="number">1</span>),</span><br><span class="line">            (<span class="number">6</span>, <span class="number">3</span>), (<span class="number">6</span>, <span class="number">6</span>), (<span class="number">7</span>, <span class="number">1</span>), (<span class="number">7</span>, <span class="number">2</span>), (<span class="number">7</span>, <span class="number">4</span>), (<span class="number">7</span>, <span class="number">5</span>), (<span class="number">8</span>, <span class="number">0</span>), (<span class="number">8</span>, <span class="number">1</span>),</span><br><span class="line">            (<span class="number">8</span>, <span class="number">3</span>), (<span class="number">8</span>, <span class="number">4</span>), (<span class="number">8</span>, <span class="number">6</span>), (<span class="number">9</span>, <span class="number">0</span>), (<span class="number">9</span>, <span class="number">3</span>), (<span class="number">9</span>, <span class="number">6</span>) &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 第一个 blocked 函数</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">maze1</span>(<span class="params">x, y</span>):</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">not</span> <span class="number">0</span> &lt;= x &lt; <span class="number">10</span> <span class="keyword">or</span> (x, y) <span class="keyword">in</span> BLOCKS1</span><br><span class="line"></span><br><span class="line"><span class="comment"># Missing block at (7, 1)</span></span><br><span class="line"><span class="comment"># 第二个迷宫，用于测试 num_paths 函数</span></span><br><span class="line">BLOCKS2 = &#123; (<span class="number">0</span>, <span class="number">0</span>), (<span class="number">0</span>, <span class="number">3</span>), (<span class="number">0</span>, <span class="number">4</span>), (<span class="number">0</span>, <span class="number">5</span>), (<span class="number">0</span>, <span class="number">6</span>), (<span class="number">1</span>, <span class="number">0</span>), (<span class="number">1</span>, <span class="number">2</span>), (<span class="number">1</span>, <span class="number">3</span>),</span><br><span class="line">            (<span class="number">1</span>, <span class="number">4</span>), (<span class="number">1</span>, <span class="number">5</span>), (<span class="number">2</span>, <span class="number">0</span>), (<span class="number">2</span>, <span class="number">1</span>), (<span class="number">2</span>, <span class="number">3</span>), (<span class="number">2</span>, <span class="number">4</span>), (<span class="number">2</span>, <span class="number">6</span>), (<span class="number">3</span>, <span class="number">0</span>),</span><br><span class="line">            (<span class="number">3</span>, <span class="number">1</span>), (<span class="number">3</span>, <span class="number">3</span>), (<span class="number">3</span>, <span class="number">5</span>), (<span class="number">3</span>, <span class="number">6</span>), (<span class="number">4</span>, <span class="number">0</span>), (<span class="number">4</span>, <span class="number">1</span>), (<span class="number">4</span>, <span class="number">2</span>), (<span class="number">4</span>, <span class="number">3</span>),</span><br><span class="line">            (<span class="number">4</span>, <span class="number">4</span>), (<span class="number">4</span>, <span class="number">6</span>), (<span class="number">5</span>, <span class="number">0</span>), (<span class="number">5</span>, <span class="number">2</span>), (<span class="number">5</span>, <span class="number">3</span>), (<span class="number">5</span>, <span class="number">4</span>), (<span class="number">5</span>, <span class="number">5</span>), (<span class="number">6</span>, <span class="number">1</span>),</span><br><span class="line">            (<span class="number">6</span>, <span class="number">3</span>), (<span class="number">6</span>, <span class="number">6</span>), (<span class="number">7</span>, <span class="number">2</span>), (<span class="number">7</span>, <span class="number">4</span>), (<span class="number">7</span>, <span class="number">5</span>), (<span class="number">8</span>, <span class="number">0</span>), (<span class="number">8</span>, <span class="number">1</span>),</span><br><span class="line">            (<span class="number">8</span>, <span class="number">3</span>), (<span class="number">8</span>, <span class="number">4</span>), (<span class="number">8</span>, <span class="number">6</span>), (<span class="number">9</span>, <span class="number">0</span>), (<span class="number">9</span>, <span class="number">3</span>), (<span class="number">9</span>, <span class="number">6</span>) &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 第二个 blocked 函数</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">maze2</span>(<span class="params">x, y</span>):</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">not</span> <span class="number">0</span> &lt;= x &lt; <span class="number">10</span> <span class="keyword">or</span> (x, y) <span class="keyword">in</span> BLOCKS2</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 搜索是否存在路径</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">is_path</span>(<span class="params">blocked, x0, y0</span>):</span><br><span class="line">   <span class="string">&quot;&quot;&quot;True iff there is a path of squares from (X0, Y0) to some </span></span><br><span class="line"><span class="string">   square (x1, 0) such that all squares on the path (including first and</span></span><br><span class="line"><span class="string">   last) are unoccupied.  BLOCKED is a predicate such that BLOCKED(x, y) </span></span><br><span class="line"><span class="string">   is true iff the grid square at (x, y) is occupied or off the edge.</span></span><br><span class="line"><span class="string">   Each step of a path goes down one row and 1 or 0 columns left or right.&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">   <span class="keyword">if</span> blocked(x0, y0):</span><br><span class="line">       <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">   <span class="keyword">elif</span> y0 == <span class="number">0</span>:</span><br><span class="line">       <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">   <span class="keyword">else</span>:</span><br><span class="line">       <span class="keyword">return</span> (is_path(blocked, x0-<span class="number">1</span>, y0-<span class="number">1</span>) </span><br><span class="line">              <span class="keyword">or</span> is_path(blocked, x0, y0-<span class="number">1</span>) </span><br><span class="line">              <span class="keyword">or</span> is_path(blocked, x0+<span class="number">1</span>, y0-<span class="number">1</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 返回存在多少条路径</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">num_paths</span>(<span class="params">blocked, x0, y0</span>):</span><br><span class="line">   <span class="string">&quot;&quot;&quot;Return the number of unoccupied paths that run from (X0, Y0)</span></span><br><span class="line"><span class="string">   to some square (x1, 0). BLOCKED is a predicate such that BLOCKED(x, y) </span></span><br><span class="line"><span class="string">   is true iff the grid square at (x, y) is occupied or off the edge. &quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">   <span class="keyword">if</span> blocked(x0, y0):</span><br><span class="line">       <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">   <span class="keyword">elif</span> y0 == <span class="number">0</span>:</span><br><span class="line">       <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">   <span class="keyword">else</span>:</span><br><span class="line">       <span class="keyword">return</span> num_paths(blocked, x0, y0-<span class="number">1</span>) \</span><br><span class="line">            + num_paths(blocked, x0-<span class="number">1</span>, y0-<span class="number">1</span>) \</span><br><span class="line">            + num_paths(blocked, x0+<span class="number">1</span>, y0-<span class="number">1</span>)</span><br><span class="line"><span class="comment"># OR (looking ahead a bit)</span></span><br><span class="line"><span class="comment">#      return sum( (num_paths(blocked, x0+k, y0-1)</span></span><br><span class="line"><span class="comment">#                   for k in range(-1, 2))</span></span><br><span class="line"><span class="comment">#                )</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="分区计数（Counting-Partitions）"><a href="#分区计数（Counting-Partitions）" class="headerlink" title="分区计数（Counting Partitions）"></a>分区计数（<code>Counting Partitions</code>）</h4><p>又一个使用<strong>树递归</strong>的例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">num_partitions</span>(<span class="params">n, k</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Return number of distinct ways to express N as a sum of </span></span><br><span class="line"><span class="string">    positive integers each of which is &lt;= K, where K &gt; 0.&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">if</span> n &lt; <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    <span class="keyword">elif</span> k == <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> num_partitions(n-k, k) + num_partitions(n, k-<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="Lecture-8-More-on-Functions"><a href="#Lecture-8-More-on-Functions" class="headerlink" title="Lecture #8: More on Functions"></a>Lecture #8: More on Functions</h3><h4 id="汉诺塔（The-Towers-of-Hanoi）"><a href="#汉诺塔（The-Towers-of-Hanoi）" class="headerlink" title="汉诺塔（The Towers of Hanoi）"></a>汉诺塔（<code>The Towers of Hanoi</code>）</h4><p>经典递归问题，课程给出了其解决策略和一个可视化的程序：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Towers of Hanoi</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">move_tower</span>(<span class="params">n, start_peg, end_peg</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Perform moves that transfer an ordered tower of N&gt;0 disks in the</span></span><br><span class="line"><span class="string">    Towers of Hanoi puzzle from peg START_PEG to peg END_PEG, where </span></span><br><span class="line"><span class="string">    1 &lt;= START_PEG, END_PEG &lt;= 3, and START_PEG != END_PEG. Assumes</span></span><br><span class="line"><span class="string">    the disks to be moved are all smaller than those on the other pegs.&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> n == <span class="number">1</span>:</span><br><span class="line">        move_disk(start_peg, end_peg)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        spare_peg = <span class="number">6</span> - start_peg - end_peg</span><br><span class="line">        move_tower(n - <span class="number">1</span>, start_peg, spare_peg)</span><br><span class="line">        move_disk(start_peg, end_peg)</span><br><span class="line">        move_tower(n - <span class="number">1</span>, spare_peg, end_peg)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">## Extra fancy stuff for showing the moves, setting up, and solving the puzzle.</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line">PAUSE = <span class="number">1.0</span></span><br><span class="line"></span><br><span class="line">pegs = [<span class="number">0</span>, [], [], []]</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">solve_puzzle</span>(<span class="params">n</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Show the moves to solve a Towers of Hanoi problem for a tower</span></span><br><span class="line"><span class="string">    of N&gt;0 disks.&quot;&quot;&quot;</span></span><br><span class="line">    set_up_puzzle(n)</span><br><span class="line">    print_puzzle()</span><br><span class="line">    time.sleep(PAUSE)</span><br><span class="line">    move_tower(n, <span class="number">1</span>, <span class="number">3</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">set_up_puzzle</span>(<span class="params">n</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Set up Towers of Hanoi puzzle with N disks on peg 1, and</span></span><br><span class="line"><span class="string">    other pegs empty.&quot;&quot;&quot;</span></span><br><span class="line">    pegs[:] = [n, [ k <span class="keyword">for</span> k <span class="keyword">in</span> <span class="built_in">range</span>(n, <span class="number">0</span>, -<span class="number">1</span>) ], [], []]</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">move_disk</span>(<span class="params">peg0, peg1</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Move disk from PEG0 and PEG1, printing the result.&quot;&quot;&quot;</span></span><br><span class="line">    pegs[peg1].append(pegs[peg0].pop())</span><br><span class="line">    print_puzzle()</span><br><span class="line">    time.sleep(PAUSE)</span><br><span class="line">    </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">print_puzzle</span>():</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Print current configuration of puzzle (stored in pegs).&quot;&quot;&quot;</span></span><br><span class="line">    n = pegs[<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">for</span> k <span class="keyword">in</span> <span class="built_in">range</span>(n, <span class="number">0</span>, -<span class="number">1</span>):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">4</span>):</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot; &quot;</span>, end=<span class="string">&quot;&quot;</span>)</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">len</span>(pegs[j]) &gt;= k:</span><br><span class="line">                c = pegs[j][k-<span class="number">1</span>]</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">&quot; &quot;</span> + <span class="string">&quot; &quot;</span> * (n - c) + <span class="string">&quot;##&quot;</span> * c + <span class="string">&quot; &quot;</span> * (n - c) + <span class="string">&quot; &quot;</span>, end=<span class="string">&quot;&quot;</span>)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">&quot; &quot;</span> * (<span class="number">2</span> * n + <span class="number">2</span>), end=<span class="string">&quot;&quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>()</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;=&quot;</span> * (<span class="number">6</span>*n + <span class="number">9</span>))</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot; &quot;</span> * (n+<span class="number">2</span>) + <span class="string">&quot;1&quot;</span> + <span class="string">&quot; &quot;</span> * (<span class="number">2</span> * n + <span class="number">2</span>) + <span class="string">&quot;2&quot;</span> + <span class="string">&quot; &quot;</span> * (<span class="number">2</span> * n + <span class="number">2</span>) + <span class="string">&quot;3&quot;</span>)</span><br><span class="line">    <span class="built_in">print</span>()</span><br></pre></td></tr></table></figure>
+
+<p>在终端输入以下命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">python3 -i 08.py</span> </span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; solve_puzzle(3)</span></span><br></pre></td></tr></table></figure>
+
+<p>可以打印三层汉诺塔的解决过程。</p>
+<h4 id="异常（Exceptions）"><a href="#异常（Exceptions）" class="headerlink" title="异常（Exceptions）"></a>异常（<code>Exceptions</code>）</h4><p><code>python</code>处理异常有两种方法：</p>
+<ul>
+<li><code>Raise</code>：丢出一个错误，结束程序的运行：</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> N &lt;= <span class="number">0</span>:</span><br><span class="line"><span class="keyword">raise</span> ValueError(<span class="string">&quot;Number of disks must be positive&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>Try</code>：接收错误，打印错误信息，但不终止程序的运行</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    <span class="built_in">input</span> = <span class="built_in">open</span>(myfile).read()</span><br><span class="line"><span class="keyword">except</span> FileNotFoundError: <span class="comment"># Another standard exception</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;Warning: could not open&quot;</span>, myfile)</span><br><span class="line">    <span class="built_in">input</span> = <span class="string">&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+
+
+<h4 id="编程练习"><a href="#编程练习" class="headerlink" title="编程练习"></a>编程练习</h4><p>编写一个函数<code>remove_digits(n, digit)</code>，移除<code>n</code>中所有等于<code>digit</code>的位。</p>
+<p>实现如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Deleting digits (spoiler alert!)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">remove_digit</span>(<span class="params">n, digit</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Assuming N&gt;=0, 0 &lt;= DIGIT &lt;= 9, return a number whose</span></span><br><span class="line"><span class="string">    base-10 representation is the same as N, but with all instances of</span></span><br><span class="line"><span class="string">    DIGIT removed.  If all digits removed, return 0.</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; remove_digit(123, 3)</span></span><br><span class="line"><span class="string">    12</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; remove_digit(1234, 5)</span></span><br><span class="line"><span class="string">    1234</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; remove_digit(1234, 1)</span></span><br><span class="line"><span class="string">    234</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; remove_digit(111111, 1)</span></span><br><span class="line"><span class="string">    0</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">if</span> n == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    <span class="keyword">if</span> n % <span class="number">10</span> == digit:</span><br><span class="line">        <span class="keyword">return</span> remove_digit(n // <span class="number">10</span>, digit)</span><br><span class="line">    <span class="keyword">return</span> n % <span class="number">10</span> + remove_digit(n // <span class="number">10</span>, digit) * <span class="number">10</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ul>
+<li><p><strong>翻译视频</strong>：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1v64y1Q78o/?spm_id_from=444.41.top_right_bar_window_default_collection.content.click&vd_source=249a8ad55bb26717dd55ec3dd295f644">【计算机程序的构造和解释】精译【UC Berkeley 公开课-CS61A (Spring 2021)】-中英双语字幕</a></p>
+</li>
+<li><p><code>github</code>: <a target="_blank" rel="noopener" href="https://github.com/Maxwell2020152049/CS61A">Maxwell2020152049&#x2F;CS61A</a></p>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/06/09/CS61A-Project01/" rel="prev" title="CS61A Project1 Hog">
+                  <i class="fa fa-angle-left"></i> CS61A Project1 Hog
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Rex</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
