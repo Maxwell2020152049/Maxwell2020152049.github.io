@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.2.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="本实验涵盖了递归和树递归的概念，通过Python代码实现和测试了多个递归函数，包括求和、帕斯卡三角形和函数重复应用等。实验中使用了OK测试框架来验证代码的正确性，强调了递归在解决问题中的应用。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CS61A Lab03">
+<meta property="og:url" content="http://example.com/2024/06/11/CS61A-Lab03/index.html">
+<meta property="og:site_name" content="Rex&#39;s Blog">
+<meta property="og:description" content="本实验涵盖了递归和树递归的概念，通过Python代码实现和测试了多个递归函数，包括求和、帕斯卡三角形和函数重复应用等。实验中使用了OK测试框架来验证代码的正确性，强调了递归在解决问题中的应用。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-06-11T01:36:19.000Z">
+<meta property="article:modified_time" content="2024-06-11T01:37:47.014Z">
+<meta property="article:author" content="Rex">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2024/06/11/CS61A-Lab03/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2024/06/11/CS61A-Lab03/","path":"2024/06/11/CS61A-Lab03/","title":"CS61A Lab03"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>CS61A Lab03 | Rex's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Rex's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Lab-3-Recursion-Tree-Recursion"><span class="nav-number">1.</span> <span class="nav-text">Lab 3: Recursion, Tree Recursion</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#What-Would-Python-Display"><span class="nav-number">1.1.</span> <span class="nav-text">What Would Python Display?</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Q1-WWPD-Recursion"><span class="nav-number">1.1.1.</span> <span class="nav-text">Q1: WWPD: Recursion</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q2-WWPD-Journey-to-the-Center-of-the-Earth"><span class="nav-number">1.1.2.</span> <span class="nav-text">Q2: WWPD: Journey to the Center of the Earth</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Coding-Practice"><span class="nav-number">1.2.</span> <span class="nav-text">Coding Practice</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Q3-Summation"><span class="nav-number">1.2.1.</span> <span class="nav-text">Q3: Summation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q4-Pascal%E2%80%99s-Triangle"><span class="nav-number">1.2.2.</span> <span class="nav-text">Q4: Pascal’s Triangle</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q5-Repeated-repeated"><span class="nav-number">1.2.3.</span> <span class="nav-text">Q5: Repeated, repeated</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Rex</p>
+  <div class="site-description" itemprop="description">最是人间留不住，朱颜辞镜花辞树。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/06/11/CS61A-Lab03/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Rex">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rex's Blog">
+      <meta itemprop="description" content="最是人间留不住，朱颜辞镜花辞树。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="CS61A Lab03 | Rex's Blog">
+      <meta itemprop="description" content="本实验涵盖了递归和树递归的概念，通过Python代码实现和测试了多个递归函数，包括求和、帕斯卡三角形和函数重复应用等。实验中使用了OK测试框架来验证代码的正确性，强调了递归在解决问题中的应用。">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          CS61A Lab03
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-06-11 09:36:19 / 修改时间：09:37:47" itemprop="dateCreated datePublished" datetime="2024-06-11T09:36:19+08:00">2024-06-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/CS61A/" itemprop="url" rel="index"><span itemprop="name">CS61A</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/CS61A/Lab/" itemprop="url" rel="index"><span itemprop="name">Lab</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">本实验涵盖了递归和树递归的概念，通过Python代码实现和测试了多个递归函数，包括求和、帕斯卡三角形和函数重复应用等。实验中使用了OK测试框架来验证代码的正确性，强调了递归在解决问题中的应用。</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="Lab-3-Recursion-Tree-Recursion"><a href="#Lab-3-Recursion-Tree-Recursion" class="headerlink" title="Lab 3: Recursion, Tree Recursion"></a>Lab 3: Recursion, Tree Recursion</h1><h2 id="What-Would-Python-Display"><a href="#What-Would-Python-Display" class="headerlink" title="What Would Python Display?"></a>What Would Python Display?</h2><h3 id="Q1-WWPD-Recursion"><a href="#Q1-WWPD-Recursion" class="headerlink" title="Q1: WWPD: Recursion"></a>Q1: WWPD: Recursion</h3><p>使用如下命令进行测试：</p>
+<p>如果结果是函数，就输入<code>Function</code>，如果是错误就输入<code>Error</code>，如果没有输出就输入<code>Nothing</code>，如果出现无限循环或者无限递归，输出<code>Infinite</code>。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 ok -q recursion-wwpd -u --local</span><br></pre></td></tr></table></figure>
+
+<p>结果如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">=====================================================================</span><br><span class="line">Assignment: Lab 3</span><br><span class="line">OK, version v1.18.1</span><br><span class="line">=====================================================================</span><br><span class="line"></span><br><span class="line">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span><br><span class="line">Unlocking tests</span><br><span class="line"></span><br><span class="line">At each &quot;? &quot;, type what you would expect the output to be.</span><br><span class="line">Type exit() to quit</span><br><span class="line"></span><br><span class="line">---------------------------------------------------------------------</span><br><span class="line">Recursion &gt; Suite 1 &gt; Case 1</span><br><span class="line">(cases remaining: 1)</span><br><span class="line"></span><br><span class="line">What would Python display? If you get stuck, try it out in the Python</span><br><span class="line">interpreter!</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; def f(a, b):</span></span><br><span class="line">...     if a &gt; b:</span><br><span class="line">...         return f(a - 3, 2 * b)</span><br><span class="line">...     elif a &lt; b:</span><br><span class="line">...         return f(b // 2, a)</span><br><span class="line">...     else:</span><br><span class="line">...         return b</span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; f(2, 2)</span></span><br><span class="line">? 2</span><br><span class="line">-- OK! --</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; f(7, 4)</span></span><br><span class="line">? 4</span><br><span class="line">-- OK! --</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; f(2, 28)</span></span><br><span class="line">? 2</span><br><span class="line">-- Not quite. Try again! --</span><br><span class="line"></span><br><span class="line">? 8</span><br><span class="line">-- OK! --</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; f(-1, -3)</span></span><br><span class="line">? Error</span><br><span class="line">-- Not quite. Try again! --</span><br><span class="line"></span><br><span class="line">? Infinite</span><br><span class="line">-- OK! --</span><br><span class="line"></span><br><span class="line">---------------------------------------------------------------------</span><br><span class="line">OK! All cases for Recursion unlocked.</span><br><span class="line"></span><br><span class="line">Cannot backup when running ok with --local.</span><br></pre></td></tr></table></figure>
+
+<h3 id="Q2-WWPD-Journey-to-the-Center-of-the-Earth"><a href="#Q2-WWPD-Journey-to-the-Center-of-the-Earth" class="headerlink" title="Q2: WWPD: Journey to the Center of the Earth"></a>Q2: WWPD: Journey to the Center of the Earth</h3><p>使用如下命令进行测试：</p>
+<p>如果结果是函数，就输入<code>Function</code>，如果是错误就输入<code>Error</code>，如果没有输出就输入<code>Nothing</code>。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 ok -q sr-wwpd -u --local</span><br></pre></td></tr></table></figure>
+
+<p>结果如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">=====================================================================</span><br><span class="line">Assignment: Lab 3</span><br><span class="line">OK, version v1.18.1</span><br><span class="line">=====================================================================</span><br><span class="line"></span><br><span class="line">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span><br><span class="line">Unlocking tests</span><br><span class="line"></span><br><span class="line">At each &quot;? &quot;, type what you would expect the output to be.</span><br><span class="line">Type exit() to quit</span><br><span class="line"></span><br><span class="line">---------------------------------------------------------------------</span><br><span class="line">Self-Reference &gt; Suite 1 &gt; Case 1</span><br><span class="line">(cases remaining: 1)</span><br><span class="line"></span><br><span class="line">What would Python display? If you get stuck, try it out in the Python</span><br><span class="line">interpreter!</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; def crust():</span></span><br><span class="line">...   print(&quot;70km&quot;)</span><br><span class="line">...   def mantle():</span><br><span class="line">...       print(&quot;2900km&quot;)</span><br><span class="line">...       def core():</span><br><span class="line">...           print(&quot;5300km&quot;)</span><br><span class="line">...           return mantle()</span><br><span class="line">...       return core</span><br><span class="line">...   return mantle</span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; drill = crust</span></span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; drill = drill()</span></span><br><span class="line">? 70km</span><br><span class="line">-- OK! --</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; drill = drill()</span></span><br><span class="line">? 2900km</span><br><span class="line">-- OK! --</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; drill = drill()</span></span><br><span class="line">(line 1)? 5300km</span><br><span class="line">(line 2)? 2900km</span><br><span class="line">-- OK! --</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; drill()</span></span><br><span class="line">(line 1)? 5300km</span><br><span class="line">(line 2)? 2900km</span><br><span class="line">(line 3)? Function</span><br><span class="line">-- OK! --</span><br><span class="line"></span><br><span class="line">---------------------------------------------------------------------</span><br><span class="line">OK! All cases for Self-Reference unlocked.</span><br><span class="line"></span><br><span class="line">Cannot backup when running ok with --local.</span><br></pre></td></tr></table></figure>
+
+<h2 id="Coding-Practice"><a href="#Coding-Practice" class="headerlink" title="Coding Practice"></a>Coding Practice</h2><h3 id="Q3-Summation"><a href="#Q3-Summation" class="headerlink" title="Q3: Summation"></a>Q3: Summation</h3><p>实现一个函数<code>summation(n, term)</code>，<code>n</code>是正整数，<code>term</code>是一个函数，接收一个参数并返回值，<code>summation</code>计算<code>term(1) + term(2) + ... + trem(n)</code>，并返回结果。</p>
+<p>不允许使用循环语句。</p>
+<p>实现代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">summation</span>(<span class="params">n, term</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Return the sum of numbers 1 through n (including n) wíth term applied to each number.</span></span><br><span class="line"><span class="string">    Implement using recursion!</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; summation(5, lambda x: x * x * x) # 1^3 + 2^3 + 3^3 + 4^3 + 5^3</span></span><br><span class="line"><span class="string">    225</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; summation(9, lambda x: x + 1) # 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 + 10</span></span><br><span class="line"><span class="string">    54</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; summation(5, lambda x: 2**x) # 2^1 + 2^2 + 2^3 + 2^4 + 2^5</span></span><br><span class="line"><span class="string">    62</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; # Do not use while/for loops!</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; from construct_check import check</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; # ban iteration</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; check(HW_SOURCE_FILE, &#x27;summation&#x27;,</span></span><br><span class="line"><span class="string">    ...       [&#x27;While&#x27;, &#x27;For&#x27;])</span></span><br><span class="line"><span class="string">    True</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">assert</span> n &gt;= <span class="number">1</span></span><br><span class="line">    <span class="string">&quot;*** YOUR CODE HERE ***&quot;</span></span><br><span class="line">    <span class="keyword">if</span> n == <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> term(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">return</span> term(n) + summation(n - <span class="number">1</span>, term)</span><br></pre></td></tr></table></figure>
+
+<h3 id="Q4-Pascal’s-Triangle"><a href="#Q4-Pascal’s-Triangle" class="headerlink" title="Q4: Pascal’s Triangle"></a>Q4: Pascal’s Triangle</h3><p>实现一个<code>pascal(row, column)</code>，求解<code>Pascal</code>三角第<code>row</code>行，第<code>column</code>列的值，其实就是杨辉三角。</p>
+<p>注意：行、列都是从<code>0</code>开始索引的；越界的<code>Pascal</code>函数返回<code>0</code>。</p>
+<p>实现代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">pascal</span>(<span class="params">row, column</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Returns the value of the item in Pascal&#x27;s Triangle </span></span><br><span class="line"><span class="string">    whose position is specified by row and column.</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; pascal(0, 0)</span></span><br><span class="line"><span class="string">    1</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; pascal(0, 5)	# Empty entry; outside of Pascal&#x27;s Triangle</span></span><br><span class="line"><span class="string">    0</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; pascal(3, 2)	# Row 3 (1 3 3 1), Column 2</span></span><br><span class="line"><span class="string">    3</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; pascal(4, 2)     # Row 4 (1 4 6 4 1), Column 2</span></span><br><span class="line"><span class="string">    6</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="string">&quot;*** YOUR CODE HERE ***&quot;</span></span><br><span class="line">    <span class="keyword">if</span> row &lt; <span class="number">0</span> <span class="keyword">or</span> column &lt; <span class="number">0</span> <span class="keyword">or</span> column &gt; row:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    <span class="keyword">if</span> row == <span class="number">0</span> <span class="keyword">and</span> column == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> pascal(row - <span class="number">1</span>, column - <span class="number">1</span>) + pascal(row - <span class="number">1</span>, column)</span><br></pre></td></tr></table></figure>
+
+<h3 id="Q5-Repeated-repeated"><a href="#Q5-Repeated-repeated" class="headerlink" title="Q5: Repeated, repeated"></a>Q5: Repeated, repeated</h3><p>实现递归函数<code>repeated(f, n)</code>，返回<code>lambda x: f(f(f(...f(x)))</code>，调用<code>n</code>次<code>f</code>。</p>
+<p>实现代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">repeated</span>(<span class="params">f, n</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Returns a function that takes in an integer and computes </span></span><br><span class="line"><span class="string">    the nth application of f on that integer.</span></span><br><span class="line"><span class="string">    Implement using recursion!</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; add_three = repeated(lambda x: x + 1, 3)</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; add_three(5)</span></span><br><span class="line"><span class="string">    8</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; square = lambda x: x ** 2</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; repeated(square, 2)(5) # square(square(5))</span></span><br><span class="line"><span class="string">    625</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; repeated(square, 4)(5) # square(square(square(square(5))))</span></span><br><span class="line"><span class="string">    152587890625</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; repeated(square, 0)(5)</span></span><br><span class="line"><span class="string">    5</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; from construct_check import check</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; # ban iteration</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; check(HW_SOURCE_FILE, &#x27;repeated&#x27;,</span></span><br><span class="line"><span class="string">    ...       [&#x27;For&#x27;, &#x27;While&#x27;])</span></span><br><span class="line"><span class="string">    True</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="string">&quot;*** YOUR CODE HERE ***&quot;</span></span><br><span class="line">    <span class="keyword">if</span> n == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">lambda</span> x: x</span><br><span class="line">    <span class="keyword">return</span> compose1(f, repeated(f, n - <span class="number">1</span>))</span><br></pre></td></tr></table></figure>
+
+<p>使用如下代码进行测试：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 ok --local</span><br></pre></td></tr></table></figure>
+
+<p>结果如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">=====================================================================</span><br><span class="line">Assignment: Lab 3</span><br><span class="line">OK, version v1.18.1</span><br><span class="line">=====================================================================</span><br><span class="line"></span><br><span class="line">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span><br><span class="line">Running tests</span><br><span class="line"></span><br><span class="line">---------------------------------------------------------------------</span><br><span class="line">Test summary</span><br><span class="line">    5 test cases passed! No cases failed.</span><br><span class="line"></span><br><span class="line">Cannot backup when running ok with --local.</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/06/11/CS61A-CourseNote-Week04/" rel="prev" title="CS61A 课程笔记 Week04">
+                  <i class="fa fa-angle-left"></i> CS61A 课程笔记 Week04
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Rex</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
