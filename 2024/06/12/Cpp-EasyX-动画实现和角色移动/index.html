@@ -19,25 +19,27 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="最是人间留不住，朱颜辞镜花辞树。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Rex&#39;s Blog">
-<meta property="og:url" content="http://example.com/archives/index.html">
+    <meta name="description" content="这是显示在首页的概述，正文内容均会被隐藏。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【C++游戏开发】角色动画|人物移动">
+<meta property="og:url" content="http://example.com/2024/06/12/Cpp-EasyX-%E5%8A%A8%E7%94%BB%E5%AE%9E%E7%8E%B0%E5%92%8C%E8%A7%92%E8%89%B2%E7%A7%BB%E5%8A%A8/index.html">
 <meta property="og:site_name" content="Rex&#39;s Blog">
-<meta property="og:description" content="最是人间留不住，朱颜辞镜花辞树。">
+<meta property="og:description" content="这是显示在首页的概述，正文内容均会被隐藏。">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-06-12T15:20:53.000Z">
+<meta property="article:modified_time" content="2024-06-12T15:59:54.517Z">
 <meta property="article:author" content="Rex">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://example.com/archives/">
+<link rel="canonical" href="http://example.com/2024/06/12/Cpp-EasyX-%E5%8A%A8%E7%94%BB%E5%AE%9E%E7%8E%B0%E5%92%8C%E8%A7%92%E8%89%B2%E7%A7%BB%E5%8A%A8/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":false,"lang":"zh-CN","comments":"","permalink":"","path":"archives/index.html","title":""}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2024/06/12/Cpp-EasyX-%E5%8A%A8%E7%94%BB%E5%AE%9E%E7%8E%B0%E5%92%8C%E8%A7%92%E8%89%B2%E7%A7%BB%E5%8A%A8/","path":"2024/06/12/Cpp-EasyX-动画实现和角色移动/","title":"【C++游戏开发】角色动画|人物移动"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>归档 | Rex's Blog</title>
+<title>【C++游戏开发】角色动画|人物移动 | Rex's Blog</title>
   
 
 
@@ -70,7 +72,7 @@
 
     <a href="/" class="brand" rel="start">
       <i class="logo-line"></i>
-      <h1 class="site-title">Rex's Blog</h1>
+      <p class="site-title">Rex's Blog</p>
       <i class="logo-line"></i>
     </a>
   </div>
@@ -123,7 +125,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -136,6 +138,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%E8%BF%90%E8%A1%8C%E6%97%B6%E9%97%B4%E7%9A%84%E8%AE%A1%E7%AE%97"><span class="nav-number">1.</span> <span class="nav-text">程序运行时间的计算</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -175,232 +178,111 @@
 
     </div>
 
-    <div class="main-inner archive posts-collapse">
+    <div class="main-inner post posts-expand">
 
 
   
+
+
+<div class="post-block">
   
   
-  <div class="post-block">
-    <div class="post-content">
-      <div class="collection-title">
-        <span class="collection-header">嗯..! 目前共计 27 篇日志。 继续努力。</span>
-      </div>
 
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/06/12/Cpp-EasyX-%E5%8A%A8%E7%94%BB%E5%AE%9E%E7%8E%B0%E5%92%8C%E8%A7%92%E8%89%B2%E7%A7%BB%E5%8A%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Rex">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rex's Blog">
+      <meta itemprop="description" content="最是人间留不住，朱颜辞镜花辞树。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="【C++游戏开发】角色动画|人物移动 | Rex's Blog">
+      <meta itemprop="description" content="这是显示在首页的概述，正文内容均会被隐藏。">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【C++游戏开发】角色动画|人物移动
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
       
-    <div class="collection-year">
-      <span class="collection-header">2024<span class="collection-year-count">27</span></span>
-    </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2024-06-13T00:08:13+08:00"
-              content="2024-06-13">
-          06-13
-        </time>
-      </div>
+      <time title="创建时间：2024-06-12 23:20:53 / 修改时间：23:59:54" itemprop="dateCreated datePublished" datetime="2024-06-12T23:20:53+08:00">2024-06-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/C/EasyX/" itemprop="url" rel="index"><span itemprop="name">EasyX</span></a>
+        </span>
+    </span>
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2024/06/13/Cpp-EasyX-%E6%B8%B8%E6%88%8F%E6%A1%86%E6%9E%B6-%E4%BA%95%E5%AD%97%E6%A3%8B%E6%B8%B8%E6%88%8F/" itemprop="url">
-            <span itemprop="name">【C++游戏开发】游戏框架|井字棋游戏</span>
-          </a>
-      </div>
+  
+</div>
 
-      
-    </header>
-  </article>
+            <div class="post-description">这是显示在首页的概述，正文内容均会被隐藏。</div>
+        </div>
+      </header>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2024-06-12T23:20:53+08:00"
-              content="2024-06-12">
-          06-12
-        </time>
-      </div>
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="程序运行时间的计算"><a href="#程序运行时间的计算" class="headerlink" title="程序运行时间的计算"></a>程序运行时间的计算</h2><p>有两种方法可以获得一段程序运行的时间，一种是使用标准库中的<code>chrono</code>，这个办法可以跨平台使用，而且精度和效率较高：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> start_time = std::chrono::system_clock::<span class="built_in">now</span>();</span><br><span class="line"><span class="comment">// 程序执行一段时间后</span></span><br><span class="line"><span class="keyword">auto</span> end_time = std::chrono::system_clock::<span class="built_in">now</span>();</span><br><span class="line"><span class="keyword">auto</span> duration = std::chrono::<span class="built_in">duration_cast</span>&lt;std::chrono::millisecond&gt;(end_time - start_time).<span class="built_in">count</span>();</span><br></pre></td></tr></table></figure>
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2024/06/12/Cpp-EasyX-%E5%8A%A8%E7%94%BB%E5%AE%9E%E7%8E%B0%E5%92%8C%E8%A7%92%E8%89%B2%E7%A7%BB%E5%8A%A8/" itemprop="url">
-            <span itemprop="name">【C++游戏开发】角色动画|人物移动</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2024-06-12T11:44:28+08:00"
-              content="2024-06-12">
-          06-12
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2024/06/12/Cpp-IDE-%E5%A6%82%E4%BD%95%E5%9C%A8Visual-Studio%E4%B8%AD%E8%AE%BE%E7%BD%AE%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AE/" itemprop="url">
-            <span itemprop="name">如何在Visual Studio中设置项目配置</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2024-06-12T11:42:52+08:00"
-              content="2024-06-12">
-          06-12
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2024/06/12/Cpp-IDE-%E5%A6%82%E4%BD%95%E5%9C%A8Visual-Studio%E4%B8%ADdebug/" itemprop="url">
-            <span itemprop="name">如何在Visual Studio中debug</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2024-06-12T11:05:30+08:00"
-              content="2024-06-12">
-          06-12
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2024/06/12/CS61A-Project2-Cat/" itemprop="url">
-            <span itemprop="name">CS61A Project2 Cat</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2024-06-12T10:57:15+08:00"
-              content="2024-06-12">
-          06-12
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2024/06/12/CS61A-CourseNote-Week05/" itemprop="url">
-            <span itemprop="name">CS61A 课程笔记 Week05</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2024-06-11T09:36:19+08:00"
-              content="2024-06-11">
-          06-11
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2024/06/11/CS61A-Lab03/" itemprop="url">
-            <span itemprop="name">CS61A Lab03</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2024-06-11T09:22:43+08:00"
-              content="2024-06-11">
-          06-11
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2024/06/11/CS61A-CourseNote-Week04/" itemprop="url">
-            <span itemprop="name">CS61A 课程笔记 Week04</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2024-06-10T17:52:09+08:00"
-              content="2024-06-10">
-          06-10
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2024/06/10/CS61A-Homework03/" itemprop="url">
-            <span itemprop="name">CS61A Homework03</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2024-06-10T16:10:11+08:00"
-              content="2024-06-10">
-          06-10
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2024/06/10/CS61A-Lab02/" itemprop="url">
-            <span itemprop="name">CS61A Lab02</span>
-          </a>
-      </div>
-
-      
-    </header>
-  </article>
+<p>这段示例代码获取的是以毫秒为单位的时间差。</p>
+<p>还有一种方法就是使用<code>Window</code>的<code>getTickCount</code>函数，这种办法是平台相关的。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> start_time = <span class="built_in">GetTickCount</span>();</span><br><span class="line"><span class="comment">// 程序执行一段时间后</span></span><br><span class="line"><span class="keyword">auto</span> end_time = <span class="built_in">GetTickCount</span>();</span><br><span class="line"><span class="keyword">auto</span> duration = end_time - start_time;</span><br></pre></td></tr></table></figure>
 
 
     </div>
-  </div>
-  
-  
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="page-number" href="/archives/page/3/">3</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/archives/page/2/"><i class="fa fa-angle-right"></i></a>
-  </nav>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/06/12/Cpp-IDE-%E5%A6%82%E4%BD%95%E5%9C%A8Visual-Studio%E4%B8%AD%E8%AE%BE%E7%BD%AE%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AE/" rel="prev" title="如何在Visual Studio中设置项目配置">
+                  <i class="fa fa-angle-left"></i> 如何在Visual Studio中设置项目配置
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/06/13/Cpp-EasyX-%E6%B8%B8%E6%88%8F%E6%A1%86%E6%9E%B6-%E4%BA%95%E5%AD%97%E6%A3%8B%E6%B8%B8%E6%88%8F/" rel="next" title="【C++游戏开发】游戏框架|井字棋游戏">
+                  【C++游戏开发】游戏框架|井字棋游戏 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
 
 </div>
   </main>

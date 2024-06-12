@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.2.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="这是显示在首页的概述，正文内容均会被隐藏。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【C++游戏开发】游戏框架|井字棋游戏">
+<meta property="og:url" content="http://example.com/2024/06/13/Cpp-EasyX-%E6%B8%B8%E6%88%8F%E6%A1%86%E6%9E%B6-%E4%BA%95%E5%AD%97%E6%A3%8B%E6%B8%B8%E6%88%8F/index.html">
+<meta property="og:site_name" content="Rex&#39;s Blog">
+<meta property="og:description" content="这是显示在首页的概述，正文内容均会被隐藏。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/fd68309c35b4e123c41e5ac6531b947.png">
+<meta property="og:image" content="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/227c2561b45b2ca320d91762b735da5.png">
+<meta property="article:published_time" content="2024-06-12T16:08:13.000Z">
+<meta property="article:modified_time" content="2024-06-12T16:13:04.813Z">
+<meta property="article:author" content="Rex">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/fd68309c35b4e123c41e5ac6531b947.png">
+
+
+<link rel="canonical" href="http://example.com/2024/06/13/Cpp-EasyX-%E6%B8%B8%E6%88%8F%E6%A1%86%E6%9E%B6-%E4%BA%95%E5%AD%97%E6%A3%8B%E6%B8%B8%E6%88%8F/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2024/06/13/Cpp-EasyX-%E6%B8%B8%E6%88%8F%E6%A1%86%E6%9E%B6-%E4%BA%95%E5%AD%97%E6%A3%8B%E6%B8%B8%E6%88%8F/","path":"2024/06/13/Cpp-EasyX-游戏框架-井字棋游戏/","title":"【C++游戏开发】游戏框架|井字棋游戏"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>【C++游戏开发】游戏框架|井字棋游戏 | Rex's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Rex's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%98%E5%88%B6%E4%BA%95%E5%AD%97%E6%A3%8B%E7%95%8C%E9%9D%A2"><span class="nav-number">1.</span> <span class="nav-text">绘制井字棋界面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%95%E6%9C%BA%E5%AF%B9%E6%88%98%E4%BA%A4%E4%BA%92"><span class="nav-number">2.</span> <span class="nav-text">单机对战交互</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96"><span class="nav-number">3.</span> <span class="nav-text">性能优化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Rex</p>
+  <div class="site-description" itemprop="description">最是人间留不住，朱颜辞镜花辞树。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/06/13/Cpp-EasyX-%E6%B8%B8%E6%88%8F%E6%A1%86%E6%9E%B6-%E4%BA%95%E5%AD%97%E6%A3%8B%E6%B8%B8%E6%88%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Rex">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rex's Blog">
+      <meta itemprop="description" content="最是人间留不住，朱颜辞镜花辞树。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="【C++游戏开发】游戏框架|井字棋游戏 | Rex's Blog">
+      <meta itemprop="description" content="这是显示在首页的概述，正文内容均会被隐藏。">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【C++游戏开发】游戏框架|井字棋游戏
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-06-13 00:08:13 / 修改时间：00:13:04" itemprop="dateCreated datePublished" datetime="2024-06-13T00:08:13+08:00">2024-06-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/C/EasyX/" itemprop="url" rel="index"><span itemprop="name">EasyX</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">这是显示在首页的概述，正文内容均会被隐藏。</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>实现以下功能：</p>
+<ul>
+<li><p><input checked="" disabled="" type="checkbox"> 
+绘制井字棋界面</p>
+</li>
+<li><p><input checked="" disabled="" type="checkbox"> 
+单机对战交互</p>
+</li>
+<li><p><input checked="" disabled="" type="checkbox"> 
+游戏胜负的判断</p>
+</li>
+<li><p><input checked="" disabled="" type="checkbox"> 
+提示信息：当前的玩家、游戏结束的弹窗</p>
+</li>
+<li><p><input checked="" disabled="" type="checkbox"> 
+性能优化</p>
+</li>
+</ul>
+<p>注意事项：</p>
+<ul>
+<li>在多个文件中使用同一个常量，需要把常量的声明和定义都写成<code>extern</code>，因为常量默认是内部连接的。</li>
+</ul>
+<h2 id="绘制井字棋界面"><a href="#绘制井字棋界面" class="headerlink" title="绘制井字棋界面"></a>绘制井字棋界面</h2><p>游戏界面使用<code>600 X 600</code>的大小，<code>flag</code>参数选择<code>EX_SHOWCONSOLE</code>，使得游戏界面和控制台能够同时显示。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">extern</span> <span class="type">const</span> <span class="type">int</span> WIDTH = <span class="number">600</span>;</span><br><span class="line"><span class="keyword">extern</span> <span class="type">const</span> <span class="type">int</span> HEIGHT = <span class="number">600</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">initgraph</span>(WIDTH, HEIGHT, EX_SHOWCONSOLE);</span><br></pre></td></tr></table></figure>
+
+<p>使用<code>EasyX</code>的<code>line</code>函数绘制棋盘，需要两横两纵共4条直线。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">static</span> <span class="type">void</span> <span class="title">drawBoard</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">line</span>(<span class="number">0</span>, <span class="number">200</span>, <span class="number">600</span>, <span class="number">200</span>);</span><br><span class="line">	<span class="built_in">line</span>(<span class="number">0</span>, <span class="number">400</span>, <span class="number">600</span>, <span class="number">400</span>);</span><br><span class="line">	<span class="built_in">line</span>(<span class="number">200</span>, <span class="number">0</span>, <span class="number">200</span>, <span class="number">600</span>);</span><br><span class="line">	<span class="built_in">line</span>(<span class="number">400</span>, <span class="number">0</span>, <span class="number">400</span>, <span class="number">600</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>绘制效果如下（左上角为提示信息，后文将提及）：</p>
+<img src="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/fd68309c35b4e123c41e5ac6531b947.png" width="40%" height="40%">
+
+<h2 id="单机对战交互"><a href="#单机对战交互" class="headerlink" title="单机对战交互"></a>单机对战交互</h2><p>定义一个<code>3 X 3</code>的棋盘，有X和<code>O</code>两位棋手。初始时，所有位置都没有棋子，默认为<code>-</code>，放置了棋子后，变成<code>X</code>或<code>O</code>。</p>
+<p>初始化棋盘和玩家：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> player = <span class="string">&#x27;X&#x27;</span>;</span><br><span class="line">std::vector&lt;std::vector&lt;<span class="type">char</span>&gt;&gt; board;</span><br><span class="line"></span><br><span class="line">board = &#123;</span><br><span class="line">	&#123;<span class="string">&#x27;-&#x27;</span>, <span class="string">&#x27;-&#x27;</span>, <span class="string">&#x27;-&#x27;</span>&#125;,</span><br><span class="line">	&#123;<span class="string">&#x27;-&#x27;</span>, <span class="string">&#x27;-&#x27;</span>, <span class="string">&#x27;-&#x27;</span>&#125;,</span><br><span class="line">	&#123;<span class="string">&#x27;-&#x27;</span>, <span class="string">&#x27;-&#x27;</span>, <span class="string">&#x27;-&#x27;</span>&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>使用peekmessage函数处理鼠标事件，在对应位置尝试放置棋子（<code>logMouseClick</code>函数用于向控制台打印日志信息，方便调试）：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">static</span> <span class="type">void</span> <span class="title">logMouseClick</span><span class="params">(<span class="type">int</span> i, <span class="type">int</span> j)</span> </span>&#123;</span><br><span class="line">	std::cout &lt;&lt; <span class="string">&quot;Click at (&quot;</span> &lt;&lt; i &lt;&lt; <span class="string">&quot;, &quot;</span> &lt;&lt; j &lt;&lt; <span class="string">&quot;).&quot;</span> &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">static</span> <span class="type">void</span> <span class="title">setPiece</span><span class="params">(<span class="type">int</span> i, <span class="type">int</span> j)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (i &gt;= <span class="number">0</span> &amp;&amp; i &lt; board.<span class="built_in">size</span>() &amp;&amp;</span><br><span class="line">		j &gt;= <span class="number">0</span> &amp;&amp; j &lt; board[i].<span class="built_in">size</span>() &amp;&amp;</span><br><span class="line">		board[i][j] == <span class="string">&#x27;-&#x27;</span>) &#123;</span><br><span class="line">		board[i][j] = player;</span><br><span class="line">		player = (player == <span class="string">&#x27;X&#x27;</span> ? <span class="string">&#x27;O&#x27;</span> : <span class="string">&#x27;X&#x27;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">readAndProcessData</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ExMessage msg;</span><br><span class="line">	<span class="keyword">while</span> (<span class="built_in">peekmessage</span>(&amp;msg)) &#123;</span><br><span class="line">		<span class="keyword">if</span> (msg.message == WM_LBUTTONDOWN) &#123;</span><br><span class="line">			<span class="type">int</span> i = msg.y / <span class="number">200</span>, j = msg.x / <span class="number">200</span>;</span><br><span class="line">			<span class="built_in">logMouseClick</span>(i, j);</span><br><span class="line">			<span class="built_in">setPiece</span>(i, j);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>每一轮游戏循环都要检查游戏是否结束，结束条件如下：</p>
+<ul>
+<li>玩家X或玩家O获胜</li>
+<li>棋盘已经被摆满且无人获胜</li>
+</ul>
+<p>游戏结束时使用<code>MessageBox</code>函数（此函数为<code>Windows API</code>）弹出确认按钮。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">static</span> <span class="type">bool</span> <span class="title">checkWin</span><span class="params">(<span class="type">char</span> player)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (board[<span class="number">0</span>][<span class="number">0</span>] == player &amp;&amp; board[<span class="number">0</span>][<span class="number">0</span>] == board[<span class="number">0</span>][<span class="number">1</span>] &amp;&amp; board[<span class="number">0</span>][<span class="number">1</span>] == board[<span class="number">0</span>][<span class="number">2</span>]) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	&#125; <span class="keyword">else</span> <span class="keyword">if</span> (board[<span class="number">1</span>][<span class="number">0</span>] == player &amp;&amp; board[<span class="number">1</span>][<span class="number">0</span>] == board[<span class="number">1</span>][<span class="number">1</span>] &amp;&amp; board[<span class="number">1</span>][<span class="number">1</span>] == board[<span class="number">1</span>][<span class="number">2</span>]) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	&#125; <span class="keyword">else</span> <span class="keyword">if</span> (board[<span class="number">2</span>][<span class="number">0</span>] == player &amp;&amp; board[<span class="number">2</span>][<span class="number">0</span>] == board[<span class="number">2</span>][<span class="number">1</span>] &amp;&amp; board[<span class="number">2</span>][<span class="number">1</span>] == board[<span class="number">2</span>][<span class="number">2</span>]) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	&#125; <span class="keyword">else</span> <span class="keyword">if</span> (board[<span class="number">0</span>][<span class="number">0</span>] == player &amp;&amp; board[<span class="number">0</span>][<span class="number">0</span>] == board[<span class="number">1</span>][<span class="number">0</span>] &amp;&amp; board[<span class="number">1</span>][<span class="number">0</span>] == board[<span class="number">2</span>][<span class="number">0</span>]) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	&#125; <span class="keyword">else</span> <span class="keyword">if</span> (board[<span class="number">0</span>][<span class="number">0</span>] == player &amp;&amp; board[<span class="number">0</span>][<span class="number">0</span>] == board[<span class="number">1</span>][<span class="number">0</span>] &amp;&amp; board[<span class="number">1</span>][<span class="number">0</span>] == board[<span class="number">2</span>][<span class="number">0</span>]) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	&#125; <span class="keyword">else</span> <span class="keyword">if</span> (board[<span class="number">0</span>][<span class="number">1</span>] == player &amp;&amp; board[<span class="number">0</span>][<span class="number">1</span>] == board[<span class="number">1</span>][<span class="number">1</span>] &amp;&amp; board[<span class="number">1</span>][<span class="number">1</span>] == board[<span class="number">2</span>][<span class="number">1</span>]) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	&#125; <span class="keyword">else</span> <span class="keyword">if</span> (board[<span class="number">0</span>][<span class="number">2</span>] == player &amp;&amp; board[<span class="number">0</span>][<span class="number">2</span>] == board[<span class="number">1</span>][<span class="number">2</span>] &amp;&amp; board[<span class="number">1</span>][<span class="number">2</span>] == board[<span class="number">2</span>][<span class="number">2</span>]) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	&#125; <span class="keyword">else</span> <span class="keyword">if</span> (board[<span class="number">0</span>][<span class="number">0</span>] == player &amp;&amp; board[<span class="number">0</span>][<span class="number">0</span>] == board[<span class="number">1</span>][<span class="number">1</span>] &amp;&amp; board[<span class="number">1</span>][<span class="number">1</span>] == board[<span class="number">2</span>][<span class="number">2</span>]) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	&#125; <span class="keyword">else</span> <span class="keyword">if</span> (board[<span class="number">0</span>][<span class="number">2</span>] == player &amp;&amp; board[<span class="number">0</span>][<span class="number">2</span>] == board[<span class="number">1</span>][<span class="number">1</span>] &amp;&amp; board[<span class="number">1</span>][<span class="number">1</span>] == board[<span class="number">2</span>][<span class="number">0</span>]) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">static</span> <span class="type">bool</span> <span class="title">checkTie</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">auto</span> line : board) &#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">auto</span> piece : line) &#123;</span><br><span class="line">			<span class="keyword">if</span> (piece == <span class="string">&#x27;-&#x27;</span>)</span><br><span class="line">				<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">checkGameOver</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">char</span> lastPlayer = player == <span class="string">&#x27;X&#x27;</span> ? <span class="string">&#x27;O&#x27;</span> : <span class="string">&#x27;X&#x27;</span>;</span><br><span class="line">	<span class="keyword">if</span> (<span class="built_in">checkWin</span>(lastPlayer)) &#123;</span><br><span class="line">		<span class="keyword">if</span> (lastPlayer == <span class="string">&#x27;X&#x27;</span>)</span><br><span class="line">			<span class="built_in">MessageBox</span>(<span class="built_in">GetHWnd</span>(), <span class="string">L&quot;X 玩家获胜&quot;</span>, <span class="string">L&quot;对局结束&quot;</span>, MB_OK);</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (lastPlayer == <span class="string">&#x27;O&#x27;</span>)</span><br><span class="line">			<span class="built_in">MessageBox</span>(<span class="built_in">GetHWnd</span>(), <span class="string">L&quot;O 玩家获胜&quot;</span>, <span class="string">L&quot;对局结束&quot;</span>, MB_OK);</span><br><span class="line">		running = <span class="literal">false</span>;</span><br><span class="line">	&#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">checkTie</span>()) &#123;</span><br><span class="line">		<span class="built_in">MessageBox</span>(<span class="literal">NULL</span>, <span class="string">L&quot;平局&quot;</span>, <span class="string">L&quot;对局结束&quot;</span>, MB_OK);</span><br><span class="line">		running = <span class="literal">false</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用<code>outtextxy</code>函数在游戏窗口左上角打印提示信息（注意需要使用宽字符串）：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">static</span> <span class="type">void</span> <span class="title">showHints</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="type">static</span> <span class="type">wchar_t</span> str[<span class="number">64</span>];</span><br><span class="line">	_stprintf_s(str, <span class="string">L&quot;当前玩家: %c&quot;</span>, player);</span><br><span class="line">	<span class="built_in">settextcolor</span>(LIGHTRED);</span><br><span class="line">	<span class="built_in">outtextxy</span>(<span class="number">10</span>, <span class="number">10</span>, str);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>游戏结束画面如下：</p>
+<img src="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/227c2561b45b2ca320d91762b735da5.png" width="70%" height="70%">
+
+<h2 id="性能优化"><a href="#性能优化" class="headerlink" title="性能优化"></a>性能优化</h2><p>游戏的主循环运行次数较多，对<code>CPU</code>资源造成了较大的浪费，限制每秒渲染的帧数，降低资源浪费。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> (running) &#123;</span><br><span class="line">    <span class="keyword">auto</span> time_start = std::chrono::system_clock::<span class="built_in">now</span>();</span><br><span class="line"></span><br><span class="line">    <span class="built_in">readAndProcessData</span>();  <span class="comment">// 读取数据并处理数据</span></span><br><span class="line">    <span class="built_in">draw</span>();	 <span class="comment">// 绘制画面</span></span><br><span class="line">    <span class="built_in">checkGameOver</span>(); <span class="comment">// 检查游戏是否结束</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">auto</span> time_end = std::chrono::system_clock::<span class="built_in">now</span>();</span><br><span class="line">    <span class="keyword">auto</span> duration = std::chrono::<span class="built_in">duration_cast</span>&lt;std::chrono::milliseconds&gt;</span><br><span class="line">        (time_end - time_start).<span class="built_in">count</span>();</span><br><span class="line">    <span class="keyword">if</span> (<span class="number">1000</span> / <span class="number">60</span> &gt; duration) &#123;</span><br><span class="line">        std::this_thread::<span class="built_in">sleep_for</span>(std::chrono::<span class="built_in">milliseconds</span>(<span class="number">1000</span> / <span class="number">60</span> - duration));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1ru4y1a7rL/">【从零开始的C++游戏开发】最简游戏框架 | EasyX制作井字棋小游戏（上）</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Gg4y1R74m/">【从零开始的C++游戏开发】动态延时优化性能 | EasyX制作井字棋小游戏（下）</a></p>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/06/12/Cpp-EasyX-%E5%8A%A8%E7%94%BB%E5%AE%9E%E7%8E%B0%E5%92%8C%E8%A7%92%E8%89%B2%E7%A7%BB%E5%8A%A8/" rel="prev" title="【C++游戏开发】角色动画|人物移动">
+                  <i class="fa fa-angle-left"></i> 【C++游戏开发】角色动画|人物移动
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Rex</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
