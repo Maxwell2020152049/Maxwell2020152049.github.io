@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.2.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="本文详细介绍了CS61A课程中的Mutable Values、List Mutation、Identity、Nonlocal、Iterators和Generators等概念。通过Python代码示例，阐述了可变性与不可变性、迭代器与生成器的使用，以及如何在函数和嵌套作用域中处理变量。此外，还探讨了列表的破坏性与非破坏性操作，以及迭代器和生成器在处理大数据集时的优势。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CS61A 课程笔记 Week06">
+<meta property="og:url" content="http://example.com/2024/06/13/CS61A-CourseNote-Week06/index.html">
+<meta property="og:site_name" content="Rex&#39;s Blog">
+<meta property="og:description" content="本文详细介绍了CS61A课程中的Mutable Values、List Mutation、Identity、Nonlocal、Iterators和Generators等概念。通过Python代码示例，阐述了可变性与不可变性、迭代器与生成器的使用，以及如何在函数和嵌套作用域中处理变量。此外，还探讨了列表的破坏性与非破坏性操作，以及迭代器和生成器在处理大数据集时的优势。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/image18.png">
+<meta property="og:image" content="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/image19.png">
+<meta property="og:image" content="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/image20.png">
+<meta property="og:image" content="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/image21.png">
+<meta property="og:image" content="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/image22.png">
+<meta property="og:image" content="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/image23.png">
+<meta property="og:image" content="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/image24.png">
+<meta property="og:image" content="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/image25.png">
+<meta property="article:published_time" content="2024-06-13T03:17:58.000Z">
+<meta property="article:modified_time" content="2024-06-13T03:23:25.141Z">
+<meta property="article:author" content="Rex">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/image18.png">
+
+
+<link rel="canonical" href="http://example.com/2024/06/13/CS61A-CourseNote-Week06/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2024/06/13/CS61A-CourseNote-Week06/","path":"2024/06/13/CS61A-CourseNote-Week06/","title":"CS61A 课程笔记 Week06"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>CS61A 课程笔记 Week06 | Rex's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Rex's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Lecture-13-Mutable-Values"><span class="nav-number">1.</span> <span class="nav-text">Lecture #13: Mutable Values</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%91%E7%9A%84%E6%8A%BD%E8%B1%A1%E5%B1%82%E6%AC%A1%EF%BC%88Tree-Layers-of-abstraction%EF%BC%89"><span class="nav-number">1.1.</span> <span class="nav-text">树的抽象层次（Tree: Layers of abstraction）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E7%A7%8D%E6%A0%91%E7%9A%84%E5%AE%9E%E7%8E%B0%EF%BC%88A-tree-implementation%EF%BC%89"><span class="nav-number">1.2.</span> <span class="nav-text">一种树的实现（A tree() implementation）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%91%E8%8A%82%E7%82%B9%E7%BF%BB%E5%80%8D"><span class="nav-number">1.3.</span> <span class="nav-text">树节点翻倍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%9E%E7%A0%B4%E5%9D%8F%E6%80%A7%E6%93%8D%E4%BD%9C%E4%B8%8E%E7%A0%B4%E5%9D%8F%E6%80%A7%E6%93%8D%E4%BD%9C%EF%BC%88Non-destructive-and-Destructive%EF%BC%89"><span class="nav-number">1.4.</span> <span class="nav-text">非破坏性操作与破坏性操作（Non-destructive and Destructive）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8D%E5%8F%AF%E5%8F%98%E6%80%A7%E5%92%8C%E5%8F%AF%E5%8F%98%E6%80%A7%EF%BC%88Immutability-and-Mutability%EF%BC%89"><span class="nav-number">1.5.</span> <span class="nav-text">不可变性和可变性（Immutability and Mutability）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E8%A2%AB%E4%BF%AE%E6%94%B9%E7%9A%84%E6%A0%91%EF%BC%88A-mutable-tree-%EF%BC%89"><span class="nav-number">1.6.</span> <span class="nav-text">可被修改的树（A mutable tree()）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%8D%E5%88%B6%E5%88%97%E8%A1%A8%EF%BC%88Copying-lists%EF%BC%89"><span class="nav-number">1.7.</span> <span class="nav-text">复制列表（Copying lists）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%90%8C%E4%B8%80%E6%80%A7%E4%B8%8E%E5%86%85%E5%AE%B9%E7%9A%84%E7%9B%B8%E7%AD%89%E6%80%A7"><span class="nav-number">1.8.</span> <span class="nav-text">对象的同一性与内容的相等性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Lecture-14-List-Mutation-Identity-and-Nonlocal"><span class="nav-number">2.</span> <span class="nav-text">Lecture #14: List Mutation, Identity, and Nonlocal</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%97%E8%A1%A8%E7%9A%84%E5%88%9B%E5%BB%BA%EF%BC%88List-creation%EF%BC%89"><span class="nav-number">2.1.</span> <span class="nav-text">列表的创建（List creation）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E8%BF%87%E5%88%87%E7%89%87%E4%BF%AE%E6%94%B9%E5%88%97%E8%A1%A8%EF%BC%88Mutating-lists-with-slicing%EF%BC%89"><span class="nav-number">2.2.</span> <span class="nav-text">通过切片修改列表（Mutating lists with slicing）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%88%97%E8%A1%A8%E7%9A%84%E6%96%B9%E6%B3%95%E4%BF%AE%E6%94%B9%E5%88%97%E8%A1%A8%EF%BC%88Mutating-lists-with-methods%EF%BC%89"><span class="nav-number">2.3.</span> <span class="nav-text">使用列表的方法修改列表（Mutating lists with methods）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%90%8C%E4%B8%80%E6%80%A7%E4%B8%8E%E5%86%85%E5%AE%B9%E7%9A%84%E7%9B%B8%E7%AD%89%E6%80%A7-1"><span class="nav-number">2.4.</span> <span class="nav-text">对象的同一性与内容的相等性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%AC%E5%9C%B0%E7%A9%BA%E9%97%B4%E7%9A%84%E5%91%BD%E5%90%8D%EF%BC%88Names-inside-local-scopes%EF%BC%89"><span class="nav-number">2.5.</span> <span class="nav-text">本地空间的命名（Names inside local scopes）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B5%8C%E5%A5%97%E7%A9%BA%E9%97%B4%E5%86%85%E7%9A%84%E5%90%8D%E7%A7%B0%EF%BC%88Names-inside-nested-scopes%EF%BC%89"><span class="nav-number">2.6.</span> <span class="nav-text">嵌套空间内的名称（Names inside nested scopes）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Lecture-15-Iterators-Generators"><span class="nav-number">3.</span> <span class="nav-text">Lecture #15: Iterators + Generators</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E8%BF%AD%E4%BB%A3%E5%AF%B9%E8%B1%A1%EF%BC%88Iterables%EF%BC%89"><span class="nav-number">3.1.</span> <span class="nav-text">可迭代对象（Iterables）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%AD%E4%BB%A3%E5%99%A8%EF%BC%88Iterators%EF%BC%89"><span class="nav-number">3.2.</span> <span class="nav-text">迭代器（Iterators）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%AD%E4%BB%A3%E5%99%A8%E4%B8%8EFor%E5%BE%AA%E7%8E%AF%EF%BC%88Iterators-vs-For-loops%EF%BC%89"><span class="nav-number">3.3.</span> <span class="nav-text">迭代器与For循环（Iterators vs. For loops）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#For%E5%BE%AA%E7%8E%AF%E7%9A%84%E6%89%A7%E8%A1%8C%EF%BC%88For-loop-execution%EF%BC%89"><span class="nav-number">3.4.</span> <span class="nav-text">For循环的执行（For loop execution）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#next-and-iter"><span class="nav-number">3.5.</span> <span class="nav-text">__next__() and __iter__()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%94%E5%9B%9E%E8%BF%AD%E4%BB%A3%E5%99%A8%E7%9A%84%E5%87%BD%E6%95%B0%EF%BC%88Functions-that-return-iterators%EF%BC%89"><span class="nav-number">3.6.</span> <span class="nav-text">返回迭代器的函数（Functions that return iterators）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%94%E5%9B%9E%E5%8F%AF%E8%BF%AD%E4%BB%A3%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%87%BD%E6%95%B0%EF%BC%88Functions-that-return-iterables%EF%BC%89"><span class="nav-number">3.7.</span> <span class="nav-text">返回可迭代对象的函数（Functions that return iterables）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E5%99%A8%EF%BC%88Generators%EF%BC%89"><span class="nav-number">3.8.</span> <span class="nav-text">生成器（Generators）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E5%99%A8%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84%EF%BC%88How-generators-work%EF%BC%89"><span class="nav-number">3.9.</span> <span class="nav-text">生成器是如何工作的（How generators work）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E7%94%9F%E6%88%90%E5%99%A8%E7%9A%84%E5%BE%AA%E7%8E%AF%EF%BC%88Looping-over-generators%EF%BC%89"><span class="nav-number">3.10.</span> <span class="nav-text">基于生成器的循环（Looping over generators）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BD%BF%E7%94%A8%E7%94%9F%E6%88%90%E5%99%A8%EF%BC%88Why-use-generators-%EF%BC%89"><span class="nav-number">3.11.</span> <span class="nav-text">为什么使用生成器（Why use generators?）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#yield-from%EF%BC%9A%E4%BB%8E%E8%BF%AD%E4%BB%A3%E5%99%A8%E7%94%9F%E6%88%90%E5%85%83%E7%B4%A0%EF%BC%88Yielding-from-iterables%EF%BC%89"><span class="nav-number">3.12.</span> <span class="nav-text">yield from：从迭代器生成元素（Yielding from iterables）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%91%E7%9A%84%E9%80%92%E5%BD%92%E7%94%9F%E6%88%90%E5%99%A8%EF%BC%88Recursive-generators-for-trees%EF%BC%89"><span class="nav-number">3.13.</span> <span class="nav-text">树的递归生成器（Recursive generators for trees）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">4.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Rex</p>
+  <div class="site-description" itemprop="description">最是人间留不住，朱颜辞镜花辞树。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/06/13/CS61A-CourseNote-Week06/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Rex">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rex's Blog">
+      <meta itemprop="description" content="最是人间留不住，朱颜辞镜花辞树。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="CS61A 课程笔记 Week06 | Rex's Blog">
+      <meta itemprop="description" content="本文详细介绍了CS61A课程中的Mutable Values、List Mutation、Identity、Nonlocal、Iterators和Generators等概念。通过Python代码示例，阐述了可变性与不可变性、迭代器与生成器的使用，以及如何在函数和嵌套作用域中处理变量。此外，还探讨了列表的破坏性与非破坏性操作，以及迭代器和生成器在处理大数据集时的优势。">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          CS61A 课程笔记 Week06
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-06-13 11:17:58 / 修改时间：11:23:25" itemprop="dateCreated datePublished" datetime="2024-06-13T11:17:58+08:00">2024-06-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/CS61A/" itemprop="url" rel="index"><span itemprop="name">CS61A</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/CS61A/Course-Notes/" itemprop="url" rel="index"><span itemprop="name">Course Notes</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">本文详细介绍了CS61A课程中的Mutable Values、List Mutation、Identity、Nonlocal、Iterators和Generators等概念。通过Python代码示例，阐述了可变性与不可变性、迭代器与生成器的使用，以及如何在函数和嵌套作用域中处理变量。此外，还探讨了列表的破坏性与非破坏性操作，以及迭代器和生成器在处理大数据集时的优势。</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="Lecture-13-Mutable-Values"><a href="#Lecture-13-Mutable-Values" class="headerlink" title="Lecture #13: Mutable Values"></a>Lecture #13: Mutable Values</h2><h3 id="树的抽象层次（Tree-Layers-of-abstraction）"><a href="#树的抽象层次（Tree-Layers-of-abstraction）" class="headerlink" title="树的抽象层次（Tree: Layers of abstraction）"></a>树的抽象层次（<code>Tree: Layers of abstraction</code>）</h3><p><img src="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/image18.png"></p>
+<p>每一个层次的抽象都由上一个层次的抽象实现。</p>
+<blockquote>
+<p>Each layer only uses the layer above it.</p>
+</blockquote>
+<h3 id="一种树的实现（A-tree-implementation）"><a href="#一种树的实现（A-tree-implementation）" class="headerlink" title="一种树的实现（A tree() implementation）"></a>一种树的实现（<code>A tree() implementation</code>）</h3><p>本节课使用以元组为树，以列表为子树的方法创建树。</p>
+<p>创建如下的树，<code>draw</code>是<a target="_blank" rel="noopener" href="https://code.cs61a.org/">CS 61A Coder</a>中实现的函数，能够绘制不同类型的结构的图形：</p>
+<p><img src="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/image19.png"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">tree</span>(<span class="params">label, children=<span class="literal">None</span></span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot; Creates a tree whose root node is labeled LABEL and</span></span><br><span class="line"><span class="string">        optionally has CHILDREN, a list of trees.&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">return</span> (label, <span class="built_in">list</span>(children <span class="keyword">or</span> []))</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">label</span>(<span class="params">tree</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot; Returns the label of the root node of TREE. &quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">return</span> tree[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">children</span>(<span class="params">tree</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot; Returns a list of children of TREE. &quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">return</span> tree[<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">t = tree(<span class="number">20</span>, [tree(<span class="number">12</span>, [tree(<span class="number">9</span>, [tree(<span class="number">7</span>), tree(<span class="number">2</span>)])]), tree(<span class="number">8</span>, [tree(<span class="number">4</span>), tree(<span class="number">4</span>)])])</span><br></pre></td></tr></table></figure>
+
+<p>输出如下：</p>
+<p><img src="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/image20.png"></p>
+<p><a target="_blank" rel="noopener" href="https://code.cs61a.org/">CS 61A Coder</a>中也实现了<code>tree</code>函数，但具体方式与上述方法有区别，使用以列表为树，也以列表为子树的方法创建树。如果不自行定义树的相关抽象类型，直接使用内置的<code>tree</code>函数：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">t = tree(<span class="number">20</span>, [tree(<span class="number">12</span>, [tree(<span class="number">9</span>, [tree(<span class="number">7</span>), tree(<span class="number">2</span>)])]), tree(<span class="number">8</span>, [tree(<span class="number">4</span>), tree(<span class="number">4</span>)])])</span><br></pre></td></tr></table></figure>
+
+<p>输入如下：</p>
+<p><img src="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/image21.png"></p>
+<h3 id="树节点翻倍"><a href="#树节点翻倍" class="headerlink" title="树节点翻倍"></a>树节点翻倍</h3><p>实现<code>double(t)</code>函数，<code>t</code>是一棵树，返回一个新的树，树上的节点都是<code>t</code>的两倍：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">double</span>(<span class="params">t</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Returns a tree identical to T, but with all labels doubled.&quot;&quot;&quot;</span></span><br><span class="line">    child = children(t)</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> child:</span><br><span class="line">        <span class="keyword">return</span> tree(label(t) * <span class="number">2</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> tree(label(t) * <span class="number">2</span>, </span><br><span class="line">                [double(t) <span class="keyword">for</span> t <span class="keyword">in</span> child])</span><br></pre></td></tr></table></figure>
+
+<p>输出如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; t</span></span><br><span class="line">(20, [(12, [(9, [(7, []), (2, [])])]), (8, [(4, []), (4, [])])])</span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; double(t)</span></span><br><span class="line">(40, [(24, [(18, [(14, []), (4, [])])]), (16, [(8, []), (8, [])])])</span><br></pre></td></tr></table></figure>
+
+<p><code>double(t)</code>函数可以更加精简，子树为空就传空列表：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">double</span>(<span class="params">t</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Returns a tree identical to T, but with all labels doubled.&quot;&quot;&quot;</span></span><br><span class="line">    child = children(t)</span><br><span class="line">    <span class="keyword">return</span> tree(label(t) * <span class="number">2</span>, </span><br><span class="line">            [double(t) <span class="keyword">for</span> t <span class="keyword">in</span> child])</span><br></pre></td></tr></table></figure>
+
+<p>输出与之前相同。</p>
+<h3 id="非破坏性操作与破坏性操作（Non-destructive-and-Destructive）"><a href="#非破坏性操作与破坏性操作（Non-destructive-and-Destructive）" class="headerlink" title="非破坏性操作与破坏性操作（Non-destructive and Destructive）"></a>非破坏性操作与破坏性操作（<code>Non-destructive and Destructive</code>）</h3><p>非破坏性操作：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>aThing</span><br><span class="line">&lt;output A&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>&lt;operation on aThing (that obey abstraction boundaries)&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>aThing</span><br><span class="line">&lt;output A&gt;</span><br></pre></td></tr></table></figure>
+
+<p><code>A</code>并没有被修改。</p>
+<p>破坏性操作：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>aThing</span><br><span class="line">&lt;output A&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>&lt;operation on aThing (that obey abstraction boundaries)&gt;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>aThing</span><br><span class="line">&lt;output B&gt;</span><br></pre></td></tr></table></figure>
+
+<p><code>A</code>被修改了。</p>
+<p>之前实现的<code>double(t)</code>是非破坏性的，因为没有修改<code>t</code>。</p>
+<h3 id="不可变性和可变性（Immutability-and-Mutability）"><a href="#不可变性和可变性（Immutability-and-Mutability）" class="headerlink" title="不可变性和可变性（Immutability and Mutability）"></a>不可变性和可变性（<code>Immutability and Mutability</code>）</h3><p>一个不可变值一但被创建就不可修改。</p>
+<blockquote>
+<p>An <code>immutable</code> value is unchanging once created. </p>
+<p>Immutable types (that we’ve covered): int, float, string, tuple</p>
+</blockquote>
+<p><code>eg</code>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">a_tuple = (<span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">a_tuple[<span class="number">0</span>] = <span class="number">3</span>                  <span class="comment"># 🚫 Error! Tuple items cannot be set.</span></span><br><span class="line">a_string = <span class="string">&quot;Hi y&#x27;all&quot;</span></span><br><span class="line">a_string[<span class="number">1</span>] = <span class="string">&quot;I&quot;</span>               <span class="comment"># 🚫 Error! String elements cannot be set.</span></span><br><span class="line">a_string += <span class="string">&quot;, how you doing?&quot;</span>  <span class="comment"># 🤔 How does this work?</span></span><br><span class="line">an_int = <span class="number">20</span></span><br><span class="line">an_int += <span class="number">2</span>                     <span class="comment"># 🤔 And this?</span></span><br></pre></td></tr></table></figure>
+
+<p>可变值在计算过程中可以被修改，所有绑定了同一对象的值都会收到修改的影响。</p>
+<blockquote>
+<p>A <code>mutable</code> value can change in value throughout the course of computation. All names that refer to the same object are afected by a mutation. </p>
+<p>Mutable types (that we’ve covered): list, dict</p>
+</blockquote>
+<p><code>eg</code>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">grades = [<span class="number">90</span>, <span class="number">70</span>, <span class="number">85</span>]</span><br><span class="line">grades_copy = grades</span><br><span class="line">grades[<span class="number">1</span>] = <span class="number">100</span></span><br><span class="line">words = &#123;<span class="string">&quot;agua&quot;</span>: <span class="string">&quot;water&quot;</span>&#125;</span><br><span class="line">words[<span class="string">&quot;pavo&quot;</span>] = <span class="string">&quot;turkey&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><code>id()</code>函数返回一个对象的<code>id</code>值，如果两个对象是同一个，<code>id</code>值应当相同，反之不一定。</p>
+<p>在函数调用中可以进行修改，也可以修改父环境框架中的值。</p>
+<p>若不可变序列包含可变值，可变值可以被修改。</p>
+<p>之前实现的<code>tree()</code>函数创建的树是不可变的。</p>
+<h3 id="可被修改的树（A-mutable-tree-）"><a href="#可被修改的树（A-mutable-tree-）" class="headerlink" title="可被修改的树（A mutable tree()）"></a>可被修改的树（<code>A mutable tree()</code>）</h3><p>可被修改的树可以使用以下方法实现：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">tree</span>(<span class="params">label, children=<span class="literal">None</span></span>):</span><br><span class="line">    <span class="keyword">return</span> [label] + <span class="built_in">list</span>(children <span class="keyword">or</span> [])</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">label</span>(<span class="params">tree</span>):</span><br><span class="line">    <span class="keyword">return</span> tree[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">children</span>(<span class="params">tree</span>):</span><br><span class="line">    <span class="keyword">return</span> tree[<span class="number">1</span>:]</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">set_label</span>(<span class="params">tree, label</span>):</span><br><span class="line">    tree[<span class="number">0</span>] = label</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">set_children</span>(<span class="params">tree, children</span>):</span><br><span class="line">    tree[<span class="number">1</span>] = children</span><br></pre></td></tr></table></figure>
+
+<p>破坏性的翻倍操作如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">double</span>(<span class="params">t</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Doubles every label in T, mutating T.&quot;&quot;&quot;</span></span><br><span class="line">    set_label(t, label(t) * <span class="number">2</span>)</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> is_leaf(t):</span><br><span class="line">        <span class="keyword">for</span> c <span class="keyword">in</span> children(t):</span><br><span class="line">            double(c)</span><br></pre></td></tr></table></figure>
+
+<h3 id="复制列表（Copying-lists）"><a href="#复制列表（Copying-lists）" class="headerlink" title="复制列表（Copying lists）"></a>复制列表（<code>Copying lists</code>）</h3><p>可以使用<strong>切片</strong>来创建新列表：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">listA = [<span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">listB = listA</span><br><span class="line"></span><br><span class="line">listC = listA[:]</span><br><span class="line">listA[<span class="number">0</span>] = <span class="number">4</span></span><br><span class="line">listB[<span class="number">1</span>] = <span class="number">5</span></span><br></pre></td></tr></table></figure>
+
+<p>或者使用<code>list()</code>函数，<code>list()</code>函数能接受任意类型的可迭代对象（<code>list()</code>是非破坏性的，列表是可修改的）：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">listA = [<span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">listB = listA</span><br><span class="line"></span><br><span class="line">listC = <span class="built_in">list</span>(listA)</span><br><span class="line">listA[<span class="number">0</span>] = <span class="number">4</span></span><br><span class="line">listB[<span class="number">1</span>] = <span class="number">5</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="对象的同一性与内容的相等性"><a href="#对象的同一性与内容的相等性" class="headerlink" title="对象的同一性与内容的相等性"></a>对象的同一性与内容的相等性</h3><p><code>is</code>可以验证对象的同一性，若是同一个对象，返回<code>True</code>，否则返回<code>False</code>。</p>
+<p><code>==</code>可以验证内容的相等性，若两个对象的内容相同，返回<code>True</code>，否则返回<code>False</code>。</p>
+<p><code>eg</code>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">list1 = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line">list2 = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line">identical = list1 <span class="keyword">is</span> list2</span><br><span class="line">are_equal = list1 == list2</span><br></pre></td></tr></table></figure>
+
+<h2 id="Lecture-14-List-Mutation-Identity-and-Nonlocal"><a href="#Lecture-14-List-Mutation-Identity-and-Nonlocal" class="headerlink" title="Lecture #14: List Mutation, Identity, and Nonlocal"></a>Lecture #14: List Mutation, Identity, and Nonlocal</h2><h3 id="列表的创建（List-creation）"><a href="#列表的创建（List-creation）" class="headerlink" title="列表的创建（List creation）"></a>列表的创建（<code>List creation</code>）</h3><p>使用方括号可以创建列表：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Creating a list from scratch:</span></span><br><span class="line">a = []</span><br><span class="line">b = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br></pre></td></tr></table></figure>
+
+<p>从已经存在的列表可以创建列表：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Creating a list from existing lists:</span></span><br><span class="line">c = b + [<span class="number">20</span>, <span class="number">30</span>]</span><br><span class="line">d = c[:]</span><br><span class="line">e = <span class="built_in">list</span>(c)</span><br></pre></td></tr></table></figure>
+
+<p>以上方法都是非破坏性的（<code>Non-destructive</code>）。</p>
+<h3 id="通过切片修改列表（Mutating-lists-with-slicing）"><a href="#通过切片修改列表（Mutating-lists-with-slicing）" class="headerlink" title="通过切片修改列表（Mutating lists with slicing）"></a>通过切片修改列表（<code>Mutating lists with slicing</code>）</h3><p>通过<strong>切片</strong>可以修改列表：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># List Mutation</span></span><br><span class="line">L = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br><span class="line"></span><br><span class="line">L[<span class="number">2</span>] = <span class="number">6</span></span><br><span class="line"></span><br><span class="line">L[<span class="number">1</span>:<span class="number">3</span>] = [<span class="number">9</span>, <span class="number">8</span>]</span><br><span class="line"></span><br><span class="line">L[<span class="number">2</span>:<span class="number">4</span>] = []            <span class="comment"># Deleting elements</span></span><br><span class="line"></span><br><span class="line">L[<span class="number">1</span>:<span class="number">1</span>] = [<span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]  <span class="comment"># Inserting elements</span></span><br><span class="line"></span><br><span class="line">L[<span class="built_in">len</span>(L):] = [<span class="number">10</span>, <span class="number">11</span>]  <span class="comment"># Appending</span></span><br><span class="line"></span><br><span class="line">L = L + [<span class="number">20</span>, <span class="number">30</span>]</span><br><span class="line"></span><br><span class="line">L[<span class="number">0</span>:<span class="number">0</span>] = <span class="built_in">range</span>(-<span class="number">3</span>, <span class="number">0</span>)  <span class="comment"># Prepending</span></span><br></pre></td></tr></table></figure>
+
+<p>注意列表的<code>+</code>和<code>+=</code>运算符，前者会为右值创建一个新的列表绑定到左值的名称上（非破坏性操作）；后者不会创建新的列表（破坏性操作）。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Test List&#x27;s &#x27;+&#x27; and &#x27;+=&#x27;</span></span><br><span class="line">a = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"><span class="built_in">print</span>(a, <span class="built_in">id</span>(a))</span><br><span class="line"></span><br><span class="line">b = a + [<span class="number">4</span>, <span class="number">5</span>]</span><br><span class="line"><span class="built_in">print</span>(b, <span class="built_in">id</span>(b))</span><br><span class="line"></span><br><span class="line">a += [<span class="number">6</span>, <span class="number">7</span>]</span><br><span class="line"><span class="built_in">print</span>(a, <span class="built_in">id</span>(a))</span><br><span class="line"></span><br><span class="line">a = a + [<span class="number">8</span>, <span class="number">9</span>]</span><br><span class="line"><span class="built_in">print</span>(a, <span class="built_in">id</span>(a))</span><br></pre></td></tr></table></figure>
+
+<h3 id="使用列表的方法修改列表（Mutating-lists-with-methods）"><a href="#使用列表的方法修改列表（Mutating-lists-with-methods）" class="headerlink" title="使用列表的方法修改列表（Mutating lists with methods）"></a>使用列表的方法修改列表（<code>Mutating lists with methods</code>）</h3><p><code>append()</code>函数可以把一个元素添加到列表尾部：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># append() adds a single element to a list:</span></span><br><span class="line">s = [<span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">t = [<span class="number">5</span>, <span class="number">6</span>]</span><br><span class="line">s.append(<span class="number">4</span>)</span><br><span class="line">s.append(t)</span><br><span class="line">t = <span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<p><code>extend()</code>函数可以把一个列表的所有元素添加到指定列表的尾部：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># extend() adds all the elements in one list to a list:</span></span><br><span class="line">s = [<span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">t = [<span class="number">5</span>, <span class="number">6</span>]</span><br><span class="line">s.extend(<span class="number">4</span>) <span class="comment"># 🚫 Error: 4 is not an iterable!</span></span><br><span class="line">s.extend(t)</span><br><span class="line">t = <span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<p><code>pop()</code>函数可以移除并返回列表的最后一个元素：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># pop() removes and returns the last element:</span></span><br><span class="line">s = [<span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">t = [<span class="number">5</span>, <span class="number">6</span>]</span><br><span class="line">t = s.pop()</span><br></pre></td></tr></table></figure>
+
+<p><code>reomve(val)</code>会移除列表中第一个等于<code>val</code>的值：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># remove() removes the first element equal to the argument:</span></span><br><span class="line">s = [<span class="number">6</span>, <span class="number">2</span>, <span class="number">4</span>, <span class="number">8</span>, <span class="number">4</span>]</span><br><span class="line">s.remove(<span class="number">4</span>)</span><br><span class="line">s.remove(<span class="number">9</span>)</span><br></pre></td></tr></table></figure>
+
+<p>以上方法都会修改列表，都是破坏性操作（<code>Destructive</code>）。</p>
+<h3 id="对象的同一性与内容的相等性-1"><a href="#对象的同一性与内容的相等性-1" class="headerlink" title="对象的同一性与内容的相等性"></a>对象的同一性与内容的相等性</h3><p><code>is</code>可以验证对象的同一性，若是同一个对象，返回<code>True</code>，否则返回<code>False</code>。</p>
+<p><code>==</code>可以验证内容的相等性，若两个对象的内容相同，返回<code>True</code>，否则返回<code>False</code>。</p>
+<p><code>eg</code>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">list1 = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line">list2 = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line"><span class="comment"># evaluates to True if both exp0 and exp1 evaluate to objects containing equal values</span></span><br><span class="line">are_equal = list1 == list2</span><br><span class="line"><span class="comment"># evaluates to True if both exp0 and exp1 evaluate to the same object</span></span><br><span class="line">identical = list1 <span class="keyword">is</span> list2</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Try this in your local friendly Python interpreter:</span></span><br><span class="line">a = <span class="string">&quot;orange&quot;</span></span><br><span class="line">b = <span class="string">&quot;orange&quot;</span></span><br><span class="line">c = <span class="string">&quot;o&quot;</span> + <span class="string">&quot;range&quot;</span></span><br><span class="line"><span class="built_in">print</span>(a <span class="keyword">is</span> b)</span><br><span class="line"><span class="built_in">print</span>(a <span class="keyword">is</span> c)</span><br><span class="line"></span><br><span class="line">a = <span class="number">100</span></span><br><span class="line">b = <span class="number">100</span></span><br><span class="line"><span class="built_in">print</span>(a <span class="keyword">is</span> b)</span><br><span class="line"><span class="built_in">print</span>(a <span class="keyword">is</span> <span class="number">10</span> * <span class="number">10</span>)</span><br><span class="line"><span class="built_in">print</span>(a == <span class="number">10</span> * <span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">a = <span class="number">100000000000000000</span></span><br><span class="line">b = <span class="number">100000000000000000</span></span><br><span class="line"><span class="built_in">print</span>(a <span class="keyword">is</span> b)</span><br><span class="line"><span class="built_in">print</span>(<span class="number">100000000000000000</span> <span class="keyword">is</span> <span class="number">100000000000000000</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="本地空间的命名（Names-inside-local-scopes）"><a href="#本地空间的命名（Names-inside-local-scopes）" class="headerlink" title="本地空间的命名（Names inside local scopes）"></a>本地空间的命名（<code>Names inside local scopes</code>）</h3><p>命名的规则如下：</p>
+<p><img src="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/image22.png"></p>
+<p><code>eg</code>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># access is allowed</span></span><br><span class="line">attendees = []</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">mark_attendance</span>(<span class="params">name</span>):</span><br><span class="line">    attendees.append(name)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;In attendance:&quot;</span>, attendees)</span><br><span class="line"></span><br><span class="line">mark_attendance(<span class="string">&quot;Emily&quot;</span>)</span><br><span class="line">mark_attendance(<span class="string">&quot;Cristiano&quot;</span>)</span><br><span class="line">mark_attendance(<span class="string">&quot;Samantha&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># re-assign is not allowed</span></span><br><span class="line"><span class="comment"># UnboundLocalError: local variable &#x27;current&#x27; referenced before assignment</span></span><br><span class="line">current = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">count</span>():</span><br><span class="line">    current = current + <span class="number">1</span>     <span class="comment"># 🚫  Error!</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;Count:&quot;</span>, current)</span><br><span class="line"></span><br><span class="line">count()</span><br><span class="line">count()</span><br></pre></td></tr></table></figure>
+
+<p>可以使用<code>global</code>描述符引入全局环境的变量（但应尽量避免使用<code>global</code>）：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Re-assigning globals</span></span><br><span class="line">current = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">count</span>():</span><br><span class="line">    <span class="keyword">global</span> current</span><br><span class="line">    current = current + <span class="number">1</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;Count:&quot;</span>, current)</span><br><span class="line"></span><br><span class="line">count()</span><br><span class="line">count()</span><br></pre></td></tr></table></figure>
+
+<h3 id="嵌套空间内的名称（Names-inside-nested-scopes）"><a href="#嵌套空间内的名称（Names-inside-nested-scopes）" class="headerlink" title="嵌套空间内的名称（Names inside nested scopes）"></a>嵌套空间内的名称（<code>Names inside nested scopes</code>）</h3><p><img src="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/image23.png"></p>
+<p>不允许在嵌套函数中重命名变量，因为根据计算顺序，左值会先创建<code>current</code>，右值访问<code>current</code>时，又会发现<code>current</code>没有绑定任何对象，就直接访问。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># UnboundLocalError: local variable &#x27;current&#x27; referenced before assignment</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">make_counter</span>(<span class="params">start</span>):</span><br><span class="line">    current = start</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">count</span>():</span><br><span class="line">        current = current + <span class="number">1</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;Count:&quot;</span>, current)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> count</span><br><span class="line"></span><br><span class="line">counter = make_counter(<span class="number">30</span>)</span><br><span class="line">counter()</span><br><span class="line">counter()</span><br><span class="line">counter()</span><br></pre></td></tr></table></figure>
+
+<p>可以使用<code>nonlocal</code>修饰符（<code>Python3</code>的新特性），在嵌套函数中引入父函数的变量（但应尽量避免使用<code>nonlocal</code>）：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># The nonlocal declaration tells Python to look in the parent frame for the name lookup.</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">make_counter</span>(<span class="params">start</span>):</span><br><span class="line">    current = start</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">count</span>():</span><br><span class="line">        <span class="keyword">nonlocal</span> current</span><br><span class="line">        current = current + <span class="number">1</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;Count:&quot;</span>, current)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> count</span><br><span class="line"></span><br><span class="line">counter = make_counter(<span class="number">30</span>)</span><br><span class="line">counter()</span><br><span class="line">counter()</span><br><span class="line">counter()</span><br></pre></td></tr></table></figure>
+
+<h2 id="Lecture-15-Iterators-Generators"><a href="#Lecture-15-Iterators-Generators" class="headerlink" title="Lecture #15: Iterators + Generators"></a>Lecture #15: Iterators + Generators</h2><h3 id="可迭代对象（Iterables）"><a href="#可迭代对象（Iterables）" class="headerlink" title="可迭代对象（Iterables）"></a>可迭代对象（<code>Iterables</code>）</h3><p>列表、元组、字典、字符串都是<strong>可迭代对象</strong>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Lists, tuples, dictionaries, and strings are all iterable objects.</span></span><br><span class="line">my_order = [<span class="string">&quot;Yuca Shepherds Pie&quot;</span>, <span class="string">&quot;Pão de queijo&quot;</span>, <span class="string">&quot;Guaraná&quot;</span>]</span><br><span class="line"></span><br><span class="line">ranked_chocolates = (<span class="string">&quot;Dark&quot;</span>, <span class="string">&quot;Milk&quot;</span>, <span class="string">&quot;White&quot;</span>)</span><br><span class="line"></span><br><span class="line">prices = &#123;<span class="string">&quot;pineapple&quot;</span>: <span class="number">9.99</span>, <span class="string">&quot;pen&quot;</span>: <span class="number">2.99</span>, <span class="string">&quot;pineapple-pen&quot;</span>: <span class="number">19.99</span>&#125;</span><br><span class="line"></span><br><span class="line">best_topping = <span class="string">&quot;pineapple&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>这些类型都支持循环迭代：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># We can iterate over iterable objects:</span></span><br><span class="line">my_order = [<span class="string">&quot;Yuca Shepherds Pie&quot;</span>, <span class="string">&quot;Pão de queijo&quot;</span>, <span class="string">&quot;Guaraná&quot;</span>]</span><br><span class="line"><span class="keyword">for</span> item <span class="keyword">in</span> my_order:</span><br><span class="line">    <span class="built_in">print</span>(item)</span><br><span class="line">lowered = [item.lower() <span class="keyword">for</span> item <span class="keyword">in</span> my_order]</span><br><span class="line"></span><br><span class="line">ranked_chocolates = (<span class="string">&quot;Dark&quot;</span>, <span class="string">&quot;Milk&quot;</span>, <span class="string">&quot;White&quot;</span>)</span><br><span class="line"><span class="keyword">for</span> chocolate <span class="keyword">in</span> ranked_chocolates:</span><br><span class="line">    <span class="built_in">print</span>(chocolate)</span><br><span class="line"></span><br><span class="line">prices = &#123;<span class="string">&quot;pineapple&quot;</span>: <span class="number">9.99</span>, <span class="string">&quot;pen&quot;</span>: <span class="number">2.99</span>, <span class="string">&quot;pineapple-pen&quot;</span>: <span class="number">19.99</span>&#125;</span><br><span class="line"><span class="keyword">for</span> product <span class="keyword">in</span> prices:</span><br><span class="line">    <span class="built_in">print</span>(product, <span class="string">&quot; costs &quot;</span>, prices[product])</span><br><span class="line">discounted = &#123; item: prices[item] * <span class="number">0.75</span> <span class="keyword">for</span> item <span class="keyword">in</span> prices &#125;</span><br><span class="line"></span><br><span class="line">best_topping = <span class="string">&quot;pineapple&quot;</span></span><br><span class="line"><span class="keyword">for</span> letter <span class="keyword">in</span> best_topping:</span><br><span class="line">    <span class="built_in">print</span>(letter)</span><br></pre></td></tr></table></figure>
+
+<h3 id="迭代器（Iterators）"><a href="#迭代器（Iterators）" class="headerlink" title="迭代器（Iterators）"></a>迭代器（<code>Iterators</code>）</h3><p>迭代器可以提供对可迭代序列的元素的访问，一次访问一个元素：</p>
+<p><code>iter(iterable)</code>函数返回可迭代对象<code>iterable</code>的迭代器。</p>
+<p><code>next(iterator)</code>函数返回迭代器<code>iterator</code>的下一个元素。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># An iterator is an object that provides sequential access to values, one by one.</span></span><br><span class="line"><span class="comment"># iter(iterable) returns an iterator over the elements of an iterable.</span></span><br><span class="line"><span class="comment"># next(iterator) returns the next element in an iterator.</span></span><br><span class="line">toppings = [<span class="string">&quot;pineapple&quot;</span>, <span class="string">&quot;pepper&quot;</span>, <span class="string">&quot;mushroom&quot;</span>, <span class="string">&quot;roasted red pepper&quot;</span>]</span><br><span class="line"></span><br><span class="line">topperator = <span class="built_in">iter</span>(toppings)</span><br><span class="line"><span class="built_in">next</span>(topperator) <span class="comment"># &#x27;pineapple&#x27;</span></span><br><span class="line"><span class="built_in">next</span>(topperator) <span class="comment"># &#x27;pepper&#x27;</span></span><br><span class="line"><span class="built_in">next</span>(topperator) <span class="comment"># &#x27;mushroom&#x27;</span></span><br><span class="line"><span class="built_in">next</span>(topperator) <span class="comment"># &#x27;roasted red pepper&#x27;</span></span><br><span class="line"><span class="built_in">next</span>(topperator) <span class="comment"># ❌ StopIteration exception</span></span><br></pre></td></tr></table></figure>
+
+<p>迭代器中不含元素时调用<code>next</code>，会返回一个<code>StopIteration: StopIteration</code>对象，停止迭代。</p>
+<p>可以使用<code>try/except</code>捕获异常：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># An unhandled exception will immediately stop a program.</span></span><br><span class="line"><span class="comment"># Use try/except to handle an exception:</span></span><br><span class="line">ranked_chocolates = (<span class="string">&quot;Dark&quot;</span>, <span class="string">&quot;Milk&quot;</span>, <span class="string">&quot;White&quot;</span>)</span><br><span class="line"></span><br><span class="line">chocolaterator = <span class="built_in">iter</span>(ranked_chocolates)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">next</span>(chocolaterator))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">next</span>(chocolaterator))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">next</span>(chocolaterator))</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="built_in">next</span>(chocolaterator))</span><br><span class="line"><span class="keyword">except</span> StopIteration:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;No more left!&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>但这样我们就需要知道迭代器的元素个数，可以使用<code>while</code>循环：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># We can use a while loop to process iterators of arbitrary length:</span></span><br><span class="line">ranked_chocolates = (<span class="string">&quot;Dark&quot;</span>, <span class="string">&quot;Milk&quot;</span>, <span class="string">&quot;White&quot;</span>)</span><br><span class="line">chocolaterator = <span class="built_in">iter</span>(ranked_chocolates)</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        choco = <span class="built_in">next</span>(chocolaterator)</span><br><span class="line">        <span class="built_in">print</span>(choco)</span><br><span class="line"><span class="keyword">except</span> StopIteration:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;No more left!&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="迭代器与For循环（Iterators-vs-For-loops）"><a href="#迭代器与For循环（Iterators-vs-For-loops）" class="headerlink" title="迭代器与For循环（Iterators vs. For loops）"></a>迭代器与<code>For</code>循环（<code>Iterators vs. For loops</code>）</h3><p>上述使用<code>while</code>的迭代器可以用<code>for</code>循环替代：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># use for loops</span></span><br><span class="line">ranked_chocolates = (<span class="string">&quot;Dark&quot;</span>, <span class="string">&quot;Milk&quot;</span>, <span class="string">&quot;White&quot;</span>)</span><br><span class="line"><span class="keyword">for</span> chocolate <span class="keyword">in</span> ranked_chocolates:</span><br><span class="line">    <span class="built_in">print</span>(chocolate)</span><br></pre></td></tr></table></figure>
+
+<p><code>for</code>循环可以视为对迭代器的封装（语法糖）。</p>
+<h3 id="For循环的执行（For-loop-execution）"><a href="#For循环的执行（For-loop-execution）" class="headerlink" title="For循环的执行（For loop execution）"></a><code>For</code>循环的执行（<code>For loop execution</code>）</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> &lt;name&gt; <span class="keyword">in</span> &lt;expression&gt;:</span><br><span class="line">    &lt;suite&gt;</span><br></pre></td></tr></table></figure>
+
+<p>上述语句执行过程如下：</p>
+<blockquote>
+<ol>
+<li><p>Python evaluates <code>&lt;expression&gt;</code> to make sure it’s an iterable.</p>
+</li>
+<li><p>Python gets an iterator for the iterable.</p>
+</li>
+<li><p>Python gets the next value from the iterator and assigns to <code>&lt;name&gt;</code>.</p>
+</li>
+<li><p>Python executes <code>&lt;suite&gt;</code>.</p>
+</li>
+<li><p>Python repeats until it sees a StopIteration error.</p>
+</li>
+</ol>
+</blockquote>
+<p>与以下代码等价：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">iterator = <span class="built_in">iter</span>(&lt;expression&gt;)</span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        &lt;name&gt; = <span class="built_in">next</span>(iterator)</span><br><span class="line">        &lt;suite&gt;</span><br><span class="line"><span class="keyword">except</span> StopIteration:</span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+
+<p><code>for</code>循环迭代是更好的选择，无论从语法的简洁性还是从程序的性能开销考虑。</p>
+<h3 id="next-and-iter"><a href="#next-and-iter" class="headerlink" title="__next__() and __iter__()"></a><code>__next__() and __iter__()</code></h3><p>调用<code>next()</code>函数时，会调用迭代器内置的<code>__next__()</code>函数：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># When the iter() function is passed an iterable object, it calls the __iter__() method on it:</span></span><br><span class="line">ranked_chocolates = (<span class="string">&quot;Dark&quot;</span>, <span class="string">&quot;Milk&quot;</span>, <span class="string">&quot;White&quot;</span>)</span><br><span class="line">chocorator1 = <span class="built_in">iter</span>(ranked_chocolates)</span><br><span class="line">chocorator2 = ranked_chocolates.__iter__()</span><br></pre></td></tr></table></figure>
+
+<p>调用<code>iter()</code>函数时，会调用迭代器内置的<code>__iter__()</code>函数：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># When the next() function is passed an iterator, it calls the __next__() method on it:</span></span><br><span class="line">ranked_chocolates = (<span class="string">&quot;Dark&quot;</span>, <span class="string">&quot;Milk&quot;</span>, <span class="string">&quot;White&quot;</span>)</span><br><span class="line">chocolate1 = <span class="built_in">next</span>(chocorator1)</span><br><span class="line">chocolate2 = chocorator2.__next__()</span><br></pre></td></tr></table></figure>
+
+<h3 id="返回迭代器的函数（Functions-that-return-iterators）"><a href="#返回迭代器的函数（Functions-that-return-iterators）" class="headerlink" title="返回迭代器的函数（Functions that return iterators）"></a>返回迭代器的函数（<code>Functions that return iterators</code>）</h3><p><img src="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/image24.png"></p>
+<p><code>reversed(sequence)</code>函数会返回<code>sequence</code>的逆序的迭代器：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Iterate over item in sequence in reverse order</span></span><br><span class="line">chocolate_bars = (<span class="string">&quot;90%&quot;</span>, <span class="string">&quot;70%&quot;</span>, <span class="string">&quot;55%&quot;</span>)</span><br><span class="line"></span><br><span class="line">worst_first = <span class="built_in">reversed</span>(chocolate_bars)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> chocolate <span class="keyword">in</span> worst_first:</span><br><span class="line">    <span class="built_in">print</span>(chocolate)</span><br></pre></td></tr></table></figure>
+
+<p><code>zip(*iterables)</code>函数返回若干可迭代对象的合并，第<code>i</code>个元素是<code>(a1[i]， a2[i], ..., an[i])</code>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Iterate over co-indexed tuples with elements from each of the iterables</span></span><br><span class="line">eng_nums = [<span class="string">&quot;one&quot;</span>, <span class="string">&quot;two&quot;</span>, <span class="string">&quot;three&quot;</span>]</span><br><span class="line">esp_nums = [<span class="string">&quot;uno&quot;</span>, <span class="string">&quot;dos&quot;</span>, <span class="string">&quot;tres&quot;</span>]</span><br><span class="line"></span><br><span class="line">zip_iter = <span class="built_in">zip</span>(eng_nums, esp_nums)</span><br><span class="line">eng, esp = <span class="built_in">next</span>(zip_iter)</span><br><span class="line"><span class="built_in">print</span>(eng, esp)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> eng, esp <span class="keyword">in</span> <span class="built_in">zip</span>(eng_nums, esp_nums):</span><br><span class="line">    <span class="built_in">print</span>(eng, esp)</span><br></pre></td></tr></table></figure>
+
+<p><code>map(func, iterable, ...)</code>函数，返回一个迭代器，元素是<code>func(x)</code>，<code>x</code>是可迭代对象<code>iterable</code>的元素：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Iterate over func(x) for x in iterable</span></span><br><span class="line"><span class="comment"># Same as [func(x) for x in iterable]</span></span><br><span class="line">nums = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># Map returns an iterator</span></span><br><span class="line">squares1 = <span class="built_in">map</span>(<span class="keyword">lambda</span> num: num ** <span class="number">2</span>, nums)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Create a list of all the elements from the iterator</span></span><br><span class="line">squares1 = <span class="built_in">list</span>(squares1)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Compare to...</span></span><br><span class="line">squares2 = [num**<span class="number">2</span> <span class="keyword">for</span> num <span class="keyword">in</span> nums]</span><br></pre></td></tr></table></figure>
+
+<p><code>filter(func, iterable)</code>函数，返回一个迭代器，元素是可迭代对象<code>iterable</code>中满足<code>func(x)</code>的元素：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Iterate over x in iterable if func(x)</span></span><br><span class="line"><span class="comment"># Same as [x for x in iterable if func(x)]</span></span><br><span class="line">nums = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># Filter returns an iterator</span></span><br><span class="line">even1 = <span class="built_in">filter</span>(<span class="keyword">lambda</span> num: num % <span class="number">2</span> == <span class="number">0</span>, nums)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Create a list of all the elements from the iterator</span></span><br><span class="line">even1 = <span class="built_in">list</span>(even1)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Compare to...</span></span><br><span class="line">even2 = [num <span class="keyword">for</span> num <span class="keyword">in</span> nums <span class="keyword">if</span> num % <span class="number">2</span> == <span class="number">0</span>]</span><br></pre></td></tr></table></figure>
+
+<h3 id="返回可迭代对象的函数（Functions-that-return-iterables）"><a href="#返回可迭代对象的函数（Functions-that-return-iterables）" class="headerlink" title="返回可迭代对象的函数（Functions that return iterables）"></a>返回可迭代对象的函数（<code>Functions that return iterables</code>）</h3><p><img src="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/image25.png"></p>
+<h3 id="生成器（Generators）"><a href="#生成器（Generators）" class="headerlink" title="生成器（Generators）"></a>生成器（<code>Generators</code>）</h3><p><code>生成器</code>是一种特殊的迭代器，从一个生成器函数中产生值：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># A generator is a type of iterator that yields results from a generator function.</span></span><br><span class="line"><span class="comment"># A generator function uses yield instead of return:</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">evens</span>():</span><br><span class="line">    num = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> num &lt; <span class="number">10</span>:</span><br><span class="line">        <span class="keyword">yield</span> num</span><br><span class="line">        num += <span class="number">2</span></span><br><span class="line">        </span><br><span class="line">evengen = evens()</span><br><span class="line"></span><br><span class="line"><span class="built_in">next</span>(evengen)  <span class="comment"># 0</span></span><br><span class="line"><span class="built_in">next</span>(evengen)  <span class="comment"># 2</span></span><br><span class="line"><span class="built_in">next</span>(evengen)  <span class="comment"># 4</span></span><br><span class="line"><span class="built_in">next</span>(evengen)  <span class="comment"># 6</span></span><br><span class="line"><span class="built_in">next</span>(evengen)  <span class="comment"># 8</span></span><br><span class="line"><span class="built_in">next</span>(evengen)  <span class="comment"># ❌ StopIteration exception</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="生成器是如何工作的（How-generators-work）"><a href="#生成器是如何工作的（How-generators-work）" class="headerlink" title="生成器是如何工作的（How generators work）"></a>生成器是如何工作的（<code>How generators work</code>）</h3><p>生成器中运作原理如下：</p>
+<blockquote>
+<ul>
+<li>When the function is called, Python immediately returns an iterator without entering the function.</li>
+<li>When <code>next()</code>is called on the iterator, it executes the body of the generator from the last stopping point up to the next <code>yield</code> statement.</li>
+<li>If it finds a <code>yield</code> statement, it pauses on the next statement and returns the value of the yielded expression.</li>
+<li>If it doesn’t reach a yield statement, it stops at the end of the function and raises a <code>StopIteration</code> exception.</li>
+</ul>
+</blockquote>
+<h3 id="基于生成器的循环（Looping-over-generators）"><a href="#基于生成器的循环（Looping-over-generators）" class="headerlink" title="基于生成器的循环（Looping over generators）"></a>基于生成器的循环（<code>Looping over generators</code>）</h3><p>可以在<code>for</code>循环中使用生成器，因为生成器是特殊的迭代器：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># We can use for loops on generators, since generators are just special types of iterators.</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">evens</span>(<span class="params">start, end</span>):</span><br><span class="line">    num = start + (start % <span class="number">2</span>)</span><br><span class="line">    <span class="keyword">while</span> num &lt; end:</span><br><span class="line">        <span class="keyword">yield</span> num</span><br><span class="line">        num += <span class="number">2</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> num <span class="keyword">in</span> evens(<span class="number">12</span>, <span class="number">60</span>):</span><br><span class="line">   <span class="built_in">print</span>(num)</span><br></pre></td></tr></table></figure>
+
+<p>与下面代码等价：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Looks a lot like...</span></span><br><span class="line">evens = [num <span class="keyword">for</span> num <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">12</span>, <span class="number">60</span>) <span class="keyword">if</span> num % <span class="number">2</span> == <span class="number">0</span>]</span><br><span class="line"><span class="comment"># Or  = filter(lambda x: x % 2 == 0, range(12, 60))</span></span><br><span class="line"><span class="keyword">for</span> num <span class="keyword">in</span> evens:</span><br><span class="line">    <span class="built_in">print</span>(num)</span><br></pre></td></tr></table></figure>
+
+<h3 id="为什么使用生成器（Why-use-generators-）"><a href="#为什么使用生成器（Why-use-generators-）" class="headerlink" title="为什么使用生成器（Why use generators?）"></a>为什么使用生成器（<code>Why use generators?</code>）</h3><p>生成器只有在需要下一个元素时才会调用生成器函数，如果迭代的对象很大，那么使用生成器是个比较好的选择。</p>
+<p>下面的代码会计算整个序列：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Generators are lazy: they only generate the next item when needed.</span></span><br><span class="line"><span class="comment"># Why generate the whole sequence...</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">find_matches</span>(<span class="params">filename, <span class="keyword">match</span></span>):</span><br><span class="line">    matched = []</span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> <span class="built_in">open</span>(filename):</span><br><span class="line">        <span class="keyword">if</span> line.find(<span class="keyword">match</span>) &gt; -<span class="number">1</span>:</span><br><span class="line">            matched.append(line)</span><br><span class="line">    <span class="keyword">return</span> matched</span><br><span class="line"></span><br><span class="line">matched_lines = find_matches(<span class="string">&#x27;frankenstein.txt&#x27;</span>, <span class="string">&quot;!&quot;</span>)</span><br><span class="line">matched_lines[<span class="number">0</span>]</span><br><span class="line">matched_lines[<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+
+<p>使用生成器只生成部分元素：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ...if you only want some elements?</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">find_matches</span>(<span class="params">filename, <span class="keyword">match</span></span>):</span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> <span class="built_in">open</span>(filename):</span><br><span class="line">        <span class="keyword">if</span> line.find(<span class="keyword">match</span>) &gt; -<span class="number">1</span>:</span><br><span class="line">            <span class="keyword">yield</span> line</span><br><span class="line"></span><br><span class="line">line_iter = find_matches(<span class="string">&#x27;frankenstein.txt&#x27;</span>, <span class="string">&quot;!&quot;</span>)</span><br><span class="line"><span class="built_in">next</span>(line_iter)</span><br><span class="line"><span class="built_in">next</span>(line_iter)</span><br></pre></td></tr></table></figure>
+
+<h3 id="yield-from：从迭代器生成元素（Yielding-from-iterables）"><a href="#yield-from：从迭代器生成元素（Yielding-from-iterables）" class="headerlink" title="yield from：从迭代器生成元素（Yielding from iterables）"></a><code>yield from</code>：从迭代器生成元素（<code>Yielding from iterables</code>）</h3><p><code>yield from iterable</code>可以从一个迭代器生成元素，一次生成一个元素。</p>
+<p>先从迭代器<code>a</code>中生成，再从迭代器<code>b</code>中生成：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># A yield from statement yields the values from an iterator one at a time. 🍬</span></span><br><span class="line"><span class="comment"># Instead of...</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">a_then_b</span>(<span class="params">a, b</span>):</span><br><span class="line">    <span class="keyword">for</span> item <span class="keyword">in</span> a:</span><br><span class="line">        <span class="keyword">yield</span> item</span><br><span class="line">    <span class="keyword">for</span> item <span class="keyword">in</span> b:</span><br><span class="line">        <span class="keyword">yield</span> item</span><br><span class="line"></span><br><span class="line"><span class="built_in">list</span>(a_then_b([<span class="string">&quot;Apples&quot;</span>, <span class="string">&quot;Aardvarks&quot;</span>], [<span class="string">&quot;Bananas&quot;</span>, <span class="string">&quot;BEARS&quot;</span>]))</span><br></pre></td></tr></table></figure>
+
+<p>使用<code>yield from</code>的等价版本：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># We can write...</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">a_then_b</span>(<span class="params">a, b</span>):</span><br><span class="line">    <span class="keyword">yield</span> <span class="keyword">from</span> a</span><br><span class="line">    <span class="keyword">yield</span> <span class="keyword">from</span> b</span><br><span class="line"></span><br><span class="line"><span class="built_in">list</span>(a_then_b([<span class="string">&quot;Apples&quot;</span>, <span class="string">&quot;Aardvarks&quot;</span>], [<span class="string">&quot;Bananas&quot;</span>, <span class="string">&quot;BEARS&quot;</span>]))</span><br></pre></td></tr></table></figure>
+
+<p><code>yield from</code>也可以从生成器函数的结果中生成值：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># A yield from can also yield the results of a generator function.</span></span><br><span class="line"><span class="comment"># Instead of...</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">factorial</span>(<span class="params">n, accum</span>):</span><br><span class="line">    <span class="keyword">if</span> n == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">yield</span> accum</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">for</span> result <span class="keyword">in</span> factorial(n - <span class="number">1</span>, n * accum):</span><br><span class="line">            <span class="keyword">yield</span> result</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> num <span class="keyword">in</span> factorial(<span class="number">3</span>, <span class="number">1</span>):</span><br><span class="line">    <span class="built_in">print</span>(num)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># We can write...</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">factorial</span>(<span class="params">n, accum</span>):</span><br><span class="line">    <span class="keyword">if</span> n == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">yield</span> accum</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">yield</span> <span class="keyword">from</span> factorial(n - <span class="number">1</span>, n * accum)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> num <span class="keyword">in</span> factorial(<span class="number">3</span>, <span class="number">1</span>):</span><br><span class="line">    <span class="built_in">print</span>(num)</span><br></pre></td></tr></table></figure>
+
+<h3 id="树的递归生成器（Recursive-generators-for-trees）"><a href="#树的递归生成器（Recursive-generators-for-trees）" class="headerlink" title="树的递归生成器（Recursive generators for trees）"></a>树的递归生成器（<code>Recursive generators for trees</code>）</h3><p>生成器支持递归，那么树也可以有生成器：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># A pre-order traversal of the tree leaves:</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">leaves</span>(<span class="params">t</span>):</span><br><span class="line">    <span class="keyword">yield</span> label(t)</span><br><span class="line">    <span class="keyword">for</span> c <span class="keyword">in</span> branches(t):</span><br><span class="line">        <span class="keyword">yield</span> <span class="keyword">from</span> leaves(c)</span><br><span class="line"></span><br><span class="line">t = tree(<span class="number">20</span>, [tree(<span class="number">12</span>,</span><br><span class="line">               [tree(<span class="number">9</span>,</span><br><span class="line">                  [tree(<span class="number">7</span>), tree(<span class="number">2</span>)]),</span><br><span class="line">                tree(<span class="number">3</span>)]),</span><br><span class="line">              tree(<span class="number">8</span>,</span><br><span class="line">               [tree(<span class="number">4</span>), tree(<span class="number">4</span>)])])</span><br><span class="line"></span><br><span class="line">leave_gen = leaves(t)</span><br><span class="line"><span class="built_in">next</span>(leave_gen)</span><br></pre></td></tr></table></figure>
+
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><p><strong>翻译视频</strong>：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1v64y1Q78o/?spm_id_from=444.41.top_right_bar_window_default_collection.content.click&vd_source=249a8ad55bb26717dd55ec3dd295f644">【计算机程序的构造和解释】精译【UC Berkeley 公开课-CS61A (Spring 2021)】-中英双语字幕</a></p>
+</li>
+<li><p><code>github</code>: <a target="_blank" rel="noopener" href="https://github.com/Maxwell2020152049/CS61A">Maxwell2020152049&#x2F;CS61A</a></p>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/06/13/Cpp-EasyX-%E6%B8%B8%E6%88%8F%E6%A1%86%E6%9E%B6-%E4%BA%95%E5%AD%97%E6%A3%8B%E6%B8%B8%E6%88%8F/" rel="prev" title="【C++游戏开发】游戏框架|井字棋游戏">
+                  <i class="fa fa-angle-left"></i> 【C++游戏开发】游戏框架|井字棋游戏
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Rex</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
