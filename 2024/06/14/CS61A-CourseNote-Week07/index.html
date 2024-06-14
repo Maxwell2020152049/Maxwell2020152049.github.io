@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.2.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="本文详细介绍了Python中的类和对象的概念，包括类的定义、实例化、方法调用、继承和组合等。通过实例展示了如何使用类来组织数据和行为，以及如何通过继承和组合来构建更复杂的对象系统。此外，还介绍了特殊对象方法如&#96;__str__&#96;和&#96;__repr__&#96;的使用，以及如何通过&#96;getattr&#96;和&#96;hasattr&#96;方法来操作对象的属性。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CS61A 课程笔记 Week07">
+<meta property="og:url" content="http://example.com/2024/06/14/CS61A-CourseNote-Week07/index.html">
+<meta property="og:site_name" content="Rex&#39;s Blog">
+<meta property="og:description" content="本文详细介绍了Python中的类和对象的概念，包括类的定义、实例化、方法调用、继承和组合等。通过实例展示了如何使用类来组织数据和行为，以及如何通过继承和组合来构建更复杂的对象系统。此外，还介绍了特殊对象方法如&#96;__str__&#96;和&#96;__repr__&#96;的使用，以及如何通过&#96;getattr&#96;和&#96;hasattr&#96;方法来操作对象的属性。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/9f142f35cdd98af831e65a770ca6a67.png">
+<meta property="og:image" content="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/e8c10fb6c0716f1b62a9e5a08af5929.png">
+<meta property="og:image" content="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/61feadd3b714075fedfad27bfe1c9af.png">
+<meta property="og:image" content="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/01bd2d2228b91429525a1ad5e256bc1.png">
+<meta property="og:image" content="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/25bd4bf86c08cd9542a8db8491cc3f8.png">
+<meta property="og:image" content="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/8f11a006a0e4c378fe2a40a4cb0ceca.png">
+<meta property="og:image" content="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/4588895c4397fe4136843e4677233a7.png">
+<meta property="article:published_time" content="2024-06-14T03:52:30.000Z">
+<meta property="article:modified_time" content="2024-06-14T04:09:51.412Z">
+<meta property="article:author" content="Rex">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/9f142f35cdd98af831e65a770ca6a67.png">
+
+
+<link rel="canonical" href="http://example.com/2024/06/14/CS61A-CourseNote-Week07/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2024/06/14/CS61A-CourseNote-Week07/","path":"2024/06/14/CS61A-CourseNote-Week07/","title":"CS61A 课程笔记 Week07"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>CS61A 课程笔记 Week07 | Rex's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Rex's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Week7"><span class="nav-number">1.</span> <span class="nav-text">Week7</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Lecture-16-Objects-Classes"><span class="nav-number">1.1.</span> <span class="nav-text">Lecture #16: Objects + Classes</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%BB%BA%E9%80%A0%E4%B8%80%E9%97%B4%E5%B7%A7%E5%85%8B%E5%8A%9B%E5%95%86%E5%BA%97%EF%BC%88Building-a-chocolate-shop%EF%BC%89"><span class="nav-number">1.1.1.</span> <span class="nav-text">如何建造一间巧克力商店（Building a chocolate shop）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%8E%E5%87%BD%E6%95%B0%E5%88%B0%E5%AF%B9%E8%B1%A1%EF%BC%88From-functions-to-objects%EF%BC%89"><span class="nav-number">1.1.2.</span> <span class="nav-text">从函数到对象（From functions to objects）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%EF%BC%88Classes%EF%BC%89"><span class="nav-number">1.1.3.</span> <span class="nav-text">类（Classes）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E5%AE%9A%E4%B9%89%EF%BC%88Class-definition%EF%BC%89"><span class="nav-number">1.1.4.</span> <span class="nav-text">类定义（Class definition）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E7%9A%84%E5%AE%9E%E4%BE%8B%E5%8C%96%EF%BC%88%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%9E%84%E9%80%A0%EF%BC%89%EF%BC%88Class-instantiation-Object-construction-%EF%BC%89"><span class="nav-number">1.1.5.</span> <span class="nav-text">类的实例化（对象的构造）（Class instantiation (Object construction)）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%82%B9%E8%BF%90%E7%AE%97%E7%AC%A6-%EF%BC%88Dot-notation%EF%BC%89"><span class="nav-number">1.1.6.</span> <span class="nav-text">点运算符.（Dot notation）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B%E7%9A%84%E5%8F%98%E9%87%8F%EF%BC%88Instance-variables%EF%BC%89"><span class="nav-number">1.1.7.</span> <span class="nav-text">实例的变量（Instance variables）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E7%9A%84%E8%B0%83%E7%94%A8%EF%BC%88Method-invocation%EF%BC%89"><span class="nav-number">1.1.8.</span> <span class="nav-text">方法的调用（Method invocation）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E5%AE%9E%E4%BE%8B%E5%8F%98%E9%87%8F%EF%BC%88Dynamic-instance-variables%EF%BC%89"><span class="nav-number">1.1.9.</span> <span class="nav-text">动态实例变量（Dynamic instance variables）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E5%8F%98%E9%87%8F%EF%BC%88Class-variables%EF%BC%89"><span class="nav-number">1.1.10.</span> <span class="nav-text">类变量（Class variables）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B1%9E%E6%80%A7%E9%83%BD%E6%98%AF%E5%85%AC%E5%85%B1%E7%9A%84%EF%BC%88Attributes-are-all-public%EF%BC%89"><span class="nav-number">1.1.11.</span> <span class="nav-text">属性都是公共的（Attributes are all public）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%80%9C%E7%A7%81%E6%9C%89%E2%80%9D%E5%B1%9E%E6%80%A7%EF%BC%88-Private-attributes%EF%BC%89"><span class="nav-number">1.1.12.</span> <span class="nav-text">“私有”属性（&quot;Private&quot; attributes）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Lecture-17-Inheritance-Composition"><span class="nav-number">1.2.</span> <span class="nav-text">Lecture #17: Inheritance + Composition</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E2%80%9C%E5%8A%A8%E7%89%A9%E5%9B%AD%E2%80%9D%EF%BC%88Building-Animal-Conserving-%EF%BC%89"><span class="nav-number">1.2.1.</span> <span class="nav-text">创建一个“动物园”（Building &quot;Animal Conserving&quot;）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A3%9F%E7%89%A9%E7%B1%BB%EF%BC%88A-Food-class%EF%BC%89"><span class="nav-number">1.2.2.</span> <span class="nav-text">食物类（A Food class）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%A7%E8%B1%A1%E7%B1%BB%EF%BC%88An-Elephant-class%EF%BC%89"><span class="nav-number">1.2.3.</span> <span class="nav-text">大象类（An Elephant class）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%94%E5%AD%90%E7%B1%BB%EF%BC%88An-Rabbit-class%EF%BC%89"><span class="nav-number">1.2.4.</span> <span class="nav-text">兔子类（An Rabbit class）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%A7%E6%89%BF%E2%80%94%E2%80%94%E5%9F%BA%E7%B1%BB%E4%B8%8E%E5%AD%90%E7%B1%BB%EF%BC%88Inheritance-Base-classes-and-subclasses%EF%BC%89"><span class="nav-number">1.2.5.</span> <span class="nav-text">继承——基类与子类（Inheritance--Base classes and subclasses）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E7%B1%BB%EF%BC%88The-base-class%EF%BC%89"><span class="nav-number">1.2.6.</span> <span class="nav-text">基类（The base class）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%90%E7%B1%BB%EF%BC%88The-subclasses%EF%BC%89"><span class="nav-number">1.2.7.</span> <span class="nav-text">子类（The subclasses）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%8D%E8%BD%BD%E7%B1%BB%E5%8F%98%E9%87%8F%EF%BC%88Overriding-class-variables%EF%BC%89"><span class="nav-number">1.2.8.</span> <span class="nav-text">重载类变量（Overriding class variables）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%8D%E8%BD%BD%E6%96%B9%E6%B3%95%EF%BC%88Overriding-methods%EF%BC%89"><span class="nav-number">1.2.9.</span> <span class="nav-text">重载方法（Overriding methods）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%9F%BA%E7%B1%BB%E7%9A%84%E6%96%B9%E6%B3%95%EF%BC%88Using-methods-from-the-base-class%EF%BC%89"><span class="nav-number">1.2.10.</span> <span class="nav-text">使用基类的方法（Using methods from the base class）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%8D%E8%BD%BD-init-%EF%BC%88Overriding-init-%EF%BC%89"><span class="nav-number">1.2.11.</span> <span class="nav-text">重载__init__（Overriding __init__）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%A7%E6%89%BF%E7%9A%84%E5%B1%82%E6%AC%A1%EF%BC%88Layers-of-inheritance%EF%BC%89"><span class="nav-number">1.2.12.</span> <span class="nav-text">继承的层次（Layers of inheritance）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E7%BB%A7%E6%89%BF%EF%BC%88Multiple-inhteritance%EF%BC%89"><span class="nav-number">1.2.13.</span> <span class="nav-text">多继承（Multiple inhteritance）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%84%E5%90%88%EF%BC%88Composition%EF%BC%89"><span class="nav-number">1.2.14.</span> <span class="nav-text">组合（Composition）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Lecture-18-Special-Object-Methods"><span class="nav-number">1.3.</span> <span class="nav-text">Lecture #18: Special Object Methods</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E5%AF%B9%E8%B1%A1%EF%BC%88So-many-objects%EF%BC%89"><span class="nav-number">1.3.1.</span> <span class="nav-text">关于对象（So many objects）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E5%86%85%E7%BD%AE%E7%9A%84%E5%B1%9E%E6%80%A7%EF%BC%88Built-in-object-attributes%EF%BC%89"><span class="nav-number">1.3.2.</span> <span class="nav-text">对象内置的属性（Built-in object attributes）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#str-%E6%96%B9%E6%B3%95%EF%BC%88-str-%EF%BC%89"><span class="nav-number">1.3.3.</span> <span class="nav-text">__str__方法（__str__）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89-str-%E6%96%B9%E6%B3%95%EF%BC%88Custom-str-behavior%EF%BC%89"><span class="nav-number">1.3.4.</span> <span class="nav-text">自定义__str__方法（Custom __str__ behavior）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#repr-%E6%96%B9%E6%B3%95%EF%BC%88-repr-%EF%BC%89"><span class="nav-number">1.3.5.</span> <span class="nav-text">__repr__方法（__repr__）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89-repr-%E6%96%B9%E6%B3%95%EF%BC%88Custom-repr-behavior%EF%BC%89"><span class="nav-number">1.3.6.</span> <span class="nav-text">自定义__repr__方法（Custom __repr__ behavior）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8getattr%E6%96%B9%E6%B3%95%E8%8E%B7%E5%8F%96%E5%AF%B9%E8%B1%A1%E5%B1%9E%E6%80%A7%EF%BC%88Get-attribute-with-getattr-%EF%BC%89"><span class="nav-number">1.3.7.</span> <span class="nav-text">使用getattr方法获取对象属性（Get attribute with getattr()）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8hasattr%E6%96%B9%E6%B3%95%E6%A3%80%E6%B5%8B%E5%B1%9E%E6%80%A7%E6%98%AF%E5%90%A6%E5%AD%98%E5%9C%A8%EF%BC%88Check-attribute-exists-with-hasattr-%EF%BC%89"><span class="nav-number">1.3.8.</span> <span class="nav-text">使用hasattr方法检测属性是否存在（Check attribute exists with hasattr()）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%B9%E5%88%AB%E7%9A%84%E6%96%B9%E6%B3%95%EF%BC%88Special-methods%EF%BC%89"><span class="nav-number">1.3.9.</span> <span class="nav-text">特别的方法（Special methods）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">1.4.</span> <span class="nav-text">参考资料</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Rex</p>
+  <div class="site-description" itemprop="description">最是人间留不住，朱颜辞镜花辞树。</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">35</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/06/14/CS61A-CourseNote-Week07/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Rex">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Rex's Blog">
+      <meta itemprop="description" content="最是人间留不住，朱颜辞镜花辞树。">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="CS61A 课程笔记 Week07 | Rex's Blog">
+      <meta itemprop="description" content="本文详细介绍了Python中的类和对象的概念，包括类的定义、实例化、方法调用、继承和组合等。通过实例展示了如何使用类来组织数据和行为，以及如何通过继承和组合来构建更复杂的对象系统。此外，还介绍了特殊对象方法如`__str__`和`__repr__`的使用，以及如何通过`getattr`和`hasattr`方法来操作对象的属性。">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          CS61A 课程笔记 Week07
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-06-14 11:52:30 / 修改时间：12:09:51" itemprop="dateCreated datePublished" datetime="2024-06-14T11:52:30+08:00">2024-06-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/CS61A/" itemprop="url" rel="index"><span itemprop="name">CS61A</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/CS61A/Course-Notes/" itemprop="url" rel="index"><span itemprop="name">Course Notes</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description">本文详细介绍了Python中的类和对象的概念，包括类的定义、实例化、方法调用、继承和组合等。通过实例展示了如何使用类来组织数据和行为，以及如何通过继承和组合来构建更复杂的对象系统。此外，还介绍了特殊对象方法如`__str__`和`__repr__`的使用，以及如何通过`getattr`和`hasattr`方法来操作对象的属性。</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="Week7"><a href="#Week7" class="headerlink" title="Week7"></a>Week7</h1><h2 id="Lecture-16-Objects-Classes"><a href="#Lecture-16-Objects-Classes" class="headerlink" title="Lecture #16: Objects + Classes"></a>Lecture #16: Objects + Classes</h2><h3 id="如何建造一间巧克力商店（Building-a-chocolate-shop）"><a href="#如何建造一间巧克力商店（Building-a-chocolate-shop）" class="headerlink" title="如何建造一间巧克力商店（Building a chocolate shop）"></a>如何建造一间巧克力商店（<code>Building a chocolate shop</code>）</h3><p><img src="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/9f142f35cdd98af831e65a770ca6a67.png" alt="9f142f35cdd98af831e65a770ca6a67"></p>
+<p>使用我们之前学习过的抽象数据类型（<code>Abstract Data Type</code>）的知识，用函数可以实现巧克力商店的所有行为，但这节课我们会引入类和对象（<code>Class and Objects</code>）。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Inventory tracking</span></span><br><span class="line">add_product(name, price, nutrition)</span><br><span class="line">get_label(product)</span><br><span class="line">get_nutrition_info(product)</span><br><span class="line">increase_inventory(product, amount)</span><br><span class="line">reduce_inventory(product, amount)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># Customer tracking</span></span><br><span class="line">signup_customer(name, address)</span><br><span class="line">get_greeting(customer)</span><br><span class="line">get_formatted_address(customer)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># Purchase tracking</span></span><br><span class="line">order(customer, product, quantity, cc_info)</span><br><span class="line">track(order_number)</span><br><span class="line">refund(order_number, reason)</span><br></pre></td></tr></table></figure>
+
+<h3 id="从函数到对象（From-functions-to-objects）"><a href="#从函数到对象（From-functions-to-objects）" class="headerlink" title="从函数到对象（From functions to objects）"></a>从函数到对象（<code>From functions to objects</code>）</h3><p>使用<strong>对象</strong>来组织数据结构：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Inventory tracking</span></span><br><span class="line">Product(name, price, nutrition)</span><br><span class="line">Product.get_label()</span><br><span class="line">Product.get_nutrition_info()</span><br><span class="line">Product.increase_inventory(amount)</span><br><span class="line">Product.reduce_inventory(amount)</span><br><span class="line">Product.get_inventory_report()</span><br><span class="line"></span><br><span class="line"><span class="comment"># Customer tracking</span></span><br><span class="line">Customer(name, address)</span><br><span class="line">Customer.get_greeting()</span><br><span class="line">Customer.get_formatted_address()</span><br><span class="line">Customer.buy(product, quantity, cc_info)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Purchase tracking</span></span><br><span class="line">Order(customer, product, quantity, cc_info)</span><br><span class="line">Order.ship()</span><br><span class="line">Order.refund(reason)</span><br></pre></td></tr></table></figure>
+
+<p>一些关于<strong>类和对象</strong>的概念：</p>
+<blockquote>
+<ul>
+<li><p>A <strong>class</strong> is a template for defining new data types.</p>
+</li>
+<li><p>An instance of a class is called an <strong>object</strong>.</p>
+</li>
+<li><p>Each object has data attributes called <strong>instance variables</strong> that describe its state.</p>
+</li>
+<li><p>Each object also has function attributes called <strong>methods</strong>.</p>
+</li>
+</ul>
+</blockquote>
+<h3 id="类（Classes）"><a href="#类（Classes）" class="headerlink" title="类（Classes）"></a>类（<code>Classes</code>）</h3><p>类能够实现：</p>
+<ul>
+<li>初始化实例对象</li>
+<li>定义方法，这些方法能够修改或者报告实例对象的值</li>
+</ul>
+<blockquote>
+<ul>
+<li><p>Set the <strong>initial values</strong> for instance variables.</p>
+</li>
+<li><p>Define <strong>methods</strong> specific to the object, often used to change or report the values of instance variables.</p>
+</li>
+</ul>
+</blockquote>
+<p>本课程给出了一种<strong>产品</strong>类的实现：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Define a new type of data</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Product</span>:</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Set the initial values</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, name, price, nutrition_info</span>):</span><br><span class="line">        self._name = name</span><br><span class="line">        self._price = price</span><br><span class="line">        self._nutrition_info = nutrition_info</span><br><span class="line">        self._inventory = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Define methods</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">increase_inventory</span>(<span class="params">self, amount</span>):</span><br><span class="line">        self._inventory += amount</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">reduce_inventory</span>(<span class="params">self, amount</span>):</span><br><span class="line">        self._inventory -= amount</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_label</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Foxolate Shop: &quot;</span> + self._name</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_inventory_report</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">if</span> self._inventory == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;There are no bars!&quot;</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">f&quot;There are <span class="subst">&#123;self._inventory&#125;</span> bars.&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>使用方法如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">pina_bar = Product(<span class="string">&quot;Piña Chocolotta&quot;</span>, <span class="number">7.99</span>,</span><br><span class="line">    [<span class="string">&quot;200 calories&quot;</span>, <span class="string">&quot;24 g sugar&quot;</span>])</span><br><span class="line"></span><br><span class="line">pina_bar.increase_inventory(<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="类定义（Class-definition）"><a href="#类定义（Class-definition）" class="headerlink" title="类定义（Class definition）"></a>类定义（<code>Class definition</code>）</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Product</span>:</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, name, price, nutrition_info</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">increase_inventory</span>(<span class="params">self, amount</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">reduce_inventory</span>(<span class="params">self, amount</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_label</span>(<span class="params">self</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_inventory_report</span>(<span class="params">self</span>):</span><br></pre></td></tr></table></figure>
+
+<p>一个类语句可以创建一个新的类，并再当前环境的第一个帧中，把该类绑定到类名上。</p>
+<blockquote>
+<ul>
+<li><p>A class statement creates a new class and binds that class to the class name in the first frame of the current environment.</p>
+</li>
+<li><p>Inner <code>def</code> statements create attributes of the class (<em>not</em> names in frames).</p>
+</li>
+</ul>
+</blockquote>
+<h3 id="类的实例化（对象的构造）（Class-instantiation-Object-construction-）"><a href="#类的实例化（对象的构造）（Class-instantiation-Object-construction-）" class="headerlink" title="类的实例化（对象的构造）（Class instantiation (Object construction)）"></a>类的实例化（对象的构造）（<code>Class instantiation (Object construction)</code>）</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pina_bar = Product(<span class="string">&quot;Piña Chocolotta&quot;</span>, <span class="number">7.99</span>,</span><br><span class="line">    [<span class="string">&quot;200 calories&quot;</span>, <span class="string">&quot;24 g sugar&quot;</span>])</span><br></pre></td></tr></table></figure>
+
+<p><code>Product(args)</code>一般被称为<strong>构造器</strong>。</p>
+<p>当<strong>构造器</strong>被调用时：</p>
+<ul>
+<li>该类的一个实例被创建</li>
+<li>该类的<code>__init__</code>函数被调用，新的对象作为<code>__init__</code>的第一个参数<code>self</code>。</li>
+</ul>
+<blockquote>
+<p><code>Product(args)</code> is often called the <strong>constructor</strong>.</p>
+<p>When the constructor is called:</p>
+<ul>
+<li>A new instance of that class is created</li>
+<li>The <code>__init__</code> method of the class is called with the new object as its first argument (named <code>self</code>), along with any additional arguments provided in the call expression</li>
+</ul>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Product</span>:</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, name, price, nutrition_info</span>):</span><br><span class="line">        self._name = name</span><br><span class="line">        self._price = price</span><br><span class="line">        self._nutrition_info = nutrition_info</span><br><span class="line">        self._inventory = <span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="点运算符-（Dot-notation）"><a href="#点运算符-（Dot-notation）" class="headerlink" title="点运算符.（Dot notation）"></a>点运算符<code>.</code>（<code>Dot notation</code>）</h3><p>一个对象的所有属性都可以被<code>.</code>运算符访问:</p>
+<blockquote>
+<p>All object attributes (which includes variables <em>and</em> methods) can be accessed with <strong>dot notation</strong>:</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pina_bar.increase_inventory(<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+
+<p>上述表达式会在<code>pina_bar</code>类中查找名为<code>increase_inventory</code>的方法。</p>
+<blockquote>
+<p>That evaluates to the value of the attribute looked up by <code>increase_inventory</code> in the object referenced by <code>pina_bar</code>.</p>
+</blockquote>
+<p><code>.</code>运算符的左边也可以是任意的表达式：</p>
+<blockquote>
+<p>The left-hand side of the dot notation can also be any expression that evaluates to an object reference:</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bars = [pina_bar, truffle_bar]</span><br><span class="line">bars[<span class="number">0</span>].increase_inventory(<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="实例的变量（Instance-variables）"><a href="#实例的变量（Instance-variables）" class="headerlink" title="实例的变量（Instance variables）"></a>实例的变量（<code>Instance variables</code>）</h3><blockquote>
+<p><strong>Instance variables</strong> are data attributes that describe the state of an object.</p>
+<p>This <code>__init__</code> initializes 4 instance variables:</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Product</span>:</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, name, price, nutrition_info</span>):</span><br><span class="line">        self._name = name</span><br><span class="line">        self._price = price</span><br><span class="line">        self._nutrition_info = nutrition_info</span><br><span class="line">        self._inventory = <span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>The object’s methods can then change the values of those variables or assign new variables.</p>
+</blockquote>
+<h3 id="方法的调用（Method-invocation）"><a href="#方法的调用（Method-invocation）" class="headerlink" title="方法的调用（Method invocation）"></a>方法的调用（<code>Method invocation</code>）</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pina_bar.increase_inventory(<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Product</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">increase_inventory</span>(<span class="params">self, amount</span>):</span><br><span class="line">        self._inventory += amount</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>pina_bar.increase_inventory</code> is a <strong>bound method</strong>: a function which has its first parameter pre-bound to a particular value.</p>
+<p>In this case, <code>self</code> is pre-bound to <code>pina_bar</code> and <code>amount</code> is set to 2.</p>
+</blockquote>
+<blockquote>
+<p>It’s equivalent to:</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Product.increase_inventory(pina_bar, <span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="动态实例变量（Dynamic-instance-variables）"><a href="#动态实例变量（Dynamic-instance-variables）" class="headerlink" title="动态实例变量（Dynamic instance variables）"></a>动态实例变量（<code>Dynamic instance variables</code>）</h3><blockquote>
+<p>An object can create a new instance variable whenever it’d like.</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Product</span>:</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">reduce_inventory</span>(<span class="params">self, amount</span>):</span><br><span class="line">        <span class="keyword">if</span> (self._inventory - amount) &lt;= <span class="number">0</span>:</span><br><span class="line">            self._needs_restocking = <span class="literal">True</span></span><br><span class="line">        self._inventory -= amount</span><br><span class="line"></span><br><span class="line">pina_bar = Product(<span class="string">&quot;Piña Chocolotta&quot;</span>, <span class="number">7.99</span>,</span><br><span class="line">    [<span class="string">&quot;200 calories&quot;</span>, <span class="string">&quot;24 g sugar&quot;</span>])</span><br><span class="line">pina_bar.reduce_inventory(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Now <code>pina_bar</code> has an updated binding for <code>_inventory</code> and a new binding for <code>_needs_restocking</code> (which was not in <code>__init__</code>).</p>
+</blockquote>
+<h3 id="类变量（Class-variables）"><a href="#类变量（Class-variables）" class="headerlink" title="类变量（Class variables）"></a>类变量（<code>Class variables</code>）</h3><blockquote>
+<p>A <strong>class variable</strong> is an assignment inside the class that isn’t inside a method body.</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Product</span>:</span><br><span class="line">    sales_tax = <span class="number">0.07</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Class variables are “shared” across all instances of a class because they are attributes of the class, not the instance.</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Product</span>:</span><br><span class="line">    _sales_tax = <span class="number">0.07</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_total_price</span>(<span class="params">self, quantity</span>):</span><br><span class="line">        <span class="keyword">return</span> (self._price * (<span class="number">1</span> + self._sales_tax)) * quantity</span><br><span class="line"></span><br><span class="line">pina_bar = Product(<span class="string">&quot;Piña Chocolotta&quot;</span>, <span class="number">7.99</span>,</span><br><span class="line">    [<span class="string">&quot;200 calories&quot;</span>, <span class="string">&quot;24 g sugar&quot;</span>])</span><br><span class="line">truffle_bar = Product(<span class="string">&quot;Truffalapagus&quot;</span>, <span class="number">9.99</span>,</span><br><span class="line">    [<span class="string">&quot;170 calories&quot;</span>, <span class="string">&quot;19 g sugar&quot;</span>])</span><br><span class="line"></span><br><span class="line">pina_bar._sales_tax</span><br><span class="line">truffle_bar._sales_tax</span><br><span class="line">pina_bar.get_total_price(<span class="number">4</span>)</span><br><span class="line">truffle_bar.get_total_price(<span class="number">4</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="属性都是公共的（Attributes-are-all-public）"><a href="#属性都是公共的（Attributes-are-all-public）" class="headerlink" title="属性都是公共的（Attributes are all public）"></a>属性都是公共的（<code>Attributes are all public</code>）</h3><blockquote>
+<p>As long as you have a reference to an object, you can set or mutate any attributes.</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">pina_bar = Product(<span class="string">&quot;Piña Chocolotta&quot;</span>, <span class="number">7.99</span>,</span><br><span class="line">    [<span class="string">&quot;200 calories&quot;</span>, <span class="string">&quot;24 g sugar&quot;</span>])</span><br><span class="line"></span><br><span class="line">pina_bar._inventory</span><br><span class="line">pina_bar._inventory = <span class="number">5000000</span></span><br><span class="line">pina_bar._inventory = -<span class="number">5000</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>You can even assign new instance variables:</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pina_bar.brand_new_attribute_haha = <span class="string">&quot;instanception&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="“私有”属性（-Private-attributes）"><a href="#“私有”属性（-Private-attributes）" class="headerlink" title="“私有”属性（&quot;Private&quot; attributes）"></a>“私有”属性（<code>&quot;Private&quot; attributes</code>）</h3><blockquote>
+<p>To communicate the desired access level of attributes, Python programmers generally use this convention:</p>
+<ul>
+<li><code>__</code> (double underscore) before very private attribute names</li>
+<li><code>_</code> (single underscore) before semi-private attribute names</li>
+<li>no underscore before public attribute names</li>
+</ul>
+<p>That allows classes to hide implementation details and add additional error checking.</p>
+<p>We will discuss <code>__</code> vs <code>_</code> next time.</p>
+<p>For now, if you see no underscore, HAVE FUN! 🎉 🎉</p>
+</blockquote>
+<h2 id="Lecture-17-Inheritance-Composition"><a href="#Lecture-17-Inheritance-Composition" class="headerlink" title="Lecture #17: Inheritance + Composition"></a>Lecture #17: Inheritance + Composition</h2><h3 id="创建一个“动物园”（Building-Animal-Conserving-）"><a href="#创建一个“动物园”（Building-Animal-Conserving-）" class="headerlink" title="创建一个“动物园”（Building &quot;Animal Conserving&quot;）"></a>创建一个“动物园”（<code>Building &quot;Animal Conserving&quot;</code>）</h3><p>要实现一个包含下图的动物的动物园，我们至少需要实现以下类：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Panda()</span><br><span class="line">Lion()</span><br><span class="line">Rabbit()</span><br><span class="line">Vulture()</span><br><span class="line">Elephant()</span><br><span class="line">Food()</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/e8c10fb6c0716f1b62a9e5a08af5929.png" alt="e8c10fb6c0716f1b62a9e5a08af5929"></p>
+<h3 id="食物类（A-Food-class）"><a href="#食物类（A-Food-class）" class="headerlink" title="食物类（A Food class）"></a>食物类（<code>A Food class</code>）</h3><p>一个简单的食物类的实现：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Let&#x27;s start simple:</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Food</span>:</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, name, <span class="built_in">type</span>, calories</span>):</span><br><span class="line">        self.name = name</span><br><span class="line">        self.<span class="built_in">type</span> = <span class="built_in">type</span></span><br><span class="line">        self.calories = calories</span><br></pre></td></tr></table></figure>
+
+<p>使用方式：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># How would we use that class?</span></span><br><span class="line">broccoli = Food(<span class="string">&quot;Broccoli Rabe&quot;</span>, <span class="string">&quot;veggies&quot;</span>, <span class="number">20</span>)</span><br><span class="line">bone_marrow = Food(<span class="string">&quot;Bone Marrow&quot;</span>, <span class="string">&quot;meat&quot;</span>, <span class="number">100</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="大象类（An-Elephant-class）"><a href="#大象类（An-Elephant-class）" class="headerlink" title="大象类（An Elephant class）"></a>大象类（<code>An Elephant class</code>）</h3><p>一个简单的大象类的实现：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Elephant</span>:</span><br><span class="line">    species_name = <span class="string">&quot;African Savanna Elephant&quot;</span></span><br><span class="line">    scientific_name = <span class="string">&quot;Loxodonta africana&quot;</span></span><br><span class="line">    calories_needed = <span class="number">8000</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, name, age=<span class="number">0</span></span>):</span><br><span class="line">        self.name = name</span><br><span class="line">        self.age = age</span><br><span class="line">        self.calories_eaten  = <span class="number">0</span></span><br><span class="line">        self.happiness = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">play</span>(<span class="params">self, num_hours</span>):</span><br><span class="line">        self.happiness += (num_hours * <span class="number">4</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;WHEEE PLAY TIME!&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">eat</span>(<span class="params">self, food</span>):</span><br><span class="line">        self.calories_eaten += food.calories</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;Om nom nom yummy <span class="subst">&#123;food.name&#125;</span>&quot;</span>)</span><br><span class="line">        <span class="keyword">if</span> self.calories_eaten &gt; self.calories_needed:</span><br><span class="line">            self.happiness -= <span class="number">1</span></span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;Ugh so full&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">interact_with</span>(<span class="params">self, animal2</span>):</span><br><span class="line">        self.happiness += <span class="number">1</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;Yay happy fun time with <span class="subst">&#123;animal2.name&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>使用方式：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">el1 = Elephant(<span class="string">&quot;Willaby&quot;</span>, <span class="number">5</span>)</span><br><span class="line">el2 = Elephant(<span class="string">&quot;Wallaby&quot;</span>, <span class="number">3</span>)</span><br><span class="line">el1.play(<span class="number">2</span>)</span><br><span class="line">el1.interact_with(el2)</span><br></pre></td></tr></table></figure>
+
+<h3 id="兔子类（An-Rabbit-class）"><a href="#兔子类（An-Rabbit-class）" class="headerlink" title="兔子类（An Rabbit class）"></a>兔子类（<code>An Rabbit class</code>）</h3><p>一个简单的兔子类的实现：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Rabbit</span>:</span><br><span class="line">    species_name = <span class="string">&quot;European rabbit&quot;</span></span><br><span class="line">    scientific_name = <span class="string">&quot;Oryctolagus cuniculus&quot;</span></span><br><span class="line">    calories_needed = <span class="number">200</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, name, age=<span class="number">0</span></span>):</span><br><span class="line">        self.name = name</span><br><span class="line">        self.age = age</span><br><span class="line">        self.calories_eaten = <span class="number">0</span></span><br><span class="line">        self.happiness = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">play</span>(<span class="params">self, num_hours</span>):</span><br><span class="line">        self.happiness += (num_hours * <span class="number">10</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;WHEEE PLAY TIME!&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">eat</span>(<span class="params">self, food</span>):</span><br><span class="line">        self.calories_eaten += food.calories</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;Om nom nom yummy <span class="subst">&#123;food.name&#125;</span>&quot;</span>)</span><br><span class="line">        <span class="keyword">if</span> self.calories_eaten &gt; self.calories_needed:</span><br><span class="line">            self.happiness -= <span class="number">1</span></span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;Ugh so full&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">interact_with</span>(<span class="params">self, animal2</span>):</span><br><span class="line">        self.happiness += <span class="number">4</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;Yay happy fun time with <span class="subst">&#123;animal2.name&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>使用方式：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">rabbit1 = Rabbit(<span class="string">&quot;Mister Wabbit&quot;</span>, <span class="number">3</span>)</span><br><span class="line">rabbit2 = Rabbit(<span class="string">&quot;Bugs Bunny&quot;</span>, <span class="number">2</span>)</span><br><span class="line">rabbit1.eat(broccoli)</span><br><span class="line">rabbit2.interact_with(rabbit1)</span><br></pre></td></tr></table></figure>
+
+<h3 id="继承——基类与子类（Inheritance-Base-classes-and-subclasses）"><a href="#继承——基类与子类（Inheritance-Base-classes-and-subclasses）" class="headerlink" title="继承——基类与子类（Inheritance--Base classes and subclasses）"></a>继承——基类与子类（<code>Inheritance--Base classes and subclasses</code>）</h3><p>如果多个类有相似的属性，可以实现一个基类（<code>Base class</code>），让这些类继承基类。</p>
+<p>基类也被成为超类（<code>superclass</code>）。</p>
+<p><img src="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/61feadd3b714075fedfad27bfe1c9af.png" alt="61feadd3b714075fedfad27bfe1c9af"></p>
+<h3 id="基类（The-base-class）"><a href="#基类（The-base-class）" class="headerlink" title="基类（The base class）"></a>基类（<code>The base class</code>）</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># The base class contains method headers common to the subclasses, and code that is used by multiple subclasses.</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Animal</span>:</span><br><span class="line">    species_name = <span class="string">&quot;Animal&quot;</span></span><br><span class="line">    scientific_name = <span class="string">&quot;Animalia&quot;</span></span><br><span class="line">    play_multiplier = <span class="number">2</span></span><br><span class="line">    interact_increment = <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, name, age=<span class="number">0</span></span>):</span><br><span class="line">        self.name = name</span><br><span class="line">        self.age = age</span><br><span class="line">        self.calories_eaten  = <span class="number">0</span></span><br><span class="line">        self.happiness = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">play</span>(<span class="params">self, num_hours</span>):</span><br><span class="line">        self.happiness += (num_hours * self.play_multiplier)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;WHEEE PLAY TIME!&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">eat</span>(<span class="params">self, food</span>):</span><br><span class="line">        self.calories_eaten += food.calories</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;Om nom nom yummy <span class="subst">&#123;food.name&#125;</span>&quot;</span>)</span><br><span class="line">        <span class="keyword">if</span> self.calories_eaten &gt; self.calories_needed:</span><br><span class="line">            self.happiness -= <span class="number">1</span></span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;Ugh so full&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">interact_with</span>(<span class="params">self, animal2</span>):</span><br><span class="line">        self.happiness += self.interact_increment</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;Yay happy fun time with <span class="subst">&#123;animal2.name&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="子类（The-subclasses）"><a href="#子类（The-subclasses）" class="headerlink" title="子类（The subclasses）"></a>子类（<code>The subclasses</code>）</h3><p>可用如下方式定义一个<code>Animal</code>类的子类<code>Panda</code>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># To declare a subclass, put parentheses after the class name and specify the base class in the parentheses:</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Panda</span>(<span class="title class_ inherited__">Animal</span>):</span><br></pre></td></tr></table></figure>
+
+<p>子类只需要不同于基类的代码部分。子类可以重新定义基类的任何部分，如类变量，方法定义，构造器等。</p>
+<p>重新定义（<code>redefinition</code>）也称重载（<code>overriding</code>）。</p>
+<p>如果子类不需要重载任何代码，可以这样实现（<code>pass</code>语句是为了防止报错）：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># The simplest subclass overrides nothing:</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">AmorphousBlob</span>(<span class="title class_ inherited__">Animal</span>):</span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="重载类变量（Overriding-class-variables）"><a href="#重载类变量（Overriding-class-variables）" class="headerlink" title="重载类变量（Overriding class variables）"></a>重载类变量（<code>Overriding class variables</code>）</h3><p>上述的兔子类和大象类可以重载动物类如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Subclasses can override existing class variables and assign new class variables:</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Rabbit</span>(<span class="title class_ inherited__">Animal</span>):</span><br><span class="line">    species_name = <span class="string">&quot;European rabbit&quot;</span></span><br><span class="line">    scientific_name = <span class="string">&quot;Oryctolagus cuniculus&quot;</span></span><br><span class="line">    calories_needed = <span class="number">200</span></span><br><span class="line">    play_multiplier = <span class="number">8</span></span><br><span class="line">    interact_increment = <span class="number">4</span></span><br><span class="line">    num_in_litter = <span class="number">12</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Elephant</span>(<span class="title class_ inherited__">Animal</span>):</span><br><span class="line">    species_name = <span class="string">&quot;African Savanna Elephant&quot;</span></span><br><span class="line">    scientific_name = <span class="string">&quot;Loxodonta africana&quot;</span></span><br><span class="line">    calories_needed = <span class="number">8000</span></span><br><span class="line">    play_multiplier = <span class="number">4</span></span><br><span class="line">    interact_increment = <span class="number">2</span></span><br><span class="line">    num_tusks = <span class="number">2</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="重载方法（Overriding-methods）"><a href="#重载方法（Overriding-methods）" class="headerlink" title="重载方法（Overriding methods）"></a>重载方法（<code>Overriding methods</code>）</h3><p>子类可以重载基类的方法(调用基类时，使用的是重载的方法)：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># If a subclass overrides a method, Python will use that definition instead of the superclass definition.</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Panda</span>(<span class="title class_ inherited__">Animal</span>):</span><br><span class="line">    species_name = <span class="string">&quot;Giant Panda&quot;</span></span><br><span class="line">    scientific_name = <span class="string">&quot;Ailuropoda melanoleuca&quot;</span></span><br><span class="line">    calories_needed = <span class="number">6000</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">interact_with</span>(<span class="params">self, other</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;I&#x27;m a Panda, I&#x27;m solitary, go away <span class="subst">&#123;other.name&#125;</span>!&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>使用方式如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># How would we call that method?</span></span><br><span class="line">panda1 = Panda(<span class="string">&quot;Pandeybear&quot;</span>, <span class="number">6</span>)</span><br><span class="line">panda2 = Panda(<span class="string">&quot;Spot&quot;</span>, <span class="number">3</span>)</span><br><span class="line">panda1.interact_with(panda2)</span><br></pre></td></tr></table></figure>
+
+<h3 id="使用基类的方法（Using-methods-from-the-base-class）"><a href="#使用基类的方法（Using-methods-from-the-base-class）" class="headerlink" title="使用基类的方法（Using methods from the base class）"></a>使用基类的方法（<code>Using methods from the base class</code>）</h3><p>可以使用<code>super()</code>表示当前类对象的基类，并调用基类方法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># To refer to a superclass method, we can use super():</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Lion</span>(<span class="title class_ inherited__">Animal</span>):</span><br><span class="line">    species_name = <span class="string">&quot;Lion&quot;</span></span><br><span class="line">    scientific_name = <span class="string">&quot;Panthera&quot;</span></span><br><span class="line">    calories_needed = <span class="number">3000</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">eat</span>(<span class="params">self, food</span>):</span><br><span class="line">        <span class="keyword">if</span> food.<span class="built_in">type</span> == <span class="string">&quot;meat&quot;</span>:</span><br><span class="line">            <span class="built_in">super</span>().eat(food)</span><br></pre></td></tr></table></figure>
+
+<p>使用方法如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># How would we call that method?</span></span><br><span class="line">bones = Food(<span class="string">&quot;Bones&quot;</span>, <span class="string">&quot;meat&quot;</span>)</span><br><span class="line">mufasa = Lion(<span class="string">&quot;Mufasa&quot;</span>, <span class="number">10</span>)</span><br><span class="line">mufasa.eat(bones)</span><br></pre></td></tr></table></figure>
+
+<p>以下两种调用是等价的：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># super().attribute refers to the definition of attribute in the superclass of the first parameter to the method.</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">eat</span>(<span class="params">self, food</span>):</span><br><span class="line">    <span class="keyword">if</span> food.<span class="built_in">type</span> == <span class="string">&quot;meat&quot;</span>:</span><br><span class="line">        <span class="built_in">super</span>().eat(food)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ...is the same as:</span></span><br><span class="line"><span class="comment"># super() is better style than BaseClassName, though slightly slower.</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">eat</span>(<span class="params">self, food</span>):</span><br><span class="line">    <span class="keyword">if</span> food.<span class="built_in">type</span> == <span class="string">&quot;meat&quot;</span>:</span><br><span class="line">        Animal.eat(self, food)</span><br></pre></td></tr></table></figure>
+
+<h3 id="重载-init-（Overriding-init-）"><a href="#重载-init-（Overriding-init-）" class="headerlink" title="重载__init__（Overriding __init__）"></a>重载<code>__init__</code>（<code>Overriding __init__</code>）</h3><p>使用<code>super().__init__()</code>会<strong>实例化基类</strong>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Similarly, we need to explicitly call super().__init__() if we want to call the __init__ functionality of the base class.</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Elephant</span>(<span class="title class_ inherited__">Animal</span>):</span><br><span class="line">    species_name = <span class="string">&quot;Elephant&quot;</span></span><br><span class="line">    scientific_name = <span class="string">&quot;Loxodonta&quot;</span></span><br><span class="line">    calories_needed = <span class="number">8000</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, name, age=<span class="number">0</span></span>):</span><br><span class="line">        <span class="built_in">super</span>().__init__(name, age)</span><br><span class="line">        <span class="keyword">if</span> age &lt; <span class="number">1</span>:</span><br><span class="line">            self.calories_needed = <span class="number">1000</span></span><br><span class="line">        <span class="keyword">elif</span> age &lt; <span class="number">5</span>:</span><br><span class="line">            self.calories_needed = <span class="number">3000</span></span><br></pre></td></tr></table></figure>
+
+<p>使用方式如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># What would this display?</span></span><br><span class="line">elly = Elephant(<span class="string">&quot;Ellie&quot;</span>, <span class="number">3</span>)</span><br><span class="line">elly.calories_needed        <span class="comment"># 3000</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="继承的层次（Layers-of-inheritance）"><a href="#继承的层次（Layers-of-inheritance）" class="headerlink" title="继承的层次（Layers of inheritance）"></a>继承的层次（<code>Layers of inheritance</code>）</h3><p>每一个<code>Python3</code>的类都隐式地继承了<code>object</code>类：</p>
+<p><img src="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/01bd2d2228b91429525a1ad5e256bc1.png" alt="01bd2d2228b91429525a1ad5e256bc1"></p>
+<h3 id="多继承（Multiple-inhteritance）"><a href="#多继承（Multiple-inhteritance）" class="headerlink" title="多继承（Multiple inhteritance）"></a>多继承（<code>Multiple inhteritance</code>）</h3><p><code>Python</code>也支持多继承，一个类可以继承多个基类：</p>
+<p><img src="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/25bd4bf86c08cd9542a8db8491cc3f8.png" alt="25bd4bf86c08cd9542a8db8491cc3f8"></p>
+<h3 id="组合（Composition）"><a href="#组合（Composition）" class="headerlink" title="组合（Composition）"></a>组合（<code>Composition</code>）</h3><p>一个对象可能包含其他类的对象的引用。</p>
+<blockquote>
+<p>An object can contain references to objects of other classes.</p>
+</blockquote>
+<p>下面的<code>Animal</code>类的实例变量<code>mate</code>就指向了另一个<code>Animal</code>类的对象。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Animal</span>:</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">mate_with</span>(<span class="params">self, other</span>):</span><br><span class="line">        <span class="keyword">if</span> other <span class="keyword">is</span> <span class="keyword">not</span> self <span class="keyword">and</span> other.species_name == self.species_name:</span><br><span class="line">            self.mate = other</span><br><span class="line">            other.mate = self</span><br></pre></td></tr></table></figure>
+
+<p>使用方式如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mr_wabbit = Rabbit(<span class="string">&quot;Mister Wabbit&quot;</span>, <span class="number">3</span>)</span><br><span class="line">jane_doe = Rabbit(<span class="string">&quot;Jane Doe&quot;</span>, <span class="number">2</span>)</span><br><span class="line">mr_wabbit.mate_with(jane_doe)</span><br></pre></td></tr></table></figure>
+
+<p><code>eg</code>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Rabbit</span>(<span class="title class_ inherited__">Animal</span>):</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">reproduce_like_rabbits</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">if</span> self.mate <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;oh no! better go on ZoOkCupid&quot;</span>)</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        self.babies = []</span><br><span class="line">        <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, self.num_in_litter):</span><br><span class="line">            self.babies.append(Rabbit(<span class="string">&quot;bunny&quot;</span>, <span class="number">0</span>))</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mr_wabbit = Rabbit(<span class="string">&quot;Mister Wabbit&quot;</span>, <span class="number">3</span>)</span><br><span class="line">jane_doe = Rabbit(<span class="string">&quot;Jane Doe&quot;</span>, <span class="number">2</span>)</span><br><span class="line">mr_wabbit.mate_with(jane_doe)</span><br><span class="line">jane_doe.reproduce_like_rabbits()</span><br></pre></td></tr></table></figure>
+
+<p><code>eg.</code>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">partytime</span>(<span class="params">animals</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Assuming ANIMALS is a list of Animals, cause each</span></span><br><span class="line"><span class="string">    to interact with all the others exactly once.&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(animals)):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(i + <span class="number">1</span>, <span class="built_in">len</span>(animals)):</span><br><span class="line">            animals[i].interact_with(animals[j])</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">jane_doe = Rabbit(<span class="string">&quot;Jane Doe&quot;</span>, <span class="number">2</span>)</span><br><span class="line">scar = Lion(<span class="string">&quot;Scar&quot;</span>, <span class="number">12</span>)</span><br><span class="line">elly = Elephant(<span class="string">&quot;Elly&quot;</span>, <span class="number">5</span>)</span><br><span class="line">pandy = Panda(<span class="string">&quot;PandeyBear&quot;</span>, <span class="number">4</span>)</span><br><span class="line">partytime([jane_doe, scar, elly, pandy])</span><br></pre></td></tr></table></figure>
+
+<h2 id="Lecture-18-Special-Object-Methods"><a href="#Lecture-18-Special-Object-Methods" class="headerlink" title="Lecture #18: Special Object Methods"></a>Lecture #18: Special Object Methods</h2><h3 id="关于对象（So-many-objects）"><a href="#关于对象（So-many-objects）" class="headerlink" title="关于对象（So many objects）"></a>关于对象（<code>So many objects</code>）</h3><p>在<code>Python</code>中，所有的类型和自定义类都隐式地直接或间接继承了<code>object</code>类，以下的变量名称都是对象的引用：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Lamb</span>:</span><br><span class="line">    species_name = <span class="string">&quot;Lamb&quot;</span></span><br><span class="line">    scientific_name = <span class="string">&quot;Ovis aries&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, name</span>):</span><br><span class="line">        self.name = name</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">play</span>(<span class="params">self</span>):</span><br><span class="line">        self.happy = <span class="literal">True</span></span><br><span class="line"></span><br><span class="line">lamb = Lamb(<span class="string">&quot;Lil&quot;</span>)</span><br><span class="line">owner = <span class="string">&quot;Mary&quot;</span></span><br><span class="line">had_a_lamb = <span class="literal">True</span></span><br><span class="line">fleece = &#123;<span class="string">&quot;color&quot;</span>: <span class="string">&quot;white&quot;</span>, <span class="string">&quot;fluffiness&quot;</span>: <span class="number">100</span>&#125;</span><br><span class="line">kids_at_school = [<span class="string">&quot;Billy&quot;</span>, <span class="string">&quot;Tilly&quot;</span>, <span class="string">&quot;Jilly&quot;</span>]</span><br><span class="line">day = <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p>使用某个对象的<code>__class__</code>属性可以查看其类名，查看其类名的<code>__bases__</code>属性，可以得到基类（返回一个元组，基类可能不止一个）：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; lamb.__class__</span></span><br><span class="line">&lt;class &#x27;__main__.Lamb&#x27;&gt;</span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; lamb.__class__.__bases__</span></span><br><span class="line">(&lt;class &#x27;object&#x27;&gt;,)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; owner.__class__</span></span><br><span class="line">&lt;class &#x27;str&#x27;&gt;</span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; owner.__class__.__bases__</span></span><br><span class="line">(&lt;class &#x27;object&#x27;&gt;,)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; had_a_lamb.__class__</span></span><br><span class="line">&lt;class &#x27;bool&#x27;&gt;</span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; had_a_lamb.__class__.__bases__</span></span><br><span class="line">(&lt;class &#x27;int&#x27;&gt;,)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; fleece.__class__</span></span><br><span class="line">&lt;class &#x27;dict&#x27;&gt;</span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; fleece.__class__.__bases__</span></span><br><span class="line">(&lt;class &#x27;object&#x27;&gt;,)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; kids_at_school.__class__</span></span><br><span class="line">&lt;class &#x27;list&#x27;&gt;</span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; kids_at_school.__class__.__bases__</span></span><br><span class="line">(&lt;class &#x27;object&#x27;&gt;,)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; day.__class__</span></span><br><span class="line">&lt;class &#x27;int&#x27;&gt;</span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; day.__class__.__bases__</span></span><br><span class="line">(&lt;class &#x27;object&#x27;&gt;,)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/8f11a006a0e4c378fe2a40a4cb0ceca.png" alt="8f11a006a0e4c378fe2a40a4cb0ceca"></p>
+<h3 id="对象内置的属性（Built-in-object-attributes）"><a href="#对象内置的属性（Built-in-object-attributes）" class="headerlink" title="对象内置的属性（Built-in object attributes）"></a>对象内置的属性（<code>Built-in object attributes</code>）</h3><p>因为所有类都继承自<code>object</code>类，所以自然继承了该类的属性，用<code>dir()</code>函数可以查看一个类的属性：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">dir</span>(<span class="built_in">object</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; <span class="built_in">dir</span>(object)</span></span><br><span class="line">[&#x27;__bases__&#x27;, &#x27;__class__&#x27;, &#x27;__delattr__&#x27;, &#x27;__dir__&#x27;, &#x27;__eq__&#x27;, &#x27;__format__&#x27;, &#x27;__ge__&#x27;, &#x27;__getattribute__&#x27;, &#x27;__gt__&#x27;, &#x27;__hash__&#x27;, &#x27;__init__&#x27;, &#x27;__init_subclass__&#x27;, &#x27;__le__&#x27;, &#x27;__lt__&#x27;, &#x27;__module__&#x27;, &#x27;__ne__&#x27;, &#x27;__new__&#x27;, &#x27;__reduce__&#x27;, &#x27;__reduce_ex__&#x27;, &#x27;__repr__&#x27;, &#x27;__setattr__&#x27;, &#x27;__str__&#x27;, &#x27;__subclasshook__&#x27;]</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<ul>
+<li>For string representation: <code>__repr__</code>, <code>__str__</code>, <code>__format__</code></li>
+<li>For comparisons: <code>__eq__</code>, <code>__ge__</code>, <code>__gt__</code>, <code>__le__</code>, <code>__lt__</code>, <code>__ne__</code></li>
+<li>Related to classes: <code>__bases__</code>, <code>__class__</code>, <code>__new__</code>, <code>__init__</code>, <code>__init_subclass__</code>, <code>__subclasshook__</code>, <code>__setattr__</code>, <code>__delattr__</code>, <code>__getattribute__</code></li>
+<li>Others: <code>__dir__</code>, <code>__hash__</code>, <code>__module__</code>, <code>__reduce__</code>, <code>__reduce_ex__</code></li>
+</ul>
+</blockquote>
+<h3 id="str-方法（-str-）"><a href="#str-方法（-str-）" class="headerlink" title="__str__方法（__str__）"></a><code>__str__</code>方法（<code>__str__</code>）</h3><p><code>__str__</code>方法会返回一个可被人类阅读的字符串表示，在字符串构造，<code>print</code>函数，f-字符串（<code>f-string</code>）等地方都被调用了。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> fractions <span class="keyword">import</span> Fraction</span><br><span class="line"></span><br><span class="line">one_third = <span class="number">1</span>/<span class="number">3</span></span><br><span class="line">one_half = Fraction(<span class="number">1</span>, <span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; one_third</span></span><br><span class="line">0.3333333333333333</span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; <span class="built_in">print</span>(one_third)</span></span><br><span class="line">0.3333333333333333</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; one_half</span></span><br><span class="line">Fraction(1, 2)</span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; <span class="built_in">print</span>(one_half)</span></span><br><span class="line">1/2</span><br></pre></td></tr></table></figure>
+
+<p>f-字符串可以把<code>&#123;&#125;</code>中的变量名进行替换，运算结果是一个字符串，<code>eval</code>函数可以接受一个字符串，对其进行计算，就和输入该字符串到终端一样。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; f<span class="string">&quot;&#123;one_half&#125; &gt; &#123;one_third&#125;&quot;</span></span></span><br><span class="line">&#x27;1/2 &gt; 0.3333333333333333&#x27;</span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; <span class="built_in">eval</span>(f<span class="string">&quot;&#123;one_half&#125; &gt; &#123;one_third&#125;&quot;</span>)</span></span><br><span class="line">True</span><br></pre></td></tr></table></figure>
+
+<h3 id="自定义-str-方法（Custom-str-behavior）"><a href="#自定义-str-方法（Custom-str-behavior）" class="headerlink" title="自定义__str__方法（Custom __str__ behavior）"></a>自定义<code>__str__</code>方法（<code>Custom __str__ behavior</code>）</h3><p>内置的<code>__str__</code>函数一般返回一个描述对象类名的字符串。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; lamb</span></span><br><span class="line">&lt;__main__.Lamb object&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; str(lamb)</span></span><br><span class="line">&#x27;&lt;__main__.Lamb object&gt;&#x27;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; lamb.__str__()</span></span><br><span class="line">&#x27;&lt;__main__.Lamb object&gt;&#x27;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; <span class="built_in">print</span>(lamb)</span></span><br><span class="line">&lt;__main__.Lamb object&gt;</span><br></pre></td></tr></table></figure>
+
+<p>重载<code>Lamb</code>类中的<code>__str__</code>函数：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">__str__</span>(<span class="params">self</span>):</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;🐑 : &quot;</span> + self.name</span><br></pre></td></tr></table></figure>
+
+<p>重载之后，注意到，输入<code>lamb</code>返回的是对象，并没有使用<code>__str__</code>：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; lamb</span></span><br><span class="line">&lt;__main__.Lamb object&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; lamb.__str__()</span></span><br><span class="line">&#x27;🐑 : Lil&#x27;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; <span class="built_in">print</span>(lamb)</span></span><br><span class="line">🐑 : Lil</span><br></pre></td></tr></table></figure>
+
+<h3 id="repr-方法（-repr-）"><a href="#repr-方法（-repr-）" class="headerlink" title="__repr__方法（__repr__）"></a><code>__repr__</code>方法（<code>__repr__</code>）</h3><p>对象调用<code>__repr__</code>方法会返回一个字符串，该字符串可以被计算，得到该对象。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; one_half.__repr__()</span></span><br><span class="line">&#x27;Fraction(1, 2)&#x27;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; <span class="built_in">eval</span>(one_half.__repr__())</span></span><br><span class="line">Fraction(1, 2)</span><br></pre></td></tr></table></figure>
+
+<p><code>__repr__</code>主要用于展示如何得到某个对象：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt;</span> </span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; one_third</span></span><br><span class="line">0.3333333333333333</span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; repr(one_third)</span></span><br><span class="line">&#x27;0.3333333333333333&#x27;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; one_half</span></span><br><span class="line">Fraction(1, 2)</span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; repr(one_half)</span></span><br><span class="line">&#x27;Fraction(1, 2)&#x27;</span><br></pre></td></tr></table></figure>
+
+<h3 id="自定义-repr-方法（Custom-repr-behavior）"><a href="#自定义-repr-方法（Custom-repr-behavior）" class="headerlink" title="自定义__repr__方法（Custom __repr__ behavior）"></a>自定义<code>__repr__</code>方法（<code>Custom __repr__ behavior</code>）</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; lamb</span></span><br><span class="line">&lt;__main__.Lamb object&gt;</span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; repr(lamb)</span></span><br><span class="line">&#x27;&lt;__main__.Lamb object&gt;&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>重载<code>Lamb</code>类中的<code>__repr__</code>方法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">__repr__</span>(<span class="params">self</span>):</span><br><span class="line">    <span class="keyword">return</span> <span class="string">f&quot;Lamb(<span class="subst">&#123;<span class="built_in">repr</span>(self.name)&#125;</span>)&quot;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; lamb</span></span><br><span class="line">Lamb(&#x27;Lil&#x27;)</span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; repr(lamb)</span></span><br><span class="line">&quot;Lamb(&#x27;Lil&#x27;)&quot;</span><br></pre></td></tr></table></figure>
+
+<h3 id="使用getattr方法获取对象属性（Get-attribute-with-getattr-）"><a href="#使用getattr方法获取对象属性（Get-attribute-with-getattr-）" class="headerlink" title="使用getattr方法获取对象属性（Get attribute with getattr()）"></a>使用<code>getattr</code>方法获取对象属性（<code>Get attribute with getattr()</code>）</h3><p>使用<code>getattr(object, name[, default])</code>可以在<code>object</code>对象中查找<code>name</code>属性，若存在，返回该对象的类名的字符串，若不存在，返回<code>default</code>（若有该参数），否则返回<code>AttributeError</code>。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; getattr(lamb, <span class="string">&quot;species_name&quot;</span>)</span></span><br><span class="line">&#x27;Lamb&#x27;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; getattr(lamb, <span class="string">&quot;not_exist_name&quot;</span>)</span></span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &lt;string&gt;, line 1, in &lt;module&gt;</span><br><span class="line">AttributeError: not_exist_name</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; getattr(lamb, <span class="string">&quot;not_exist_name&quot;</span>, <span class="string">&#x27;not this attribute&#x27;</span>)</span></span><br><span class="line">&#x27;not this attribute&#x27;</span><br></pre></td></tr></table></figure>
+
+<h3 id="使用hasattr方法检测属性是否存在（Check-attribute-exists-with-hasattr-）"><a href="#使用hasattr方法检测属性是否存在（Check-attribute-exists-with-hasattr-）" class="headerlink" title="使用hasattr方法检测属性是否存在（Check attribute exists with hasattr()）"></a>使用<code>hasattr</code>方法检测属性是否存在（<code>Check attribute exists with hasattr()</code>）</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; hasattr(lamb, <span class="string">&quot;scientific_name&quot;</span>)</span></span><br><span class="line">True</span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash">&gt;&gt; hasattr(lamb, <span class="string">&quot;not_exist_name&quot;</span>)</span></span><br><span class="line">False</span><br></pre></td></tr></table></figure>
+
+<h3 id="特别的方法（Special-methods）"><a href="#特别的方法（Special-methods）" class="headerlink" title="特别的方法（Special methods）"></a>特别的方法（<code>Special methods</code>）</h3><p><img src="https://bucket-hexo-blog-2020152049.oss-cn-shenzhen.aliyuncs.com/img/4588895c4397fe4136843e4677233a7.png" alt="4588895c4397fe4136843e4677233a7"></p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><strong>翻译视频</strong>：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1v64y1Q78o/?spm_id_from=444.41.top_right_bar_window_default_collection.content.click&vd_source=249a8ad55bb26717dd55ec3dd295f644">【计算机程序的构造和解释】精译【UC Berkeley 公开课-CS61A (Spring 2021)】-中英双语字幕</a></li>
+<li><code>github</code>: <a target="_blank" rel="noopener" href="https://github.com/Maxwell2020152049/CS61A">Maxwell2020152049&#x2F;CS61A</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/06/13/Cpp-CppPrimer-Static-Keyword/" rel="prev" title="【C++ Primer】Static关键字">
+                  <i class="fa fa-angle-left"></i> 【C++ Primer】Static关键字
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/06/14/CS61A-Lab06/" rel="next" title="CS61A-Lab06">
+                  CS61A-Lab06 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Rex</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
